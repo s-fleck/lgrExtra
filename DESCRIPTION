@@ -1,0 +1,28 @@
+Type: Package
+Package: lgr.app
+Title: Extra Appenders for lgr
+Version: 0.3.3.9001
+Authors@R: 
+    person(given = "Stefan",
+           family = "Fleck",
+           role = c("aut", "cre"),
+           email = "stefan.b.fleck@gmail.com",
+           comment = c(ORCID = "0000-0003-3344-9851"))
+Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
+Description: Extra appenders for 'lgr' that support logging to databases, as
+    well as email and push notifications.
+License: MIT + file LICENSE
+Imports:
+    lgr
+Suggests: 
+    DBI,
+    gmailr,
+    RMariaDB,
+    RPostgres,
+    RPushbullet,
+    RSQLite,
+    sendmailR,
+    testthat
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.1.9000

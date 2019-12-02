@@ -1,0 +1,528 @@
+# AppenderDbi -------------------------------------------------------------
+
+
+#' Log to databases via DBI
+#'
+#' Log to a database table with any **DBI** compatible backend. Please be
+#' aware that AppenderDbi does *not* support case sensitive / quoted column
+#' names, and you advised to only use all-lowercase names for
+#' custom fields (see `...` argument of [LogEvent]).
+#' When appending to a database table all LogEvent values for which a column
+#' exists in the target table will be appended, all others are ignored.
+#'
+#' @section Buffered Logging:
+#'
+#' AppenderDbi does not write directly to the database but to an in memory
+#' buffer. With the default settings, this buffer is written to the database
+#' whenever the buffer is full (`buffer_size`, default is 10 LogEvents),
+#' whenever a LogEvent with a level of `fatal` or `error` is encountered
+#' (`flush_threshold`) or when the Appender is garbage collected
+#' (`flush_on_exit`), i.e. when you close the \R session or shortly after you
+#' remove the Appender object via `rm()`. If you want to disable buffering, just
+#' set `buffer_size` to `0`.
+#'
+#'
+#' @inheritSection Appender Creating a New Appender
+#' @inheritSection AppenderMemory Fields
+#' @inheritSection AppenderMemory Methods
+#'
+#' @section Creating a New Appender:
+#'
+#' An AppenderDbi is linked to a database table via its `table` argument. If
+#' the table does not exist it is created either when the Appender is first
+#' instantiated or (more likely) when the first LogEvent would be written to
+#' that table. Rather than to rely on this feature, it is recommended that you
+#' create the target log table first manually using an `SQL CREATE TABLE`
+#' statement as this is safer and more flexible. See also [LayoutDbi].
+#'
+#'
+#' @section Fields:
+#'
+#' Note: `$data` and `show()` query the data from the remote database and might
+#'   be slow for very large logs.
+#'
+#' \describe{
+#'   \item{`close_on_exit`, `set_close_on_exit()`}{`TRUE` or `FALSE`. Close the
+#'   Database connection when the Logger is removed?}
+#'   \item{`conn`, `set_conn(conn)`}{a [DBI connection][DBI::dbConnect]}
+#'   \item{`table`}{Name of the target database table}
+#' }
+#'
+#' @section Choosing the Right DBI Layout:
+#'
+#' Layouts for relational database tables are tricky as they have very strict
+#' column types and further restrictions. On top of that implementation details
+#' vary between database backends.
+#'
+#' To make setting up `AppenderDbi` as painless as possible, the helper function
+#' [select_dbi_layout()] tries to automatically determine sensible [LayoutDbi]
+#' settings based on `conn` and - if it exists in the database already -
+#' `table`. If `table` does not exist in the database and you start logging, a
+#' new table will be created with the `col_types` from `layout`.
+#'
+#' @export
+#' @family Appenders
+#' @name AppenderDbi
+NULL
+
+
+
+
+#' @export
+AppenderDbi <- R6::R6Class(
+  "AppenderDbi",
+  inherit = lgr::AppenderMemory,
+  cloneable = FALSE,
+  public = list(
+    initialize = function(
+      conn,
+      table,
+      threshold = NA_integer_,
+      layout = select_dbi_layout(conn, table),
+      close_on_exit = TRUE,
+      buffer_size = 10,
+      flush_threshold = "error",
+      flush_on_exit = TRUE,
+      flush_on_rotate = TRUE,
+      should_flush = default_should_flush,
+      filters = NULL
+    ){
+      assert_namespace("DBI", "data.table", "jsonlite")
+
+      # appender
+      self$set_threshold(threshold)
+      self$set_layout(layout)
+      self$set_filters(filters)
+
+      # buffer
+      private$initialize_buffer(buffer_size)
+
+      # flush conditions
+      self$set_should_flush(should_flush)
+      self$set_flush_threshold(flush_threshold)
+      self$set_flush_on_exit(flush_on_exit)
+      self$set_flush_on_rotate(flush_on_rotate)
+
+      # database
+      self$set_conn(conn)
+      private$set_table(table)
+      self$set_close_on_exit(close_on_exit)
+
+
+      if (DBI::dbExistsTable(self$conn, layout$format_table_name(self$table))){
+        # do nothing
+      } else if (is.null(self$layout$col_types)) {
+        message(paste0("Creating '", fmt_tname(table), "' on first log. "))
+
+      } else {
+        message("Creating '", fmt_tname(table), "' with manually specified column types")
+        DBI::dbCreateTable(
+          self$conn,
+          layout$format_table_name(self$table),
+          fields = layout$col_types
+        )
+      }
+    },
+
+
+    set_close_on_exit = function(x){
+      assert(is_scalar_bool(x))
+      private$.close_on_exit <- x
+      invisible(self)
+    },
+
+
+    set_conn = function(conn){
+      assert(inherits(conn, "DBIConnection"))
+
+      if (inherits(conn, "MySQLConnection")){
+        stop(
+          "'RMySQL' is not supported by lgr. Please use the newer 'RMariaDB'",
+          "package to connect to MySQL and MariaDB databases instead."
+        )
+      } else if (inherits(conn, "PostgreSQLConnection")){
+        stop(
+          "'PostgreSQL' is not supported by lgr. Please use the newer
+          'Rpostgres' package to connect to Postgres databases instead."
+        )
+      }
+
+      private$.conn <- conn
+      invisible(self)
+    },
+
+
+    show = function(
+      threshold = NA_integer_,
+      n = 20
+    ){
+      assert(is_n0(n))
+      threshold <- lgr::standardize_threshold(threshold)
+      if (is.na(threshold)) threshold <- Inf
+
+      dd <- tail(self$data[self$data$level <= threshold, ], n)
+      colors <- getOption("lgr.colors")
+      lo <- get(".layout", envir = private)
+
+      if (identical(nrow(dd),  0L)){
+        cat("[empty log]")
+      } else {
+        walk(
+          as_LogEventList(dd, na.rm = TRUE),
+          function(.x){
+            cat(lo$format_event(.x), "\n", sep = "")
+          }
+        )
+      }
+
+      invisible(dd)
+    },
+
+
+    flush = function(){
+      lo <- get(".layout", envir = private)
+
+      table  <- get("table", envir = self)
+      buffer <- get("buffer_dt", envir = self)
+
+      if (length(buffer)){
+        dd <- lo[["format_data"]](buffer)
+        cn <- names(get("col_types", envir = lo))
+
+        if (!is.null(cn)){
+          sel <- which(toupper(names(dd)) %in% toupper(cn))
+          dd <- dd[, sel, with = FALSE]
+        }
+
+        for (nm in names(which(vapply(dd, Negate(is.atomic), logical(1))))){
+          data.table::set(
+            dd,
+            i = NULL,
+            j = nm,
+            value = vapply(
+              dd[[nm]],
+              function(.) if (is.null(.)) NA_character_ else jsonlite::toJSON(., auto_unbox = TRUE),
+              character(1L)
+            )
+          )
+        }
+
+        DBI::dbWriteTable(
+          conn  = get(".conn", envir = private),
+          name  = table,
+          value = dd,
+          row.names = FALSE,
+          append = TRUE
+        )
+      }
+
+      assign("insert_pos", 0L, envir = private)
+      private$.buffer_events <- list()
+      invisible(self)
+    }
+  ),
+
+
+  # +- active ---------------------------------------------------------------
+  active = list(
+    destination = function(){
+      fmt_tname(self$table)
+    },
+
+
+    conn = function(){
+      private$.conn
+    },
+
+
+    close_on_exit = function(){
+      private$.close_on_exit
+    },
+
+
+    col_types = function(){
+      if (is.null(get(".col_types", envir = private))){
+        ct <- get_col_types(private[[".conn"]], self[["table"]])
+        if (is.null(ct)) return (NULL)
+        names(ct) <- get("layout", envir = self)[["format_colnames"]](names(ct))
+        private$set_col_types(ct)
+        return(ct)
+      } else {
+        get(".col_types", envir = private)
+      }
+    },
+
+
+    table = function(){
+      self$layout$format_table_name(get(".table", envir = private))
+    },
+
+
+    table_name = function(){
+      as_tname(get("table", envir = self))
+    },
+
+
+    table_id = function(){
+
+      table <- self$table
+      table <- unlist(strsplit(table, ".", fixed = TRUE))
+
+      if (identical(length(table), 1L)){
+        table <- DBI::Id(table = table)
+      } else if (identical(length(table), 2L)) {
+        table <- DBI::Id(schema = table[[1]], table = table[[2]])
+
+      } else {
+        stop(
+          "`table` must either be DBI::Id object or a character scalar of ",
+          "the form <schema>.<table>")
+      }
+    },
+
+
+    data = function(){
+      tbl <- get("table", envir = self)
+
+      if (DBI::dbExistsTable(private[[".conn"]], tbl)){
+        dd <- DBI::dbReadTable(private[[".conn"]], tbl)
+      } else {
+        return(NULL)
+      }
+
+      names(dd) <- tolower(names(dd))
+      if (nrow(dd) > 0){
+        dd[["timestamp"]] <- as.POSIXct(dd[["timestamp"]])
+      }
+
+      dd[["level"]] <- as.integer(dd[["level"]])
+      dd
+    }
+  ),
+
+  # +- private -------------------------------------------------------------
+  private = list(
+    finalize = function() {
+      if (self$flush_on_exit)
+        self$flush()
+
+      if (self$close_on_exit){
+        try(DBI::dbDisconnect(private$.conn), silent = TRUE)
+      }
+    },
+
+
+    set_col_types = function(x){
+      if (!is.null(x)){
+        assert(is.character(x))
+        assert(identical(length(names(x)), length(x)))
+      }
+      private$.col_types <- x
+      invisible(self)
+    },
+
+
+    set_table = function(table){
+      if (inherits(table, "Id")){
+        assert("table" %in% names(table@name))
+
+      } else {
+        assert(is_scalar_character(table))
+      }
+
+      private[[".table"]] <- table
+      self
+    },
+
+    .col_types = NULL,
+    .conn = NULL,
+    .table = NULL,
+    .close_on_exit = NULL
+  )
+)
+
+
+
+
+# AppenderRjdbc -------------------------------------------------------------
+
+#' Log to databases via RJDBC
+#'
+#' Log to a database table with the **RJDBC** package. **RJDBC** is only
+#' somewhat  **DBI** compliant and does not work with [AppenderDbi].
+#' **I do not recommend using RJDBC if it can be avoided.**. AppenderRjdbc
+#' is only tested for DB2 databases, and it is likely it will not work properly
+#' for other databases. Please file a bug report if you encounter any issues.
+#'
+#' @inheritSection AppenderDbi Creating a New Appender
+#' @inheritSection AppenderDbi Choosing the Right DBI Layout
+#' @inheritSection AppenderDbi Fields
+#' @inheritSection AppenderDbi Methods
+#'
+#'
+#' @section Fields:
+#' @section Methods:
+#'
+#' @export
+#' @seealso [LayoutFormat], [simple_logging], [data.table::data.table]
+#' @family Appenders
+#' @name AppenderRjdbc
+NULL
+
+
+
+
+# exclude from coverage because relies on external ressources
+# nocov start
+#' @export
+AppenderRjdbc <- R6::R6Class(
+  "AppenderRjdbc",
+  inherit = AppenderDbi,
+  cloneable = FALSE,
+  public = list(
+    initialize = function(
+      conn,
+      table,
+      threshold = NA_integer_,
+      layout = select_dbi_layout(conn, table),
+      close_on_exit = TRUE,
+      buffer_size = 10,
+      flush_threshold = "error",
+      flush_on_exit = TRUE,
+      flush_on_rotate = TRUE,
+      should_flush = default_should_flush,
+      filters = NULL
+    ){
+      assert_namespace("DBI", "RJDBC", "data.table")
+
+      # appender
+      self$set_threshold(threshold)
+      self$set_layout(layout)
+      self$set_filters(filters)
+
+      # buffer
+      private$initialize_buffer(buffer_size)
+
+      # flush conditions
+      self$set_should_flush(should_flush)
+      self$set_flush_threshold(flush_threshold)
+      self$set_flush_on_exit(flush_on_exit)
+      self$set_flush_on_rotate(flush_on_rotate)
+
+      # database
+      self$set_conn(conn)
+      private$set_table(table)
+      self$set_close_on_exit(close_on_exit)
+
+      table_exists <- tryCatch(
+        is.data.frame(DBI::dbGetQuery(conn, paste("SELECT 1 FROM", self$table))),
+        error = function(e) FALSE
+      )
+
+      if (!table_exists) {
+        message("Creating '", fmt_tname(self$table), "' with manually specified column types")
+        RJDBC::dbSendUpdate(conn, layout$sql_create_table(self$table))
+      }
+
+      self
+    },
+
+
+    flush = function(){
+      lo <- get(".layout", envir = private)
+
+      table  <- get("table", envir = self)
+      buffer <- get("buffer_dt", envir = self)
+
+      if (length(buffer)){
+        dd <- lo[["format_data"]](buffer)
+        cn <- names(get("col_types", envir = self))
+
+        if (!is.null(cn))
+          dd <- dd[, intersect(cn, names(dd))]
+
+        for (i in seq_len(nrow(dd))){
+          data <- as.list(dd[i, ])
+          q <-  sprintf(
+            "INSERT INTO %s (%s) VALUES (%s)",
+            get("table", self),
+            paste(names(data), collapse = ", "),
+            paste(rep("?", length(data)), collapse = ", ")
+          )
+          RJDBC::dbSendUpdate(get(".conn", private), q, list=data)
+        }
+
+        assign("insert_pos", 0L, envir = private)
+        private$.buffer_events <- list()
+        invisible(self)
+      }
+    }
+  ),
+
+
+  active = list(
+
+    data = function(){
+      dd <- try(DBI::dbGetQuery(self$conn, paste("SELECT * FROM", self$table)))
+
+      if (inherits(dd, "try-error"))
+        return(NULL)
+
+      names(dd) <- tolower(names(dd))
+
+      dd[["timestamp"]] <- as.POSIXct(dd[["timestamp"]])
+      dd[["level"]] <- as.integer(dd[["level"]])
+      dd
+    }
+  ),
+
+
+  private = list(
+    .conn = NULL,
+    .table = NULL
+  )
+)
+
+
+
+
+# helpers -----------------------------------------------------------------
+
+
+
+
+
+fmt_tname <- function(x){
+  if (inherits(x, "Id")){
+    paste0("<Id: ", trimws(gsub("<Id>", "", utils::capture.output(print(x)))), ">")
+  } else {
+    x
+  }
+}
+
+
+
+
+as_tname <- function(x){
+  if (is_scalar_character(x)){
+    return(x)
+
+  } else if (is_Id(x)){
+    x <- x@name
+
+    if (identical(length(x), 1L)){
+      assert(identical(names(x), "table"))
+      x <- x[["table"]]
+
+    } else if (identical(length(x), 2L)){
+      assert(setequal(names(x), c("schema", "table")))
+      x <- paste0(x[["schema"]], ".", x[["table"]])
+
+    } else {
+
+      stop("Table identifiers must contain a table and may contain a schema")
+    }
+  }
+
+  x
+}
