@@ -3,13 +3,6 @@
 language: R
 sudo: false
 cache: packages
-r_binary_packages:
-  - devtools
-  - roxygen2
-  - RMariaDB
-  - RMySQL
-  - RPostgreSQL
-  - RPostgres
 services:
   - postgresql
   - mysql
