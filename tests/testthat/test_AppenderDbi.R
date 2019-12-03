@@ -160,7 +160,8 @@ for (nm in names(dbs)){
       caller = "nope()",
       timestamp = Sys.time(),
       foo = "blubb",
-      bar = letters
+      bar = letters,
+      hash = "baz"
     )
     app$append(e)
     app$append(e)

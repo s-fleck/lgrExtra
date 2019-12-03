@@ -194,10 +194,17 @@ AppenderDbi <- R6::R6Class(
         )
 
         data.table::setnames(dd, lo[["format_colnames"]](names(dd)))
-        if (!is.null(cn)){
-          sel <- which(toupper(names(dd)) %in% toupper(cn))
-          dd <- dd[, sel, with = FALSE]
+
+        if (is.null(cn)){
+          # TODO: needs better implementation
+          cn <- names(dbGetQuery(
+            conn = get(".conn", envir = private),
+            sprintf("select * from %s where 0=1", self$table_name)
+          ))
         }
+
+        sel <- which(toupper(names(dd)) %in% toupper(cn))
+        dd <- dd[, sel, with = FALSE]
 
         # add normal cols
         for (nm in names(which(vapply(dd, Negate(is.atomic), logical(1))))){
