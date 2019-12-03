@@ -127,6 +127,16 @@ AppenderDbi <- R6::R6Class(
       columns <- get_columns(self$conn, self$table)
       private$set_columns(columns)
 
+      assert(
+        all(names(layout$serialized_cols) %in% columns),
+        errorCondition(sprintf(
+          "The following `serialized_cols` were defined but are not present in %s: %s",
+          self$table_name,
+          paste(setdiff(names(layout$serialized_cols), columns), collapse = ", ")
+        ),
+        call = NULL,
+        class = "AppenderConfigDoesNotMatchDbTableError"
+      ))
       self
     },
 

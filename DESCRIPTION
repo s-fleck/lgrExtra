@@ -13,15 +13,16 @@ Description: Extra appenders for 'lgr' that support logging to databases, as
     well as email and push notifications.
 License: MIT + file LICENSE
 Imports:
-    lgr
+    lgr,
+    data.table
 Suggests: 
     DBI,
-    data.table,
     gmailr,
     RMariaDB,
     RPostgres,
     RPushbullet,
     RSQLite,
+    jsonlite,
     sendmailR,
     testthat,
     covr

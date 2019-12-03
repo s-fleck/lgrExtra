@@ -130,7 +130,7 @@ for (nm in names(dbs)){
 
   # +- tests -------------------------------------------------------------------
 
-  test_that(paste0(nm, ": extra_fields works"), {
+  test_that(paste0(nm, ": serialized_cols works"), {
     cts <- c(
       level = "smallint",
       timestamp = "timestamp",
@@ -177,6 +177,43 @@ for (nm in names(dbs)){
     )
 
     expect_identical(app$data$msg, c(msg, msg))
+  })
+
+
+  test_that(paste0(nm, ": serialized_cols fails if column is not in db"), {
+    cts <- c(
+      level = "smallint",
+      timestamp = "timestamp",
+      logger= "varchar(512)",
+      msg = "varchar(1024)",
+      caller = "varchar(1024)",
+      foo = "varchar(256)",
+      fields = "varchar(2048)"
+    )
+
+    lo <- LayoutDbi$new(
+      col_types = cts,
+      serialized_cols = list(
+        fields2 = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
+      )
+    )
+
+    expect_error(
+      app <- init_test_appender(ctor, conn, layout = lo),
+      class = "AppenderConfigDoesNotMatchDbTableError"
+    )
+
+    # Try again with the correct serialized_col name. This also makes it easier
+    # for us to delete the table we just created above
+    lo <- LayoutDbi$new(
+      col_types = cts,
+      serialized_cols = list(
+        fields = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
+      )
+    )
+
+    expect_silent(app <- init_test_appender(ctor, conn, layout = lo))
+    dbRemoveTableCaseInsensitive(conn, app$table)
   })
 
 

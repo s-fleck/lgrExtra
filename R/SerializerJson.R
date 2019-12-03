@@ -1,3 +1,5 @@
+#' Serializers
+#'
 #' @export
 Serializer <- R6::R6Class(
   "Serializer"
@@ -6,6 +8,7 @@ Serializer <- R6::R6Class(
 
 
 #' @export
+#' @rdname Serializer
 SerializerJson <- R6::R6Class(
   "SerializerJson",
   inherit = Serializer,
