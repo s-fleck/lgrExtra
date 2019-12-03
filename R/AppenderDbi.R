@@ -112,14 +112,21 @@ AppenderDbi <- R6::R6Class(
       if (DBI::dbExistsTable(self$conn, layout$format_table_name(self$table))){
         # do nothing
       } else if (is.null(self$layout$col_types)) {
-        message(paste0("Creating '", fmt_tname(table), "' on first log. "))
+        stop(AppenderConfigDoesNotMatchDbTableError(
+          "table `%s` does not exist and no col_types were specified in `layout`"),
+          self$table_name
+        )
 
       } else {
-        message("Creating '", fmt_tname(table), "' with manually specified column types")
+        ct <- layout$col_types
+        message(
+          "creating '", fmt_tname(table), "' with columns: ",
+          paste(names(ct), " ", ct, sep = "", collapse = ", ")
+        )
         DBI::dbCreateTable(
           self$conn,
           layout$format_table_name(self$table),
-          fields = layout$col_types
+          fields = ct
         )
       }
 
@@ -129,14 +136,12 @@ AppenderDbi <- R6::R6Class(
 
       assert(
         all(names(layout$serialized_cols) %in% columns),
-        errorCondition(sprintf(
+        AppenderConfigDoesNotMatchDbTableError(
           "The following `serialized_cols` were defined but are not present in %s: %s",
           self$table_name,
           paste(setdiff(names(layout$serialized_cols), columns), collapse = ", ")
-        ),
-        call = NULL,
-        class = "AppenderConfigDoesNotMatchDbTableError"
-      ))
+        )
+      )
       self
     },
 
@@ -355,10 +360,10 @@ AppenderDbi <- R6::R6Class(
 
     set_columns = function(x){
       if (is.null(x)){
-        stop(
-          "Could not retrieve column names of `", self$table_name, "`.",
-          "Please supply them manually"
-        )
+        stop(AppenderConfigDoesNotMatchDbTableError(
+          "Could not retrieve column names of `%s`. Please supply them manually",
+          self$table_name,
+        ))
       }
       assert(is.character(x))
       private$.columns <- x
@@ -654,4 +659,17 @@ get_columns <- function(conn, table){
   )
 
   res
+}
+
+
+
+AppenderConfigDoesNotMatchDbTableError <- function(
+  msg,
+  ...
+){
+  errorCondition(
+    sprintf(msg, ...),
+    call = NULL,
+    class = "AppenderConfigDoesNotMatchDbTableError"
+  )
 }

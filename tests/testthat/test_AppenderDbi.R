@@ -217,6 +217,7 @@ for (nm in names(dbs)){
   })
 
 
+
   test_that(paste0(nm, ": create schema.table at initalization via DBI::Id"), {
     if (nm == "SQLite via RSQLite"){
       skip("SQLite doesn't support schemas")
@@ -434,7 +435,7 @@ test_that("AppenderDbi / RSQLite: manual field types work", {
       )),
     table = tname
     ),
-  "column types"
+  "creating.*columns"
   )
   e <- LogEvent$new(lgr, level = 600, msg = "ohno", caller = "nope()", timestamp = Sys.time())
 
@@ -478,7 +479,7 @@ test_that("AppenderDBI / RSQLite: $show()", {
       )),
       propagate = FALSE
     ),
-    "manual"
+    "creating.*columns"
   )
 
   lg$fatal("blubb")
