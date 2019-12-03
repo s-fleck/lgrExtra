@@ -160,7 +160,9 @@ LayoutDbi <- R6::R6Class(
   active = list(
     col_types = function() {
       r <- get(".col_types", envir = private)
-      names(r) <- self$format_colnames(names(r))
+      if (!is.null(r)){
+        names(r) <- self$format_colnames(names(r))
+      }
       r
     },
 
