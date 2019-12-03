@@ -157,7 +157,7 @@ AppenderDbi <- R6::R6Class(
       n = 20
     ){
       assert(is_n0(n))
-      threshold <- lgr::standardize_threshold(threshold)
+      threshold <- standardize_threshold(threshold)
       if (is.na(threshold)) threshold <- Inf
 
       dd <- tail(self$data[self$data$level <= threshold, ], n)
@@ -206,6 +206,8 @@ AppenderDbi <- R6::R6Class(
             )
           )
         }
+
+        data.table::setnames(dd, lo[["format_colnames"]](names(dd)))
 
         DBI::dbWriteTable(
           conn  = get(".conn", envir = private),
@@ -507,7 +509,7 @@ as_tname <- function(x){
   if (is_scalar_character(x)){
     return(x)
 
-  } else if (is_Id(x)){
+  } else if (inherits(x, "Id")){
     x <- x@name
 
     if (identical(length(x), 1L)){

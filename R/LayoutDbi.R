@@ -226,7 +226,7 @@ LayoutPostgres <- R6::R6Class(
       pad_levels = "right",
 
       format_table_name = function(x){
-        if (is_Id(x)) x else tolower(x)
+        if (inherits(x, "Id")) x else tolower(x)
       },
       format_colnames = tolower,
       format_data = identity
