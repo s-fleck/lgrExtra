@@ -144,7 +144,7 @@ for (nm in names(dbs)){
     lo <- LayoutDbi$new(
       col_types = cts,
       serialized_cols = list(
-        fields = SerializerJson$new(cols_exclude = names(cts))
+        fields = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
       )
     )
 

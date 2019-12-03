@@ -501,6 +501,7 @@ select_dbi_layout <- function(
 
 
 
+
 get_col_types <- function(conn, table){
   res <- tryCatch({
     dd  <- DBI::dbSendQuery(conn, paste("SELECT * FROM", table))

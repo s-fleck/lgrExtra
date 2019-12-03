@@ -108,7 +108,7 @@ AppenderDbi <- R6::R6Class(
       private$set_table(table)
       self$set_close_on_exit(close_on_exit)
 
-
+      # table columns
       if (DBI::dbExistsTable(self$conn, layout$format_table_name(self$table))){
         # do nothing
       } else if (is.null(self$layout$col_types)) {
@@ -122,6 +122,12 @@ AppenderDbi <- R6::R6Class(
           fields = layout$col_types
         )
       }
+
+      # table columns
+      columns <- get_columns(self$conn, self$table)
+      private$set_columns(columns)
+
+      self
     },
 
 
@@ -186,7 +192,7 @@ AppenderDbi <- R6::R6Class(
 
       if (length(buffer)){
         dd <- lo[["format_data"]](buffer)
-        cn <- names(get("col_types", envir = lo))
+        cn <- get(".columns", envir = private)
 
         sc <- lapply(
           lo$serialized_cols,
@@ -194,14 +200,6 @@ AppenderDbi <- R6::R6Class(
         )
 
         data.table::setnames(dd, lo[["format_colnames"]](names(dd)))
-
-        if (is.null(cn)){
-          # TODO: needs better implementation
-          cn <- names(dbGetQuery(
-            conn = get(".conn", envir = private),
-            sprintf("select * from %s where 0=1", self$table_name)
-          ))
-        }
 
         sel <- which(toupper(names(dd)) %in% toupper(cn))
         dd <- dd[, sel, with = FALSE]
@@ -342,9 +340,20 @@ AppenderDbi <- R6::R6Class(
         assert(identical(length(names(x)), length(x)))
       }
       private$.col_types <- x
-      invisible(self)
+      self
     },
 
+    set_columns = function(x){
+      if (is.null(x)){
+        stop(
+          "Could not retrieve column names of `", self$table_name, "`.",
+          "Please supply them manually"
+        )
+      }
+      assert(is.character(x))
+      private$.columns <- x
+      self
+    },
 
     set_table = function(table){
       if (inherits(table, "Id")){
@@ -361,7 +370,8 @@ AppenderDbi <- R6::R6Class(
     .col_types = NULL,
     .conn = NULL,
     .table = NULL,
-    .close_on_exit = NULL
+    .close_on_exit = NULL,
+    .columns = NULL
   )
 )
 
@@ -616,3 +626,22 @@ sql_create_table <- function(
   sprintf("CREATE TABLE %s (%s)", tname, cols)
 }
 
+
+
+
+
+get_columns <- function(conn, table){
+  res <- tryCatch({
+    dd  <- DBI::dbSendQuery(conn, paste("SELECT * FROM", table))
+    res <- DBI::dbColumnInfo(dd)
+    DBI::dbClearResult(dd)
+    if ("type" %in% names(res))
+      res$name
+    else if ("field.type" %in% names(res))
+      res$field.name
+  },
+    error = function(e) NULL
+  )
+
+  res
+}
