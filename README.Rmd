@@ -1,0 +1,21 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# lgr.app
+
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/s-fleck/lgr.app.svg?branch=master)](https://travis-ci.org/s-fleck/lgr.app)
+[![Codecov test coverage](https://codecov.io/gh/s-fleck/lgr.app/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/lgr.app?branch=master)
+<!-- badges: end -->
