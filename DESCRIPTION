@@ -16,6 +16,7 @@ Imports:
     lgr
 Suggests: 
     DBI,
+    data.table,
     gmailr,
     RMariaDB,
     RPostgres,

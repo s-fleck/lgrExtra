@@ -84,9 +84,9 @@
 #' @name AppenderDt
 #'
 #' @examples
-#' lg <- get_logger("test")
+#' lg <- lgr::get_logger("test")
 #' lg$config(list(
-#'   appenders = list(memory = AppenderBuffer$new()),
+#'   appenders = list(memory = AppenderDt$new()),
 #'   threshold = NA,
 #'   propagate = FALSE  # to prevent routing to root logger for this example
 #' ))
@@ -96,11 +96,11 @@
 #' # Displaying the log
 #' lg$appenders$memory$data
 #' lg$appenders$memory$show()
-#' show_log(target = lg$appenders$memory)
+#' lgr::show_log(target = lg$appenders$memory)
 #'
 #' # If you pass a Logger to show_log(), it looks for the first AppenderDt
 #' # that it can find.
-#' show_log(target = lg)
+#' lgr::show_log(target = lg)
 #'
 #' # Custom fields are stored in the list column .custom by default
 #' lg$info("the iris data frame", caps = LETTERS[1:5])

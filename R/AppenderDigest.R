@@ -274,7 +274,7 @@ AppenderPushbullet <- R6::R6Class(
 #' @keywords internal
 #'
 AppenderMail <- R6::R6Class(
-  "AppenderGmail",
+  "AppenderMail",
   inherit = AppenderDigest,
   cloneable = FALSE,
 

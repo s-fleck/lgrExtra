@@ -7,7 +7,6 @@ test_that("all Appenders print() without failure", {
   if (
     !requireNamespace("sendmailR") ||
     !requireNamespace("RPushbullet") ||
-    !requireNamespace("rotor") ||
     !requireNamespace("DBI") ||
     !requireNamespace("RSQLite")
   ){
@@ -22,9 +21,7 @@ test_that("all Appenders print() without failure", {
     print(AppenderConsole$new())
     print(AppenderConsole$new(layout = LayoutGlue$new()))
     print(AppenderDbi$new(RSQLite::dbConnect(RSQLite::SQLite()), "blubb"))
-    print(AppenderMail$new())
     print(AppenderSendmail$new("test@blah.com", control = list()))
-    print(AppenderTable$new())
     print(AppenderBuffer$new(appenders = list(
       AppenderConsole$new(),
       blah = AppenderBuffer$new()
