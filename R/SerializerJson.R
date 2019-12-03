@@ -34,7 +34,12 @@ SerializerJson <- R6::R6Class(
       vals <- event$values
       vals <- vals[!names(vals) %in% self$cols_exclude]
       vals <- vals[vapply(vals, self$col_filter, logical(1), USE.NAMES = FALSE)]
-      jsonlite::toJSON(vals, auto_unbox = self$auto_unbox)
+
+      if (length(vals)){
+        jsonlite::toJSON(vals, auto_unbox = self$auto_unbox)
+      } else {
+        NA_character_
+      }
     }
   )
 )
