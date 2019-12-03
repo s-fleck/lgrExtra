@@ -22,7 +22,6 @@ test_that("all Appenders print() without failure", {
     print(AppenderConsole$new())
     print(AppenderConsole$new(layout = LayoutGlue$new()))
     print(AppenderDbi$new(RSQLite::dbConnect(RSQLite::SQLite()), "blubb"))
-    print(AppenderMemory$new())
     print(AppenderMail$new())
     print(AppenderSendmail$new("test@blah.com", control = list()))
     print(AppenderTable$new())

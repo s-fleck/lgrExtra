@@ -39,6 +39,10 @@ AppenderDigest <-  R6::R6Class(
 
   # +- public --------------------------------------------------------------
   public = list(
+    initialize = function(...){
+      stop(CannotInitializeAbstractClassError())
+    },
+
     set_subject_layout = function(layout){
       assert(inherits(layout, "Layout"))
       private$.subject_layout <- layout
@@ -276,6 +280,11 @@ AppenderMail <- R6::R6Class(
 
   # +- public --------------------------------------------------------------
   public = list(
+
+    initialize = function(...){
+      stop(CannotInitializeAbstractClassError())
+    },
+
     set_to = function(x){
       private$.to <- x
       invisible(self)

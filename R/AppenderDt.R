@@ -269,7 +269,7 @@ AppenderDt <- R6::R6Class(
       # guranteed to work with LayoutFormat, other layouts might run into
       # issues
       walk(
-        as_LogEventList.data.frame(res),
+        as_LogEventList(res),
         function(.x){
           cat(self$layout$format_event(.x), "\n", sep = "")
         }
@@ -319,3 +319,14 @@ AppenderDt <- R6::R6Class(
     list_cols = NULL
   )
 )
+
+
+
+
+# trim multi-valued events from vectorized inserts to the buffer size
+trim_to_buffer_size <- function(x, buffer_size){
+  if (length(x) <= buffer_size)
+    x
+  else
+    x[seq.int(length(x) - buffer_size + 1L, length(x))]
+}

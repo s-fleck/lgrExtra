@@ -2,6 +2,7 @@
 
 export(AppenderDbi)
 export(AppenderDigest)
+export(AppenderDt)
 export(AppenderGmail)
 export(AppenderPushbullet)
 export(AppenderRjdbc)

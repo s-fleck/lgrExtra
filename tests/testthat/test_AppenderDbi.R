@@ -446,3 +446,44 @@ test_that("AppenderDbi / RSQLite: automatic closing of connections works", {
   gc()
   expect_silent(DBI::dbDisconnect(conn))
 })
+
+
+
+
+
+
+
+# embedded from tabde
+test_that("generate_sql works as expected", {
+
+  cn1 <- LETTERS[1:18]
+  ct1 <- c("SMALLINT", "INTEGER", "INT", "BIGINT", "DECIMAL", "NUMERIC", "DECFLOAT",
+           "REAL", "DOUBLE", "CHARACTER", "CHARACTER(1)", "VARCHAR(9)", "CLOB(1)",
+           "GRAPHIC(80)", "VARGRAPHIC(80)", "DBCLOB(80)", "BLOB(80)", "FAIL")
+  co1 <- c(rep("NOT NULL", length(ct1)))
+
+  expect_silent(sql_create_table("testtable", cn1[1:3], ct1[1:3]))
+  expect_error(
+    sql_create_table("testtable", cn1[1:3], ct1[1:2]),
+    "is_equal_length"
+  )
+
+  ct1[[1]] <- NA
+
+  expect_message(
+    sql_create_table("testtable", cn1[1:3], ct1[1:3]),
+    "Skipping 1"
+  )
+
+  cn1[[1]] <- NA
+  expect_error(
+    sql_create_table("testtable", cn1[1:3], ct1[1:3]),
+    "must be unique"
+  )
+
+  cn1[[1]] <- "B"
+  expect_error(
+    sql_create_table("testtable", cn1[1:3], ct1[1:3]),
+    "must be unique"
+  )
+})
