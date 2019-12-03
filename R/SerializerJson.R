@@ -1,9 +1,11 @@
+#' @export
 Serializer <- R6::R6Class(
   "Serializer"
 )
 
 
 
+#' @export
 SerializerJson <- R6::R6Class(
   "SerializerJson",
   inherit = Serializer,
@@ -16,7 +18,7 @@ SerializerJson <- R6::R6Class(
 
     initialize = function(
       cols = "*",
-      cols_exclude = character(),
+      cols_exclude = c("level", "timestamp", "logger", "caller", "msg"),
       col_filter = is.atomic,
       max_nchar = 2048L,
       auto_unbox = TRUE
