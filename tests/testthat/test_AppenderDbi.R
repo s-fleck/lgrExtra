@@ -19,6 +19,11 @@ tsqlite <- tempfile()
 teardown(unlink(tsqlite))
 
 dbs <- list(
+  "SQLite via RSQLite" = list(
+    conn = DBI::dbConnect(RSQLite::SQLite(), database = tsqlite),
+    ctor = AppenderDbi
+  ),
+
   "MySQL via RMariaDB" = list(
     conn = try(silent = TRUE, DBI::dbConnect(
       RMariaDB::MariaDB(),
@@ -65,11 +70,6 @@ dbs <- list(
         foo = "varchar(256)"
       )
     )
-  ),
-
-  "SQLite via RSQLite" = list(
-    conn = DBI::dbConnect(RSQLite::SQLite(), database = tsqlite),
-    ctor = AppenderDbi
   )
 )
 
@@ -78,7 +78,6 @@ teardown({
     try(DBI::dbDisconnect(db$conn), silent = TRUE)
   }
 })
-
 
 
 
@@ -109,9 +108,8 @@ nm <- "MySQL via RMySQL"
 nm <- "DB2 via RJDBC"
 nm <- "DB2 via odbc"
 nm <- "MySQL via RMariaDB"
-nm <- "SQLite via RSQLite"
 nm <-  "PostgreSQL via RPostgres"
-
+nm <- "SQLite via RSQLite"
 
 for (nm in names(dbs)){
 
@@ -131,6 +129,56 @@ for (nm in names(dbs)){
 
 
   # +- tests -------------------------------------------------------------------
+
+  test_that(paste0(nm, ": extra_fields works"), {
+    cts <- c(
+      level = "smallint",
+      timestamp = "timestamp",
+      logger= "varchar(512)",
+      msg = "varchar(1024)",
+      caller = "varchar(1024)",
+      foo = "varchar(256)",
+      fields = "varchar(2048)"
+    )
+
+    lo <- LayoutDbi$new(
+      col_types = cts,
+      serialized_cols = list(
+        fields = SerializerJson$new(cols_exclude = names(cts))
+      )
+    )
+
+    app <- init_test_appender(ctor, conn, layout = lo)
+
+    on.exit(dbRemoveTableCaseInsensitive(conn, app$table))
+
+    msg <- ";*/;   \"' /* blubb;"
+    e <- lgr::LogEvent$new(
+      lgr,
+      level = 600L,
+      msg = msg,
+      caller = "nope()",
+      timestamp = Sys.time(),
+      foo = "blubb",
+      bar = letters
+    )
+    app$append(e)
+    app$append(e)
+
+    app$flush()
+
+    expect_identical(
+      app$data$fields,
+      c(
+        as.character(jsonlite::toJSON(list(bar = letters))),
+        as.character(jsonlite::toJSON(list(bar = letters)))
+      )
+    )
+
+    expect_identical(app$data$msg, c(msg, msg))
+  })
+
+
   test_that(paste0(nm, ": create schema.table at initalization via DBI::Id"), {
     if (nm == "SQLite via RSQLite"){
       skip("SQLite doesn't support schemas")
@@ -318,6 +366,10 @@ for (nm in names(dbs)){
     app$flush()
     expect_identical(app$data$msg, msg)
   })
+
+
+
+
 }
 
 

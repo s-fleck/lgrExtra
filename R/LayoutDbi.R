@@ -87,6 +87,10 @@ LayoutDbi <- R6::R6Class(
   public = list(
     initialize = function(
       col_types = NULL,
+      serialized_cols = list(
+        fields = SerializerJson$new()
+      ),
+
       fmt = "%L [%t] %m  %f",
       timestamp_fmt = "%Y-%m-%d %H:%M:%S",
       colors = getOption("lgr.colors", list()),
@@ -94,9 +98,11 @@ LayoutDbi <- R6::R6Class(
 
       format_table_name = identity,
       format_colnames = identity,
-      format_data = identity
+      format_data = data.table::as.data.table
     ){
       self$set_col_types(col_types)
+      self$set_serialized_cols(serialized_cols)
+
       self$set_fmt(fmt)
       self$set_timestamp_fmt(timestamp_fmt)
       self$set_colors(colors)
@@ -123,6 +129,11 @@ LayoutDbi <- R6::R6Class(
       invisible(self)
     },
 
+
+    set_serialized_cols = function(x){
+      private$.serialized_cols <- x
+      invisible(self)
+    },
 
     sql_create_table = function(table){
       assert(
@@ -154,6 +165,11 @@ LayoutDbi <- R6::R6Class(
     },
 
 
+    serialized_cols = function(){
+      get(".serialized_cols", envir = private)
+    },
+
+
     col_names = function(){
       names(self$col_types)
     }
@@ -161,7 +177,8 @@ LayoutDbi <- R6::R6Class(
 
 
   private = list(
-    .col_types = NULL
+    .col_types = NULL,
+    .serialized_cols   = NULL
   )
 )
 
@@ -186,6 +203,7 @@ LayoutSqlite <- R6::R6Class(
       format_table_name = tolower,
       format_colnames = tolower,
       format_data = function(x){
+        x <- data.table::as.data.table(x)
         for (nm in names(x)){
           if (inherits(x[[nm]], "POSIXt"))
             data.table::set(x, i = NULL, j = nm, value = format(x[[nm]]))
@@ -264,6 +282,7 @@ LayoutMySql <- R6::R6Class(
       format_table_name = as_tname,
       format_colnames = tolower,
       format_data       = function(x){
+        x <- data.table::as.data.table(x)
         data.table::setnames(x, tolower(names(x)))
         x
       }
@@ -310,6 +329,7 @@ LayoutDb2 <- R6::R6Class(
       },
       format_colnames = toupper,
       format_data = function(x){
+        x <- data.table::as.data.table(x)
         names(x) <- toupper(names(x))
         x
       }
@@ -348,6 +368,7 @@ LayoutRjdbc <- R6::R6Class(
       format_table_name =  as_tname,
       format_colnames = toupper,
       format_data = function(x){
+        x <- data.table::as.data.table(x)
         names(x) <- toupper(names(x))
         x
       }
@@ -387,6 +408,7 @@ LayoutRjdbcDb2 <- R6::R6Class(
       format_table_name =  function(x) toupper(as_tname(x)),
       format_colnames = toupper,
       format_data = function(x){
+        x <- data.table::as.data.table(x)
         names(x) <- toupper(names(x))
         x
       }

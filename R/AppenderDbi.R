@@ -181,19 +181,25 @@ AppenderDbi <- R6::R6Class(
 
     flush = function(){
       lo <- get(".layout", envir = private)
-
       table  <- get("table", envir = self)
-      buffer <- get("buffer_dt", envir = self)
+      buffer <- get("buffer_events", envir = self)
 
       if (length(buffer)){
         dd <- lo[["format_data"]](buffer)
         cn <- names(get("col_types", envir = lo))
 
+        sc <- lapply(
+          lo$serialized_cols,
+          function(.s) vapply(buffer, function(.) .s$serialize(.), character(1), USE.NAMES = FALSE)
+        )
+
+        data.table::setnames(dd, lo[["format_colnames"]](names(dd)))
         if (!is.null(cn)){
           sel <- which(toupper(names(dd)) %in% toupper(cn))
           dd <- dd[, sel, with = FALSE]
         }
 
+        # add normal cols
         for (nm in names(which(vapply(dd, Negate(is.atomic), logical(1))))){
           data.table::set(
             dd,
@@ -207,7 +213,16 @@ AppenderDbi <- R6::R6Class(
           )
         }
 
-        data.table::setnames(dd, lo[["format_colnames"]](names(dd)))
+        # add serialized cols
+        for (nm in names(sc)){
+          assert(is.character(sc[[nm]]))
+          data.table::set(
+            dd,
+            i = NULL,
+            j = nm,
+            value = as.character(sc[[nm]])
+          )
+        }
 
         DBI::dbWriteTable(
           conn  = get(".conn", envir = private),
@@ -294,7 +309,7 @@ AppenderDbi <- R6::R6Class(
 
       names(dd) <- tolower(names(dd))
       if (nrow(dd) > 0){
-        dd[["timestamp"]] <- as.POSIXct(dd[["timestamp"]])
+        dd[["timestamp"]] <- as.POSIXct(dd[["timestamp"]], origin = c("1970-01-01 00:00:00"))
       }
 
       dd[["level"]] <- as.integer(dd[["level"]])
@@ -463,7 +478,6 @@ AppenderRjdbc <- R6::R6Class(
 
 
   active = list(
-
     data = function(){
       dd <- try(DBI::dbGetQuery(self$conn, paste("SELECT * FROM", self$table)))
 
