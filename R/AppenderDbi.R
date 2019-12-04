@@ -205,7 +205,7 @@ AppenderDbi <- R6::R6Class(
         cat("[empty log]")
       } else {
         walk(
-          as_LogEventList(dd, na.rm = TRUE),
+          as_event_list(dd, na.rm = TRUE),
           function(.x){
             cat(lo$format_event(.x), "\n", sep = "")
           }
