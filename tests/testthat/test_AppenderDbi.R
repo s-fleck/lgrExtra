@@ -19,6 +19,21 @@ tsqlite <- tempfile()
 teardown(unlink(tsqlite))
 
 dbs <- list(
+  "DB2 via odbc" = list(
+    conn = try(silent = TRUE, dataSTAT::dbConnectDB2("RTEST", "rtest", "rtest", type = "odbc")),
+    ctor = AppenderDbi,
+    layout = LayoutDb2$new(
+      col_types = c(
+        level = "smallint",
+        timestamp = "timestamp",
+        logger= "varchar(512)",
+        msg = "varchar(1024)",
+        caller = "varchar(1024)",
+        foo = "varchar(256)"
+      )
+    )
+  ),
+
   "SQLite via RSQLite" = list(
     conn = DBI::dbConnect(RSQLite::SQLite(), database = tsqlite),
     ctor = AppenderDbi
@@ -50,27 +65,12 @@ dbs <- list(
       }
     ),
     ctor = AppenderDbi
-  ),
-
-  "DB2 via RJDBC" = list(
-    conn = try(silent = TRUE, dataSTAT::dbConnectDB2("RTEST", "rtest", "rtest")),
-    ctor = AppenderRjdbc
-  ),
-
-  "DB2 via odbc" = list(
-    conn = try(silent = TRUE, dataSTAT::dbConnectDB2("RTEST", "rtest", "rtest", type = "odbc")),
-    ctor = AppenderDbi,
-    layout = LayoutDb2$new(
-      col_types = c(
-        level = "smallint",
-        timestamp = "timestamp",
-        logger= "varchar(512)",
-        msg = "varchar(1024)",
-        caller = "varchar(1024)",
-        foo = "varchar(256)"
-      )
-    )
   )
+
+  # "DB2 via RJDBC" = list(
+  #   conn = try(silent = TRUE, dataSTAT::dbConnectDB2("RTEST", "rtest", "rtest")),
+  #   ctor = AppenderRjdbc
+  # ),
 )
 
 teardown({
@@ -93,23 +93,28 @@ init_test_appender = function(
     caller = "varchar(1024)",
     foo = "varchar(256)"
   ))){
+
+  on.exit(dbRemoveTableCaseInsensitive(conn, table))
   ap <- ctor$new(
     conn = conn,
     table = table,
     layout = layout,
     close_on_exit = FALSE
   )
+  on.exit(NULL)
+  ap
 }
 
 
 
 # for manual testing
 nm <- "MySQL via RMySQL"
-nm <- "DB2 via RJDBC"
-nm <- "DB2 via odbc"
 nm <- "MySQL via RMariaDB"
 nm <-  "PostgreSQL via RPostgres"
 nm <- "SQLite via RSQLite"
+nm <- "DB2 via RJDBC"
+nm <- "DB2 via odbc"
+
 
 for (nm in names(dbs)){
 
@@ -141,12 +146,11 @@ for (nm in names(dbs)){
       fields = "varchar(2048)"
     )
 
-    lo <- LayoutDbi$new(
-      col_types = cts,
-      serialized_cols = list(
-        fields = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
-      )
-    )
+    lo <- select_dbi_layout(conn, "logging.test")
+    lo$set_serialized_cols(list(
+      fields = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
+    ))
+    lo$set_col_types(cts)
 
     app <- init_test_appender(ctor, conn, layout = lo)
 
@@ -191,12 +195,11 @@ for (nm in names(dbs)){
       fields = "varchar(2048)"
     )
 
-    lo <- LayoutDbi$new(
-      col_types = cts,
-      serialized_cols = list(
-        fields2 = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
-      )
-    )
+    lo <- select_dbi_layout(conn, "logging.test")
+    lo$set_serialized_cols(list(
+      fields2 = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
+    ))
+    lo$set_col_types(cts)
 
     expect_error(
       app <- init_test_appender(ctor, conn, layout = lo),
@@ -205,14 +208,13 @@ for (nm in names(dbs)){
 
     # Try again with the correct serialized_col name. This also makes it easier
     # for us to delete the table we just created above
-    lo <- LayoutDbi$new(
-      col_types = cts,
-      serialized_cols = list(
-        fields = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
-      )
-    )
+    lo <- select_dbi_layout(conn, "logging.test")
+    lo$set_serialized_cols(list(
+      fields = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
+    ))
+    lo$set_col_types(cts)
 
-    expect_silent(app <- init_test_appender(ctor, conn, layout = lo))
+    expect_message(app <- init_test_appender(ctor, conn, layout = lo, "creating"))
     dbRemoveTableCaseInsensitive(conn, app$table)
   })
 
@@ -223,7 +225,7 @@ for (nm in names(dbs)){
       skip("SQLite doesn't support schemas")
     }
 
-    tab <-  DBI::Id(schema = "TMP", table = "TEST")
+    tab <- DBI::Id(schema = "TMP", table = "TEST")
 
     if (inherits(conn, "PqConnection")){
       try(DBI::dbExecute(conn, 'create schema "TMP"'), silent = TRUE)

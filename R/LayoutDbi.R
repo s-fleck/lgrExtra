@@ -87,9 +87,7 @@ LayoutDbi <- R6::R6Class(
   public = list(
     initialize = function(
       col_types = NULL,
-      serialized_cols = list(
-        fields = SerializerJson$new()
-      ),
+      serialized_cols = NULL,
 
       fmt = "%L [%t] %m  %f",
       timestamp_fmt = "%Y-%m-%d %H:%M:%S",
@@ -491,6 +489,15 @@ select_dbi_layout <- function(
       )),
     LayoutDbi$new()
   )
+
+  # check for DB2 on odbc connections
+  try({
+    if (grepl("^DB2", conn@info$dbms.name)){
+      res$format_colnames   <- toupper
+      res$format_table_name <- toupper
+    }
+  }, silent = TRUE)
+
 
   ct <- get_col_types(conn, table)
 

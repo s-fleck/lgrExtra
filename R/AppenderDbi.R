@@ -105,11 +105,15 @@ AppenderDbi <- R6::R6Class(
 
       # database
       self$set_conn(conn)
+
+      if (!inherits(table, "Id")){
+        table <- layout$format_table_name(table)
+      }
       private$set_table(table)
       self$set_close_on_exit(close_on_exit)
 
       # table columns
-      if (DBI::dbExistsTable(self$conn, layout$format_table_name(self$table))){
+      if (DBI::dbExistsTable(self$conn, self$table)){
         # do nothing
       } else if (is.null(self$layout$col_types)) {
         stop(AppenderConfigDoesNotMatchDbTableError(
@@ -123,19 +127,31 @@ AppenderDbi <- R6::R6Class(
           "creating '", fmt_tname(table), "' with columns: ",
           paste(names(ct), " ", ct, sep = "", collapse = ", ")
         )
+
         DBI::dbCreateTable(
           self$conn,
-          layout$format_table_name(self$table),
+          self$table,
           fields = ct
         )
       }
 
       # table columns
       columns <- get_columns(self$conn, self$table)
+
+      if (is.null(columns)){
+        stop(AppenderConfigDoesNotMatchDbTableError(
+          "Could not retrieve column names of `%s`. Please supply them manually",
+          self$table_name
+        ))
+      }
+
       private$set_columns(columns)
 
       assert(
-        all(names(layout$serialized_cols) %in% columns),
+        all(
+          layout$format_colnames(names(layout$serialized_cols)) %in%
+          columns
+        ),
         AppenderConfigDoesNotMatchDbTableError(
           "The following `serialized_cols` were defined but are not present in %s: %s",
           self$table_name,
@@ -214,8 +230,6 @@ AppenderDbi <- R6::R6Class(
           function(.s) vapply(buffer, function(.) .s$serialize(.), character(1), USE.NAMES = FALSE)
         )
 
-        data.table::setnames(dd, lo[["format_colnames"]](names(dd)))
-
         sel <- which(toupper(names(dd)) %in% toupper(cn))
         dd <- dd[, sel, with = FALSE]
 
@@ -243,6 +257,8 @@ AppenderDbi <- R6::R6Class(
             value = as.character(sc[[nm]])
           )
         }
+
+        data.table::setnames(dd, lo[["format_colnames"]](names(dd)))
 
         DBI::dbWriteTable(
           conn  = get(".conn", envir = private),
@@ -291,7 +307,7 @@ AppenderDbi <- R6::R6Class(
 
 
     table = function(){
-      self$layout$format_table_name(get(".table", envir = private))
+      get(".table", envir = private)
     },
 
 
@@ -359,12 +375,6 @@ AppenderDbi <- R6::R6Class(
     },
 
     set_columns = function(x){
-      if (is.null(x)){
-        stop(AppenderConfigDoesNotMatchDbTableError(
-          "Could not retrieve column names of `%s`. Please supply them manually",
-          self$table_name,
-        ))
-      }
       assert(is.character(x))
       private$.columns <- x
       self
@@ -443,6 +453,8 @@ AppenderRjdbc <- R6::R6Class(
       filters = NULL
     ){
       assert_namespace("DBI", "RJDBC", "data.table")
+      stop("AppenderRjdbc is currently not working")
+      # TODO: AppenderRjdbc is disabled
 
       # appender
       self$set_threshold(threshold)
@@ -646,19 +658,35 @@ sql_create_table <- function(
 
 
 get_columns <- function(conn, table){
-  res <- tryCatch({
-    dd  <- DBI::dbSendQuery(conn, paste("SELECT * FROM", table))
-    res <- DBI::dbColumnInfo(dd)
-    DBI::dbClearResult(dd)
-    if ("type" %in% names(res))
-      res$name
-    else if ("field.type" %in% names(res))
-      res$field.name
-  },
-    error = function(e) NULL
-  )
 
-  res
+  res <- try(DBI::dbListFields(conn, table), silent = TRUE)
+
+  if (!is_try_error(res))
+    return(res)
+
+  res <- try(silent = TRUE, {
+    if (is_try_error(res)){
+      if (inherits(table, "Id"))
+        table <- as_tname(table)
+
+      dd  <- DBI::dbSendQuery(conn, paste("SELECT * FROM", table))
+      on.exit(DBI::dbClearResult(dd))
+      cols <- DBI::dbColumnInfo(dd)
+
+      if ("type" %in% names(cols)){
+        cols$name
+      } else if ("field.type" %in% names(cols)) {
+        cols$field.name
+      } else {
+        stop("could not determine colnames")
+      }
+    }
+  })
+
+  if (!is_try_error(res))
+    return(res)
+
+  NULL
 }
 
 
