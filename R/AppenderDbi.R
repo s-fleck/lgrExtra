@@ -22,10 +22,6 @@
 #' set `buffer_size` to `0`.
 #'
 #'
-#' @inheritSection Appender Creating a New Appender
-#' @inheritSection AppenderMemory Fields
-#' @inheritSection AppenderMemory Methods
-#'
 #' @section Creating a New Appender:
 #'
 #' An AppenderDbi is linked to a database table via its `table` argument. If

@@ -9,8 +9,6 @@
 #' at once, for example [AppenderPushbullet], [AppenderGmail] and
 #' [AppenderSendmail].
 #'
-#' @inheritSection AppenderMemory Methods
-#' @inheritSection AppenderMemory Fields
 #'
 #' @section Fields:
 #'
@@ -94,8 +92,6 @@ AppenderDigest <-  R6::R6Class(
 #' events in case a `fatal` event is encountered.
 #'
 #'
-#' @inheritSection AppenderMemory Methods
-#' @inheritSection AppenderMemory Fields
 #'
 #' @section Fields:
 #'

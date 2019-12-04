@@ -18,7 +18,6 @@
 #' [as.data.table.LogEvent]), as well as column- and table names.
 #'
 #'
-#' @inheritSection LayoutFormat Methods
 #' @inheritSection Layout Creating a New Layout
 #'
 #' @section Creating a New Layout:

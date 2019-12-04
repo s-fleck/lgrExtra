@@ -19,9 +19,6 @@
 #'
 #' @eval r6_usage(AppenderDt)
 #'
-#' @inheritSection AppenderTable Fields
-#' @inheritSection Appender Methods
-#'
 #'
 #' @section Creating a Data Table Appender:
 #'
