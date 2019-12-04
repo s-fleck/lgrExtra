@@ -664,12 +664,13 @@ get_columns <- function(conn, table){
   if (!is_try_error(res))
     return(res)
 
+  # hackish way if cannonical way above does not work
   res <- try(silent = TRUE, {
     if (is_try_error(res)){
       if (inherits(table, "Id"))
         table <- as_tname(table)
 
-      dd  <- DBI::dbSendQuery(conn, paste("SELECT * FROM", table))
+      dd  <- DBI::dbSendQuery(conn, paste("SELECT * FROM", table, "WHERE 1=0"))
       on.exit(DBI::dbClearResult(dd))
       cols <- DBI::dbColumnInfo(dd)
 
