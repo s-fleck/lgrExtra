@@ -46,3 +46,94 @@ SerializerJson <- R6::R6Class(
     }
   )
 )
+
+
+
+
+#' Title
+#'
+#' @param x
+#'
+#' @return
+#' @export
+#'
+#' @examples
+unpack_json_cols <- function(
+  x,
+  cols
+){
+  UseMethod("unpack_json_cols")
+}
+
+
+
+
+#' Title
+#'
+#' @param x
+#' @param cols
+#'
+#' @return
+#' @export
+#'
+#' @examples
+unpack_json_cols.data.table <- function(
+  x,
+  cols
+){
+  assert_namespace("jsonlite")
+
+  a <- list(x[ , !cols, with = FALSE])
+  b <- lapply(cols, function(nm) unpack_col(x[[nm]]))
+
+
+  do.call(cbind, c(a, b))
+}
+
+
+
+#' Title
+#'
+#' @param x
+#' @param cols
+#'
+#' @return
+#' @export
+#'
+#' @examples
+unpack_json_cols.data.frame <- function(
+  x,
+  cols
+){
+  as.data.frame(
+    unpack_json_cols.data.table(
+      data.table::as.data.table(x),
+      cols = cols
+    )
+  )
+}
+
+
+
+
+
+unpack_row <- function(x){
+  if (is.na(x)){
+    data.table(..unpack_row_dummy.. = list(NULL))
+  } else {
+    data.table::as.data.table(lapply(jsonlite::fromJSON(x), list))
+  }
+}
+
+
+
+
+unpack_col <- function(x){
+  r <- lapply(x, unpack_row)
+  r <- data.table::rbindlist(r, fill = TRUE, use.names = TRUE)
+  if ("..unpack_row_dummy.." %in% names(r)){
+    r[, ..unpack_row_dummy.. := NULL]
+  }
+
+  r
+}
