@@ -340,6 +340,11 @@ AppenderDbi <- R6::R6Class(
       }
 
       names(dd) <- tolower(names(dd))
+
+      if (is.character(dd$timestamp) && !grepl("-", dd$timestamp[[1]])){
+        dd$timestamp <- as.numeric(dd$timestamp)
+      }
+
       if (nrow(dd) > 0){
         dd[["timestamp"]] <- as.POSIXct(dd[["timestamp"]], origin = c("1970-01-01 00:00:00"))
       }
@@ -689,12 +694,12 @@ get_columns <- function(conn, table){
 
 
 AppenderConfigDoesNotMatchDbTableError <- function(
-  msg,
+  message,
   ...
 ){
-  errorCondition(
-    sprintf(msg, ...),
+  error(
+    message = sprintf(message, ...),
     call = NULL,
-    class = "AppenderConfigDoesNotMatchDbTableError"
+    subclass = "AppenderConfigDoesNotMatchDbTableError"
   )
 }
