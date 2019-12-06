@@ -41,7 +41,7 @@ Other abstract classes:
 \concept{abstract classes}
 \keyword{internal}
 \section{Super classes}{
-\code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgr.app:AppenderDigest]{lgr.app::AppenderDigest}} -> \code{AppenderMail}
+\code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{AppenderMail}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -72,7 +72,7 @@ Other abstract classes:
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_threshold}{\code{lgr::AppenderMemory$set_flush_threshold()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush">}\href{../../lgr/html/AppenderMemory.html#method-set_should_flush}{\code{lgr::AppenderMemory$set_should_flush()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show">}\href{../../lgr/html/AppenderMemory.html#method-show}{\code{lgr::AppenderMemory$show()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr.app" data-topic="AppenderDigest" data-id="set_subject_layout">}\href{../../lgr.app/html/AppenderDigest.html#method-set_subject_layout}{\code{lgr.app::AppenderDigest$set_subject_layout()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout">}\href{../../lgrExtra/html/AppenderDigest.html#method-set_subject_layout}{\code{lgrExtra::AppenderDigest$set_subject_layout()}}\out{</span>}
 }
 \out{</details>}
 }

@@ -4,12 +4,14 @@
 \alias{select_dbi_layout}
 \title{Select Appropriate Database Table Layout}
 \usage{
-select_dbi_layout(conn, table)
+select_dbi_layout(conn, table, ...)
 }
 \arguments{
 \item{conn}{a \link[DBI:dbConnect]{DBI connection}}
 
 \item{table}{a \code{character} scalar. The name of the table to log to.}
+
+\item{...}{passed on to the appropriate \code{LayoutDbi} subclass constructor.}
 }
 \description{
 Selects an appropriate Layout for a database table based on

@@ -1,4 +1,4 @@
 library(testthat)
-library(lgr.app)
+library(lgrExtra)
 
-test_check("lgr.app")
+test_check("lgrExtra")

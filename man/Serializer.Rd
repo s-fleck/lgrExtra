@@ -33,7 +33,7 @@ The objects of this class are cloneable with this method.
 }
 }
 \section{Super class}{
-\code{\link[lgr.app:Serializer]{lgr.app::Serializer}} -> \code{SerializerJson}
+\code{\link[lgrExtra:Serializer]{lgrExtra::Serializer}} -> \code{SerializerJson}
 }
 \section{Methods}{
 \subsection{Public methods}{

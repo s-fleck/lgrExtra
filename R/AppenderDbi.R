@@ -67,7 +67,7 @@ NULL
 #' @export
 AppenderDbi <- R6::R6Class(
   "AppenderDbi",
-  inherit = AppenderMemory,
+  inherit = lgr::AppenderMemory,
   cloneable = FALSE,
   public = list(
     initialize = function(
@@ -341,16 +341,17 @@ AppenderDbi <- R6::R6Class(
 
       names(dd) <- tolower(names(dd))
 
-      if (is.character(dd$timestamp) && !grepl("-", dd$timestamp[[1]])){
-        dd$timestamp <- as.numeric(dd$timestamp)
-      }
-
       if (nrow(dd) > 0){
-        dd[["timestamp"]] <- as.POSIXct(dd[["timestamp"]], origin = c("1970-01-01 00:00:00"))
+        dd[["timestamp"]] <- parse_timestamp_smart(dd[["timestamp"]])
       }
 
       dd[["level"]] <- as.integer(dd[["level"]])
       dd
+    },
+
+
+    dt = function(){
+      data.table::as.data.table(self$data)
     }
   ),
 
@@ -702,4 +703,18 @@ AppenderConfigDoesNotMatchDbTableError <- function(
     call = NULL,
     subclass = "AppenderConfigDoesNotMatchDbTableError"
   )
+}
+
+
+
+
+parse_timestamp_smart <- function(x){
+  if (is.character(x) && !grepl("-", dd$timestamp[[1]]))
+    x <- as.numeric(x)
+
+  if (is.character(x)){
+    as.POSIXct(x)
+  } else {
+    as.POSIXct(x, origin = c("1970-01-01 00:00:00"))
+  }
 }

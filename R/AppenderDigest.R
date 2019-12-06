@@ -32,7 +32,7 @@ NULL
 
 AppenderDigest <-  R6::R6Class(
   "AppenderDigest",
-  inherit = AppenderMemory,
+  inherit = lgr::AppenderMemory,
   cloneable = FALSE,
 
   # +- public --------------------------------------------------------------
