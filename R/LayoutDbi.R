@@ -85,7 +85,13 @@ LayoutDbi <- R6::R6Class(
   inherit = LayoutFormat,
   public = list(
     initialize = function(
-      col_types = NULL,
+      col_types = c(
+        level = "integer",
+        timestamp = "timestamp",
+        logger = "varchar(256)",
+        caller = "varchar(256)",
+        msg = "varchar(2048)"
+      ),
       serialized_cols = NULL,
 
       fmt = "%L [%t] %m  %f",
@@ -444,11 +450,13 @@ LayoutRjdbcDb2 <- R6::R6Class(
 #'
 #' @param conn  a [DBI connection][DBI::dbConnect()]
 #' @param table a `character` scalar. The name of the table to log to.
+#' @param ...  passed on to the appropriate `LayoutDbi` subclass constructor.
 #'
 #' @export
 select_dbi_layout <- function(
   conn,
-  table
+  table,
+  ...
 ){
   cls <- c(class(conn))
 
@@ -461,13 +469,13 @@ select_dbi_layout <- function(
 
   res <- switch(
     cls,
-    "PostgreSQLConnection" = LayoutPostgres$new(),
+    "PostgreSQLConnection" = LayoutPostgres$new(...),
 
-    "PqConnection" = LayoutPostgres$new(),
+    "PqConnection" = LayoutPostgres$new(...),
 
-    "MariaDBConnection" = LayoutMySql$new(),
+    "MariaDBConnection" = LayoutMySql$new(...),
 
-    "MySQLConnection" = LayoutMySql$new(),
+    "MySQLConnection" = LayoutMySql$new(...),
 
     "SQLiteConnection" = LayoutSqlite$new(
       col_types = c(
@@ -476,7 +484,9 @@ select_dbi_layout <- function(
         logger = "TEXT",
         caller = "TEXT",
         msg = "TEXT"
-      )),
+      ),
+      ...
+    ),
 
     "JDBCConnection" = LayoutRjdbc$new(
       col_types = c(
@@ -485,8 +495,10 @@ select_dbi_layout <- function(
         logger = "varchar(256)",
         caller = "varchar(256)",
         msg = "varchar(2048)"
-      )),
-    LayoutDbi$new()
+      ),
+      ...
+    ),
+    LayoutDbi$new(...)
   )
 
   # check for DB2 on odbc connections
