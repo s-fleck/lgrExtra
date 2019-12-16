@@ -48,12 +48,17 @@ test_that("unpack_json_cols works", {
   l$appenders$db$flush()
 
 
-  res <- l$appenders$db$data
+  dd <- l$appenders$db$data
 
-  unpack_json_cols(res, cols = c("fields", "fields2"))
+  res <- unpack_json_cols(dd, cols = c("fields", "fields2"))
 
-
-
+  expect_true(is.integer(res$level))
+  expect_true(is_POSIXct(res$timestamp))
+  expect_true(is.character(res$logger))
+  expect_true(is.character(res$caller))
+  expect_true(is.character(res$msg))
+  expect_true(is.list(res$letters))
+  expect_true(is.character(res$foo))
 
 
 })
