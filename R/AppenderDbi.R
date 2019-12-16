@@ -709,7 +709,7 @@ AppenderConfigDoesNotMatchDbTableError <- function(
 
 
 parse_timestamp_smart <- function(x){
-  if (is.character(x) && !grepl("-", dd$timestamp[[1]]))
+  if (is.character(x) && !grepl("-", x[[1]]))
     x <- as.numeric(x)
 
   if (is.character(x)){
