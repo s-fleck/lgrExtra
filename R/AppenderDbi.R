@@ -698,10 +698,10 @@ AppenderConfigDoesNotMatchDbTableError <- function(
   message,
   ...
 ){
-  error(
+  errorCondition(
     message = sprintf(message, ...),
     call = NULL,
-    subclass = "AppenderConfigDoesNotMatchDbTableError"
+    class = "AppenderConfigDoesNotMatchDbTableError"
   )
 }
 
