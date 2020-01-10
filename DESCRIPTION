@@ -1,7 +1,7 @@
 Type: Package
 Package: lgrExtra
 Title: Extra Appenders for lgr
-Version: 0.0.1.9009
+Version: 0.0.1.9010
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",
