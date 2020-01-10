@@ -556,7 +556,7 @@ AppenderRjdbc <- R6::R6Class(
 
 fmt_tname <- function(x){
   if (inherits(x, "Id")){
-    paste0("<Id: ", trimws(gsub("<Id>", "", utils::capture.output(print(x)))), ">")
+    paste0("<Id: ", trimws(gsub("<Id>", "", toString(x))), ">")
   } else {
     x
   }
