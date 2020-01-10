@@ -120,6 +120,9 @@ unpack_json_cols.data.frame <- function(
 unpack_row <- function(x){
   if (is.na(x)){
     data.table(..unpack_row_dummy.. = list(NULL))
+  } else if (identical(x, "NA")){
+    warning("row contains 'NA' string value")
+    data.table(..unpack_row_dummy.. = list(NULL))
   } else {
     data.table::as.data.table(
       lapply(jsonlite::fromJSON(x), function(.) if (is_scalar_atomic(.)) . else list(.))
