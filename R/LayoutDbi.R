@@ -284,7 +284,7 @@ LayoutMySql <- R6::R6Class(
       colors = getOption("lgr.colors", list()),
       pad_levels = "right",
 
-      format_table_name = as_tname,
+      format_table_name = function(x) if (inherits(x, "Id")) x else tolower(x),
       format_colnames = tolower,
       format_data       = function(x){
         x <- data.table::as.data.table(x)

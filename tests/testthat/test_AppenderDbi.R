@@ -227,7 +227,7 @@ for (nm in names(dbs)){
 
     tab <- DBI::Id(schema = "TMP", table = "TEST")
 
-    if (inherits(conn, "PqConnection") || inherits(conn, "MariaDBConnection")){
+    if (inherits(conn, "PqConnection")){
       schema <- DBI::dbQuoteIdentifier(conn = conn, "TMP")
       try(DBI::dbExecute(conn, paste("create schema", schema)), silent = TRUE)
       on.exit(DBI::dbExecute(conn, paste("drop schema", schema, "cascade")))

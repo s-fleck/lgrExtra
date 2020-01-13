@@ -592,7 +592,6 @@ as_tname <- function(x){
 
 
 
-
 # embedded from tabde
 #' Generate SQL CREATE TABLE statements
 #'
