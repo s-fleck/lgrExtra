@@ -228,8 +228,9 @@ for (nm in names(dbs)){
     tab <- DBI::Id(schema = "TMP", table = "TEST")
 
     if (inherits(conn, "PqConnection") || inherits(conn, "MariaDBConnection")){
-      try(DBI::dbExecute(conn, 'create schema "TMP"'), silent = TRUE)
-      on.exit(DBI::dbExecute(conn, 'drop schema "TMP" cascade'))
+      schema <- DBI::dbQuoteIdentifier(conn = conn, "TMP")
+      try(DBI::dbExecute(conn, paste("create schema", schema)), silent = TRUE)
+      on.exit(DBI::dbExecute(conn, paste("drop schema", schema, "cascade")))
     }
 
     ap <- init_test_appender(ctor, conn, tab)
