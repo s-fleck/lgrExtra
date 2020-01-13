@@ -19,7 +19,6 @@ reference:
   - AppenderConsole
   - AppenderDt
   - AppenderFile
-  - AppenderFileRotating
   - AppenderJson
   - AppenderBuffer
   - AppenderSyslog
