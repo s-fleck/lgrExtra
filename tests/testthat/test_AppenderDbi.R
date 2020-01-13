@@ -110,7 +110,7 @@ init_test_appender = function(
 # for manual testing
 nm <- "MySQL via RMySQL"
 nm <- "MySQL via RMariaDB"
-nm <-  "PostgreSQL via RPostgres"
+nm <- "PostgreSQL via RPostgres"
 nm <- "SQLite via RSQLite"
 nm <- "DB2 via RJDBC"
 nm <- "DB2 via odbc"
@@ -227,7 +227,7 @@ for (nm in names(dbs)){
 
     tab <- DBI::Id(schema = "TMP", table = "TEST")
 
-    if (inherits(conn, "PqConnection")){
+    if (inherits(conn, "PqConnection") || inherits(conn, "MariaDBConnection")){
       try(DBI::dbExecute(conn, 'create schema "TMP"'), silent = TRUE)
       on.exit(DBI::dbExecute(conn, 'drop schema "TMP" cascade'))
     }
