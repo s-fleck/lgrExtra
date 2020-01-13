@@ -6,10 +6,10 @@ r:
   - release
   - devel
 r_github_packages:
-  - r-dbi/RMariaDB
   - s-fleck/lgr
 r_packages:
   - RPostgres
+  - RMariaDB
 sudo: false
 services:
   - postgresql
