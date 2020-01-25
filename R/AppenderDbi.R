@@ -226,6 +226,7 @@ AppenderDbi <- R6::R6Class(
           function(.s) vapply(buffer, function(.) .s$serialize(.), character(1), USE.NAMES = FALSE)
         )
 
+        dd <- data.table::as.data.table(dd)
         sel <- which(toupper(names(dd)) %in% toupper(cn))
         dd <- dd[, sel, with = FALSE]
 
@@ -263,11 +264,11 @@ AppenderDbi <- R6::R6Class(
           row.names = FALSE,
           append = TRUE
         )
-      }
 
       assign("insert_pos", 0L, envir = private)
       private$.buffer_events <- list()
       invisible(self)
+      }
     }
   ),
 

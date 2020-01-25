@@ -56,12 +56,12 @@ dbs <- list(
           "RPostgres <= 1.1.1 works but tests are disabled due to this bug:",
           "https://github.com/r-dbi/RMariaDB/issues/119"
         )
-        DBI::dbConnect(
-          RPostgres::Postgres(),
-          user = "postgres",
-          host = "localhost",
-          dbname = "travis_ci_test"
-        )
+          DBI::dbConnect(
+            RPostgres::Postgres(),
+            user = "postgres",
+            host = "localhost",
+            dbname = "travis_ci_test"
+          )
       }
     ),
     ctor = AppenderDbi
@@ -110,11 +110,10 @@ init_test_appender = function(
 # for manual testing
 nm <- "MySQL via RMySQL"
 nm <- "MySQL via RMariaDB"
-nm <- "PostgreSQL via RPostgres"
 nm <- "SQLite via RSQLite"
 nm <- "DB2 via RJDBC"
 nm <- "DB2 via odbc"
-
+nm <- "PostgreSQL via RPostgres"
 
 for (nm in names(dbs)){
 
@@ -408,10 +407,6 @@ for (nm in names(dbs)){
     app$flush()
     expect_identical(app$data$msg, msg)
   })
-
-
-
-
 }
 
 
