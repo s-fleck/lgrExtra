@@ -2,6 +2,8 @@
 
 #' Log to an in-memory data.table
 #'
+#' @description
+#'
 #' An Appender that outputs to an in-memory `data.table`. This kind of
 #' Appender is useful for interactive use, and has very little overhead.
 #'
@@ -17,8 +19,6 @@
 #' `data.table` as a list column to store arbitrary \R objects (see example).
 #' It is recommended to use this feature only `TRACE` level.
 #'
-#' @eval r6_usage(AppenderDt)
-#'
 #'
 #' @section Creating a Data Table Appender:
 #'
@@ -30,36 +30,6 @@
 #' The [Layout] for this Appender is used only to format console output of
 #' its `$show()` method.
 #'
-#' \describe{
-#'   \item{buffer_size}{`integer` scalar. Number of rows of the in-memory
-#'   `data.table`}
-#'   \item{prototype}{A prototype `data.table`. The prototype must be a
-#'     `data.table` with the same columns and column types as the data
-#'     you want to log. The actual content of the columns is irrelevant.
-#'     There are a few columns that have special meaning, based on their name:
-#'     \itemize{
-#'       \item{`.id`: `integer` (mandatory). Must always be the first column
-#'         and is used internally by the Appender}
-#'       \item{`.custom`: `list` (optional). If present all custom values of the
-#'         event (that are not already part of the prototype) are stored in
-#'         this list column.}
-#'     }
-#'   }
-#' }
-#'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{`dt`}{Get the log recorded by this `Appender` as a `data.table`
-#'     with a maximum of `buffer_size` rows}
-#' }
-#'
-#' @section Methods:
-#' \describe{
-#'   \item{`show(n, threshold)`}{Show the last `n` log entries with a log level
-#'   bellow `threshold`. The log entries will be formatted for console output
-#'   via this Appenders [Layout]}
-#'  }
 #'
 #' @section Comparison AppenderBuffer and AppenderDt:
 #'
@@ -78,7 +48,6 @@
 #' @export
 #' @seealso [LayoutFormat], [simple_logging], [data.table::data.table]
 #' @aliases lgr_data
-#' @name AppenderDt
 #'
 #' @examples
 #' lg <- lgr::get_logger("test")
@@ -99,22 +68,32 @@
 #' # that it can find.
 #' lgr::show_log(target = lg)
 #'
-#' # Custom fields are stored in the list column .custom by default
+#' # Custom fields are stored in the list column .fields by default
 #' lg$info("the iris data frame", caps = LETTERS[1:5])
 #' lg$appenders$memory$data
-#' lg$appenders$memory$data$.custom[[3]]$caps
+#' lg$appenders$memory$data$.fields[[3]]$caps
 #' lg$config(NULL)
-NULL
-
-
-
-
 #' @export
 AppenderDt <- R6::R6Class(
   "AppenderDt",
   inherit = Appender,
   cloneable = FALSE,
   public = list(
+    #' Creating a new AppenderDt
+    #'
+    #' @param buffer_size `integer` scalar. Number of rows of the in-memory `data.table`
+    #' @param prototype A prototype `data.table`. The prototype must be a
+    #'     `data.table` with the same columns and column types as the data
+    #'     you want to log. The actual content of the columns is irrelevant.
+    #'     There are a few reserved column names that have special meaning:
+    #'     * `.id`: `integer` (mandatory). Must always be the first column
+    #'         and is used internally by the Appender
+    #'     * `.fields`: `list` (optional). If present all custom values of the
+    #'         event (that are not already part of the prototype) are stored in
+    #'         this list column.
+    #'     }
+    #'   }
+    #' }
     initialize = function(
       threshold = NA_integer_,
       layout = LayoutFormat$new(
@@ -129,7 +108,7 @@ AppenderDt <- R6::R6Class(
         logger = NA_character_,
         caller = NA_character_,
         msg = NA_character_,
-        .custom = list(list())
+        .fields = list(list())
       ),
       buffer_size = 1e5,
       filters = NULL
@@ -141,10 +120,10 @@ AppenderDt <- R6::R6Class(
         "'prototype' must be a data.table with an integer column '.id'"
       )
 
-      if (".custom" %in% names(prototype) && !is.list(prototype$.custom)){
+      if (".fields" %in% names(prototype) && !is.list(prototype$.fields)){
         warning(
-          "`prototype` has the special column `.custom` but it is ",
-          class_fmt(prototype$.custom), " instead of a list-column. ",
+          "`prototype` has the special column `.fields` but it is ",
+          class_fmt(prototype$.fields), " instead of a list-column. ",
           "Coercing to list-column."
         )
       }
@@ -194,9 +173,9 @@ AppenderDt <- R6::R6Class(
       # Select and prepare event values to be inserted into data
       vals <- event[["values"]]
 
-      # handle .custom
-      if (".custom" %in% datanames){
-        vals[[".custom"]] <- vals[!names(vals) %in% valnames]
+      # handle .fields
+      if (".fields" %in% datanames){
+        vals[[".fields"]] <- vals[!names(vals) %in% valnames]
       }
 
       vals <- vals[valnames]
@@ -243,7 +222,6 @@ AppenderDt <- R6::R6Class(
 
       private[["id"]] <- get("id", envir = private) + lenmax
     },
-
 
     show = function(
       threshold = NA_integer_,
@@ -294,6 +272,10 @@ AppenderDt <- R6::R6Class(
 
   # +- active ---------------------------------------------------------------
   active = list(
+
+    #' @description
+    #' Get the log recorded by this `Appender` as a `data.table` with a maximum
+    #' of `buffer_size` rows
     dt = function(){
       tmp <- private$.data[!is.na(private$.data$.id), ]
       tmp[order(tmp$.id), ]

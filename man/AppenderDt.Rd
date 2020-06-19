@@ -51,24 +51,6 @@ this list column.}
 }
 }
 
-\section{Fields}{
-
-
-\describe{
-\item{\code{dt}}{Get the log recorded by this \code{Appender} as a \code{data.table}
-with a maximum of \code{buffer_size} rows}
-}
-}
-
-\section{Methods}{
-
-\describe{
-\item{\code{show(n, threshold)}}{Show the last \code{n} log entries with a log level
-bellow \code{threshold}. The log entries will be formatted for console output
-via this Appenders \link{Layout}}
-}
-}
-
 \section{Comparison AppenderBuffer and AppenderDt}{
 
 
@@ -112,4 +94,74 @@ lg$config(NULL)
 }
 \seealso{
 \link{LayoutFormat}, \link{simple_logging}, \link[data.table:data.table]{data.table::data.table}
+}
+\section{Super classes}{
+\code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{AppenderDt}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{AppenderDt$new()}}
+\item \href{#method-append}{\code{AppenderDt$append()}}
+\item \href{#method-show}{\code{AppenderDt$show()}}
+\item \href{#method-set_layout}{\code{AppenderDt$set_layout()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter">}\href{../../lgr/html/Filterable.html#method-add_filter}{\code{lgr::Filterable$add_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter">}\href{../../lgr/html/Filterable.html#method-filter}{\code{lgr::Filterable$filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter">}\href{../../lgr/html/Filterable.html#method-remove_filter}{\code{lgr::Filterable$remove_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters">}\href{../../lgr/html/Filterable.html#method-set_filters}{\code{lgr::Filterable$set_filters()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="format">}\href{../../lgr/html/Appender.html#method-format}{\code{lgr::Appender$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDt$new(
+  threshold = NA_integer_,
+  layout = LayoutFormat$new(fmt = "\%L [\%t] \%m \%f", timestamp_fmt = "\%H:\%M:\%OS3",
+    colors = getOption("lgr.colors", list())),
+  prototype = data.table::data.table(.id = NA_integer_, level = NA_integer_, timestamp
+    = Sys.time(), logger = NA_character_, caller = NA_character_, msg = NA_character_,
+    .custom = list(list())),
+  buffer_size = 1e+05,
+  filters = NULL
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-append"></a>}}
+\if{latex}{\out{\hypertarget{method-append}{}}}
+\subsection{Method \code{append()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDt$append(event)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-show"></a>}}
+\if{latex}{\out{\hypertarget{method-show}{}}}
+\subsection{Method \code{show()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDt$show(threshold = NA_integer_, n = 20L)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_layout"></a>}}
+\if{latex}{\out{\hypertarget{method-set_layout}{}}}
+\subsection{Method \code{set_layout()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDt$set_layout(layout)}\if{html}{\out{</div>}}
+}
+
+}
 }

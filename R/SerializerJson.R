@@ -50,14 +50,24 @@ SerializerJson <- R6::R6Class(
 
 
 
-#' Title
+#' Unserialize data frame columns that contain JSON
 #'
-#' @param x
-#'
-#' @return
+#' @param x a `data.frame`
+#' @param cols `character` vector. The names of the text columns containing
+#'   JSON strings that should be expanded.
+#' @return a `data.frame` with additional columns expanded from the columns
+#'   containing JSON
 #' @export
 #'
 #' @examples
+#' x <- data.frame(
+#'   name = "example data",
+#'   fields = '{"letters":["a","b","c"], "LETTERS":["A","B","C"]}',
+#'   stringsAsFactors = FALSE
+#' )
+#' res <- unpack_json_cols(x, "fields")
+#' res
+#' res$letters[[1]]
 unpack_json_cols <- function(
   x,
   cols
@@ -68,15 +78,8 @@ unpack_json_cols <- function(
 
 
 
-#' Title
-#'
-#' @param x
-#' @param cols
-#'
-#' @return
+#' @rdname unpack_json_cols
 #' @export
-#'
-#' @examples
 unpack_json_cols.data.table <- function(
   x,
   cols
@@ -86,21 +89,14 @@ unpack_json_cols.data.table <- function(
   a <- list(x[ , !cols, with = FALSE])
   b <- lapply(cols, function(nm) unpack_col(x[[nm]]))
 
-
   do.call(cbind, c(a, b))
 }
 
 
 
-#' Title
-#'
-#' @param x
-#' @param cols
-#'
-#' @return
+
+#' @rdname unpack_json_cols
 #' @export
-#'
-#' @examples
 unpack_json_cols.data.frame <- function(
   x,
   cols
@@ -112,7 +108,6 @@ unpack_json_cols.data.frame <- function(
     )
   )
 }
-
 
 
 

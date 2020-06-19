@@ -99,7 +99,7 @@ test_that("AppenderDt: works with list columns", {
 
 
 
-test_that("AppenderDt: .custom works", {
+test_that("AppenderDt: .fields works", {
   app <- AppenderDt$new()
 
   e <- LogEvent$new(
@@ -111,20 +111,20 @@ test_that("AppenderDt: .custom works", {
   )
 
   app$append(e)
-  expect_true(is_empty(app$data$.custom[[1]]))
-  expect_true(is.list(app$data$.custom[[1]]))
+  expect_true(is_empty(app$data$.fields[[1]]))
+  expect_true(is.list(app$data$.fields[[1]]))
 
   e$envir <- environment()
   e$schwupp = "foo"
   app$append(e)
-  expect_identical(app$data$.custom[[2]]$schwupp, "foo")
-  expect_true(is.environment(app$data$.custom[[2]]$envir))
+  expect_identical(app$data$.fields[[2]]$schwupp, "foo")
+  expect_true(is.environment(app$data$.fields[[2]]$envir))
 
-  # warn if .custom is not a list column
+  # warn if .fields is not a list column
   expect_warning(
     app <- AppenderDt$new(prototype = data.table::data.table(
       .id = NA_integer_,
-      .custom = NA_integer_
+      .fields = NA_integer_
     ))
   )
 })

@@ -27,6 +27,7 @@ test_that("all Appenders print() without failure", {
       blah = AppenderBuffer$new()
     )))
     print(AppenderPushbullet$new(recipients = "blubb"))
+    app <- AppenderFileRotating$new(file = tf)
     app$rotate(force = TRUE)
     print(app)
     app$prune(0)

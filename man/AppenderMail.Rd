@@ -65,6 +65,7 @@ Other abstract classes:
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout">}\href{../../lgr/html/Appender.html#method-set_layout}{\code{lgr::Appender$set_layout()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="flush">}\href{../../lgr/html/AppenderMemory.html#method-flush}{\code{lgr::AppenderMemory$flush()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
@@ -78,6 +79,7 @@ Other abstract classes:
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderMail$new(...)}\if{html}{\out{</div>}}
@@ -86,6 +88,7 @@ Other abstract classes:
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set_to"></a>}}
+\if{latex}{\out{\hypertarget{method-set_to}{}}}
 \subsection{Method \code{set_to()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderMail$set_to(x)}\if{html}{\out{</div>}}
@@ -94,6 +97,7 @@ Other abstract classes:
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set_from"></a>}}
+\if{latex}{\out{\hypertarget{method-set_from}{}}}
 \subsection{Method \code{set_from()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderMail$set_from(x)}\if{html}{\out{</div>}}
@@ -102,6 +106,7 @@ Other abstract classes:
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set_cc"></a>}}
+\if{latex}{\out{\hypertarget{method-set_cc}{}}}
 \subsection{Method \code{set_cc()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderMail$set_cc(x)}\if{html}{\out{</div>}}
@@ -110,6 +115,7 @@ Other abstract classes:
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set_bcc"></a>}}
+\if{latex}{\out{\hypertarget{method-set_bcc}{}}}
 \subsection{Method \code{set_bcc()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderMail$set_bcc(x)}\if{html}{\out{</div>}}
@@ -118,6 +124,7 @@ Other abstract classes:
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set_html"></a>}}
+\if{latex}{\out{\hypertarget{method-set_html}{}}}
 \subsection{Method \code{set_html()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderMail$set_html(x)}\if{html}{\out{</div>}}
@@ -126,6 +133,7 @@ Other abstract classes:
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-format"></a>}}
+\if{latex}{\out{\hypertarget{method-format}{}}}
 \subsection{Method \code{format()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderMail$format(color = FALSE, ...)}\if{html}{\out{</div>}}
