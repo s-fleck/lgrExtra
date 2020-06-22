@@ -226,10 +226,16 @@ for (nm in names(dbs)){
 
     tab <- DBI::Id(schema = "TMP", table = "TEST")
 
-    if (inherits(conn, "PqConnection")){
+    if (inherits(conn, c("PqConnection", "MariaDBConnection"))){
       schema <- DBI::dbQuoteIdentifier(conn = conn, "TMP")
       try(DBI::dbExecute(conn, paste("create schema", schema)), silent = TRUE)
-      on.exit(DBI::dbExecute(conn, paste("drop schema", schema, "cascade")))
+      on.exit({
+        DBI::dbRemoveTable(conn, tab)
+        if (inherits(conn, "MariaDBConnection"))
+          DBI::dbExecute(conn, paste("drop schema", schema)) # does not support cascade
+        else
+          DBI::dbExecute(conn, paste("drop schema", schema, "cascade"))
+      })
     }
 
     ap <- init_test_appender(ctor, conn, tab)
