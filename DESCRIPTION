@@ -9,23 +9,24 @@ Authors@R:
            email = "stefan.b.fleck@gmail.com",
            comment = c(ORCID = "0000-0003-3344-9851"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
-Description: Extra appenders for 'lgr' that support logging to databases, as
-    well as email and push notifications.
+Description: Extra appenders for 'lgr' that support logging to
+    databases, as well as email and push notifications.
 License: MIT + file LICENSE
 Imports:
-    lgr,
-    data.table
+    data.table,
+    lgr
 Suggests: 
+    covr,
     DBI,
     gmailr,
+    jsonlite,
     RMariaDB,
     RPostgres,
     RPushbullet,
     RSQLite,
-    jsonlite,
+    rsyslog,
     sendmailR,
-    testthat,
-    covr
+    testthat
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

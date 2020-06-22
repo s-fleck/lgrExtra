@@ -32,7 +32,8 @@ Other Appenders:
 \code{\link{AppenderDbi}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPushbullet}},
-\code{\link{AppenderRjdbc}}
+\code{\link{AppenderRjdbc}},
+\code{\link{AppenderSyslog}}
 
 Other Digest Appenders: 
 \code{\link{AppenderDigest}},

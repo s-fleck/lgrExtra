@@ -18,7 +18,8 @@ Other Appenders:
 \code{\link{AppenderDbi}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderRjdbc}},
-\code{\link{AppenderSendmail}}
+\code{\link{AppenderSendmail}},
+\code{\link{AppenderSyslog}}
 
 Other Digest Appenders: 
 \code{\link{AppenderDigest}},

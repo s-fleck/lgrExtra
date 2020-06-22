@@ -17,7 +17,8 @@ Other Appenders:
 \code{\link{AppenderDbi}},
 \code{\link{AppenderPushbullet}},
 \code{\link{AppenderRjdbc}},
-\code{\link{AppenderSendmail}}
+\code{\link{AppenderSendmail}},
+\code{\link{AppenderSyslog}}
 }
 \concept{Appenders}
 \section{Super classes}{
