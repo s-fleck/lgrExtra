@@ -164,8 +164,7 @@ test_that("AppenderDt: default format for show_log() looks like format.LogEvent(
     lg$fatal("blubb", foo = "bar", fizz = "buzz", iris = iris)
   )
   xp <- capture.output(lg$appenders$memory$show(n = 1))
-  expect_identical(xo, xp)
 
+  expect_identical(xo, xp)
   expect_length(capture.output(lg$appenders$memory$show(n = 2)), 2)
 })
-

@@ -4,20 +4,17 @@
 #'
 #' @description
 #'
-#' An Appender that outputs to an in-memory `data.table`. This kind of
-#' Appender is useful for interactive use, and has very little overhead.
+#' An Appender that outputs to an in-memory `data.table`. It fulfill a similar
+#' purpose as the more flexible [AppenderBuffer] and is mainly included for
+#' historical reasons/backwards compatibility with older version of **lgr**.
+#'
 #'
 #' @section Custom Fields:
 #'
 #' `AppenderDt` supports [custom fields][LogEvent], but they have to be
 #' pre-allocated in the `prototype` argument. Custom fields that are not
-#' part of the prototype are discarded. If you want an Appender that retains
-#' all custom fields (at the cost of slightly less performance), take a look at
-#' [AppenderBuffer].
-#'
-#' With the default settings, the custom field `value` is included in the
-#' `data.table` as a list column to store arbitrary \R objects (see example).
-#' It is recommended to use this feature only `TRACE` level.
+#' part of the prototype are inserted in the list-column `.fields` if it
+#' exists.
 #'
 #'
 #' @section Creating a Data Table Appender:
@@ -91,9 +88,6 @@ AppenderDt <- R6::R6Class(
     #'     * `.fields`: `list` (optional). If present all custom values of the
     #'         event (that are not already part of the prototype) are stored in
     #'         this list column.
-    #'     }
-    #'   }
-    #' }
     initialize = function(
       threshold = NA_integer_,
       layout = LayoutFormat$new(
@@ -101,6 +95,8 @@ AppenderDt <- R6::R6Class(
         timestamp_fmt = "%H:%M:%OS3",
         colors = getOption("lgr.colors", list())
       ),
+
+      # the column names .id and .fields are hardcoded in lgr::as_event_list.data.frame
       prototype = data.table::data.table(
         .id  = NA_integer_,
         level = NA_integer_,

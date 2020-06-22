@@ -12,18 +12,6 @@ for other databases. Please file a bug report if you encounter any issues.
 }
 \section{Fields}{
 
-
-
-
-Note: \verb{$data} and \code{show()} query the data from the remote database and might
-be slow for very large logs.
-
-\describe{
-\item{\code{close_on_exit}, \code{set_close_on_exit()}}{\code{TRUE} or \code{FALSE}. Close the
-Database connection when the Logger is removed?}
-\item{\code{conn}, \code{set_conn(conn)}}{a \link[DBI:dbConnect]{DBI connection}}
-\item{\code{table}}{Name of the target database table}
-}
 }
 
 \section{Methods}{
@@ -39,20 +27,6 @@ instantiated or (more likely) when the first LogEvent would be written to
 that table. Rather than to rely on this feature, it is recommended that you
 create the target log table first manually using an \verb{SQL CREATE TABLE}
 statement as this is safer and more flexible. See also \link{LayoutDbi}.
-}
-
-\section{Choosing the Right DBI Layout}{
-
-
-Layouts for relational database tables are tricky as they have very strict
-column types and further restrictions. On top of that implementation details
-vary between database backends.
-
-To make setting up \code{AppenderDbi} as painless as possible, the helper function
-\code{\link[=select_dbi_layout]{select_dbi_layout()}} tries to automatically determine sensible \link{LayoutDbi}
-settings based on \code{conn} and - if it exists in the database already -
-\code{table}. If \code{table} does not exist in the database and you start logging, a
-new table will be created with the \code{col_types} from \code{layout}.
 }
 
 \seealso{

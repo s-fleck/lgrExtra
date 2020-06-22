@@ -2,34 +2,16 @@
 
 #' Abstract class for digests
 #'
+#' Digests is an abstract class for report-like output that contain several
+#' log messages and a title. A praictical example would be an E-mail containg
+#' the last 10 log messages before an error was encountered.
+#'
 #' @template abstract_class
-#'
-#' @description
-#' Abstract class for Appenders that transmit digests of several log events
-#' at once, for example [AppenderPushbullet], [AppenderGmail] and
-#' [AppenderSendmail].
-#'
-#'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{`subject_layout`, `set_layout(subject_layout)`}{Like `layout`, but
-#'     used to format the subject/title of the digest. While `layout` is applied
-#'     to each LogEvent of the digest, `subject_layout` is only applied to
-#'     the last one.
-#'   }
-#' }
-#'
-#' @section Methods:
 #'
 #' @export
 #' @seealso [LayoutFormat], [LayoutGlue]
 #' @name AppenderDigest
-NULL
-
-
-
-
+#' @family Digest Appenders
 AppenderDigest <-  R6::R6Class(
   "AppenderDigest",
   inherit = lgr::AppenderMemory,
@@ -40,6 +22,7 @@ AppenderDigest <-  R6::R6Class(
     initialize = function(...){
       stop(CannotInitializeAbstractClassError())
     },
+
 
     set_subject_layout = function(layout){
       assert(inherits(layout, "Layout"))
@@ -67,6 +50,9 @@ AppenderDigest <-  R6::R6Class(
 
 
   active = list(
+    #' @field subject_layout A [Layout] used to format the last [LogEvent]
+    #'   in this Appenders buffer when it is flushed. The result will be used as
+    #'   the subject of the tigest (for example, the E-mail subject).
     subject_layout = function() get(".subject_layout", private)
   ),
 
@@ -92,26 +78,11 @@ AppenderDigest <-  R6::R6Class(
 #' events in case a `fatal` event is encountered.
 #'
 #'
-#'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{`apikey`, `recipients`, `email`, `channel`, `devices`}{
-#'     See [RPushbullet::pbPost()]
-#'   }
-#' }
-#'
-#' @section Methods:
-#'
 #' @export
 #' @family Appenders
+#' @family Digest Appenders
 #' @seealso [LayoutFormat], [LayoutGlue]
 #' @name AppenderPushbullet
-NULL
-
-
-
-
 #' @export
 AppenderPushbullet <- R6::R6Class(
   "AppenderPushbullet",
@@ -217,11 +188,23 @@ AppenderPushbullet <- R6::R6Class(
 
   # +- active ---------------------------------------------------------------
   active = list(
+
+    #' @field apikey see [RPushbullet::pbPost()]
     apikey = function() private$.apikey,
+
+    #' @field recipients see [RPushbullet::pbPost()]
     recipients = function() get(".recipients", private),
+
+    #' @field email see [RPushbullet::pbPost()]
     email = function() get(".email", private),
+
+    #' @field channel see [RPushbullet::pbPost()]
     channel = function() get(".channel", private),
+
+    #' @field devices see [RPushbullet::pbPost()]
     devices = function() get(".devices", private),
+
+
     destination = function(){
       if (!is.null(self$recipients))
         return(self$recipients)
@@ -265,7 +248,7 @@ AppenderPushbullet <- R6::R6Class(
 #'     text.
 #'   }
 #' }
-#'
+#' @family Digest Appenders
 #' @name AppenderMail
 #' @keywords internal
 #'
@@ -332,10 +315,22 @@ AppenderMail <- R6::R6Class(
 
   # +- active ---------------------------------------------------------------
   active = list(
+
+    #' @field to `character` vector. The email addresses of the recepient
     to = function() get(".to", envir = private),
+
+    #' @field to `character` vector. The email address of the sender
     from = function() get(".from", envir = private),
+
+    #' @field to `character` vector. The email addresses of the cc-recepients (carbon copy)
     cc = function() get(".cc", envir = private),
+
+    #' @field to `character` vector. The email addresses of bcc-recepients (blind carbon copy)
     bcc = function() get(".bcc", envir = private),
+
+    #' @field html `logical` scalar.  Send a html email message?
+    #'  This does currently only format the log contents as monospace verbatim
+    #'  text.
     html = function() get(".html", envir = private),
     destination = function() self$to
   ),
@@ -366,19 +361,6 @@ AppenderMail <- R6::R6Class(
 #' @note The default Layout's `fmt` indents each log entry with 3 blanks. This
 #'   is a workaround so that Microsoft Outlook does not mess up the line breaks.
 #'
-#' @inheritSection AppenderMail Methods
-#' @inheritSection AppenderMail Fields
-#'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{`headers`, `control`}{see [sendmailR::sendmail()]}
-#' }
-#'
-#'
-#' @section Methods:
-#'
-#'
 #' @examples
 #' \dontrun{
 #' lgr::AppenderSendmail$new(
@@ -388,16 +370,11 @@ AppenderMail <- R6::R6Class(
 #' )
 #' }
 #'
-#'
 #' @export
 #' @seealso [LayoutFormat], [LayoutGlue]
 #' @family Appenders
+#' @family Digest Appenders
 #' @name AppenderSendmail
-NULL
-
-
-
-
 #' @export
 AppenderSendmail <- R6::R6Class(
   "AppenderSendmail",
@@ -441,7 +418,6 @@ AppenderSendmail <- R6::R6Class(
       self$set_layout(layout)
       self$set_threshold(threshold)
       self$set_flush_threshold(flush_threshold)
-      self$set_should_flush(default_should_flush)
     },
 
     flush = function(
@@ -504,7 +480,11 @@ AppenderSendmail <- R6::R6Class(
 
   # +- active ---------------------------------------------------------------
   active = list(
+
+    #' @field control see [sendmailR::sendmail()]
     control = function() get(".control", envir = private),
+
+    #' @field headers see [sendmailR::sendmail()]
     headers = function() get(".headers", envir = private)
   ),
 
@@ -528,23 +508,10 @@ AppenderSendmail <- R6::R6Class(
 #' buffered events are concatenated to a single message. The default behaviour
 #' is to push the last 30 log events in case a `fatal` event is encountered.
 #'
-#'
-#' @inheritSection AppenderMail Methods
-#' @inheritSection AppenderMail Fields
-#'
-#' @section Fields:
-#'
-#' @section Methods:
-#'
 #' @export
 #' @seealso [LayoutFormat], [LayoutGlue]
 #' @family Appenders
 #' @name AppenderGmail
-NULL
-
-
-
-
 #' @export
 AppenderGmail <- R6::R6Class(
   "AppenderGmail",
@@ -584,7 +551,6 @@ AppenderGmail <- R6::R6Class(
       self$set_threshold(threshold)
       self$set_flush_threshold(flush_threshold)
       self$set_buffer_size(buffer_size)
-      self$set_should_flush(default_should_flush)
 
       private$.flush_on_exit   <- FALSE
       private$.flush_on_rotate <- FALSE

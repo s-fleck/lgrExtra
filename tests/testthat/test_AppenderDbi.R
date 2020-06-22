@@ -112,8 +112,8 @@ nm <- "MySQL via RMySQL"
 nm <- "MySQL via RMariaDB"
 nm <- "SQLite via RSQLite"
 nm <- "DB2 via RJDBC"
-nm <- "DB2 via odbc"
 nm <- "PostgreSQL via RPostgres"
+nm <- "DB2 via odbc"
 
 for (nm in names(dbs)){
 
@@ -407,6 +407,35 @@ for (nm in names(dbs)){
     app$flush()
     expect_identical(app$data$msg, msg)
   })
+
+
+
+test_that(paste0(nm, ": app$col_types works as expected"), {
+  cts <- c(
+    level = "smallint",
+    timestamp = "timestamp",
+    logger= "varchar(512)",
+    msg = "varchar(1024)",
+    caller = "varchar(1024)",
+    foo = "varchar(256)",
+    fields = "varchar(2048)"
+  )
+
+  lo <- select_dbi_layout(conn, "logging.test")
+  lo$set_serialized_cols(list(
+    fields = SerializerJson$new(cols_exclude = c(names(cts), "hash"))
+  ))
+  lo$set_col_types(cts)
+
+  app <- init_test_appender(ctor, conn, layout = lo)
+  on.exit(dbRemoveTableCaseInsensitive(conn, app$table))
+  expect_length(app$col_types, 7)
+  expect_true(is.character(app$col_types))
+  expect_setequal(
+    tolower(names(app$col_types)),
+    c("level", "timestamp", "logger", "msg", "caller", "foo", "fields")
+  )
+})
 }
 
 
@@ -535,6 +564,7 @@ test_that("AppenderDbi / RSQLite: automatic closing of connections works", {
   gc()
   expect_silent(DBI::dbDisconnect(conn))
 })
+
 
 
 

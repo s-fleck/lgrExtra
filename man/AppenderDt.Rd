@@ -32,23 +32,6 @@ modified anymore after the instantiation of the appender.
 
 The \link{Layout} for this Appender is used only to format console output of
 its \verb{$show()} method.
-
-\describe{
-\item{buffer_size}{\code{integer} scalar. Number of rows of the in-memory
-\code{data.table}}
-\item{prototype}{A prototype \code{data.table}. The prototype must be a
-\code{data.table} with the same columns and column types as the data
-you want to log. The actual content of the columns is irrelevant.
-There are a few columns that have special meaning, based on their name:
-\itemize{
-\item{\code{.id}: \code{integer} (mandatory). Must always be the first column
-and is used internally by the Appender}
-\item{\code{.custom}: \code{list} (optional). If present all custom values of the
-event (that are not already part of the prototype) are stored in
-this list column.}
-}
-}
-}
 }
 
 \section{Comparison AppenderBuffer and AppenderDt}{
@@ -86,10 +69,10 @@ lgr::show_log(target = lg$appenders$memory)
 # that it can find.
 lgr::show_log(target = lg)
 
-# Custom fields are stored in the list column .custom by default
+# Custom fields are stored in the list column .fields by default
 lg$info("the iris data frame", caps = LETTERS[1:5])
 lg$appenders$memory$data
-lg$appenders$memory$data$.custom[[3]]$caps
+lg$appenders$memory$data$.fields[[3]]$caps
 lg$config(NULL)
 }
 \seealso{
@@ -130,12 +113,19 @@ lg$config(NULL)
     colors = getOption("lgr.colors", list())),
   prototype = data.table::data.table(.id = NA_integer_, level = NA_integer_, timestamp
     = Sys.time(), logger = NA_character_, caller = NA_character_, msg = NA_character_,
-    .custom = list(list())),
+    .fields = list(list())),
   buffer_size = 1e+05,
   filters = NULL
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{buffer_size}}{\code{integer} scalar. Number of rows of the in-memory \code{data.table}}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-append"></a>}}

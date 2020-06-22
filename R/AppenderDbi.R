@@ -32,19 +32,7 @@
 #' statement as this is safer and more flexible. See also [LayoutDbi].
 #'
 #'
-#' @section Fields:
-#'
-#' Note: `$data` and `show()` query the data from the remote database and might
-#'   be slow for very large logs.
-#'
-#' \describe{
-#'   \item{`close_on_exit`, `set_close_on_exit()`}{`TRUE` or `FALSE`. Close the
-#'   Database connection when the Logger is removed?}
-#'   \item{`conn`, `set_conn(conn)`}{a [DBI connection][DBI::dbConnect]}
-#'   \item{`table`}{Name of the target database table}
-#' }
-#'
-#' @section Choosing the Right DBI Layout:
+#' @section Choosing the correct DBI Layout:
 #'
 #' Layouts for relational database tables are tricky as they have very strict
 #' column types and further restrictions. On top of that implementation details
@@ -58,12 +46,6 @@
 #'
 #' @export
 #' @family Appenders
-#' @name AppenderDbi
-NULL
-
-
-
-
 #' @export
 AppenderDbi <- R6::R6Class(
   "AppenderDbi",
@@ -80,7 +62,7 @@ AppenderDbi <- R6::R6Class(
       flush_threshold = "error",
       flush_on_exit = TRUE,
       flush_on_rotate = TRUE,
-      should_flush = default_should_flush,
+      should_flush = NULL,
       filters = NULL
     ){
       assert_namespace("DBI", "data.table", "jsonlite")
@@ -280,16 +262,25 @@ AppenderDbi <- R6::R6Class(
     },
 
 
+    #' @field conn a [DBI connection][DBI::dbConnect]
     conn = function(){
       private$.conn
     },
 
 
+    #' @field close_on_exit `TRUE` or `FALSE`. Close the Database connection
+    #'   when the Logger is removed?
     close_on_exit = function(){
       private$.close_on_exit
     },
 
 
+    #' @field col_types a named `character` vector providing information about the
+    #'   column types in the database. How the column types are reported
+    #'   depends on the database driver. For example, SQLite returns human
+    #'   readable data types (character, double, ...) while DB2 returns
+    #'   numeric codes representing the data type
+    #'   (see \url{https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_73/db2/rbafzcatsqltypeinfo.htm})
     col_types = function(){
       if (is.null(get(".col_types", envir = private))){
         ct <- get_col_types(private[[".conn"]], self[["table"]])
@@ -303,16 +294,21 @@ AppenderDbi <- R6::R6Class(
     },
 
 
+    #' @field table a `character` scalar or a [DBI::Id] specifying the target
+    #'   database table
     table = function(){
       get(".table", envir = private)
     },
 
 
+    #' @field table_name `character` scalar. Like `$table`, but always returns a
+    #'   `character` scalar
     table_name = function(){
       as_tname(get("table", envir = self))
     },
 
 
+    #' @field table_id `DBI::Id`. Like `$table`, but always returns a [DBI::Id]
     table_id = function(){
 
       table <- self$table
@@ -434,7 +430,7 @@ NULL
 
 
 
-# exclude from coverage because relies on external ressources
+# exclude from coverage because relies on external resources
 # nocov start
 #' @export
 AppenderRjdbc <- R6::R6Class(
@@ -452,7 +448,7 @@ AppenderRjdbc <- R6::R6Class(
       flush_threshold = "error",
       flush_on_exit = TRUE,
       flush_on_rotate = TRUE,
-      should_flush = default_should_flush,
+      should_flush = NULL,
       filters = NULL
     ){
       assert_namespace("DBI", "RJDBC", "data.table")

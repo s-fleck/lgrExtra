@@ -35,21 +35,7 @@ create the target log table first manually using an \verb{SQL CREATE TABLE}
 statement as this is safer and more flexible. See also \link{LayoutDbi}.
 }
 
-\section{Fields}{
-
-
-Note: \verb{$data} and \code{show()} query the data from the remote database and might
-be slow for very large logs.
-
-\describe{
-\item{\code{close_on_exit}, \code{set_close_on_exit()}}{\code{TRUE} or \code{FALSE}. Close the
-Database connection when the Logger is removed?}
-\item{\code{conn}, \code{set_conn(conn)}}{a \link[DBI:dbConnect]{DBI connection}}
-\item{\code{table}}{Name of the target database table}
-}
-}
-
-\section{Choosing the Right DBI Layout}{
+\section{Choosing the correct DBI Layout}{
 
 
 Layouts for relational database tables are tricky as they have very strict
@@ -71,3 +57,119 @@ Other Appenders:
 \code{\link{AppenderSendmail}}
 }
 \concept{Appenders}
+\section{Super classes}{
+\code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{AppenderDbi}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{conn}}{a \link[DBI:dbConnect]{DBI connection}}
+
+\item{\code{close_on_exit}}{\code{TRUE} or \code{FALSE}. Close the Database connection
+when the Logger is removed?}
+
+\item{\code{col_types}}{a named \code{character} vector providing information about the
+column types in the database. How the column types are reported
+depends on the database driver. For example, SQLite returns human
+readable data types (character, double, ...) while DB2 returns
+numeric codes representing the data type
+(see \url{https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_73/db2/rbafzcatsqltypeinfo.htm})}
+
+\item{\code{table}}{a \code{character} scalar or a \link[DBI:Id]{DBI::Id} specifying the target
+database table}
+
+\item{\code{table_name}}{\code{character} scalar. Like \verb{$table}, but always returns a
+\code{character} scalar}
+
+\item{\code{table_id}}{\code{DBI::Id}. Like \verb{$table}, but always returns a \link[DBI:Id]{DBI::Id}}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{AppenderDbi$new()}}
+\item \href{#method-set_close_on_exit}{\code{AppenderDbi$set_close_on_exit()}}
+\item \href{#method-set_conn}{\code{AppenderDbi$set_conn()}}
+\item \href{#method-show}{\code{AppenderDbi$show()}}
+\item \href{#method-flush}{\code{AppenderDbi$flush()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter">}\href{../../lgr/html/Filterable.html#method-add_filter}{\code{lgr::Filterable$add_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter">}\href{../../lgr/html/Filterable.html#method-filter}{\code{lgr::Filterable$filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter">}\href{../../lgr/html/Filterable.html#method-remove_filter}{\code{lgr::Filterable$remove_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters">}\href{../../lgr/html/Filterable.html#method-set_filters}{\code{lgr::Filterable$set_filters()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout">}\href{../../lgr/html/Appender.html#method-set_layout}{\code{lgr::Appender$set_layout()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format">}\href{../../lgr/html/AppenderMemory.html#method-format}{\code{lgr::AppenderMemory$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate}{\code{lgr::AppenderMemory$set_flush_on_rotate()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_threshold}{\code{lgr::AppenderMemory$set_flush_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush">}\href{../../lgr/html/AppenderMemory.html#method-set_should_flush}{\code{lgr::AppenderMemory$set_should_flush()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDbi$new(
+  conn,
+  table,
+  threshold = NA_integer_,
+  layout = select_dbi_layout(conn, table),
+  close_on_exit = TRUE,
+  buffer_size = 10,
+  flush_threshold = "error",
+  flush_on_exit = TRUE,
+  flush_on_rotate = TRUE,
+  should_flush = NULL,
+  filters = NULL
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_close_on_exit"></a>}}
+\if{latex}{\out{\hypertarget{method-set_close_on_exit}{}}}
+\subsection{Method \code{set_close_on_exit()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDbi$set_close_on_exit(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_conn"></a>}}
+\if{latex}{\out{\hypertarget{method-set_conn}{}}}
+\subsection{Method \code{set_conn()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDbi$set_conn(conn)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-show"></a>}}
+\if{latex}{\out{\hypertarget{method-show}{}}}
+\subsection{Method \code{show()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDbi$show(threshold = NA_integer_, n = 20)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-flush"></a>}}
+\if{latex}{\out{\hypertarget{method-flush}{}}}
+\subsection{Method \code{flush()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDbi$flush()}\if{html}{\out{</div>}}
+}
+
+}
+}
