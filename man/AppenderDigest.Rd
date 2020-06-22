@@ -4,33 +4,92 @@
 \alias{AppenderDigest}
 \title{Abstract class for digests}
 \description{
+Digests is an abstract class for report-like output that contain several
+log messages and a title. A praictical example would be an E-mail containg
+the last 10 log messages before an error was encountered.
+
 \strong{Abstract classes} are exported for package developers that want to extend
 them, they cannot be instantiated directly.
-
-Abstract class for Appenders that transmit digests of several log events
-at once, for example \link{AppenderPushbullet}, \link{AppenderGmail} and
-\link{AppenderSendmail}.
 }
-\section{Fields}{
-
-
-\describe{
-\item{\code{subject_layout}, \code{set_layout(subject_layout)}}{Like \code{layout}, but
-used to format the subject/title of the digest. While \code{layout} is applied
-to each LogEvent of the digest, \code{subject_layout} is only applied to
-the last one.
-}
-}
-}
-
-\section{Methods}{
-
-}
-
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}
 
 Other abstract classes: 
 \code{\link{AppenderMail}}
+
+Other Digest Appenders: 
+\code{\link{AppenderMail}},
+\code{\link{AppenderPushbullet}},
+\code{\link{AppenderSendmail}}
 }
+\concept{Digest Appenders}
 \concept{abstract classes}
+\section{Super classes}{
+\code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{AppenderDigest}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{subject_layout}}{A \link{Layout} used to format the last \link{LogEvent}
+in this Appenders buffer when it is flushed. The result will be used as
+the subject of the tigest (for example, the E-mail subject).}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{AppenderDigest$new()}}
+\item \href{#method-set_subject_layout}{\code{AppenderDigest$set_subject_layout()}}
+\item \href{#method-format}{\code{AppenderDigest$format()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter">}\href{../../lgr/html/Filterable.html#method-add_filter}{\code{lgr::Filterable$add_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter">}\href{../../lgr/html/Filterable.html#method-filter}{\code{lgr::Filterable$filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter">}\href{../../lgr/html/Filterable.html#method-remove_filter}{\code{lgr::Filterable$remove_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters">}\href{../../lgr/html/Filterable.html#method-set_filters}{\code{lgr::Filterable$set_filters()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout">}\href{../../lgr/html/Appender.html#method-set_layout}{\code{lgr::Appender$set_layout()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="flush">}\href{../../lgr/html/AppenderMemory.html#method-flush}{\code{lgr::AppenderMemory$flush()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate}{\code{lgr::AppenderMemory$set_flush_on_rotate()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_threshold}{\code{lgr::AppenderMemory$set_flush_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush">}\href{../../lgr/html/AppenderMemory.html#method-set_should_flush}{\code{lgr::AppenderMemory$set_should_flush()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show">}\href{../../lgr/html/AppenderMemory.html#method-show}{\code{lgr::AppenderMemory$show()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDigest$new(...)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_subject_layout"></a>}}
+\if{latex}{\out{\hypertarget{method-set_subject_layout}{}}}
+\subsection{Method \code{set_subject_layout()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDigest$set_subject_layout(layout)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-format"></a>}}
+\if{latex}{\out{\hypertarget{method-format}{}}}
+\subsection{Method \code{format()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDigest$format(color = FALSE, ...)}\if{html}{\out{</div>}}
+}
+
+}
+}

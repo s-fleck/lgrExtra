@@ -11,20 +11,6 @@ buffered events are concatenated to a single message that is sent to
 \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}. The default behaviour is to push the last 7 log
 events in case a \code{fatal} event is encountered.
 }
-\section{Fields}{
-
-
-\describe{
-\item{\code{apikey}, \code{recipients}, \code{email}, \code{channel}, \code{devices}}{
-See \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}
-}
-}
-}
-
-\section{Methods}{
-
-}
-
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}
 
@@ -33,5 +19,139 @@ Other Appenders:
 \code{\link{AppenderGmail}},
 \code{\link{AppenderRjdbc}},
 \code{\link{AppenderSendmail}}
+
+Other Digest Appenders: 
+\code{\link{AppenderDigest}},
+\code{\link{AppenderMail}},
+\code{\link{AppenderSendmail}}
 }
 \concept{Appenders}
+\concept{Digest Appenders}
+\section{Super classes}{
+\code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{AppenderPushbullet}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{apikey}}{see \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}}
+
+\item{\code{recipients}}{see \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}}
+
+\item{\code{email}}{see \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}}
+
+\item{\code{channel}}{see \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}}
+
+\item{\code{devices}}{see \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{AppenderPushbullet$new()}}
+\item \href{#method-flush}{\code{AppenderPushbullet$flush()}}
+\item \href{#method-set_apikey}{\code{AppenderPushbullet$set_apikey()}}
+\item \href{#method-set_recipients}{\code{AppenderPushbullet$set_recipients()}}
+\item \href{#method-set_email}{\code{AppenderPushbullet$set_email()}}
+\item \href{#method-set_channel}{\code{AppenderPushbullet$set_channel()}}
+\item \href{#method-set_devices}{\code{AppenderPushbullet$set_devices()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter">}\href{../../lgr/html/Filterable.html#method-add_filter}{\code{lgr::Filterable$add_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter">}\href{../../lgr/html/Filterable.html#method-filter}{\code{lgr::Filterable$filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter">}\href{../../lgr/html/Filterable.html#method-remove_filter}{\code{lgr::Filterable$remove_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters">}\href{../../lgr/html/Filterable.html#method-set_filters}{\code{lgr::Filterable$set_filters()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout">}\href{../../lgr/html/Appender.html#method-set_layout}{\code{lgr::Appender$set_layout()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate}{\code{lgr::AppenderMemory$set_flush_on_rotate()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_threshold}{\code{lgr::AppenderMemory$set_flush_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush">}\href{../../lgr/html/AppenderMemory.html#method-set_should_flush}{\code{lgr::AppenderMemory$set_should_flush()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show">}\href{../../lgr/html/AppenderMemory.html#method-show}{\code{lgr::AppenderMemory$show()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="format">}\href{../../lgrExtra/html/AppenderDigest.html#method-format}{\code{lgrExtra::AppenderDigest$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout">}\href{../../lgrExtra/html/AppenderDigest.html#method-set_subject_layout}{\code{lgrExtra::AppenderDigest$set_subject_layout()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderPushbullet$new(
+  threshold = NA_integer_,
+  flush_threshold = "fatal",
+  layout = LayoutFormat$new(fmt = "\%K  \%t> \%m \%f", timestamp_fmt = "\%H:\%M:\%S"),
+  subject_layout = LayoutFormat$new(fmt = "[LGR] \%L: \%m"),
+  buffer_size = 6,
+  recipients = NULL,
+  email = NULL,
+  channel = NULL,
+  devices = NULL,
+  apikey = NULL,
+  filters = NULL
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-flush"></a>}}
+\if{latex}{\out{\hypertarget{method-flush}{}}}
+\subsection{Method \code{flush()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderPushbullet$flush()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_apikey"></a>}}
+\if{latex}{\out{\hypertarget{method-set_apikey}{}}}
+\subsection{Method \code{set_apikey()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderPushbullet$set_apikey(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_recipients"></a>}}
+\if{latex}{\out{\hypertarget{method-set_recipients}{}}}
+\subsection{Method \code{set_recipients()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderPushbullet$set_recipients(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_email"></a>}}
+\if{latex}{\out{\hypertarget{method-set_email}{}}}
+\subsection{Method \code{set_email()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderPushbullet$set_email(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_channel"></a>}}
+\if{latex}{\out{\hypertarget{method-set_channel}{}}}
+\subsection{Method \code{set_channel()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderPushbullet$set_channel(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_devices"></a>}}
+\if{latex}{\out{\hypertarget{method-set_devices}{}}}
+\subsection{Method \code{set_devices()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderPushbullet$set_devices(x)}\if{html}{\out{</div>}}
+}
+
+}
+}

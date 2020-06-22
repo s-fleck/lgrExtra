@@ -231,12 +231,9 @@ AppenderPushbullet <- R6::R6Class(
 
 # AppenderMail ------------------------------------------------------------
 
-#' Abstract class for email appenders
+#' Abstract class for email Appenders
 #'
 #' @template abstract_class
-#'
-#' @inheritSection AppenderDigest Fields
-#' @inheritSection AppenderDigest Methods
 #'
 #'@section Fields:
 #' \describe{

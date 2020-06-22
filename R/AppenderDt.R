@@ -24,7 +24,7 @@
 #' `data.table` used to store the log this appender creates and cannot be
 #' modified anymore after the instantiation of the appender.
 #'
-#' The [Layout] for this Appender is used only to format console output of
+#' The [lgr::Layout] for this Appender is used only to format console output of
 #' its `$show()` method.
 #'
 #'
@@ -76,7 +76,8 @@ AppenderDt <- R6::R6Class(
   inherit = Appender,
   cloneable = FALSE,
   public = list(
-    #' Creating a new AppenderDt
+
+    #' @description Creating a new AppenderDt
     #'
     #' @param buffer_size `integer` scalar. Number of rows of the in-memory `data.table`
     #' @param prototype A prototype `data.table`. The prototype must be a

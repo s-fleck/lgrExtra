@@ -2,7 +2,7 @@
 % Please edit documentation in R/AppenderDigest.R
 \name{AppenderMail}
 \alias{AppenderMail}
-\title{Abstract class for email appenders}
+\title{Abstract class for email Appenders}
 \description{
 \strong{Abstract classes} are exported for package developers that want to extend
 them, they cannot be instantiated directly.
@@ -18,30 +18,39 @@ This does currently only formats the log contents as monospace verbatim
 text.
 }
 }
-
-
-
-\describe{
-\item{\code{subject_layout}, \code{set_layout(subject_layout)}}{Like \code{layout}, but
-used to format the subject/title of the digest. While \code{layout} is applied
-to each LogEvent of the digest, \code{subject_layout} is only applied to
-the last one.
-}
-}
-}
-
-\section{Methods}{
-
 }
 
 \seealso{
 Other abstract classes: 
 \code{\link{AppenderDigest}}
+
+Other Digest Appenders: 
+\code{\link{AppenderDigest}},
+\code{\link{AppenderPushbullet}},
+\code{\link{AppenderSendmail}}
 }
+\concept{Digest Appenders}
 \concept{abstract classes}
 \keyword{internal}
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{AppenderMail}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{to}}{\code{character} vector. The email addresses of the recepient}
+
+\item{\code{to}}{\code{character} vector. The email address of the sender}
+
+\item{\code{to}}{\code{character} vector. The email addresses of the cc-recepients (carbon copy)}
+
+\item{\code{to}}{\code{character} vector. The email addresses of bcc-recepients (blind carbon copy)}
+
+\item{\code{html}}{\code{logical} scalar.  Send a html email message?
+This does currently only format the log contents as monospace verbatim
+text.}
+}
+\if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{

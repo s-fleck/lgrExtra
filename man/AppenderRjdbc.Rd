@@ -10,25 +10,6 @@ somewhat  \strong{DBI} compliant and does not work with \link{AppenderDbi}.
 is only tested for DB2 databases, and it is likely it will not work properly
 for other databases. Please file a bug report if you encounter any issues.
 }
-\section{Fields}{
-
-}
-
-\section{Methods}{
-
-}
-
-\section{Creating a New Appender}{
-
-
-An AppenderDbi is linked to a database table via its \code{table} argument. If
-the table does not exist it is created either when the Appender is first
-instantiated or (more likely) when the first LogEvent would be written to
-that table. Rather than to rely on this feature, it is recommended that you
-create the target log table first manually using an \verb{SQL CREATE TABLE}
-statement as this is safer and more flexible. See also \link{LayoutDbi}.
-}
-
 \seealso{
 \link{LayoutFormat}, \link{simple_logging}, \link[data.table:data.table]{data.table::data.table}
 
@@ -39,3 +20,67 @@ Other Appenders:
 \code{\link{AppenderSendmail}}
 }
 \concept{Appenders}
+\section{Super classes}{
+\code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDbi]{lgrExtra::AppenderDbi}} -> \code{AppenderRjdbc}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{AppenderRjdbc$new()}}
+\item \href{#method-flush}{\code{AppenderRjdbc$flush()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter">}\href{../../lgr/html/Filterable.html#method-add_filter}{\code{lgr::Filterable$add_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter">}\href{../../lgr/html/Filterable.html#method-filter}{\code{lgr::Filterable$filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter">}\href{../../lgr/html/Filterable.html#method-remove_filter}{\code{lgr::Filterable$remove_filter()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters">}\href{../../lgr/html/Filterable.html#method-set_filters}{\code{lgr::Filterable$set_filters()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout">}\href{../../lgr/html/Appender.html#method-set_layout}{\code{lgr::Appender$set_layout()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format">}\href{../../lgr/html/AppenderMemory.html#method-format}{\code{lgr::AppenderMemory$format()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate}{\code{lgr::AppenderMemory$set_flush_on_rotate()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_threshold}{\code{lgr::AppenderMemory$set_flush_threshold()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush">}\href{../../lgr/html/AppenderMemory.html#method-set_should_flush}{\code{lgr::AppenderMemory$set_should_flush()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDbi" data-id="set_close_on_exit">}\href{../../lgrExtra/html/AppenderDbi.html#method-set_close_on_exit}{\code{lgrExtra::AppenderDbi$set_close_on_exit()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDbi" data-id="set_conn">}\href{../../lgrExtra/html/AppenderDbi.html#method-set_conn}{\code{lgrExtra::AppenderDbi$set_conn()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDbi" data-id="show">}\href{../../lgrExtra/html/AppenderDbi.html#method-show}{\code{lgrExtra::AppenderDbi$show()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderRjdbc$new(
+  conn,
+  table,
+  threshold = NA_integer_,
+  layout = select_dbi_layout(conn, table),
+  close_on_exit = TRUE,
+  buffer_size = 10,
+  flush_threshold = "error",
+  flush_on_exit = TRUE,
+  flush_on_rotate = TRUE,
+  should_flush = NULL,
+  filters = NULL
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-flush"></a>}}
+\if{latex}{\out{\hypertarget{method-flush}{}}}
+\subsection{Method \code{flush()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderRjdbc$flush()}\if{html}{\out{</div>}}
+}
+
+}
+}

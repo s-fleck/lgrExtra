@@ -129,6 +129,8 @@ unpack_row <- function(x){
 
 
 unpack_col <- function(x){
+  ..unpack_row_dummy.. <- NULL
+
   r <- lapply(x, unpack_row)
   r <- data.table::rbindlist(r, fill = TRUE, use.names = TRUE)
   if ("..unpack_row_dummy.." %in% names(r)){

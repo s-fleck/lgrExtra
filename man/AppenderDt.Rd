@@ -5,21 +5,17 @@
 \alias{lgr_data}
 \title{Log to an in-memory data.table}
 \description{
-An Appender that outputs to an in-memory \code{data.table}. This kind of
-Appender is useful for interactive use, and has very little overhead.
+An Appender that outputs to an in-memory \code{data.table}. It fulfill a similar
+purpose as the more flexible \link{AppenderBuffer} and is mainly included for
+historical reasons/backwards compatibility with older version of \strong{lgr}.
 }
 \section{Custom Fields}{
 
 
 \code{AppenderDt} supports \link[=LogEvent]{custom fields}, but they have to be
 pre-allocated in the \code{prototype} argument. Custom fields that are not
-part of the prototype are discarded. If you want an Appender that retains
-all custom fields (at the cost of slightly less performance), take a look at
-\link{AppenderBuffer}.
-
-With the default settings, the custom field \code{value} is included in the
-\code{data.table} as a list column to store arbitrary \R objects (see example).
-It is recommended to use this feature only \code{TRACE} level.
+part of the prototype are inserted in the list-column \code{.fields} if it
+exists.
 }
 
 \section{Creating a Data Table Appender}{
@@ -30,7 +26,7 @@ a \code{buffer_size} and a \code{prototype}. These determine the structure of th
 \code{data.table} used to store the log this appender creates and cannot be
 modified anymore after the instantiation of the appender.
 
-The \link{Layout} for this Appender is used only to format console output of
+The \link[lgr:Layout]{lgr::Layout} for this Appender is used only to format console output of
 its \verb{$show()} method.
 }
 
@@ -106,6 +102,7 @@ lg$config(NULL)
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
+Creating a new AppenderDt
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDt$new(
   threshold = NA_integer_,
@@ -122,6 +119,16 @@ lg$config(NULL)
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{prototype}}{A prototype \code{data.table}. The prototype must be a
+\code{data.table} with the same columns and column types as the data
+you want to log. The actual content of the columns is irrelevant.
+There are a few reserved column names that have special meaning:
+* \code{.id}: \code{integer} (mandatory). Must always be the first column
+and is used internally by the Appender
+* \code{.fields}: \code{list} (optional). If present all custom values of the
+event (that are not already part of the prototype) are stored in
+this list column.}
+
 \item{\code{buffer_size}}{\code{integer} scalar. Number of rows of the in-memory \code{data.table}}
 }
 \if{html}{\out{</div>}}

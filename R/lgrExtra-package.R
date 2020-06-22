@@ -1,7 +1,7 @@
 #' @keywords internal
 #' @import lgr
 #' @importFrom stats setNames
-#' @importFrom data.table data.table
+#' @importFrom data.table data.table :=
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage

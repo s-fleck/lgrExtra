@@ -404,6 +404,9 @@ AppenderDbi <- R6::R6Class(
 
 # AppenderRjdbc -------------------------------------------------------------
 
+# exclude from coverage because relies on external resources
+# nocov start
+
 #' Log to databases via RJDBC
 #'
 #' Log to a database table with the **RJDBC** package. **RJDBC** is only
@@ -412,26 +415,9 @@ AppenderDbi <- R6::R6Class(
 #' is only tested for DB2 databases, and it is likely it will not work properly
 #' for other databases. Please file a bug report if you encounter any issues.
 #'
-#' @inheritSection AppenderDbi Creating a New Appender
-#' @inheritSection AppenderDbi Choosing the Right DBI Layout
-#' @inheritSection AppenderDbi Fields
-#' @inheritSection AppenderDbi Methods
-#'
-#'
-#' @section Fields:
-#' @section Methods:
-#'
 #' @export
 #' @seealso [LayoutFormat], [simple_logging], [data.table::data.table]
 #' @family Appenders
-#' @name AppenderRjdbc
-NULL
-
-
-
-
-# exclude from coverage because relies on external resources
-# nocov start
 #' @export
 AppenderRjdbc <- R6::R6Class(
   "AppenderRjdbc",
