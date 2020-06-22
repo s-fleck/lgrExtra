@@ -24,43 +24,6 @@ It does not format
 LogEvents directly, but their \code{data.table} representations (see
 \link{as.data.table.LogEvent}), as well as column- and table names.
 }
-\section{Creating a New Layout}{
-
-}
-
-\section{Fields}{
-
-
-\describe{
-\item{\code{col_types}}{A named \code{character} vector of column types supported by
-the target database. If not \code{NULL} this is used by \link{AppenderDbi} or similar
-Appenders to create a new database table on instantiation of the Appender. If
-the target database table already exists, \code{col_types} is not used.
-}
-\item{\code{col_names}}{Convenience method to get the names of the \code{col_types}
-vector}
-}
-}
-
-\section{Methods}{
-
-
-\describe{
-\item{\code{format_table_name(x)}}{Format table names before inserting into
-the database. For example some databases prefer all lowercase names,
-some uppercase. SQL updates should be case-agnostic, but sadly in
-practice not all DBI backends behave consistently in this regard}
-\item{\code{format_colnames}}{Format column names before inserting into the
-database. See \verb{$format_table_name} for more info}
-\item{\code{format_data}}{Format the input \code{data.table} before inserting into
-the database. Usually this function does nothing, but for example for
-SQLite it has to apply formatting to the timestamp.
-}
-\item{\code{col_names}}{Convenience method to get the names of the \code{col_types}
-vector}
-}
-}
-
 \section{Database Specific Layouts}{
 
 
@@ -77,6 +40,10 @@ but this list is expected to grow as lgr matures:
 The utility function \code{\link[=select_dbi_layout]{select_dbi_layout()}} tries returns the appropriate
 Layout for a DBI connection, but this does not work for odbc and JDBC
 connections where you have to specify the layout manually.
+
+For creating custom DB-specific layouts it should usually be enough to create
+an \link[R6:R6]{R6::R6} class that inherits from \code{LayoutDbi} and chosing different
+defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$format_data}.
 }
 
 \seealso{
@@ -84,3 +51,143 @@ connections where you have to specify the layout manually.
 }
 \concept{Layouts}
 \concept{database layouts}
+\section{Super classes}{
+\code{\link[lgr:Layout]{lgr::Layout}} -> \code{\link[lgr:LayoutFormat]{lgr::LayoutFormat}} -> \code{LayoutDbi}
+}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{format_table_name}}{a \code{function} to format the table name before
+inserting to the database. The function will be applied to the
+\verb{$table_name} before inseting into the database. For example some,
+databases prefer all lowercase names, some uppercase. SQL updates
+should be case-agnostic, but sadly in practice not all DBI backends
+behave consistently in this regard.}
+
+\item{\code{format_colnames}}{a \code{function} to format the column names before
+inserting to the database. The function will be applied to the column
+names of the data frame to be inserted into the database.}
+
+\item{\code{format_data}}{a \code{function} to format the data before
+inserting into the database. The function will be applied to the whole
+data frame.}
+
+\item{\code{names}}{of the columns that contain data that has been serialized
+to JSON strings}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{col_types}}{a named \code{character} vector of column types supported by
+the target database. If not \code{NULL} this is used by \link{AppenderDbi} or
+similar Appenders to create a new database table on instantiation of
+the Appender. If the target database table already exists, \code{col_types}
+is not used.}
+
+\item{\code{names}}{of the columns that contain data that has been serialized
+to JSON strings}
+
+\item{\code{col_names}}{column names of the target table (the same as
+\code{names(lo$col_types)})}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{LayoutDbi$new()}}
+\item \href{#method-set_col_types}{\code{LayoutDbi$set_col_types()}}
+\item \href{#method-set_serialized_cols}{\code{LayoutDbi$set_serialized_cols()}}
+\item \href{#method-sql_create_table}{\code{LayoutDbi$sql_create_table()}}
+\item \href{#method-toString}{\code{LayoutDbi$toString()}}
+\item \href{#method-clone}{\code{LayoutDbi$clone()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="format_event">}\href{../../lgr/html/LayoutFormat.html#method-format_event}{\code{lgr::LayoutFormat$format_event()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="read">}\href{../../lgr/html/LayoutFormat.html#method-read}{\code{lgr::LayoutFormat$read()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_colors">}\href{../../lgr/html/LayoutFormat.html#method-set_colors}{\code{lgr::LayoutFormat$set_colors()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_fmt">}\href{../../lgr/html/LayoutFormat.html#method-set_fmt}{\code{lgr::LayoutFormat$set_fmt()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_pad_levels">}\href{../../lgr/html/LayoutFormat.html#method-set_pad_levels}{\code{lgr::LayoutFormat$set_pad_levels()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_timestamp_fmt">}\href{../../lgr/html/LayoutFormat.html#method-set_timestamp_fmt}{\code{lgr::LayoutFormat$set_timestamp_fmt()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$new(
+  col_types = c(level = "integer", timestamp = "timestamp", logger = "varchar(256)",
+    caller = "varchar(256)", msg = "varchar(2048)"),
+  serialized_cols = NULL,
+  fmt = "\%L [\%t] \%m  \%f",
+  timestamp_fmt = "\%Y-\%m-\%d \%H:\%M:\%S",
+  colors = getOption("lgr.colors", list()),
+  pad_levels = "right",
+  format_table_name = identity,
+  format_colnames = identity,
+  format_data = data.table::as.data.table
+)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_col_types"></a>}}
+\if{latex}{\out{\hypertarget{method-set_col_types}{}}}
+\subsection{Method \code{set_col_types()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$set_col_types(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_serialized_cols"></a>}}
+\if{latex}{\out{\hypertarget{method-set_serialized_cols}{}}}
+\subsection{Method \code{set_serialized_cols()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$set_serialized_cols(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-sql_create_table"></a>}}
+\if{latex}{\out{\hypertarget{method-sql_create_table}{}}}
+\subsection{Method \code{sql_create_table()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$sql_create_table(table)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-toString"></a>}}
+\if{latex}{\out{\hypertarget{method-toString}{}}}
+\subsection{Method \code{toString()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$toString()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

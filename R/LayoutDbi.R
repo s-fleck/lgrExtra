@@ -17,41 +17,6 @@
 #' LogEvents directly, but their `data.table` representations (see
 #' [as.data.table.LogEvent]), as well as column- and table names.
 #'
-#'
-#' @inheritSection Layout Creating a New Layout
-#'
-#' @section Creating a New Layout:
-#'
-#'
-#' @section Fields:
-#'
-#' \describe{
-#'   \item{`col_types`}{A named `character` vector of column types supported by
-#'   the target database. If not `NULL` this is used by [AppenderDbi] or similar
-#'   Appenders to create a new database table on instantiation of the Appender. If
-#'   the target database table already exists, `col_types` is not used.
-#'   }
-#'   \item{`col_names`}{Convenience method to get the names of the `col_types`
-#'     vector}
-#' }
-#'
-#' @section Methods:
-#'
-#' \describe{
-#'   \item{`format_table_name(x)`}{Format table names before inserting into
-#'     the database. For example some databases prefer all lowercase names,
-#'     some uppercase. SQL updates should be case-agnostic, but sadly in
-#'     practice not all DBI backends behave consistently in this regard}
-#'   \item{`format_colnames`}{Format column names before inserting into the
-#'     database. See `$format_table_name` for more info}
-#'   \item{`format_data`}{Format the input `data.table` before inserting into
-#'     the database. Usually this function does nothing, but for example for
-#'     SQLite it has to apply formatting to the timestamp.
-#'   }
-#'   \item{`col_names`}{Convenience method to get the names of the `col_types`
-#'     vector}
-#' }
-#'
 #' @section Database Specific Layouts:
 #'
 #' Different databases have different data types and features. Currently the
@@ -67,6 +32,10 @@
 #' Layout for a DBI connection, but this does not work for odbc and JDBC
 #' connections where you have to specify the layout manually.
 #'
+#' For creating custom DB-specific layouts it should usually be enough to create
+#' an [R6::R6] class that inherits from `LayoutDbi` and chosing different
+#' defaults for `$format_table_name`, `$format_colnames` and `$format_data`.
+#'
 #'
 #' @name LayoutDbi
 #' @aliases LayoutSqlite LayoutRjdbc LayoutRjdbcDb2 LayoutDb2 LayoutMySql LayoutPostgres
@@ -74,11 +43,6 @@
 #' @family database layouts
 #' @seealso [select_dbi_layout()], [DBI::DBI],
 #'
-NULL
-
-
-
-
 #' @export
 LayoutDbi <- R6::R6Class(
   "LayoutDbi",
@@ -118,8 +82,23 @@ LayoutDbi <- R6::R6Class(
       self
     },
 
+
+    #' @field format_table_name a `function` to format the table name before
+    #'   inserting to the database. The function will be applied to the
+    #'   `$table_name` before inseting into the database. For example some,
+    #'   databases prefer all lowercase names, some uppercase. SQL updates
+    #'   should be case-agnostic, but sadly in practice not all DBI backends
+    #'   behave consistently in this regard.
     format_table_name = NULL,
+
+    #' @field format_colnames a `function` to format the column names before
+    #'   inserting to the database. The function will be applied to the column
+    #'   names of the data frame to be inserted into the database.
     format_colnames   = NULL,
+
+    #' @field format_data a `function` to format the data before
+    #'   inserting into the database. The function will be applied to the whole
+    #'   data frame.
     format_data       = NULL,
 
 
@@ -161,6 +140,11 @@ LayoutDbi <- R6::R6Class(
 
 
   active = list(
+    #' @field col_types a named `character` vector of column types supported by
+    #'   the target database. If not `NULL` this is used by [AppenderDbi] or
+    #'   similar Appenders to create a new database table on instantiation of
+    #'   the Appender. If the target database table already exists, `col_types`
+    #'   is not used.
     col_types = function() {
       r <- get(".col_types", envir = private)
       if (!is.null(r)){
@@ -170,11 +154,15 @@ LayoutDbi <- R6::R6Class(
     },
 
 
+    #' @field names of the columns that contain data that has been serialized
+    #'   to JSON strings
     serialized_cols = function(){
       get(".serialized_cols", envir = private)
     },
 
 
+    #' @field col_names column names of the target table (the same as
+    #'   `names(lo$col_types)`)
     col_names = function(){
       names(self$col_types)
     }
