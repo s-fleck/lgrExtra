@@ -14,25 +14,25 @@ exists in the target table will be appended, all others are ignored.
 \section{Buffered Logging}{
 
 
-AppenderDbi does not write directly to the database but to an in memory
-buffer. With the default settings, this buffer is written to the database
-whenever the buffer is full (\code{buffer_size}, default is 10 LogEvents),
-whenever a LogEvent with a level of \code{fatal} or \code{error} is encountered
-(\code{flush_threshold}) or when the Appender is garbage collected
+By default, AppenderDbi writes each LogEvent directly to the target database
+which can be relatively slow. To improve performance it is possible to tell
+AppenderDbi to buffer db writes by setting \code{buffer_size} to something greater
+than \code{0}. This buffer is written to the database whenever it is full
+(\code{buffer_size}), whenever a LogEvent with a level of \code{fatal} or \code{error} is
+encountered (\code{flush_threshold}), or when the Appender is garbage collected
 (\code{flush_on_exit}), i.e. when you close the \R session or shortly after you
-remove the Appender object via \code{rm()}. If you want to disable buffering, just
-set \code{buffer_size} to \code{0}.
+remove the Appender object via \code{rm()}.
 }
 
 \section{Creating a New Appender}{
 
 
-An AppenderDbi is linked to a database table via its \code{table} argument. If
-the table does not exist it is created either when the Appender is first
+An AppenderDbi is linked to a database table via its \code{table} argument. If the
+table does not exist it is created either when the Appender is first
 instantiated or (more likely) when the first LogEvent would be written to
 that table. Rather than to rely on this feature, it is recommended that you
-create the target log table first manually using an \verb{SQL CREATE TABLE}
-statement as this is safer and more flexible. See also \link{LayoutDbi}.
+create the target table first using an \verb{SQL CREATE TABLE} statement as this
+is safer and more flexible. See also \link{LayoutDbi}.
 }
 
 \section{Choosing the correct DBI Layout}{
@@ -127,7 +127,7 @@ database table}
   threshold = NA_integer_,
   layout = select_dbi_layout(conn, table),
   close_on_exit = TRUE,
-  buffer_size = 10,
+  buffer_size = 0,
   flush_threshold = "error",
   flush_on_exit = TRUE,
   flush_on_rotate = TRUE,

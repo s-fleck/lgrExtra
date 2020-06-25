@@ -110,10 +110,10 @@ init_test_appender = function(
 # for manual testing
 nm <- "MySQL via RMySQL"
 nm <- "MySQL via RMariaDB"
-nm <- "SQLite via RSQLite"
 nm <- "DB2 via RJDBC"
 nm <- "PostgreSQL via RPostgres"
 nm <- "DB2 via odbc"
+nm <- "SQLite via RSQLite"
 
 for (nm in names(dbs)){
 

@@ -65,7 +65,7 @@ Other Appenders:
   threshold = NA_integer_,
   layout = select_dbi_layout(conn, table),
   close_on_exit = TRUE,
-  buffer_size = 10,
+  buffer_size = 0,
   flush_threshold = "error",
   flush_on_exit = TRUE,
   flush_on_rotate = TRUE,

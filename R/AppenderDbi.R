@@ -12,24 +12,24 @@
 #'
 #' @section Buffered Logging:
 #'
-#' AppenderDbi does not write directly to the database but to an in memory
-#' buffer. With the default settings, this buffer is written to the database
-#' whenever the buffer is full (`buffer_size`, default is 10 LogEvents),
-#' whenever a LogEvent with a level of `fatal` or `error` is encountered
-#' (`flush_threshold`) or when the Appender is garbage collected
+#' By default, AppenderDbi writes each LogEvent directly to the target database
+#' which can be relatively slow. To improve performance it is possible to tell
+#' AppenderDbi to buffer db writes by setting `buffer_size` to something greater
+#' than `0`. This buffer is written to the database whenever it is full
+#' (`buffer_size`), whenever a LogEvent with a level of `fatal` or `error` is
+#' encountered (`flush_threshold`), or when the Appender is garbage collected
 #' (`flush_on_exit`), i.e. when you close the \R session or shortly after you
-#' remove the Appender object via `rm()`. If you want to disable buffering, just
-#' set `buffer_size` to `0`.
+#' remove the Appender object via `rm()`.
 #'
 #'
 #' @section Creating a New Appender:
 #'
-#' An AppenderDbi is linked to a database table via its `table` argument. If
-#' the table does not exist it is created either when the Appender is first
+#' An AppenderDbi is linked to a database table via its `table` argument. If the
+#' table does not exist it is created either when the Appender is first
 #' instantiated or (more likely) when the first LogEvent would be written to
 #' that table. Rather than to rely on this feature, it is recommended that you
-#' create the target log table first manually using an `SQL CREATE TABLE`
-#' statement as this is safer and more flexible. See also [LayoutDbi].
+#' create the target table first using an `SQL CREATE TABLE` statement as this
+#' is safer and more flexible. See also [LayoutDbi].
 #'
 #'
 #' @section Choosing the correct DBI Layout:
@@ -58,7 +58,7 @@ AppenderDbi <- R6::R6Class(
       threshold = NA_integer_,
       layout = select_dbi_layout(conn, table),
       close_on_exit = TRUE,
-      buffer_size = 10,
+      buffer_size = 0,
       flush_threshold = "error",
       flush_on_exit = TRUE,
       flush_on_rotate = TRUE,
@@ -430,7 +430,7 @@ AppenderRjdbc <- R6::R6Class(
       threshold = NA_integer_,
       layout = select_dbi_layout(conn, table),
       close_on_exit = TRUE,
-      buffer_size = 10,
+      buffer_size = 0,
       flush_threshold = "error",
       flush_on_exit = TRUE,
       flush_on_rotate = TRUE,
