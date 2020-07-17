@@ -42,12 +42,12 @@ Layout for a DBI connection, but this does not work for odbc and JDBC
 connections where you have to specify the layout manually.
 
 For creating custom DB-specific layouts it should usually be enough to create
-an \link[R6:R6]{R6::R6} class that inherits from \code{LayoutDbi} and chosing different
+an \link[R6:R6Class]{R6::R6} class that inherits from \code{LayoutDbi} and chosing different
 defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$format_data}.
 }
 
 \seealso{
-\code{\link[=select_dbi_layout]{select_dbi_layout()}}, \link[DBI:DBI]{DBI::DBI},
+\code{\link[=select_dbi_layout]{select_dbi_layout()}}, \link[DBI:DBI-package]{DBI::DBI},
 }
 \concept{Layouts}
 \concept{database layouts}
