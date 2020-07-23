@@ -117,9 +117,7 @@ AppenderPushbullet <- R6::R6Class(
       self$set_apikey(apikey)
       self$set_buffer_size(buffer_size)
       self$set_subject_layout(subject_layout)
-      self$set_should_flush(function(event){
-        is.na(.obj()[["flush_threshold"]]) || all(event[["level"]] <= .obj()[["flush_threshold"]])
-      })
+      self$set_should_flush(NULL)
 
       self$set_recipients(recipients)
       self$set_email(email)
@@ -414,6 +412,7 @@ AppenderSendmail <- R6::R6Class(
 
       self$set_layout(layout)
       self$set_threshold(threshold)
+      self$set_should_flush(NULL)
       self$set_flush_threshold(flush_threshold)
     },
 
@@ -548,6 +547,7 @@ AppenderGmail <- R6::R6Class(
       self$set_threshold(threshold)
       self$set_flush_threshold(flush_threshold)
       self$set_buffer_size(buffer_size)
+      self$set_should_flush(NULL)
 
       private$.flush_on_exit   <- FALSE
       private$.flush_on_rotate <- FALSE
