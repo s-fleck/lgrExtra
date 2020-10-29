@@ -13,3 +13,8 @@ coverage](https://codecov.io/gh/s-fleck/lgrExtra/branch/master/graph/badge.svg)]
 
 Extra Appenders for logging to databases, push notifications, email,
 etc… for the R logging package [lgr](https://github.com/s-fleck/lgr).
+
+
+# development status
+
+I'm currently aiming for a CRAN release in January 2021.
