@@ -5,8 +5,11 @@ r:
   - oldrel
   - release
   - devel
-r_github_packages:
-  - s-fleck/lgr
+addons:
+  apt:
+    packages:
+      - libharfbuzz-dev # for pkgdown
+      - libfribidi-dev
 r_packages:
   - RPostgres
   - RMariaDB
