@@ -113,12 +113,12 @@
 <span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://s-fleck.github.io/lgr/reference/get_logger.html">get_logger</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">)</span><span class="op">$</span><span class="fu">add_appender</span><span class="op">(</span><span class="va">ap</span><span class="op">)</span>
   
 <span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">"test"</span>, foo <span class="op">=</span> <span class="st">"bar"</span>, hash <span class="op">=</span> <span class="st">"baz"</span><span class="op">)</span>  
-<span class="co">#&gt; INFO  [11:11:36.920] test {foo: bar, hash: baz}</span>
+<span class="co">#&gt; INFO  [11:11:58.807] test {foo: bar, hash: baz}</span>
 
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">ap</span><span class="op">$</span><span class="va">conn</span>, <span class="st">"select * from log"</span><span class="op">)</span>
 <span class="va">x</span>  
 <span class="co">#&gt;   level        timestamp logger  msg caller foo                     fields</span>
-<span class="co">#&gt; 1   400 1608721896.92085   test test   eval bar {"foo":"bar","hash":"baz"}</span></code></pre></div>
+<span class="co">#&gt; 1   400 1608721918.80703   test test   eval bar {"foo":"bar","hash":"baz"}</span></code></pre></div>
 </div>
   </div>
 
