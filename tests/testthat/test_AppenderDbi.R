@@ -66,11 +66,6 @@ dbs <- list(
     ),
     ctor = AppenderDbi
   )
-
-  # "DB2 via RJDBC" = list(
-  #   conn = try(silent = TRUE, dataSTAT::dbConnectDB2("RTEST", "rtest", "rtest")),
-  #   ctor = AppenderRjdbc
-  # ),
 )
 
 teardown({
@@ -335,17 +330,6 @@ for (nm in names(dbs)){
     if ("layout" %in% names(dbs[[nm]])){
       lo <- dbs[[nm]]$layout
 
-    } else if (ctor$classname == "AppenderRjdbc"){
-      lo <- LayoutRjdbc$new(
-        col_types = c(
-          level = "smallint",
-          timestamp = "timestamp",
-          logger= "varchar(512)",
-          msg = "varchar(1024)",
-          caller = "varchar(1024)",
-          foo = "varchar(256)"
-        )
-      )
     } else {
       lo <- LayoutSqlite$new(
         col_types = c(
