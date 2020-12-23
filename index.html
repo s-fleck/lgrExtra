@@ -72,7 +72,7 @@
 <a href="#lgrextra" class="anchor"></a>lgrExtra</h1></div>
 <!-- badges: start -->
 
-<p>Extra Appenders for logging to push notifications, email, databases, and other destinations with the R logging package <a href="https://github.com/s-fleck/lgr">lgr</a>.</p>
+<p>Extra Appenders for logging to push notifications, email, databases, and other destinations for <a href="https://github.com/s-fleck/lgr">lgr</a>.</p>
 </div>
 <div id="development-status" class="section level1">
 <h1 class="hasAnchor">
@@ -81,16 +81,14 @@
 <table class="table">
 <colgroup>
 <col width="6%">
-<col width="14%">
-<col width="20%">
-<col width="11%">
-<col width="47%">
+<col width="16%">
+<col width="22%">
+<col width="53%">
 </colgroup>
 <thead><tr class="header">
 <th>Appender</th>
-<th>Target</th>
-<th>Package</th>
-<th>Comment</th>
+<th>Description</th>
+<th>Backend</th>
 <th>Status</th>
 </tr></thead>
 <tbody>
@@ -98,43 +96,36 @@
 <td>AppenderDbi</td>
 <td>Databases</td>
 <td><a href="https://cran.r-project.org/package=DBI">DBI</a></td>
-<td></td>
 <td><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></td>
 </tr>
 <tr class="even">
 <td>AppenderDt</td>
 <td>In-memory data.table</td>
 <td><a href="https://github.com/Rdatatable/data.table">data.table</a></td>
-<td>Replaced by <code><a href="https://s-fleck.github.io/lgr/reference/AppenderBuffer.html">lgr::AppenderBuffer</a></code>
-</td>
 <td><a href="https://www.tidyverse.org/lifecycle/#superseded"><img src="https://img.shields.io/badge/lifecycle-superseded-blue.svg" alt="Lifecycle: superseded"></a></td>
 </tr>
 <tr class="odd">
 <td>AppenderGmail</td>
 <td>E-mail via Gmail REST API</td>
 <td><a href="https://cran.r-project.org/package=gmailr">gmailr</a></td>
-<td></td>
 <td><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></td>
 </tr>
 <tr class="even">
 <td>AppenderSendmail</td>
 <td>E-mail via SMTP</td>
 <td><a href="https://cran.r-project.org/package=sendmailR">sendmailR</a></td>
-<td></td>
 <td><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></td>
 </tr>
 <tr class="odd">
 <td>AppenderPushbullet</td>
 <td>Pushbullet (mobile phone push notifications)</td>
 <td><a href="https://cran.r-project.org/package=RPushbullet">RPushbullet</a></td>
-<td></td>
 <td><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></td>
 </tr>
 <tr class="even">
 <td>AppenderSyslog</td>
 <td>Linux Syslog</td>
 <td><a href="https://cran.r-project.org/package=rsyslog">rsyslog</a></td>
-<td></td>
 <td><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></td>
 </tr>
 </tbody>
