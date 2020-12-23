@@ -53,7 +53,6 @@ new table will be created with the \code{col_types} from \code{layout}.
 Other Appenders: 
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPushbullet}},
-\code{\link{AppenderRjdbc}},
 \code{\link{AppenderSendmail}},
 \code{\link{AppenderSyslog}}
 }
