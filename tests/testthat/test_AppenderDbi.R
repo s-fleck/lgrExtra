@@ -70,7 +70,7 @@ dbs <- list(
 
 teardown({
   for (db in dbs){
-    try(DBI::dbDisconnect(db$conn), silent = TRUE)
+    suppressWarnings(try(DBI::dbDisconnect(db$conn), silent = TRUE))
   }
 })
 

@@ -359,7 +359,7 @@ AppenderDbi <- R6::R6Class(
         self$flush()
 
       if (self$close_on_exit){
-        try(DBI::dbDisconnect(private$.conn), silent = TRUE)
+        suppressWarnings(try(DBI::dbDisconnect(private$.conn), silent = TRUE))
       }
     },
 
