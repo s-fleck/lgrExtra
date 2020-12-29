@@ -76,17 +76,16 @@
 
     
     
-<div id="development-status" class="section level1">
+<p>This vignette is very much work in progress and will contain more examples in the future.</p>
+<div id="appenderdbi---logging-to-databases" class="section level1">
 <h1 class="hasAnchor">
-<a href="#development-status" class="anchor"></a>Development status</h1>
-<p>lgrExtra uses the the livecycle stages suggested</p>
-<p><a href="https://lifecycle.r-lib.org/articles/lifecycle.html" class="uri">https://lifecycle.r-lib.org/articles/lifecycle.html</a></p>
-<p>ApenderDbi | Expiermental</p>
+<a href="#appenderdbi---logging-to-databases" class="anchor"></a>AppenderDbi - Logging to databases</h1>
+<p><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></p>
+<p>Appending to databases is supported but still experimental. Please be aware that the API might change and AppenderDbi and its subclasses are not fit for production use.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://s-fleck.github.io/lgr/">lgr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">lgrExtra</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rsqlite.r-dbi.org">RSQLite</a></span><span class="op">)</span>
-
 
 <span class="va">lo</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/LayoutDbi.html">LayoutDbi</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
   serialized_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>fields <span class="op">=</span> <span class="va"><a href="../reference/Serializer.html">SerializerJson</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,
@@ -101,7 +100,6 @@
   <span class="op">)</span>
 <span class="op">)</span>
 
-
 <span class="va">ap</span> <span class="op">&lt;-</span> <span class="fu">lgrExtra</span><span class="fu">::</span><span class="va"><a href="../reference/AppenderDbi.html">AppenderDbi</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
   conn <span class="op">=</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'log.db'</span><span class="op">)</span>,
   table <span class="op">=</span> <span class="st">"log"</span>,
@@ -113,12 +111,12 @@
 <span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://s-fleck.github.io/lgr/reference/get_logger.html">get_logger</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">)</span><span class="op">$</span><span class="fu">add_appender</span><span class="op">(</span><span class="va">ap</span><span class="op">)</span>
   
 <span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">"test"</span>, foo <span class="op">=</span> <span class="st">"bar"</span>, hash <span class="op">=</span> <span class="st">"baz"</span><span class="op">)</span>  
-<span class="co">#&gt; INFO  [21:50:01.726] test {foo: bar, hash: baz}</span>
+<span class="co">#&gt; INFO  [19:44:47.004] test {foo: bar, hash: baz}</span>
 
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">ap</span><span class="op">$</span><span class="va">conn</span>, <span class="st">"select * from log"</span><span class="op">)</span>
 <span class="va">x</span>  
 <span class="co">#&gt;   level        timestamp logger  msg caller foo                     fields</span>
-<span class="co">#&gt; 1   400 1608760201.72629   test test   eval bar {"foo":"bar","hash":"baz"}</span></code></pre></div>
+<span class="co">#&gt; 1   400 1609271087.00435   test test   eval bar {"foo":"bar","hash":"baz"}</span></code></pre></div>
 </div>
   </div>
 
