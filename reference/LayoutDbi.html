@@ -151,7 +151,7 @@ but this list is expected to grow as lgr matures:</p><ul>
 Layout for a DBI connection, but this does not work for odbc and JDBC
 connections where you have to specify the layout manually.</p>
 <p>For creating custom DB-specific layouts it should usually be enough to create
-an <a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6</a> class that inherits from <code>LayoutDbi</code> and chosing different
+an <a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6</a> class that inherits from <code>LayoutDbi</code> and choosing different
 defaults for <code>$format_table_name</code>, <code>$format_colnames</code> and <code>$format_data</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -164,7 +164,7 @@ defaults for <code>$format_table_name</code>, <code>$format_colnames</code> and 
     <p><div class="r6-fields"></p><dl>
 <dt><code>format_table_name</code></dt><dd><p>a <code>function</code> to format the table name before
 inserting to the database. The function will be applied to the
-<code>$table_name</code> before inseting into the database. For example some,
+<code>$table_name</code> before inserting into the database. For example some,
 databases prefer all lowercase names, some uppercase. SQL updates
 should be case-agnostic, but sadly in practice not all DBI backends
 behave consistently in this regard.</p></dd>
