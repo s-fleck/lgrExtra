@@ -5,7 +5,7 @@
 \title{Abstract class for digests}
 \description{
 Digests is an abstract class for report-like output that contain several
-log messages and a title. A praictical example would be an E-mail containg
+log messages and a title. A practical example would be an E-mail containing
 the last 10 log messages before an error was encountered.
 
 \strong{Abstract classes} are exported for package developers that want to extend
@@ -32,7 +32,7 @@ Other Digest Appenders:
 \describe{
 \item{\code{subject_layout}}{A \link{Layout} used to format the last \link{LogEvent}
 in this Appenders buffer when it is flushed. The result will be used as
-the subject of the tigest (for example, the E-mail subject).}
+the subject of the digest (for example, the E-mail subject).}
 }
 \if{html}{\out{</div>}}
 }

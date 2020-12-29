@@ -42,7 +42,7 @@ Layout for a DBI connection, but this does not work for odbc and JDBC
 connections where you have to specify the layout manually.
 
 For creating custom DB-specific layouts it should usually be enough to create
-an \link[R6:R6Class]{R6::R6} class that inherits from \code{LayoutDbi} and chosing different
+an \link[R6:R6Class]{R6::R6} class that inherits from \code{LayoutDbi} and choosing different
 defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$format_data}.
 }
 
@@ -59,7 +59,7 @@ defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$forma
 \describe{
 \item{\code{format_table_name}}{a \code{function} to format the table name before
 inserting to the database. The function will be applied to the
-\verb{$table_name} before inseting into the database. For example some,
+\verb{$table_name} before inserting into the database. For example some,
 databases prefer all lowercase names, some uppercase. SQL updates
 should be case-agnostic, but sadly in practice not all DBI backends
 behave consistently in this regard.}

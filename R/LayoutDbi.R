@@ -33,7 +33,7 @@
 #' connections where you have to specify the layout manually.
 #'
 #' For creating custom DB-specific layouts it should usually be enough to create
-#' an [R6::R6] class that inherits from `LayoutDbi` and chosing different
+#' an [R6::R6] class that inherits from `LayoutDbi` and choosing different
 #' defaults for `$format_table_name`, `$format_colnames` and `$format_data`.
 #'
 #'
@@ -85,7 +85,7 @@ LayoutDbi <- R6::R6Class(
 
     #' @field format_table_name a `function` to format the table name before
     #'   inserting to the database. The function will be applied to the
-    #'   `$table_name` before inseting into the database. For example some,
+    #'   `$table_name` before inserting into the database. For example some,
     #'   databases prefer all lowercase names, some uppercase. SQL updates
     #'   should be case-agnostic, but sadly in practice not all DBI backends
     #'   behave consistently in this regard.

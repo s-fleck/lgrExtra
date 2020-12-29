@@ -38,13 +38,13 @@ Other Digest Appenders:
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{to}}{\code{character} vector. The email addresses of the recepient}
+\item{\code{to}}{\code{character} vector. The email addresses of the recipient}
 
 \item{\code{to}}{\code{character} vector. The email address of the sender}
 
-\item{\code{to}}{\code{character} vector. The email addresses of the cc-recepients (carbon copy)}
+\item{\code{to}}{\code{character} vector. The email addresses of the cc-recipients (carbon copy)}
 
-\item{\code{to}}{\code{character} vector. The email addresses of bcc-recepients (blind carbon copy)}
+\item{\code{to}}{\code{character} vector. The email addresses of bcc-recipients (blind carbon copy)}
 
 \item{\code{html}}{\code{logical} scalar.  Send a html email message?
 This does currently only format the log contents as monospace verbatim

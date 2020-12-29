@@ -4,11 +4,11 @@
 \alias{AppenderPushbullet}
 \title{Send push-notifications via RPushbullet}
 \description{
-Send push notifications via \href{https://www.pushbullet.com/}{pushbullet}. This
+Send push notifications via \href{https://www.pushbullet.com/}{Pushbullet}. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message that is sent to
-\code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}. The default behaviour is to push the last 7 log
+\code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}. The default behavior is to push the last 7 log
 events in case a \code{fatal} event is encountered.
 }
 \seealso{

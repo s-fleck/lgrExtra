@@ -52,7 +52,7 @@ AppenderDigest <-  R6::R6Class(
   active = list(
     #' @field subject_layout A [Layout] used to format the last [LogEvent]
     #'   in this Appenders buffer when it is flushed. The result will be used as
-    #'   the subject of the tigest (for example, the E-mail subject).
+    #'   the subject of the digest (for example, the E-mail subject).
     subject_layout = function() get(".subject_layout", private)
   ),
 
@@ -70,11 +70,11 @@ AppenderDigest <-  R6::R6Class(
 
 #' Send push-notifications via RPushbullet
 #'
-#' Send push notifications via [pushbullet](https://www.pushbullet.com/). This
+#' Send push notifications via [Pushbullet](https://www.pushbullet.com/). This
 #' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
 #' buffered events are concatenated to a single message that is sent to
-#' [RPushbullet::pbPost()]. The default behaviour is to push the last 7 log
+#' [RPushbullet::pbPost()]. The default behavior is to push the last 7 log
 #' events in case a `fatal` event is encountered.
 #'
 #'
@@ -311,16 +311,16 @@ AppenderMail <- R6::R6Class(
   # +- active ---------------------------------------------------------------
   active = list(
 
-    #' @field to `character` vector. The email addresses of the recepient
+    #' @field to `character` vector. The email addresses of the recipient
     to = function() get(".to", envir = private),
 
     #' @field to `character` vector. The email address of the sender
     from = function() get(".from", envir = private),
 
-    #' @field to `character` vector. The email addresses of the cc-recepients (carbon copy)
+    #' @field to `character` vector. The email addresses of the cc-recipients (carbon copy)
     cc = function() get(".cc", envir = private),
 
-    #' @field to `character` vector. The email addresses of bcc-recepients (blind carbon copy)
+    #' @field to `character` vector. The email addresses of bcc-recipients (blind carbon copy)
     bcc = function() get(".bcc", envir = private),
 
     #' @field html `logical` scalar.  Send a html email message?
@@ -350,7 +350,7 @@ AppenderMail <- R6::R6Class(
 #' to an SMTP server that does not require authentication. This
 #' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
-#' buffered events are concatenated to a single message. The default behaviour
+#' buffered events are concatenated to a single message. The default behavior
 #' is to push the last 30 log events in case a `fatal` event is encountered.
 #'
 #' @note The default Layout's `fmt` indents each log entry with 3 blanks. This
@@ -501,7 +501,7 @@ AppenderSendmail <- R6::R6Class(
 #' Send mails via [gmailr::send_message()]. This
 #' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
-#' buffered events are concatenated to a single message. The default behaviour
+#' buffered events are concatenated to a single message. The default behavior
 #' is to push the last 30 log events in case a `fatal` event is encountered.
 #'
 #' @export

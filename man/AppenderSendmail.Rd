@@ -8,7 +8,7 @@ Send mails via \code{\link[sendmailR:sendmail]{sendmailR::sendmail()}}, which re
 to an SMTP server that does not require authentication. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
-buffered events are concatenated to a single message. The default behaviour
+buffered events are concatenated to a single message. The default behavior
 is to push the last 30 log events in case a \code{fatal} event is encountered.
 }
 \note{
