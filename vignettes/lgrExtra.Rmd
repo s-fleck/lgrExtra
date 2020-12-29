@@ -14,22 +14,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-
-# Development status
-
-lgrExtra uses the the livecycle stages suggested 
-
-https://lifecycle.r-lib.org/articles/lifecycle.html
-
-ApenderDbi | Expiermental
+This vignette is very much work in progress and will contain more examples in
+the future.
 
 
+# AppenderDbi - Logging to databases
+
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+Appending to databases is supported but still experimental. Please be aware
+that the API might change and AppenderDbi and its subclasses are not fit
+for production use.
 
 ```{r setup}
 library(lgr)
 library(lgrExtra)
 library(RSQLite)
-
 
 lo <- LayoutDbi$new(
   serialized_cols = list(fields = SerializerJson$new()),
@@ -44,7 +44,6 @@ lo <- LayoutDbi$new(
   )
 )
 
-
 ap <- lgrExtra::AppenderDbi$new(
   conn = DBI::dbConnect(RSQLite::SQLite(), 'log.db'),
   table = "log",
@@ -58,7 +57,6 @@ lg$info("test", foo = "bar", hash = "baz")
 
 x <- DBI::dbGetQuery(ap$conn, "select * from log")
 x  
-
 
 ```
 

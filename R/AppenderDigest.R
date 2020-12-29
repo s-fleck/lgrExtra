@@ -3,7 +3,7 @@
 #' Abstract class for digests
 #'
 #' Digests is an abstract class for report-like output that contain several
-#' log messages and a title. A praictical example would be an E-mail containg
+#' log messages and a title. A practical example would be an E-mail containing
 #' the last 10 log messages before an error was encountered.
 #'
 #' @template abstract_class
