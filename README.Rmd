@@ -21,8 +21,10 @@ knitr::opts_chunk$set(
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-Extra Appenders for logging to push notifications, email, databases, and
-other destinations for [lgr](https://github.com/s-fleck/lgr).
+Extra appenders for logging to push notifications, email, databases, and
+other destinations for [lgr](https://github.com/s-fleck/lgr). Please
+refer to the [function reference](https://s-fleck.github.io/lgrExtra/reference/index.html) 
+for details and examples.
 
 
 # Development status

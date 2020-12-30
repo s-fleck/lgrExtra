@@ -13,8 +13,11 @@ coverage](https://codecov.io/gh/s-fleck/lgrExtra/branch/master/graph/badge.svg)]
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 <!-- badges: end -->
 
-Extra Appenders for logging to push notifications, email, databases, and
-other destinations for [lgr](https://github.com/s-fleck/lgr).
+Extra appenders for logging to push notifications, email, databases, and
+other destinations for [lgr](https://github.com/s-fleck/lgr). Please
+refer to the [function
+reference](https://s-fleck.github.io/lgrExtra/reference/index.html) for
+details and examples.
 
 # Development status
 
@@ -26,7 +29,7 @@ requests. If I see that the interest in lgrExtra increases I may
 prioritize it over other projects.
 
 | Appender           | Description                                  | Backend                                                       | Status                                                                                                                                          |
-| ------------------ | -------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------|----------------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
 | AppenderDbi        | Databases                                    | [DBI](https://cran.r-project.org/package=DBI)                 | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) |
 | AppenderDt         | In-memory data.table                         | [data.table](https://github.com/Rdatatable/data.table)        | [![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://www.tidyverse.org/lifecycle/#superseded)         |
 | AppenderGmail      | E-mail via Gmail REST API                    | [gmailr](https://cran.r-project.org/package=gmailr)           | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)              |

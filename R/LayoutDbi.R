@@ -192,6 +192,7 @@ LayoutSqlite <- R6::R6Class(
       timestamp_fmt = "%Y-%m-%d %H:%M:%S",
       colors = getOption("lgr.colors", list()),
       pad_levels = "right",
+      serialized_cols = NULL,
 
       format_table_name = tolower,
       format_colnames = tolower,
@@ -209,6 +210,8 @@ LayoutSqlite <- R6::R6Class(
       self$set_timestamp_fmt(timestamp_fmt)
       self$set_colors(colors)
       self$set_pad_levels(pad_levels)
+
+      self$set_serialized_cols(serialized_cols)
 
       self$format_table_name <- format_table_name
       self$format_colnames   <- format_colnames
