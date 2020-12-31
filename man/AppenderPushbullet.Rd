@@ -4,11 +4,6 @@
 \alias{AppenderPushbullet}
 \title{Send push-notifications via RPushbullet}
 \description{
-Send push-notifications via RPushbullet
-
-Send push-notifications via RPushbullet
-}
-\details{
 Send push notifications via \href{https://www.pushbullet.com/}{Pushbullet}. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all

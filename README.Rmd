@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 Extra appenders for logging to push notifications, email, databases, and
 other destinations for [lgr](https://github.com/s-fleck/lgr). Please
 refer to the [function reference](https://s-fleck.github.io/lgrExtra/reference/index.html) 
-for details and examples.
+for details and estrxamples.
 
 
 # Development status
@@ -48,7 +48,13 @@ the interest in lgrExtra increases I may prioritize it over other projects.
 
 ## Installation
 
-You can install the current development version directly from github
+You can install the stable version from CRAN
+
+```{r eval = FALSE}
+install.packages("lgrExtra")
+```
+
+or the current development version directly from github
 
 ```{r eval = FALSE}
 #install.packages("remotes")

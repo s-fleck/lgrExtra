@@ -2,6 +2,7 @@
 
 #' Abstract class for digests (multi-log message notifications)
 #'
+#' @description
 #' Digests is an abstract class for report-like output that contain several
 #' log messages and a title; e.g. an E-mail containing the last 10 log messages
 #' before an error was encountered or a push notification.
@@ -49,6 +50,7 @@ AppenderDigest <-  R6::R6Class(
 
 #' Send push-notifications via RPushbullet
 #'
+#' @description
 #' Send push notifications via [Pushbullet](https://www.pushbullet.com/). This
 #' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
@@ -67,7 +69,6 @@ AppenderPushbullet <- R6::R6Class(
 
   # +- public --------------------------------------------------------------
   public = list(
-  #' @description
   #' @param recipients,email,channel,devices,apikey see [RPushbullet::pbPost]
     initialize = function(
       threshold = NA_integer_,
@@ -341,7 +342,8 @@ AppenderSendmail <- R6::R6Class(
 
   # +- public --------------------------------------------------------------
   public = list(
-    #' @description see [AppenderMail] for details
+    #' @description
+    #' see [AppenderMail] for details
     initialize = function(
       to,
       control,

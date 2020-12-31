@@ -44,7 +44,6 @@
 #'
 #' @export
 #' @seealso [LayoutFormat], [simple_logging], [data.table::data.table]
-#' @aliases lgr_data
 #'
 #' @examples
 #' lg <- lgr::get_logger("test")

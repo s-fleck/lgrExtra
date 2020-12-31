@@ -17,7 +17,7 @@ Extra appenders for logging to push notifications, email, databases, and
 other destinations for [lgr](https://github.com/s-fleck/lgr). Please
 refer to the [function
 reference](https://s-fleck.github.io/lgrExtra/reference/index.html) for
-details and examples.
+details and estrxamples.
 
 # Development status
 
@@ -39,7 +39,13 @@ prioritize it over other projects.
 
 ## Installation
 
-You can install the current development version directly from github
+You can install the stable version from CRAN
+
+``` r
+install.packages("lgrExtra")
+```
+
+or the current development version directly from github
 
 ``` r
 #install.packages("remotes")

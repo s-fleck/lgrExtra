@@ -6,8 +6,8 @@
 \alias{lgrExtra-package}
 \title{lgrExtra: Extra Appenders for lgr}
 \description{
-Extra appenders for 'lgr' that support logging to
-    databases, as well as email and push notifications.
+Additional appenders for the logging package 'lgr' that support 
+  logging to databases, email and push notifications.
 }
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})

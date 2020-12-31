@@ -2,7 +2,6 @@
 % Please edit documentation in R/AppenderDt.R
 \name{AppenderDt}
 \alias{AppenderDt}
-\alias{lgr_data}
 \title{Log to an in-memory data.table}
 \description{
 An Appender that outputs to an in-memory \code{data.table}. It fulfill a similar
