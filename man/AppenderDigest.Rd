@@ -2,11 +2,11 @@
 % Please edit documentation in R/AppenderDigest.R
 \name{AppenderDigest}
 \alias{AppenderDigest}
-\title{Abstract class for digests}
+\title{Abstract class for digests (multi-log message notifications)}
 \description{
 Digests is an abstract class for report-like output that contain several
-log messages and a title. A practical example would be an E-mail containing
-the last 10 log messages before an error was encountered.
+log messages and a title; e.g. an E-mail containing the last 10 log messages
+before an error was encountered or a push notification.
 
 \strong{Abstract classes} are exported for package developers that want to extend
 them, they cannot be instantiated directly.
@@ -41,7 +41,6 @@ the subject of the digest (for example, the E-mail subject).}
 \itemize{
 \item \href{#method-new}{\code{AppenderDigest$new()}}
 \item \href{#method-set_subject_layout}{\code{AppenderDigest$set_subject_layout()}}
-\item \href{#method-format}{\code{AppenderDigest$format()}}
 }
 }
 \if{html}{
@@ -56,6 +55,7 @@ the subject of the digest (for example, the E-mail subject).}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="flush">}\href{../../lgr/html/AppenderMemory.html#method-flush}{\code{lgr::AppenderMemory$flush()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format">}\href{../../lgr/html/AppenderMemory.html#method-format}{\code{lgr::AppenderMemory$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate}{\code{lgr::AppenderMemory$set_flush_on_rotate()}}\out{</span>}
@@ -80,15 +80,6 @@ the subject of the digest (for example, the E-mail subject).}
 \subsection{Method \code{set_subject_layout()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDigest$set_subject_layout(layout)}\if{html}{\out{</div>}}
-}
-
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-format"></a>}}
-\if{latex}{\out{\hypertarget{method-format}{}}}
-\subsection{Method \code{format()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AppenderDigest$format(color = FALSE, ...)}\if{html}{\out{</div>}}
 }
 
 }

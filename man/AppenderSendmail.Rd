@@ -4,6 +4,11 @@
 \alias{AppenderSendmail}
 \title{Send emails via sendmailR}
 \description{
+Send emails via sendmailR
+
+Send emails via sendmailR
+}
+\details{
 Send mails via \code{\link[sendmailR:sendmail]{sendmailR::sendmail()}}, which requires that you have access
 to an SMTP server that does not require authentication. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
@@ -28,18 +33,11 @@ lgr::AppenderSendmail$new(
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}
 
-Other Appenders: 
-\code{\link{AppenderDbi}},
-\code{\link{AppenderGmail}},
-\code{\link{AppenderPushbullet}},
-\code{\link{AppenderSyslog}}
-
 Other Digest Appenders: 
 \code{\link{AppenderDigest}},
 \code{\link{AppenderMail}},
 \code{\link{AppenderPushbullet}}
 }
-\concept{Appenders}
 \concept{Digest Appenders}
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{\link[lgrExtra:AppenderMail]{lgrExtra::AppenderMail}} -> \code{AppenderSendmail}
@@ -93,6 +91,7 @@ Other Digest Appenders:
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
+see \link{AppenderMail} for details
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderSendmail$new(
   to,

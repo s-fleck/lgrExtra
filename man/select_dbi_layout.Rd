@@ -2,7 +2,7 @@
 % Please edit documentation in R/LayoutDbi.R
 \name{select_dbi_layout}
 \alias{select_dbi_layout}
-\title{Select Appropriate Database Table Layout}
+\title{Automatically select appropriate layout for logging to a database}
 \usage{
 select_dbi_layout(conn, table, ...)
 }

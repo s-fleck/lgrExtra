@@ -2,7 +2,7 @@
 % Please edit documentation in R/AppenderSyslog.R
 \name{AppenderSyslog}
 \alias{AppenderSyslog}
-\title{Log to the POSIX System Log}
+\title{Log to the POSIX system log}
 \description{
 An Appender that writes to the syslog on supported POSIX platforms. Requires
 the \pkg{rsyslog} package.
@@ -25,9 +25,7 @@ if (requireNamespace("rsyslog", quietly = TRUE)) {
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
-\code{\link{AppenderGmail}},
-\code{\link{AppenderPushbullet}},
-\code{\link{AppenderSendmail}}
+\code{\link{AppenderGmail}}
 }
 \concept{Appenders}
 \section{Super classes}{

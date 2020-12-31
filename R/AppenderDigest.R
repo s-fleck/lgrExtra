@@ -1,16 +1,15 @@
   # AppenderDigest --------------------------------------------------------
 
-#' Abstract class for digests
+#' Abstract class for digests (multi-log message notifications)
 #'
 #' Digests is an abstract class for report-like output that contain several
-#' log messages and a title. A practical example would be an E-mail containing
-#' the last 10 log messages before an error was encountered.
+#' log messages and a title; e.g. an E-mail containing the last 10 log messages
+#' before an error was encountered or a push notification.
 #'
 #' @template abstract_class
 #'
 #' @export
 #' @seealso [LayoutFormat], [LayoutGlue]
-#' @name AppenderDigest
 #' @family Digest Appenders
 AppenderDigest <-  R6::R6Class(
   "AppenderDigest",
@@ -23,31 +22,12 @@ AppenderDigest <-  R6::R6Class(
       stop(CannotInitializeAbstractClassError())
     },
 
-
     set_subject_layout = function(layout){
       assert(inherits(layout, "Layout"))
       private$.subject_layout <- layout
       invisible(self)
-    },
-
-
-    format = function(
-      color = FALSE,
-      ...
-    ){
-      res <- super$format(color = color, ...)
-
-      if (!color)
-        style_error <- identity
-
-      if (class(self)[[1]] == "AppenderDigest"){
-        paste(res[[1]], style_error("[abstract class]"))
-      } else {
-        res
-      }
     }
   ),
-
 
   active = list(
     #' @field subject_layout A [Layout] used to format the last [LogEvent]
@@ -55,7 +35,6 @@ AppenderDigest <-  R6::R6Class(
     #'   the subject of the digest (for example, the E-mail subject).
     subject_layout = function() get(".subject_layout", private)
   ),
-
 
   private = list(
     .subject_layout = NULL
@@ -77,12 +56,9 @@ AppenderDigest <-  R6::R6Class(
 #' [RPushbullet::pbPost()]. The default behavior is to push the last 7 log
 #' events in case a `fatal` event is encountered.
 #'
-#'
 #' @export
-#' @family Appenders
 #' @family Digest Appenders
 #' @seealso [LayoutFormat], [LayoutGlue]
-#' @name AppenderPushbullet
 #' @export
 AppenderPushbullet <- R6::R6Class(
   "AppenderPushbullet",
@@ -91,6 +67,8 @@ AppenderPushbullet <- R6::R6Class(
 
   # +- public --------------------------------------------------------------
   public = list(
+  #' @description
+  #' @param recipients,email,channel,devices,apikey see [RPushbullet::pbPost]
     initialize = function(
       threshold = NA_integer_,
       flush_threshold = "fatal",
@@ -233,20 +211,7 @@ AppenderPushbullet <- R6::R6Class(
 #'
 #' @template abstract_class
 #'
-#'@section Fields:
-#' \describe{
-#'   \item{`to`, `from`, `cc`, `bcc`}{
-#'     `character` vectors.
-#'   }
-#'   \item{`html`, `set_html()`}{`TRUE` or `FALSE`. Send a html email message?
-#'     This does currently only formats the log contents as monospace verbatim
-#'     text.
-#'   }
-#' }
 #' @family Digest Appenders
-#' @name AppenderMail
-#' @keywords internal
-#'
 AppenderMail <- R6::R6Class(
   "AppenderMail",
   inherit = AppenderDigest,
@@ -367,9 +332,7 @@ AppenderMail <- R6::R6Class(
 #'
 #' @export
 #' @seealso [LayoutFormat], [LayoutGlue]
-#' @family Appenders
 #' @family Digest Appenders
-#' @name AppenderSendmail
 #' @export
 AppenderSendmail <- R6::R6Class(
   "AppenderSendmail",
@@ -378,6 +341,7 @@ AppenderSendmail <- R6::R6Class(
 
   # +- public --------------------------------------------------------------
   public = list(
+    #' @description see [AppenderMail] for details
     initialize = function(
       to,
       control,
@@ -496,18 +460,21 @@ AppenderSendmail <- R6::R6Class(
 # AppenderGmail --------------------------------------------------------
 
 
-#' Send emails via gmailr
+#' Send emails via the Gmail REST API
 #'
-#' Send mails via [gmailr::send_message()]. This
+#' @description
+#' Send mails via [gmailr::gm_send_message()]. This
 #' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
 #' buffered events are concatenated to a single message. The default behavior
 #' is to push the last 30 log events in case a `fatal` event is encountered.
 #'
-#' @export
+#' **NOTE:** This Appender requires that you set up google API authorization,
+#' please refer to the [documentation of gmailr](https://github.com/r-lib/gmailr)
+#' for details.
+#'
 #' @seealso [LayoutFormat], [LayoutGlue]
 #' @family Appenders
-#' @name AppenderGmail
 #' @export
 AppenderGmail <- R6::R6Class(
   "AppenderGmail",
@@ -516,6 +483,8 @@ AppenderGmail <- R6::R6Class(
 
   # +- public --------------------------------------------------------------
   public = list(
+
+    #' @description see [AppenderMail] for details
     initialize = function(
       to,
       threshold = NA_integer_,
@@ -568,20 +537,20 @@ AppenderGmail <- R6::R6Class(
         silent = TRUE
       )
 
-      mail <- gmailr::mime()
-      mail <- gmailr::to(mail, self$to)
-      mail <- gmailr::from(mail, self$from)
-      mail <- gmailr::cc(mail, self$cc)
-      mail <- gmailr::bcc(mail, self$bcc)
-      mail <- gmailr::subject(mail, title)
+      mail <- gmailr::gm_mime()
+      mail <- gmailr::gm_to(mail, self$to)
+      mail <- gmailr::gm_from(mail, self$from)
+      mail <- gmailr::gm_cc(mail, self$cc)
+      mail <- gmailr::gm_bcc(mail, self$bcc)
+      mail <- gmailr::gm_subject(mail, title)
 
       if (self$html){
-        mail <- gmailr::html_body(mail, paste0("<pre>\n", body, "</pre>\n"))
+        mail <- gmailr::gm_html_body(mail, paste0("<pre>\n", body, "</pre>\n"))
       } else {
-        mail <- gmailr::text_body(mail, body)
+        mail <- gmailr::gm_text_body(mail, body)
       }
 
-      gmailr::send_message(mail)
+      gmailr::gm_send_message(mail)
       private$.buffer_events <- list()
 
       invisible(self)

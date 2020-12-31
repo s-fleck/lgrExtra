@@ -7,19 +7,6 @@
 \strong{Abstract classes} are exported for package developers that want to extend
 them, they cannot be instantiated directly.
 }
-\section{Fields}{
-
-\describe{
-\item{\code{to}, \code{from}, \code{cc}, \code{bcc}}{
-\code{character} vectors.
-}
-\item{\code{html}, \code{set_html()}}{\code{TRUE} or \code{FALSE}. Send a html email message?
-This does currently only formats the log contents as monospace verbatim
-text.
-}
-}
-}
-
 \seealso{
 Other abstract classes: 
 \code{\link{AppenderDigest}}
@@ -31,7 +18,6 @@ Other Digest Appenders:
 }
 \concept{Digest Appenders}
 \concept{abstract classes}
-\keyword{internal}
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{AppenderMail}
 }

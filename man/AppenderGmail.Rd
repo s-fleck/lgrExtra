@@ -2,21 +2,23 @@
 % Please edit documentation in R/AppenderDigest.R
 \name{AppenderGmail}
 \alias{AppenderGmail}
-\title{Send emails via gmailr}
+\title{Send emails via the Gmail REST API}
 \description{
-Send mails via \code{\link[gmailr:gmailr-deprecated]{gmailr::send_message()}}. This
+Send mails via \code{\link[gmailr:gm_send_message]{gmailr::gm_send_message()}}. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message. The default behavior
 is to push the last 30 log events in case a \code{fatal} event is encountered.
+
+\strong{NOTE:} This Appender requires that you set up google API authorization,
+please refer to the \href{https://github.com/r-lib/gmailr}{documentation of gmailr}
+for details.
 }
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
-\code{\link{AppenderPushbullet}},
-\code{\link{AppenderSendmail}},
 \code{\link{AppenderSyslog}}
 }
 \concept{Appenders}
@@ -61,6 +63,7 @@ Other Appenders:
 \if{html}{\out{<a id="method-new"></a>}}
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
+see \link{AppenderMail} for details
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderGmail$new(
   to,

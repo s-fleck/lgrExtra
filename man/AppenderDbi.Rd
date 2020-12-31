@@ -10,6 +10,11 @@ names, and you advised to only use all-lowercase names for
 custom fields (see \code{...} argument of \link{LogEvent}).
 When appending to a database table all LogEvent values for which a column
 exists in the target table will be appended, all others are ignored.
+
+\strong{NOTE}: AppenderDbi works reliable for most databases, but is still
+considered \strong{experimental}, especially because the configuration is
+excessively complicated. Expect \strong{breaking changes} to AppenderDbi in the
+future.
 }
 \section{Buffered Logging}{
 
@@ -52,8 +57,6 @@ new table will be created with the \code{col_types} from \code{layout}.
 \seealso{
 Other Appenders: 
 \code{\link{AppenderGmail}},
-\code{\link{AppenderPushbullet}},
-\code{\link{AppenderSendmail}},
 \code{\link{AppenderSyslog}}
 }
 \concept{Appenders}

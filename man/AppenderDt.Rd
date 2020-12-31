@@ -8,6 +8,9 @@
 An Appender that outputs to an in-memory \code{data.table}. It fulfill a similar
 purpose as the more flexible \link{AppenderBuffer} and is mainly included for
 historical reasons/backwards compatibility with older version of \strong{lgr}.
+
+\strong{NOTE}: AppenderDt has been superseded by \link[lgr:AppenderBuffer]{lgr::AppenderBuffer} and is
+kept mainly for archival purposes.
 }
 \section{Custom Fields}{
 
@@ -41,9 +44,6 @@ configure. Used inside loops (several hundred iterations),
 AppenderDt has much less overhead than AppenderBuffer. For single logging
 calls and small loops, AppenderBuffer is more performant. This is related to
 how memory pre-allocation is handled by the appenders.
-
-In short: Use AppenderDt if you want an in-memory log for interactive use,
-and AppenderBuffer if you actually want to buffer events
 }
 
 \examples{

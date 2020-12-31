@@ -8,6 +8,8 @@
 #' purpose as the more flexible [AppenderBuffer] and is mainly included for
 #' historical reasons/backwards compatibility with older version of **lgr**.
 #'
+#' **NOTE**: AppenderDt has been superseded by [lgr::AppenderBuffer] and is
+#' kept mainly for archival purposes.
 #'
 #' @section Custom Fields:
 #'
@@ -39,8 +41,6 @@
 #' calls and small loops, AppenderBuffer is more performant. This is related to
 #' how memory pre-allocation is handled by the appenders.
 #'
-#' In short: Use AppenderDt if you want an in-memory log for interactive use,
-#' and AppenderBuffer if you actually want to buffer events
 #'
 #' @export
 #' @seealso [LayoutFormat], [simple_logging], [data.table::data.table]

@@ -2,7 +2,7 @@
 # LayoutDbi ---------------------------------------------------------------
 
 
-#' Format Log Events for Output to Databases
+#' Format log events for output to databases
 #'
 #' LayoutDbi can contain `col_types` that [AppenderDbi] can use to create new
 #' database tables; however, it is safer and more flexible to set up the log
@@ -21,7 +21,7 @@
 #'
 #' Different databases have different data types and features. Currently the
 #' following `LayoutDbi` subclasses exist that deal with specific databases,
-#' but this list is expected to grow as lgr matures:
+#' but this list is expected to grow as lgrExtra matures:
 #'
 #'   * `LayoutSqlite`: For SQLite databases
 #'   * `LayoutPostgres`: for Postgres databases
@@ -435,7 +435,7 @@ LayoutRjdbcDb2 <- R6::R6Class(
 # utils -------------------------------------------------------------------
 
 
-#' Select Appropriate Database Table Layout
+#' Automatically select appropriate layout for logging to a database
 #'
 #' Selects an appropriate Layout for a database table based on
 #' a DBI connection and - if it already exists in the database -

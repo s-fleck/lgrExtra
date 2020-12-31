@@ -1,7 +1,7 @@
 Type: Package
 Package: lgrExtra
 Title: Extra Appenders for lgr
-Version: 0.0.1.9010
+Version: 0.0.2
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",
@@ -9,8 +9,8 @@ Authors@R:
            email = "stefan.b.fleck@gmail.com",
            comment = c(ORCID = "0000-0003-3344-9851"))
 Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
-Description: Extra appenders for 'lgr' that support logging to
-    databases, as well as email and push notifications.
+Description: Additional appenders for the logging package 'lgr' that support 
+  logging to databases, email and push notifications.
 License: MIT + file LICENSE
 Imports:
     data.table,

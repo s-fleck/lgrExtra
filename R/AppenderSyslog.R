@@ -1,6 +1,6 @@
 # AppenderSyslog ----------------------------------------------------------
 
-#' Log to the POSIX System Log
+#' Log to the POSIX system log
 #'
 #' @description
 #' An Appender that writes to the syslog on supported POSIX platforms. Requires

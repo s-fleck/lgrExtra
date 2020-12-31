@@ -8,7 +8,7 @@
 \alias{LayoutDb2}
 \alias{LayoutMySql}
 \alias{LayoutPostgres}
-\title{Format Log Events for Output to Databases}
+\title{Format log events for output to databases}
 \description{
 LayoutDbi can contain \code{col_types} that \link{AppenderDbi} can use to create new
 database tables; however, it is safer and more flexible to set up the log
@@ -29,7 +29,7 @@ LogEvents directly, but their \code{data.table} representations (see
 
 Different databases have different data types and features. Currently the
 following \code{LayoutDbi} subclasses exist that deal with specific databases,
-but this list is expected to grow as lgr matures:
+but this list is expected to grow as lgrExtra matures:
 \itemize{
 \item \code{LayoutSqlite}: For SQLite databases
 \item \code{LayoutPostgres}: for Postgres databases

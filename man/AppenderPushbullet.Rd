@@ -4,6 +4,11 @@
 \alias{AppenderPushbullet}
 \title{Send push-notifications via RPushbullet}
 \description{
+Send push-notifications via RPushbullet
+
+Send push-notifications via RPushbullet
+}
+\details{
 Send push notifications via \href{https://www.pushbullet.com/}{Pushbullet}. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
@@ -14,18 +19,11 @@ events in case a \code{fatal} event is encountered.
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}
 
-Other Appenders: 
-\code{\link{AppenderDbi}},
-\code{\link{AppenderGmail}},
-\code{\link{AppenderSendmail}},
-\code{\link{AppenderSyslog}}
-
 Other Digest Appenders: 
 \code{\link{AppenderDigest}},
 \code{\link{AppenderMail}},
 \code{\link{AppenderSendmail}}
 }
-\concept{Appenders}
 \concept{Digest Appenders}
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{AppenderPushbullet}
@@ -68,13 +66,13 @@ Other Digest Appenders:
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format">}\href{../../lgr/html/AppenderMemory.html#method-format}{\code{lgr::AppenderMemory$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate}{\code{lgr::AppenderMemory$set_flush_on_rotate()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_threshold}{\code{lgr::AppenderMemory$set_flush_threshold()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush">}\href{../../lgr/html/AppenderMemory.html#method-set_should_flush}{\code{lgr::AppenderMemory$set_should_flush()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show">}\href{../../lgr/html/AppenderMemory.html#method-show}{\code{lgr::AppenderMemory$show()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="format">}\href{../../lgrExtra/html/AppenderDigest.html#method-format}{\code{lgrExtra::AppenderDigest$format()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout">}\href{../../lgrExtra/html/AppenderDigest.html#method-set_subject_layout}{\code{lgrExtra::AppenderDigest$set_subject_layout()}}\out{</span>}
 }
 \out{</details>}
@@ -99,6 +97,13 @@ Other Digest Appenders:
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recipients, email, channel, devices, apikey}}{see \link[RPushbullet:pbPost]{RPushbullet::pbPost}}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-flush"></a>}}
