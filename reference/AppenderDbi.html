@@ -45,7 +45,11 @@ aware that AppenderDbi does not support case sensitive / quoted column
 names, and you advised to only use all-lowercase names for
 custom fields (see ... argument of LogEvent).
 When appending to a database table all LogEvent values for which a column
-exists in the target table will be appended, all others are ignored." />
+exists in the target table will be appended, all others are ignored.
+NOTE: AppenderDbi works reliable for most databases, but is still
+considered experimental, especially because the configuration is
+excessively complicated. Expect breaking changes to AppenderDbi in the
+future." />
 
 
 
@@ -123,6 +127,10 @@ names, and you advised to only use all-lowercase names for
 custom fields (see <code>...</code> argument of LogEvent).
 When appending to a database table all LogEvent values for which a column
 exists in the target table will be appended, all others are ignored.</p>
+<p><strong>NOTE</strong>: AppenderDbi works reliable for most databases, but is still
+considered <strong>experimental</strong>, especially because the configuration is
+excessively complicated. Expect <strong>breaking changes</strong> to AppenderDbi in the
+future.</p>
     </div>
 
 
@@ -168,8 +176,6 @@ new table will be created with the <code>col_types</code> from <code>layout</cod
 
     <div class='dont-index'><p>Other Appenders: 
 <code><a href='AppenderGmail.html'>AppenderGmail</a></code>,
-<code><a href='AppenderPushbullet.html'>AppenderPushbullet</a></code>,
-<code><a href='AppenderSendmail.html'>AppenderSendmail</a></code>,
 <code><a href='AppenderSyslog.html'>AppenderSyslog</a></code></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 

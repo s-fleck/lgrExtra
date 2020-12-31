@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Send emails via gmailr — AppenderGmail • lgrExtra</title>
+<title>Send emails via the Gmail REST API — AppenderGmail • lgrExtra</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,15 @@
 
 
 
-<meta property="og:title" content="Send emails via gmailr — AppenderGmail" />
-<meta property="og:description" content="Send mails via gmailr::send_message(). This
+<meta property="og:title" content="Send emails via the Gmail REST API — AppenderGmail" />
+<meta property="og:description" content="Send mails via gmailr::gm_send_message(). This
 Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message. The default behavior
-is to push the last 30 log events in case a fatal event is encountered." />
+is to push the last 30 log events in case a fatal event is encountered.
+NOTE: This Appender requires that you set up google API authorization,
+please refer to the documentation of gmailr
+for details." />
 
 
 
@@ -110,17 +113,20 @@ is to push the last 30 log events in case a fatal event is encountered." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Send emails via gmailr</h1>
+    <h1>Send emails via the Gmail REST API</h1>
     
     <div class="hidden name"><code>AppenderGmail.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Send mails via <code><a href='https://rdrr.io/pkg/gmailr/man/gmailr-deprecated.html'>gmailr::send_message()</a></code>. This
+    <p>Send mails via <code><a href='https://rdrr.io/pkg/gmailr/man/gm_send_message.html'>gmailr::gm_send_message()</a></code>. This
 Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message. The default behavior
 is to push the last 30 log events in case a <code>fatal</code> event is encountered.</p>
+<p><strong>NOTE:</strong> This Appender requires that you set up google API authorization,
+please refer to the <a href='https://github.com/r-lib/gmailr'>documentation of gmailr</a>
+for details.</p>
     </div>
 
 
@@ -130,8 +136,6 @@ is to push the last 30 log events in case a <code>fatal</code> event is encounte
     <div class='dont-index'><p>LayoutFormat, LayoutGlue</p>
 <p>Other Appenders: 
 <code><a href='AppenderDbi.html'>AppenderDbi</a></code>,
-<code><a href='AppenderPushbullet.html'>AppenderPushbullet</a></code>,
-<code><a href='AppenderSendmail.html'>AppenderSendmail</a></code>,
 <code><a href='AppenderSyslog.html'>AppenderSyslog</a></code></p></div>
     <h2 class="hasAnchor" id="super-classes"><a class="anchor" href="#super-classes"></a>Super classes</h2>
 
@@ -173,8 +177,7 @@ is to push the last 30 log events in case a <code>fatal</code> event is encounte
 
 <hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>see <a href='AppenderMail.html'>AppenderMail</a> for details</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>AppenderGmail</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   <span class='va'>to</span>,
   threshold <span class='op'>=</span> <span class='cn'>NA_integer_</span>,

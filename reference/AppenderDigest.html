@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Abstract class for digests — AppenderDigest • lgrExtra</title>
+<title>Abstract class for digests (multi-log message notifications) — AppenderDigest • lgrExtra</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,10 @@
 
 
 
-<meta property="og:title" content="Abstract class for digests — AppenderDigest" />
+<meta property="og:title" content="Abstract class for digests (multi-log message notifications) — AppenderDigest" />
 <meta property="og:description" content="Digests is an abstract class for report-like output that contain several
-log messages and a title. A practical example would be an E-mail containing
-the last 10 log messages before an error was encountered.
+log messages and a title; e.g. an E-mail containing the last 10 log messages
+before an error was encountered or a push notification.
 Abstract classes are exported for package developers that want to extend
 them, they cannot be instantiated directly." />
 
@@ -110,15 +110,15 @@ them, they cannot be instantiated directly." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Abstract class for digests</h1>
+    <h1>Abstract class for digests (multi-log message notifications)</h1>
     
     <div class="hidden name"><code>AppenderDigest.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Digests is an abstract class for report-like output that contain several
-log messages and a title. A practical example would be an E-mail containing
-the last 10 log messages before an error was encountered.</p>
+log messages and a title; e.g. an E-mail containing the last 10 log messages
+before an error was encountered or a push notification.</p>
 <p><strong>Abstract classes</strong> are exported for package developers that want to extend
 them, they cannot be instantiated directly.</p>
     </div>
@@ -153,7 +153,6 @@ the subject of the digest (for example, the E-mail subject).</p></dd>
 <ul>
 <li><p><a href='#method-new'><code>AppenderDigest$new()</code></a></p></li>
 <li><p><a href='#method-set_subject_layout'><code>AppenderDigest$set_subject_layout()</code></a></p></li>
-<li><p><a href='#method-format'><code>AppenderDigest$format()</code></a></p></li>
 </ul>
 <p><details ><summary>Inherited methods</summary>
 <ul>
@@ -166,6 +165,7 @@ the subject of the digest (for example, the E-mail subject).</p></dd>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append"><a href='../../lgr/html/AppenderMemory.html#method-append'><code>lgr::AppenderMemory$append()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear"><a href='../../lgr/html/AppenderMemory.html#method-clear'><code>lgr::AppenderMemory$clear()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="flush"><a href='../../lgr/html/AppenderMemory.html#method-flush'><code>lgr::AppenderMemory$flush()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format"><a href='../../lgr/html/AppenderMemory.html#method-format'><code>lgr::AppenderMemory$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size"><a href='../../lgr/html/AppenderMemory.html#method-set_buffer_size'><code>lgr::AppenderMemory$set_buffer_size()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit"><a href='../../lgr/html/AppenderMemory.html#method-set_flush_on_exit'><code>lgr::AppenderMemory$set_flush_on_exit()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate"><a href='../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate'><code>lgr::AppenderMemory$set_flush_on_rotate()</code></a></span></p></li>
@@ -186,12 +186,6 @@ the subject of the digest (for example, the E-mail subject).</p></dd>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>AppenderDigest</span><span class='op'>$</span><span class='fu'>set_subject_layout</span><span class='op'>(</span><span class='va'>layout</span><span class='op'>)</span></pre><p></div></p>
-
-<p><hr>
-<a id="method-format"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/format.html'>format()</a></code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>AppenderDigest</span><span class='op'>$</span><span class='fu'>format</span><span class='op'>(</span>color <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre><p></div></p>
 
 
 

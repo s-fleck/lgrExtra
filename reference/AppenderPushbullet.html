@@ -40,12 +40,8 @@
 
 
 <meta property="og:title" content="Send push-notifications via RPushbullet — AppenderPushbullet" />
-<meta property="og:description" content="Send push notifications via Pushbullet. This
-Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
-flushed, usually because an event of specified magnitude is encountered, all
-buffered events are concatenated to a single message that is sent to
-RPushbullet::pbPost(). The default behavior is to push the last 7 log
-events in case a fatal event is encountered." />
+<meta property="og:description" content="Send push-notifications via RPushbullet
+Send push-notifications via RPushbullet" />
 
 
 
@@ -117,24 +113,23 @@ events in case a fatal event is encountered." />
     </div>
 
     <div class="ref-description">
+    <p>Send push-notifications via RPushbullet</p>
+<p>Send push-notifications via RPushbullet</p>
+    </div>
+
+
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
     <p>Send push notifications via <a href='https://www.pushbullet.com/'>Pushbullet</a>. This
 Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message that is sent to
 <code><a href='https://rdrr.io/pkg/RPushbullet/man/pbPost.html'>RPushbullet::pbPost()</a></code>. The default behavior is to push the last 7 log
 events in case a <code>fatal</code> event is encountered.</p>
-    </div>
-
-
-
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>LayoutFormat, LayoutGlue</p>
-<p>Other Appenders: 
-<code><a href='AppenderDbi.html'>AppenderDbi</a></code>,
-<code><a href='AppenderGmail.html'>AppenderGmail</a></code>,
-<code><a href='AppenderSendmail.html'>AppenderSendmail</a></code>,
-<code><a href='AppenderSyslog.html'>AppenderSyslog</a></code></p>
 <p>Other Digest Appenders: 
 <code><a href='AppenderDigest.html'>AppenderDigest</a></code>,
 <code><a href='AppenderMail.html'>AppenderMail</a></code>,
@@ -180,13 +175,13 @@ events in case a <code>fatal</code> event is encountered.</p>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold"><a href='../../lgr/html/Appender.html#method-set_threshold'><code>lgr::Appender$set_threshold()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append"><a href='../../lgr/html/AppenderMemory.html#method-append'><code>lgr::AppenderMemory$append()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear"><a href='../../lgr/html/AppenderMemory.html#method-clear'><code>lgr::AppenderMemory$clear()</code></a></span></p></li>
+<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format"><a href='../../lgr/html/AppenderMemory.html#method-format'><code>lgr::AppenderMemory$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size"><a href='../../lgr/html/AppenderMemory.html#method-set_buffer_size'><code>lgr::AppenderMemory$set_buffer_size()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit"><a href='../../lgr/html/AppenderMemory.html#method-set_flush_on_exit'><code>lgr::AppenderMemory$set_flush_on_exit()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate"><a href='../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate'><code>lgr::AppenderMemory$set_flush_on_rotate()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold"><a href='../../lgr/html/AppenderMemory.html#method-set_flush_threshold'><code>lgr::AppenderMemory$set_flush_threshold()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush"><a href='../../lgr/html/AppenderMemory.html#method-set_should_flush'><code>lgr::AppenderMemory$set_should_flush()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show"><a href='../../lgr/html/AppenderMemory.html#method-show'><code>lgr::AppenderMemory$show()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="format"><a href='../../lgrExtra/html/AppenderDigest.html#method-format'><code>lgrExtra::AppenderDigest$format()</code></a></span></p></li>
 <li><p><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout"><a href='../../lgrExtra/html/AppenderDigest.html#method-set_subject_layout'><code>lgrExtra::AppenderDigest$set_subject_layout()</code></a></span></p></li>
 </ul>
 </details>
@@ -209,6 +204,11 @@ events in case a <code>fatal</code> event is encountered.</p>
   filters <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>recipients, email, channel, devices, apikey</code></dt><dd><p>see <a href='https://rdrr.io/pkg/RPushbullet/man/pbPost.html'>RPushbullet::pbPost</a></p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-flush"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/connections.html'>flush()</a></code></h3>
 

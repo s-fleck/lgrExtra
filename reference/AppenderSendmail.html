@@ -40,12 +40,8 @@
 
 
 <meta property="og:title" content="Send emails via sendmailR — AppenderSendmail" />
-<meta property="og:description" content="Send mails via sendmailR::sendmail(), which requires that you have access
-to an SMTP server that does not require authentication. This
-Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
-flushed, usually because an event of specified magnitude is encountered, all
-buffered events are concatenated to a single message. The default behavior
-is to push the last 30 log events in case a fatal event is encountered." />
+<meta property="og:description" content="Send emails via sendmailR
+Send emails via sendmailR" />
 
 
 
@@ -117,16 +113,20 @@ is to push the last 30 log events in case a fatal event is encountered." />
     </div>
 
     <div class="ref-description">
+    <p>Send emails via sendmailR</p>
+<p>Send emails via sendmailR</p>
+    </div>
+
+
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
     <p>Send mails via <code><a href='https://rdrr.io/pkg/sendmailR/man/sendmail.html'>sendmailR::sendmail()</a></code>, which requires that you have access
 to an SMTP server that does not require authentication. This
 Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message. The default behavior
 is to push the last 30 log events in case a <code>fatal</code> event is encountered.</p>
-    </div>
-
-
-
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>The default Layout's <code>fmt</code> indents each log entry with 3 blanks. This
@@ -134,11 +134,6 @@ is a workaround so that Microsoft Outlook does not mess up the line breaks.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>LayoutFormat, LayoutGlue</p>
-<p>Other Appenders: 
-<code><a href='AppenderDbi.html'>AppenderDbi</a></code>,
-<code><a href='AppenderGmail.html'>AppenderGmail</a></code>,
-<code><a href='AppenderPushbullet.html'>AppenderPushbullet</a></code>,
-<code><a href='AppenderSyslog.html'>AppenderSyslog</a></code></p>
 <p>Other Digest Appenders: 
 <code><a href='AppenderDigest.html'>AppenderDigest</a></code>,
 <code><a href='AppenderMail.html'>AppenderMail</a></code>,
@@ -193,8 +188,7 @@ is a workaround so that Microsoft Outlook does not mess up the line breaks.</p>
 
 <hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>see <a href='AppenderMail.html'>AppenderMail</a> for details</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>AppenderSendmail</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>
   <span class='va'>to</span>,
   <span class='va'>control</span>,
