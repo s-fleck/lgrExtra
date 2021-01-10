@@ -297,6 +297,10 @@ for (nm in names(dbs)){
       stringsAsFactors = FALSE
     )
 
+    # timezone info cannot consistently be transported
+    attr(tres$timestamp, "tzone") <- ""
+    attr(eres$timestamp, "tzone") <- ""
+
     expect_equal(tres, eres)
   })
 
