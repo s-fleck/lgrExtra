@@ -11,6 +11,8 @@ status](https://travis-ci.com/s-fleck/lgrExtra.svg?branch=master)](https://travi
 coverage](https://codecov.io/gh/s-fleck/lgrExtra/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/lgrExtra?branch=master)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/lgrExtra)](https://CRAN.R-project.org/package=lgrExtra)
 <!-- badges: end -->
 
 Extra appenders for logging to push notifications, email, databases, and
