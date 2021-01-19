@@ -11,6 +11,10 @@
 
 0 errors | 0 warnings | 0 note
 
-* R CMD check may throw WARNINGs or NOTEs on systems for which the **rsyslog** 
+- R CMD check may throw WARNINGs or NOTEs on systems for which the **rsyslog** 
   package is not available (such as Windows)
+  
+Resubmission:
 
+- added single quotes around 'lgr' to the title
+- removed vignette builder from DESCRIPTION

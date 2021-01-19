@@ -19,7 +19,7 @@ Extra appenders for logging to push notifications, email, databases, and
 other destinations for [lgr](https://github.com/s-fleck/lgr). Please
 refer to the [function
 reference](https://s-fleck.github.io/lgrExtra/reference/index.html) for
-details and estrxamples.
+details and examples
 
 # Development status
 

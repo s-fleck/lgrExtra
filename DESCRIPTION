@@ -1,7 +1,7 @@
 Type: Package
 Package: lgrExtra
-Title: Extra Appenders for lgr
-Version: 0.0.2
+Title: Extra Appenders for 'lgr'
+Version: 0.0.3
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",
@@ -33,4 +33,3 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9000
-VignetteBuilder: knitr
