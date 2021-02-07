@@ -40,8 +40,12 @@
 
 
 <meta property="og:title" content="Send emails via sendmailR — AppenderSendmail" />
-<meta property="og:description" content="Send emails via sendmailR
-Send emails via sendmailR" />
+<meta property="og:description" content="Send mails via sendmailR::sendmail(), which requires that you have access
+to an SMTP server that does not require authentication. This
+Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
+flushed, usually because an event of specified magnitude is encountered, all
+buffered events are concatenated to a single message. The default behavior
+is to push the last 30 log events in case a fatal event is encountered." />
 
 
 
@@ -113,8 +117,12 @@ Send emails via sendmailR" />
     </div>
 
     <div class="ref-description">
-    <p>Send emails via sendmailR</p>
-<p>Send emails via sendmailR</p>
+    <p>Send mails via <code><a href='https://rdrr.io/pkg/sendmailR/man/sendmail.html'>sendmailR::sendmail()</a></code>, which requires that you have access
+to an SMTP server that does not require authentication. This
+Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
+flushed, usually because an event of specified magnitude is encountered, all
+buffered events are concatenated to a single message. The default behavior
+is to push the last 30 log events in case a <code>fatal</code> event is encountered.</p>
     </div>
 
 
@@ -123,14 +131,6 @@ Send emails via sendmailR" />
 
     <p>The <code>$new()</code> method returns an <a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6</a> that inherits from
 <a href='https://s-fleck.github.io/lgr/reference/Appender.html'>lgr::Appender</a> and can be uses as an appender by a <a href='https://s-fleck.github.io/lgr/reference/Logger.html'>lgr::Logger</a>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Send mails via <code><a href='https://rdrr.io/pkg/sendmailR/man/sendmail.html'>sendmailR::sendmail()</a></code>, which requires that you have access
-to an SMTP server that does not require authentication. This
-Appender keeps an in-memory buffer like AppenderBuffer. If the buffer is
-flushed, usually because an event of specified magnitude is encountered, all
-buffered events are concatenated to a single message. The default behavior
-is to push the last 30 log events in case a <code>fatal</code> event is encountered.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>The default Layout's <code>fmt</code> indents each log entry with 3 blanks. This
