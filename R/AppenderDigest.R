@@ -58,10 +58,23 @@ AppenderDigest <-  R6::R6Class(
 #' [RPushbullet::pbPost()]. The default behavior is to push the last 7 log
 #' events in case a `fatal` event is encountered.
 #'
-#' @export
+#' @template appender
 #' @family Digest Appenders
 #' @seealso [LayoutFormat], [LayoutGlue]
 #' @export
+#' @examples
+#' if (requireNamespace("RPushbullet") && !is.null(getOption("rpushbullet.key")) ){
+#'   app <- AppenderPushbullet$new()
+#'
+#'   lg <- lgr::get_logger("test/dbi")$
+#'     add_appender(app, "pb")$
+#'     set_propagate(FALSE)
+#'
+#'   lg$fatal("info")
+#'   lg$fatal("test")
+#'
+#'  invisible(lg$config(NULL))
+#' }
 AppenderPushbullet <- R6::R6Class(
   "AppenderPushbullet",
   inherit = AppenderDigest,
@@ -70,6 +83,8 @@ AppenderPushbullet <- R6::R6Class(
   # +- public --------------------------------------------------------------
   public = list(
   #' @param recipients,email,channel,devices,apikey see [RPushbullet::pbPost]
+  #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
+  #' @param subject_layout A [lgr::LayoutFormat] object.
     initialize = function(
       threshold = NA_integer_,
       flush_threshold = "fatal",
@@ -80,7 +95,7 @@ AppenderPushbullet <- R6::R6Class(
       email = NULL,
       channel = NULL,
       devices = NULL,
-      apikey = NULL,
+      apikey = getOption("rpushbullet.key"),
       filters = NULL
     ){
       assert_namespace("RPushbullet")
@@ -280,13 +295,13 @@ AppenderMail <- R6::R6Class(
     #' @field to `character` vector. The email addresses of the recipient
     to = function() get(".to", envir = private),
 
-    #' @field to `character` vector. The email address of the sender
+    #' @field from `character` vector. The email address of the sender
     from = function() get(".from", envir = private),
 
-    #' @field to `character` vector. The email addresses of the cc-recipients (carbon copy)
+    #' @field cc `character` vector. The email addresses of the cc-recipients (carbon copy)
     cc = function() get(".cc", envir = private),
 
-    #' @field to `character` vector. The email addresses of bcc-recipients (blind carbon copy)
+    #' @field bcc `character` vector. The email addresses of bcc-recipients (blind carbon copy)
     bcc = function() get(".bcc", envir = private),
 
     #' @field html `logical` scalar.  Send a html email message?
@@ -312,6 +327,7 @@ AppenderMail <- R6::R6Class(
 
 #' Send emails via sendmailR
 #'
+#' @description
 #' Send mails via [sendmailR::sendmail()], which requires that you have access
 #' to an SMTP server that does not require authentication. This
 #' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
@@ -331,10 +347,24 @@ AppenderMail <- R6::R6Class(
 #' )
 #' }
 #'
-#' @export
+#' @template appender
 #' @seealso [LayoutFormat], [LayoutGlue]
 #' @family Digest Appenders
 #' @export
+#' @examples
+#' if (requireNamespace("sendmailR")){
+#' # requires that you have access to an SMTP server
+#'
+#'   lg <- lgr::get_logger("lgrExtra/test/mail")$
+#'     set_propagate(FALSE)$
+#'     add_appender(AppenderSendmail$new(
+#'       from = "ceo@ecorp.com",
+#'       to = "some.guy@ecorp.com",
+#'     control = list(smtpServer = "mail.somesmptserver.com")
+#'   ))
+#'   # cleanup
+#'   invisible(lg$config(NULL))
+#' }
 AppenderSendmail <- R6::R6Class(
   "AppenderSendmail",
   inherit = AppenderMail,
@@ -475,8 +505,8 @@ AppenderSendmail <- R6::R6Class(
 #' please refer to the [documentation of gmailr](https://github.com/r-lib/gmailr)
 #' for details.
 #'
+#' @template appender
 #' @seealso [LayoutFormat], [LayoutGlue]
-#' @family Appenders
 #' @export
 AppenderGmail <- R6::R6Class(
   "AppenderGmail",

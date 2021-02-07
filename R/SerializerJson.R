@@ -1,6 +1,15 @@
 #' Serializers
 #'
+#' Serializers are used by [AppenderDbi] to store multiple values in a single
+#' text column in a Database table. Usually you just want to use the default
+#' `SerializerJson`. Please not that `AppenderDbi` as well as `Serializers`
+#' are still **experimental**.
+#'
+#' @return a `Serializer` [R6::R6] object for [AppenderDbi].
 #' @export
+#' @examples
+#' # The defaul Serializer for 'custom fields' columns
+#' SerializerJson$new()
 Serializer <- R6::R6Class(
   "Serializer"
 )

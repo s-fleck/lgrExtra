@@ -3,6 +3,10 @@
 \name{AppenderGmail}
 \alias{AppenderGmail}
 \title{Send emails via the Gmail REST API}
+\value{
+The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
+\link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
+}
 \description{
 Send mails via \code{\link[gmailr:gm_send_message]{gmailr::gm_send_message()}}. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
@@ -19,6 +23,9 @@ for details.
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
+\code{\link{AppenderDt}},
+\code{\link{AppenderPushbullet}},
+\code{\link{AppenderSendmail}},
 \code{\link{AppenderSyslog}}
 }
 \concept{Appenders}

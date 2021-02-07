@@ -7,17 +7,14 @@
 #' the \pkg{rsyslog} package.
 #'
 #' @seealso [LayoutFormat], [LayoutJson]
-#' @family Appenders
+#' @template appender
 #' @export
 #' @examples
-#' if (requireNamespace("rsyslog", quietly = TRUE)) {
+#' if (requireNamespace("rsyslog", quietly = TRUE) && Sys.info()[["sysname"]] == "Linux") {
 #'   lg <- lgr::get_logger("rsyslog/test")
 #'   lg$add_appender(AppenderSyslog$new(), "syslog")
 #'   lg$info("A test message")
-#'
-#'   if (Sys.info()[["sysname"]] == "Linux"){
-#'     system("journalctl -t 'rsyslog/test'")
-#'   }
+#'   print(system("journalctl -t 'rsyslog/test'"))
 #'
 #'   invisible(lg$config(NULL))  # cleanup
 #' }

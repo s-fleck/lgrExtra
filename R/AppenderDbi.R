@@ -51,14 +51,32 @@
 #' `table`. If `table` does not exist in the database and you start logging, a
 #' new table will be created with the `col_types` from `layout`.
 #'
-#' @export
-#' @family Appenders
+#' @template appender
+#'
+#' @examples
+#' if (requireNamespace("RSQLite")){
+#'   app <- AppenderDbi$new(
+#'     conn = DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:"),
+#'     table = "log"
+#'    )
+#'
+#'   lg <- lgr::get_logger("test/dbi")$
+#'     add_appender(app, "db")$
+#'     set_propagate(FALSE)
+#'   lg$info("test")
+#'   print(lg$appenders[[1]]$data)
+#'
+#'   invisible(lg$config(NULL))  # cleanup
+#' }
 #' @export
 AppenderDbi <- R6::R6Class(
   "AppenderDbi",
   inherit = lgr::AppenderMemory,
   cloneable = FALSE,
   public = list(
+
+    #' @param conn,table see section *Fields*
+    #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
     initialize = function(
       conn,
       table,

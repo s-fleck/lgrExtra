@@ -3,19 +3,20 @@
 \name{AppenderSyslog}
 \alias{AppenderSyslog}
 \title{Log to the POSIX system log}
+\value{
+The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
+\link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
+}
 \description{
 An Appender that writes to the syslog on supported POSIX platforms. Requires
 the \pkg{rsyslog} package.
 }
 \examples{
-if (requireNamespace("rsyslog", quietly = TRUE)) {
+if (requireNamespace("rsyslog", quietly = TRUE) && Sys.info()[["sysname"]] == "Linux") {
   lg <- lgr::get_logger("rsyslog/test")
   lg$add_appender(AppenderSyslog$new(), "syslog")
   lg$info("A test message")
-
-  if (Sys.info()[["sysname"]] == "Linux"){
-    system("journalctl -t 'rsyslog/test'")
-  }
+  print(system("journalctl -t 'rsyslog/test'"))
 
   invisible(lg$config(NULL))  # cleanup
 }
@@ -25,7 +26,10 @@ if (requireNamespace("rsyslog", quietly = TRUE)) {
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
-\code{\link{AppenderGmail}}
+\code{\link{AppenderDt}},
+\code{\link{AppenderGmail}},
+\code{\link{AppenderPushbullet}},
+\code{\link{AppenderSendmail}}
 }
 \concept{Appenders}
 \section{Super classes}{

@@ -41,10 +41,9 @@
 #' calls and small loops, AppenderBuffer is more performant. This is related to
 #' how memory pre-allocation is handled by the appenders.
 #'
-#'
+#' @template appender
 #' @export
-#' @seealso [LayoutFormat], [simple_logging], [data.table::data.table]
-#'
+#' @seealso [data.table::data.table]
 #' @examples
 #' lg <- lgr::get_logger("test")
 #' lg$config(list(

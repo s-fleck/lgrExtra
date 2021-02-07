@@ -9,6 +9,10 @@
 \alias{LayoutMySql}
 \alias{LayoutPostgres}
 \title{Format log events for output to databases}
+\value{
+The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
+\link[lgr:Layout]{lgr::Layout} and can used as a Layout by an \link[lgr:Appender]{lgr::Appender}.
+}
 \description{
 LayoutDbi can contain \code{col_types} that \link{AppenderDbi} can use to create new
 database tables; however, it is safer and more flexible to set up the log
@@ -49,7 +53,7 @@ defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$forma
 \seealso{
 \code{\link[=select_dbi_layout]{select_dbi_layout()}}, \link[DBI:DBI-package]{DBI::DBI},
 }
-\concept{Layouts}
+\concept{Layout}
 \concept{database layouts}
 \section{Super classes}{
 \code{\link[lgr:Layout]{lgr::Layout}} -> \code{\link[lgr:LayoutFormat]{lgr::LayoutFormat}} -> \code{LayoutDbi}

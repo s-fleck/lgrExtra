@@ -3,6 +3,10 @@
 \name{AppenderDt}
 \alias{AppenderDt}
 \title{Log to an in-memory data.table}
+\value{
+The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
+\link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
+}
 \description{
 An Appender that outputs to an in-memory \code{data.table}. It fulfill a similar
 purpose as the more flexible \link{AppenderBuffer} and is mainly included for
@@ -71,8 +75,16 @@ lg$appenders$memory$data$.fields[[3]]$caps
 lg$config(NULL)
 }
 \seealso{
-\link{LayoutFormat}, \link{simple_logging}, \link[data.table:data.table]{data.table::data.table}
+\link[data.table:data.table]{data.table::data.table}
+
+Other Appenders: 
+\code{\link{AppenderDbi}},
+\code{\link{AppenderGmail}},
+\code{\link{AppenderPushbullet}},
+\code{\link{AppenderSendmail}},
+\code{\link{AppenderSyslog}}
 }
+\concept{Appenders}
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{AppenderDt}
 }

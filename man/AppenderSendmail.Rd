@@ -3,12 +3,11 @@
 \name{AppenderSendmail}
 \alias{AppenderSendmail}
 \title{Send emails via sendmailR}
-\description{
-Send emails via sendmailR
-
-Send emails via sendmailR
+\value{
+The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
+\link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
 }
-\details{
+\description{
 Send mails via \code{\link[sendmailR:sendmail]{sendmailR::sendmail()}}, which requires that you have access
 to an SMTP server that does not require authentication. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
@@ -29,15 +28,36 @@ lgr::AppenderSendmail$new(
 )
 }
 
+if (requireNamespace("sendmailR")){
+# requires that you have access to an SMTP server
+
+  lg <- lgr::get_logger("lgrExtra/test/mail")$
+    set_propagate(FALSE)$
+    add_appender(AppenderSendmail$new(
+      from = "ceo@ecorp.com",
+      to = "some.guy@ecorp.com",
+    control = list(smtpServer = "mail.somesmptserver.com")
+  ))
+  # cleanup
+  invisible(lg$config(NULL))
+}
 }
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}
+
+Other Appenders: 
+\code{\link{AppenderDbi}},
+\code{\link{AppenderDt}},
+\code{\link{AppenderGmail}},
+\code{\link{AppenderPushbullet}},
+\code{\link{AppenderSyslog}}
 
 Other Digest Appenders: 
 \code{\link{AppenderDigest}},
 \code{\link{AppenderMail}},
 \code{\link{AppenderPushbullet}}
 }
+\concept{Appenders}
 \concept{Digest Appenders}
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{\link[lgrExtra:AppenderMail]{lgrExtra::AppenderMail}} -> \code{AppenderSendmail}

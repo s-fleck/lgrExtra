@@ -3,6 +3,10 @@
 \name{AppenderDbi}
 \alias{AppenderDbi}
 \title{Log to databases via DBI}
+\value{
+The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
+\link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
+}
 \description{
 Log to a database table with any \strong{DBI} compatible backend. Please be
 aware that AppenderDbi does \emph{not} support case sensitive / quoted column
@@ -54,9 +58,28 @@ settings based on \code{conn} and - if it exists in the database already -
 new table will be created with the \code{col_types} from \code{layout}.
 }
 
+\examples{
+if (requireNamespace("RSQLite")){
+  app <- AppenderDbi$new(
+    conn = DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:"),
+    table = "log"
+   )
+
+  lg <- lgr::get_logger("test/dbi")$
+    add_appender(app, "db")$
+    set_propagate(FALSE)
+  lg$info("test")
+  print(lg$appenders[[1]]$data)
+
+  invisible(lg$config(NULL))  # cleanup
+}
+}
 \seealso{
 Other Appenders: 
+\code{\link{AppenderDt}},
 \code{\link{AppenderGmail}},
+\code{\link{AppenderPushbullet}},
+\code{\link{AppenderSendmail}},
 \code{\link{AppenderSyslog}}
 }
 \concept{Appenders}
@@ -138,6 +161,15 @@ database table}
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{conn, table}}{see section \emph{Fields}}
+
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-set_close_on_exit"></a>}}

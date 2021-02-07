@@ -4,7 +4,7 @@
 \name{lgrExtra-package}
 \alias{lgrExtra}
 \alias{lgrExtra-package}
-\title{lgrExtra: Extra Appenders for lgr}
+\title{lgrExtra: Extra Appenders for 'lgr'}
 \description{
 Additional appenders for the logging package 'lgr' that support 
   logging to databases, email and push notifications.

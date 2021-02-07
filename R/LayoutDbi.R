@@ -39,7 +39,7 @@
 #'
 #' @name LayoutDbi
 #' @aliases LayoutSqlite LayoutRjdbc LayoutRjdbcDb2 LayoutDb2 LayoutMySql LayoutPostgres
-#' @family Layouts
+#' @template layout
 #' @family database layouts
 #' @seealso [select_dbi_layout()], [DBI::DBI],
 #'

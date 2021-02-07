@@ -1,0 +1,20 @@
+reference:
+  - title: "Appenders"
+    contents:
+      - AppenderDbi
+      - AppenderDt
+      - AppenderGmail
+      - AppenderSendmail
+      - AppenderPushbullet
+      - AppenderSyslog
+  - title: Other functions and classes
+    contents:
+      - LayoutDbi
+      - Serializer
+      - select_dbi_layout
+      - unpack_json_cols
+  - title: "Abstract classes"
+    desc: For developers only
+    contents:
+    - AppenderDigest
+    - AppenderMail

@@ -3,13 +3,17 @@
 \name{AppenderDigest}
 \alias{AppenderDigest}
 \title{Abstract class for digests (multi-log message notifications)}
+\value{
+Abstract classes cannot be instantiated with \verb{$new()} and therefore
+do not return anything. They are solely for developers that want to write
+their own extension to \strong{lgr}.
+}
 \description{
 Digests is an abstract class for report-like output that contain several
 log messages and a title; e.g. an E-mail containing the last 10 log messages
 before an error was encountered or a push notification.
 
-\strong{Abstract classes} are exported for package developers that want to extend
-them, they cannot be instantiated directly.
+\strong{Abstract classes}, only exported for package developers.
 }
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}

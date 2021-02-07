@@ -3,6 +3,10 @@
 \name{AppenderPushbullet}
 \alias{AppenderPushbullet}
 \title{Send push-notifications via RPushbullet}
+\value{
+The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
+\link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
+}
 \description{
 Send push notifications via \href{https://www.pushbullet.com/}{Pushbullet}. This
 Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
@@ -11,14 +15,36 @@ buffered events are concatenated to a single message that is sent to
 \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}. The default behavior is to push the last 7 log
 events in case a \code{fatal} event is encountered.
 }
+\examples{
+if (requireNamespace("RPushbullet") && !is.null(getOption("rpushbullet.key")) ){
+  app <- AppenderPushbullet$new()
+
+  lg <- lgr::get_logger("test/dbi")$
+    add_appender(app, "pb")$
+    set_propagate(FALSE)
+
+  lg$fatal("info")
+  lg$fatal("test")
+
+ invisible(lg$config(NULL))
+}
+}
 \seealso{
 \link{LayoutFormat}, \link{LayoutGlue}
+
+Other Appenders: 
+\code{\link{AppenderDbi}},
+\code{\link{AppenderDt}},
+\code{\link{AppenderGmail}},
+\code{\link{AppenderSendmail}},
+\code{\link{AppenderSyslog}}
 
 Other Digest Appenders: 
 \code{\link{AppenderDigest}},
 \code{\link{AppenderMail}},
 \code{\link{AppenderSendmail}}
 }
+\concept{Appenders}
 \concept{Digest Appenders}
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{\link[lgrExtra:AppenderDigest]{lgrExtra::AppenderDigest}} -> \code{AppenderPushbullet}
@@ -87,7 +113,7 @@ Other Digest Appenders:
   email = NULL,
   channel = NULL,
   devices = NULL,
-  apikey = NULL,
+  apikey = getOption("rpushbullet.key"),
   filters = NULL
 )}\if{html}{\out{</div>}}
 }
@@ -95,6 +121,10 @@ Other Digest Appenders:
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
+
+\item{\code{subject_layout}}{A \link[lgr:LayoutFormat]{lgr::LayoutFormat} object.}
+
 \item{\code{recipients, email, channel, devices, apikey}}{see \link[RPushbullet:pbPost]{RPushbullet::pbPost}}
 }
 \if{html}{\out{</div>}}

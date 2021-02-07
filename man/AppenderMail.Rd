@@ -3,9 +3,13 @@
 \name{AppenderMail}
 \alias{AppenderMail}
 \title{Abstract class for email Appenders}
+\value{
+Abstract classes cannot be instantiated with \verb{$new()} and therefore
+do not return anything. They are solely for developers that want to write
+their own extension to \strong{lgr}.
+}
 \description{
-\strong{Abstract classes} are exported for package developers that want to extend
-them, they cannot be instantiated directly.
+\strong{Abstract classes}, only exported for package developers.
 }
 \seealso{
 Other abstract classes: 
@@ -26,11 +30,11 @@ Other Digest Appenders:
 \describe{
 \item{\code{to}}{\code{character} vector. The email addresses of the recipient}
 
-\item{\code{to}}{\code{character} vector. The email address of the sender}
+\item{\code{from}}{\code{character} vector. The email address of the sender}
 
-\item{\code{to}}{\code{character} vector. The email addresses of the cc-recipients (carbon copy)}
+\item{\code{cc}}{\code{character} vector. The email addresses of the cc-recipients (carbon copy)}
 
-\item{\code{to}}{\code{character} vector. The email addresses of bcc-recipients (blind carbon copy)}
+\item{\code{bcc}}{\code{character} vector. The email addresses of bcc-recipients (blind carbon copy)}
 
 \item{\code{html}}{\code{logical} scalar.  Send a html email message?
 This does currently only format the log contents as monospace verbatim

@@ -4,10 +4,18 @@
 \alias{Serializer}
 \alias{SerializerJson}
 \title{Serializers}
+\value{
+a \code{Serializer} \link[R6:R6Class]{R6::R6} object for \link{AppenderDbi}.
+}
 \description{
-Serializers
-
-Serializers
+Serializers are used by \link{AppenderDbi} to store multiple values in a single
+text column in a Database table. Usually you just want to use the default
+\code{SerializerJson}. Please not that \code{AppenderDbi} as well as \code{Serializers}
+are still \strong{experimental}.
+}
+\examples{
+# The defaul Serializer for 'custom fields' columns
+SerializerJson$new()
 }
 \section{Methods}{
 \subsection{Public methods}{
