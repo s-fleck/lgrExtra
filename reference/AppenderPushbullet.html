@@ -77,7 +77,7 @@ events in case a fatal event is encountered." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -127,9 +127,21 @@ events in case a <code>fatal</code> event is encountered.</p>
 
 
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The <code>$new()</code> method returns an <a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6</a> that inherits from
+<a href='https://s-fleck.github.io/lgr/reference/Appender.html'>lgr::Appender</a>.</p>
+<p>The <code>$new()</code> method returns an <a href='https://r6.r-lib.org/reference/R6Class.html'>R6::R6</a> that inherits from
+<a href='https://s-fleck.github.io/lgr/reference/Appender.html'>lgr::Appender</a> and can be uses as an appender by a <a href='https://s-fleck.github.io/lgr/reference/Logger.html'>lgr::Logger</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>LayoutFormat, LayoutGlue</p>
+<p>Other Appenders: 
+<code><a href='AppenderDbi.html'>AppenderDbi</a></code>,
+<code><a href='AppenderDt.html'>AppenderDt</a></code>,
+<code><a href='AppenderGmail.html'>AppenderGmail</a></code>,
+<code><a href='AppenderSendmail.html'>AppenderSendmail</a></code>,
+<code><a href='AppenderSyslog.html'>AppenderSyslog</a></code></p>
 <p>Other Digest Appenders: 
 <code><a href='AppenderDigest.html'>AppenderDigest</a></code>,
 <code><a href='AppenderMail.html'>AppenderMail</a></code>,
@@ -200,12 +212,16 @@ events in case a <code>fatal</code> event is encountered.</p>
   email <span class='op'>=</span> <span class='cn'>NULL</span>,
   channel <span class='op'>=</span> <span class='cn'>NULL</span>,
   devices <span class='op'>=</span> <span class='cn'>NULL</span>,
-  apikey <span class='op'>=</span> <span class='cn'>NULL</span>,
+  apikey <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"rpushbullet.key"</span><span class='op'>)</span>,
   filters <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
+<dt><code>threshold, flush_threshold, layout, buffer_size</code></dt><dd><p>see AppenderBuffer</p></dd>
+
+<dt><code>subject_layout</code></dt><dd><p>A <a href='https://s-fleck.github.io/lgr/reference/LayoutFormat.html'>lgr::LayoutFormat</a> object.</p></dd>
+
 <dt><code>recipients, email, channel, devices, apikey</code></dt><dd><p>see <a href='https://rdrr.io/pkg/RPushbullet/man/pbPost.html'>RPushbullet::pbPost</a></p></dd>
 
 </dl><p></div></p>
@@ -248,6 +264,20 @@ events in case a <code>fatal</code> event is encountered.</p>
 
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>"RPushbullet"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>app</span> <span class='op'>&lt;-</span> <span class='va'>AppenderPushbullet</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>apikey <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"rpushbullet.key"</span><span class='op'>)</span><span class='op'>)</span>
+
+  <span class='va'>lg</span> <span class='op'>&lt;-</span> <span class='fu'>lgr</span><span class='fu'>::</span><span class='fu'><a href='https://s-fleck.github.io/lgr/reference/get_logger.html'>get_logger</a></span><span class='op'>(</span><span class='st'>"test/dbi"</span><span class='op'>)</span><span class='op'>$</span>
+    <span class='fu'>add_appender</span><span class='op'>(</span><span class='va'>app</span>, <span class='st'>"pb"</span><span class='op'>)</span><span class='op'>$</span>
+    <span class='fu'>set_propagate</span><span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span>
+
+  <span class='va'>lg</span><span class='op'>$</span><span class='fu'>fatal</span><span class='op'>(</span><span class='st'>"info"</span><span class='op'>)</span>
+  <span class='va'>lg</span><span class='op'>$</span><span class='fu'>fatal</span><span class='op'>(</span><span class='st'>"test"</span><span class='op'>)</span>
+
+ <span class='fu'><a href='https://rdrr.io/r/base/invisible.html'>invisible</a></span><span class='op'>(</span><span class='va'>lg</span><span class='op'>$</span><span class='fu'>config</span><span class='op'>(</span><span class='cn'>NULL</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required namespace: RPushbullet</span></div><div class='output co'>#&gt; <span class='warning'>Warning: [2021-02-07 14:47:48.913] test/dbi &lt;AppenderPushbullet/AppenderDigest/AppenderMemory&gt; ~ error in `lg$fatal("info")`: Neither option 'rpushbullet.key' nor entry in package environment found. Aborting.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: [2021-02-07 14:47:48.949] test/dbi &lt;AppenderPushbullet/AppenderDigest/AppenderMemory&gt; ~ error in `lg$fatal("test")`: Neither option 'rpushbullet.key' nor entry in package environment found. Aborting.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

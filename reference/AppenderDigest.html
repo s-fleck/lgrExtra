@@ -43,8 +43,7 @@
 <meta property="og:description" content="Digests is an abstract class for report-like output that contain several
 log messages and a title; e.g. an E-mail containing the last 10 log messages
 before an error was encountered or a push notification.
-Abstract classes are exported for package developers that want to extend
-them, they cannot be instantiated directly." />
+Abstract classes, only exported for package developers." />
 
 
 
@@ -76,7 +75,7 @@ them, they cannot be instantiated directly." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -119,12 +118,16 @@ them, they cannot be instantiated directly." />
     <p>Digests is an abstract class for report-like output that contain several
 log messages and a title; e.g. an E-mail containing the last 10 log messages
 before an error was encountered or a push notification.</p>
-<p><strong>Abstract classes</strong> are exported for package developers that want to extend
-them, they cannot be instantiated directly.</p>
+<p><strong>Abstract classes</strong>, only exported for package developers.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Abstract classes cannot be instantiated with <code>$new()</code> and therefore
+do not return anything. They are solely for developers that want to write
+their own extension to <strong>lgr</strong>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>LayoutFormat, LayoutGlue</p>

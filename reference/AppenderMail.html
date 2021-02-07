@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="Abstract class for email Appenders — AppenderMail" />
-<meta property="og:description" content="Abstract classes are exported for package developers that want to extend
-them, they cannot be instantiated directly." />
+<meta property="og:description" content="Abstract classes, only exported for package developers." />
 
 
 
@@ -73,7 +72,7 @@ them, they cannot be instantiated directly." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -113,12 +112,16 @@ them, they cannot be instantiated directly." />
     </div>
 
     <div class="ref-description">
-    <p><strong>Abstract classes</strong> are exported for package developers that want to extend
-them, they cannot be instantiated directly.</p>
+    <p><strong>Abstract classes</strong>, only exported for package developers.</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Abstract classes cannot be instantiated with <code>$new()</code> and therefore
+do not return anything. They are solely for developers that want to write
+their own extension to <strong>lgr</strong>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other abstract classes: 
@@ -135,11 +138,11 @@ them, they cannot be instantiated directly.</p>
     <p><div class="r6-active-bindings"></p><dl>
 <dt><code>to</code></dt><dd><p><code>character</code> vector. The email addresses of the recipient</p></dd>
 
-<dt><code>to</code></dt><dd><p><code>character</code> vector. The email address of the sender</p></dd>
+<dt><code>from</code></dt><dd><p><code>character</code> vector. The email address of the sender</p></dd>
 
-<dt><code>to</code></dt><dd><p><code>character</code> vector. The email addresses of the cc-recipients (carbon copy)</p></dd>
+<dt><code>cc</code></dt><dd><p><code>character</code> vector. The email addresses of the cc-recipients (carbon copy)</p></dd>
 
-<dt><code>to</code></dt><dd><p><code>character</code> vector. The email addresses of bcc-recipients (blind carbon copy)</p></dd>
+<dt><code>bcc</code></dt><dd><p><code>character</code> vector. The email addresses of bcc-recipients (blind carbon copy)</p></dd>
 
 <dt><code>html</code></dt><dd><p><code>logical</code> scalar.  Send a html email message?
 This does currently only format the log contents as monospace verbatim
