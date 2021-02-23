@@ -16,7 +16,4 @@
   
 Resubmission:
 
-- add examples to many R6 classes. Not all examples are practical because
-  many of the extra Appenders provided by this package require things like
-  API keys or access to an SMTP server
-- Improved documentation by adding a `Value` section for R6 classes
+- fixed outdated links in README.Rmd

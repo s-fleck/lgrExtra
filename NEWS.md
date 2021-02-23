@@ -1,4 +1,4 @@
-# lgrExtra 0.0.4 (2021-02-07)
+# lgrExtra 0.0.5 (2021-02-23)
 
 * Migration of experimental Appenders from [lgr](https://s-fleck.github.io/lgr/)
 * `AppenderDbi`: The default setting for buffer_size has been changed to `0`. 
