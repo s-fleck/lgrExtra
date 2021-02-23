@@ -76,7 +76,7 @@ kept mainly for archival purposes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
       </span>
     </div>
 
@@ -262,29 +262,29 @@ this list column.</p></dd>
 <span class='co'># Displaying the log</span>
 <span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>$</span><span class='va'>data</span>
 </div><div class='output co'>#&gt;   .id level           timestamp logger caller  msg .fields
-#&gt; 1   1   500 2021-02-07 15:40:50   test   eval test    NULL
-#&gt; 2   2   200 2021-02-07 15:40:50   test   eval test    NULL</div><div class='input'><span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'>DEBUG</span><span> [15:40:50.720] test 
-#&gt; </span><span style='color: #D75F5F;'>ERROR</span><span> [15:40:50.759] test </div><div class='input'><span class='fu'>lgr</span><span class='fu'>::</span><span class='fu'><a href='https://s-fleck.github.io/lgr/reference/simple_logging.html'>show_log</a></span><span class='op'>(</span>target <span class='op'>=</span> <span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'>DEBUG</span><span> [15:40:50.720] test 
-#&gt; </span><span style='color: #D75F5F;'>ERROR</span><span> [15:40:50.759] test </div><div class='input'>
+#&gt; 1   1   500 2021-02-23 02:30:11   test   eval test    NULL
+#&gt; 2   2   200 2021-02-23 02:30:11   test   eval test    NULL</div><div class='input'><span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>$</span><span class='fu'>show</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; DEBUG [02:30:11.929] test 
+#&gt; ERROR [02:30:11.966] test </div><div class='input'><span class='fu'>lgr</span><span class='fu'>::</span><span class='fu'><a href='https://s-fleck.github.io/lgr/reference/simple_logging.html'>show_log</a></span><span class='op'>(</span>target <span class='op'>=</span> <span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; DEBUG [02:30:11.929] test 
+#&gt; ERROR [02:30:11.966] test </div><div class='input'>
 <span class='co'># If you pass a Logger to show_log(), it looks for the first AppenderDt</span>
 <span class='co'># that it can find.</span>
 <span class='fu'>lgr</span><span class='fu'>::</span><span class='fu'><a href='https://s-fleck.github.io/lgr/reference/simple_logging.html'>show_log</a></span><span class='op'>(</span>target <span class='op'>=</span> <span class='va'>lg</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #555555;'>DEBUG</span><span> [15:40:50.720] test 
-#&gt; </span><span style='color: #D75F5F;'>ERROR</span><span> [15:40:50.759] test </div><div class='input'>
+</div><div class='output co'>#&gt; DEBUG [02:30:11.929] test 
+#&gt; ERROR [02:30:11.966] test </div><div class='input'>
 <span class='co'># Custom fields are stored in the list column .fields by default</span>
 <span class='va'>lg</span><span class='op'>$</span><span class='fu'>info</span><span class='op'>(</span><span class='st'>"the iris data frame"</span>, caps <span class='op'>=</span> <span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 <span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>$</span><span class='va'>data</span>
 </div><div class='output co'>#&gt;   .id level           timestamp logger caller                 msg       .fields
-#&gt; 1   1   500 2021-02-07 15:40:50   test   eval                test          NULL
-#&gt; 2   2   200 2021-02-07 15:40:50   test   eval                test          NULL
-#&gt; 3   3   400 2021-02-07 15:40:50   test   eval the iris data frame A, B, C, D, E</div><div class='input'><span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>$</span><span class='va'>data</span><span class='op'>$</span><span class='va'>.fields</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>caps</span>
+#&gt; 1   1   500 2021-02-23 02:30:11   test   eval                test          NULL
+#&gt; 2   2   200 2021-02-23 02:30:11   test   eval                test          NULL
+#&gt; 3   3   400 2021-02-23 02:30:12   test   eval the iris data frame A, B, C, D, E</div><div class='input'><span class='va'>lg</span><span class='op'>$</span><span class='va'>appenders</span><span class='op'>$</span><span class='va'>memory</span><span class='op'>$</span><span class='va'>data</span><span class='op'>$</span><span class='va'>.fields</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>caps</span>
 </div><div class='output co'>#&gt; [1] "A" "B" "C" "D" "E"</div><div class='input'><span class='va'>lg</span><span class='op'>$</span><span class='fu'>config</span><span class='op'>(</span><span class='cn'>NULL</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;Logger&gt; [</span><span style='color: #555555;'>info</span><span>] test
+</div><div class='output co'>#&gt; &lt;Logger&gt; [info] test
 #&gt; 
 #&gt; inherited appenders:
-#&gt;   console: &lt;AppenderConsole&gt; [all] -&gt; console</div></span></pre>
+#&gt;   console: &lt;AppenderConsole&gt; [all] -&gt; console</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
