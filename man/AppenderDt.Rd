@@ -79,6 +79,7 @@ lg$config(NULL)
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
+\code{\link{AppenderElastic}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPushbullet}},
 \code{\link{AppenderSendmail}},

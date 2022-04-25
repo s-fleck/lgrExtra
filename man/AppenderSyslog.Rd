@@ -27,6 +27,7 @@ if (requireNamespace("rsyslog", quietly = TRUE) && Sys.info()[["sysname"]] == "L
 Other Appenders: 
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
+\code{\link{AppenderElastic}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPushbullet}},
 \code{\link{AppenderSendmail}}

@@ -35,6 +35,7 @@ if (requireNamespace("RPushbullet") && !is.null(getOption("rpushbullet.key")) ){
 Other Appenders: 
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
+\code{\link{AppenderElastic}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderSendmail}},
 \code{\link{AppenderSyslog}}

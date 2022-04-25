@@ -1,7 +1,7 @@
 Type: Package
 Package: lgrExtra
 Title: Extra Appenders for 'lgr'
-Version: 0.0.5
+Version: 0.0.5.9000
 Authors@R: 
     person(given = "Stefan",
            family = "Fleck",
@@ -32,4 +32,4 @@ Suggests:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9000
+RoxygenNote: 7.1.2
