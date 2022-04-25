@@ -108,16 +108,24 @@ AppenderElastic <- R6::R6Class(
 
       if (length(buffer)){
 
-        dd <- lapply(buffer, function(event) as.data.frame(event))
-        dd <- data.table::rbindlist(dd)
-        dd <- as.data.frame(dd)
+        if (identical(length(buffer), 1L)){
+          elastic::docs_create(conn, index, buffer[[1]]$values)
+        } else {
+          dd <- lapply(buffer, function(event) as.data.frame(event))
+          dd <- data.table::rbindlist(dd)
+          dd <- as.data.frame(dd)
 
-        elastic::docs_bulk_index(
-          conn = self[["conn"]],
-          x = dd,
-          index = self[["index"]],
-          quiet = TRUE
-        )
+          if (nrow(dd) > 1){
+            elastic::docs_bulk_index(
+              conn = self[["conn"]],
+              x = dd,
+              index = self[["index"]],
+              quiet = TRUE
+            )
+          } else {
+            elastic::docs_bulk_index()
+          }
+        }
 
         assign("insert_pos", 0L, envir = private)
         private$.buffer_events <- list()
@@ -190,10 +198,8 @@ AppenderElastic <- R6::R6Class(
         return(NULL)
       }
 
-
       dd <- lapply(dd$hits$hits, function(hit) as.data.frame(hit[["_source"]]))
       dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
-
 
       if (nrow(dd) > 0){
         dd[["timestamp"]] <- parse_timestamp_smart(dd[["timestamp"]])
