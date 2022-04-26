@@ -123,7 +123,10 @@ AppenderElastic <- R6::R6Class(
         }
       }
 
-      dd[["level"]] <- as.integer(dd[["level"]])
+      if (is_integerish(dd[["level"]])){
+        dd[["level"]] <- as.integer(dd[["level"]])
+      }
+
       dd
     },
 
