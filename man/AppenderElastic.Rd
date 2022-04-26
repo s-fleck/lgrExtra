@@ -31,20 +31,22 @@ Other Appenders:
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{AppenderElastic}
 }
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{data}}{\code{data.frame}. content of index}
+}
+\if{html}{\out{</div>}}
+}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
+\item{\code{data}}{\code{data.frame}. content of index}
+
 \item{\code{conn}}{a \link[elastic:connect]{ElasticSearch connection}}
 
 \item{\code{close_on_exit}}{\code{TRUE} or \code{FALSE}. Close the ElasticSearch connection
 when the Logger is removed?}
-
-\item{\code{col_types}}{a named \code{character} vector providing information about the
-column types in the database. How the column types are reported
-depends on the database driver. For example, SQLite returns human
-readable data types (character, double, ...) while DB2 returns
-numeric codes representing the data type
-(see \url{https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_73/db2/rbafzcatsqltypeinfo.htm})}
 
 \item{\code{index}}{a \code{character} scalar or a \link[DBI:Id]{DBI::Id} specifying the target
 ElasticSearch index}
@@ -57,6 +59,7 @@ ElasticSearch index}
 \item \href{#method-new}{\code{AppenderElastic$new()}}
 \item \href{#method-set_close_on_exit}{\code{AppenderElastic$set_close_on_exit()}}
 \item \href{#method-set_conn}{\code{AppenderElastic$set_conn()}}
+\item \href{#method-get_data}{\code{AppenderElastic$get_data()}}
 \item \href{#method-show}{\code{AppenderElastic$show()}}
 \item \href{#method-flush}{\code{AppenderElastic$flush()}}
 }
@@ -90,7 +93,7 @@ ElasticSearch index}
   conn,
   index,
   threshold = NA_integer_,
-  layout = lgr::LayoutJson$new(),
+  layout = LayoutElastic$new(),
   close_on_exit = TRUE,
   buffer_size = 0,
   flush_threshold = "error",
@@ -126,6 +129,15 @@ ElasticSearch index}
 \subsection{Method \code{set_conn()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderElastic$set_conn(conn)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-get_data"></a>}}
+\if{latex}{\out{\hypertarget{method-get_data}{}}}
+\subsection{Method \code{get_data()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderElastic$get_data(n = 20)}\if{html}{\out{</div>}}
 }
 
 }

@@ -27,7 +27,7 @@ AppenderElastic <- R6::R6Class(
     conn,
     index,
     threshold = NA_integer_,
-    layout = lgr::LayoutJson$new(),
+    layout = LayoutElastic$new(),
     close_on_exit = TRUE,
     buffer_size = 0,
     flush_threshold = "error",
@@ -98,7 +98,7 @@ AppenderElastic <- R6::R6Class(
       index <- get("index", envir = self)
 
       if (elastic::index_exists(private[[".conn"]], index)){
-        dd <- elastic::Search(
+        es_result <- elastic::Search(
           private[[".conn"]],
           index = index,
           body = '{
@@ -112,7 +112,11 @@ AppenderElastic <- R6::R6Class(
         return(NULL)
       }
 
-      dd <- lapply(dd$hits$hits, function(hit) as.data.frame(hit[["_source"]]))
+      x <- es_result$hits$hits[[5]][["_source"]]
+      as.data.frame(x)
+      as.data.frame(lapply(x, function(.) if (!is.atomic(.)) I(.) else .))
+
+      dd <- lapply(es_result$hits$hits, function(hit) wrap_recursive_elements(hit[["_source"]]))
       dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
 
       if (nrow(dd) > 0){
@@ -138,16 +142,29 @@ AppenderElastic <- R6::R6Class(
       buffer <- get("buffer_events", envir = self)
 
       if (length(buffer)){
-        dd <- lapply(buffer, function(event) as.data.frame(event))
-        dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
-        dd <- as.data.frame(dd)
+        # convert to data.frame (docs_bulk_index needs it that way)
+          dd <- lapply(buffer, function(event) as.data.frame(event))
+          dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
 
-        elastic::docs_bulk_index(
+        # apply layout
+          name_transformer <- self[["layout"]]$transform_names
+          if (!is.null(name_transformer)){
+            data.table::setnames(dd, name_transformer(names(dd)))
+          }
+          data.table::setDF(dd)
+
+        res <- elastic::docs_bulk_index(
           conn = self[["conn"]],
           x = dd,
           index = self[["index"]],
           quiet = TRUE
         )
+
+        errors <- vapply(res, function(x) isTRUE(x[["errors"]]), logical(1))
+
+        if (any(errors)){
+          lapply(res[errors], function(.) warning(jsonlite::toJSON(.)))
+        }
 
         assign("insert_pos", 0L, envir = private)
         private$.buffer_events <- list()
@@ -176,26 +193,6 @@ AppenderElastic <- R6::R6Class(
       private$.close_on_exit
     },
 
-
-    #' @field col_types a named `character` vector providing information about the
-    #'   column types in the database. How the column types are reported
-    #'   depends on the database driver. For example, SQLite returns human
-    #'   readable data types (character, double, ...) while DB2 returns
-    #'   numeric codes representing the data type
-    #'   (see \url{https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_73/db2/rbafzcatsqltypeinfo.htm})
-    col_types = function(){
-      if (is.null(get(".col_types", envir = private))){
-        ct <- get_col_types(private[[".conn"]], self[["index"]])
-        if (is.null(ct)) return (NULL)
-        names(ct) <- get("layout", envir = self)[["format_colnames"]](names(ct))
-        private$set_col_types(ct)
-        return(ct)
-      } else {
-        get(".col_types", envir = private)
-      }
-    },
-
-
     #' @field index a `character` scalar or a [DBI::Id] specifying the target
     #'   ElasticSearch index
     index = function(){
@@ -214,33 +211,29 @@ AppenderElastic <- R6::R6Class(
       }
     },
 
-
-    set_col_types = function(x){
-      if (!is.null(x)){
-        assert(is.character(x))
-        assert(identical(length(names(x)), length(x)))
-      }
-      private$.col_types <- x
-      self
-    },
-
-    set_columns = function(x){
-      assert(is.character(x))
-      private$.columns <- x
-      self
-    },
-
     set_index = function(index){
       assert(is_scalar_character(index))
       private[[".index"]] <- index
       self
     },
 
-    .col_types = NULL,
     .conn = NULL,
     .index = NULL,
-    .close_on_exit = NULL,
-    .columns = NULL
+    .close_on_exit = NULL
   )
 )
 
+
+
+
+wrap_recursive_elements <- function(x){
+  lapply(x,
+    function(.){
+      if (is.atomic(.)){
+        .
+      } else {
+        list(.)
+      }
+    }
+  )
+}
