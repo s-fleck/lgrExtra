@@ -48,7 +48,7 @@ if (requireNamespace("sendmailR")){
 Other Appenders: 
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
-\code{\link{AppenderElastic}},
+\code{\link{AppenderElasticSearch}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPushbullet}},
 \code{\link{AppenderSyslog}}

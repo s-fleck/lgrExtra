@@ -1,22 +1,20 @@
-#* @testfile integration_tests/test_AppenderElastic
+#* @testfile integration_tests/test_AppenderElasticSearch
 # AppenderDbi -------------------------------------------------------------
 
 
 #' Log to elasticsearch
 #'
+#' **NOTE**: **Experimental**; not yet fully documented and and details are
+#' subject to change
+#'
 #' @description
-#'
-#'
-#' @section Buffered Logging:
-#'
-#' @section Creating a New Appender:
 #'
 #' @template appender
 #'
 #' @examples
 #' @export
-AppenderElastic <- R6::R6Class(
-  "AppenderElastic",
+AppenderElasticSearch <- R6::R6Class(
+  "AppenderElasticSearch",
   inherit = lgr::AppenderMemory,
   cloneable = FALSE,
   public = list(

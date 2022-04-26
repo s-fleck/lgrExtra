@@ -1,4 +1,4 @@
-# sfmisc utils 1.0.0
+# sfmisc utils 1.0.9
 
 
 
@@ -43,8 +43,8 @@ ptrunc <- function(
 
 
 
-fmt_class <- function(x){
-  paste0("<", paste(x, collapse = "/"), ">")
+fmt_class <- function(x, open = "<", close = ">"){
+  paste0(open, paste(x, collapse = "/"), close)
 }
 
 
@@ -131,16 +131,19 @@ assert <- function(
 
 
 assert_namespace <- function(...){
-  res <- vapply(c(...), requireNamespace, logical(1), quietly = TRUE)
+  pkgs <- c(...)
+
+  res <- vapply(pkgs, requireNamespace, logical(1), quietly = TRUE)
   if (all(res)){
     return(invisible(TRUE))
 
   } else {
-    pkgs <- c(...)
-    if (identical(length(pkgs), 1L)){
+    miss <- pkgs[!res]
+
+    if (identical(length(miss), 1L)){
       msg <- sprintf(paste(
         "This function requires the package '%s'. You can install it with",
-        '`install.packages("%s")`.'), pkgs, pkgs
+        '`install.packages("%s")`.'), miss, miss
       )
     } else {
       msg <- sprintf(
@@ -148,13 +151,13 @@ assert_namespace <- function(...){
           "This function requires the packages %s. You can install them with",
           "`install.packages(%s)`."
         ),
-        paste(names(res)[!res], collapse = ", "),
-        deparse(names(res))
+        paste(miss, collapse = ", "),
+        paste0("c(", paste(paste0('\"', miss, '\"'), collapse = ", "), ")")
       )
     }
   }
 
-  stop(msg)
+  stop(msg, call. = FALSE)
 }
 
 
@@ -334,7 +337,12 @@ is_scalar_bool <- function(x){
 #' @return either `TRUE` or `FALSE`
 #' @noRd
 #'
-is_integerish <- function(x){
+is_integerish <- function(x, na_rm = FALSE){
+
+  if (na_rm){
+    x <- x[!is.na(x)]
+  }
+
   if (!is.numeric(x)){
     FALSE
   } else {
@@ -440,7 +448,7 @@ is_candidate_key <- function(x){
 
   if (is.atomic(x)){
     # !is.infinite instead of is.finite because x can be a character vector
-    length(x) > 1 &&
+    length(x) >= 1 &&
     all(!is.infinite(x)) &&
     !any(is.na(x)) &&
     identical(length(unique(x)), length(x))
@@ -477,6 +485,19 @@ is_windows_path <- function(x){
 }
 
 
+
+
+is_dir <- function(x){
+  dir.exists(x) & file.info(x)[["isdir"]]
+}
+
+
+
+
+is_empty_dir <- function(x){
+  is_dir(x) &&
+  identical(length(list.files(x, all.files = TRUE, include.dirs = TRUE, no.. = TRUE)), 0L)
+}
 
 # equalish ----------------------------------------------------------------
 
@@ -646,12 +667,18 @@ n_distinct <- function(x){
 pad_left <- function(
   x,
   width = max(nchar(paste(x))),
-  pad = " "
+  pad = " ",
+  preserve_na = FALSE
 ){
   diff <- pmax(width - nchar(paste(x)), 0L)
   padding <-
     vapply(diff, function(i) paste(rep.int(pad, i), collapse = ""), character(1))
-  paste0(padding, x)
+  res <- paste0(padding, x)
+
+  if (preserve_na)
+    res[is.na(x)] <- NA_character_
+
+  res
 }
 
 
@@ -660,12 +687,18 @@ pad_left <- function(
 pad_right <- function(
   x,
   width = max(nchar(paste(x))),
-  pad = " "
+  pad = " ",
+  preserve_na = FALSE
 ){
   diff <- pmax(width - nchar(paste(x)), 0L)
   padding <-
     vapply(diff, function(i) paste(rep.int(pad, i), collapse = ""), character(1))
   paste0(x, padding)
+
+  if (preserve_na)
+    res[is.na(x)] <- NA_character_
+
+  res
 }
 
 
@@ -687,6 +720,24 @@ preview_object <- function(
   quotes   = c("`", "`"),
   dots = ".."
 ){
+  if (is.function(x)){
+    fmls <- names(formals(x))
+    len_fmls <- length(fmls)
+
+    if (len_fmls > 4){
+      fmls <- fmls[1:4]
+      fmls_fmt <- paste(fmls, collapse = ", ")
+      fmls_fmt <- paste0(fmls_fmt, ", +", len_fmls - length(fmls), "")
+    } else {
+      fmls_fmt <- paste(fmls, collapse = ", ")
+    }
+    return(fmt_class(paste(
+      fmt_class(class(x), open = "", close = ""), "(", fmls_fmt, ")",
+      sep = ""
+    )))
+  }
+
+
   if (!is.atomic(x))
     return(class_fmt(x))
 
@@ -701,6 +752,32 @@ preview_object <- function(
     res <- paste0(quotes[[1]], res, quotes[[2]])
 
   res
+}
+
+
+
+
+#' Collapse text vectors with a comma
+#'
+#' @param x `character` vector
+#'
+#' @return a `character` scalar
+#' @noRd
+comma <- function(..., collapse = ", "){
+  paste(unlist(c(...)), collapse = collapse)
+}
+
+
+
+
+#' Collapse text vectors with a comma (no duplicates)
+#'
+#' @param x `character` vector
+#'
+#' @return a `character` scalar
+#' @noRd
+commaset <- function(..., collapse = ", "){
+  paste(sort(unique(unlist(c(...)))), collapse = collapse)
 }
 
 
@@ -736,5 +813,102 @@ path_tidy <- function(x){
 }
 
 
+
+
+url_tidy <- function(...){
+  sub("/", "//", gsub("/+", "/", paste(..., sep = "/")))
+}
+
+
+
+
+#' Return (unique) duplicated elements of a vector or rows of a data.frame
+#'
+#' For every element/row of `x` that has at least one duplicate, return one
+#' instance of that element.
+#'
+#' @param x an [atomic] vector or [data.frame]
+#' @param ... passed on to [duplicated()]
+#'
+#' @noRd
+#'
+#' @examples
+#' dupes(c(1, 1, 1, 2))
+#' dupes(cars[c(1, 1, 1, 2), ])
+dupes <- function(x, ...){
+
+  if (is.atomic(x)){
+    sort(unique(x[duplicated(x, ...)]))
+  } else if (is.data.frame(x)){
+    res <- unique(x[duplicated(x, ...), ])
+    row.names(res) <- NULL
+    res
+  }
+}
+
+
+
+
+#' Turn a character vector to camelCase
+#'
+#' **EXPERIMENTAL**
+#'
+#' @param x a `character` vector
+#' @param sep_pattern a `regex` pattern to match separators
+#'
+#' @return a `character` vector that follows camelCase guidelines
+#' @noRd
+#'
+#' @examples
+#' camelCase("foo_bar")
+camelCase <- function(x, sep_pattern = "_|\\s"){
+  assert(is.character(x))
+  assert(is_scalar_character(sep_pattern))
+  substr(x, 1, 1) <- tolower(substr(x, 1, 1))
+
+  if (any(grepl(sep_pattern, x))){
+    x <- gsub(paste0("^((", sep_pattern, ")*)|", "((", sep_pattern, ")*$)"), "", x)
+    sep_positions <- gregexpr(sep_pattern, x)
+
+    res <- vapply(
+      seq_along(x),
+      function(i_strings){
+        string <- x[[i_strings]]
+        i_seps <- sep_positions[[i_strings]]
+
+        if (!identical(i_seps, -1L)){
+          for (i_sep in i_seps){
+            substr(string, i_sep + 1L, i_sep + 1L) <- toupper(substr(string, i_sep + 1L, i_sep + 1L))
+          }
+        }
+
+        string
+      },
+      character(1)
+    )
+    res <- gsub(sep_pattern, "", res)
+  } else {
+    res <- x
+  }
+
+  res
+}
+
+
+
+#' Create description string for listlike R objects Rd documentation
+#'
+#' **EXPERIMENTAL**
+#'
+#' @param x any \R object
+#' @noRd
+rd_describe_str <- function(x){
+
+  types <- paste0("`", vapply(x, class_fmt, character(1)), "`")
+
+  cat(paste0("\\describe{\n",
+    paste0("  \\item{", paste(names(x), types), "}{ }", collapse = "\n"),
+    "\n}"))
+}
 
 # nocov end

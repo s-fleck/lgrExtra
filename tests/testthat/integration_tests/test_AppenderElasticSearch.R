@@ -1,7 +1,7 @@
 # requires a local elastic search instance
 try(source(rprojroot::find_testthat_root_file("integration_tests/elastic_test_user.R")))
 
-test_that("AppenderElastic basic logging works", {
+test_that("AppenderElasticSearch basic logging works", {
   con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
   index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
   on.exit({
@@ -9,10 +9,10 @@ test_that("AppenderElastic basic logging works", {
     lg$config(NULL)
   })
 
-  app <- AppenderElastic$new(con, index)
+  app <- AppenderElasticSearch$new(con, index)
 
   lg <-
-    get_logger("test/AppenderElastic")$
+    get_logger("test/AppenderElasticSearch")$
     add_appender(app)$
     set_propagate(FALSE)
 
@@ -51,7 +51,7 @@ test_that("AppenderElastic basic logging works", {
 
 
 
-test_that("AppenderElastic/LayoutElastic transform_names works", {
+test_that("AppenderElasticSearch/LayoutElastic transform_names works", {
   con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
   index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
   on.exit({
@@ -59,13 +59,13 @@ test_that("AppenderElastic/LayoutElastic transform_names works", {
     lg$config(NULL)
   })
 
-  app <- AppenderElastic$new(
+  app <- AppenderElasticSearch$new(
     con,
     index,
     layout = LayoutElastic$new(transform_names = toupper))
 
   lg <-
-    get_logger("test/AppenderElastic")$
+    get_logger("test/AppenderElasticSearch")$
     add_appender(app)$
     set_propagate(FALSE)
 
@@ -84,7 +84,7 @@ test_that("AppenderElastic/LayoutElastic transform_names works", {
 
 
 
-test_that("AppenderElastic/LayoutElastic transform_names works", {
+test_that("AppenderElasticSearch/LayoutElastic transform_names works", {
   con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
   index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
   on.exit({
@@ -92,13 +92,13 @@ test_that("AppenderElastic/LayoutElastic transform_names works", {
     lg$config(NULL)
   })
 
-  app <- AppenderElastic$new(
+  app <- AppenderElasticSearch$new(
     con,
     index,
     layout = LayoutElastic$new(transform_names = toupper))
 
   lg <-
-    get_logger("test/AppenderElastic")$
+    get_logger("test/AppenderElasticSearch")$
     add_appender(app)$
     set_propagate(FALSE)
 
@@ -117,7 +117,7 @@ test_that("AppenderElastic/LayoutElastic transform_names works", {
 
 
 
-test_that("AppenderElastic/LayoutElastic transform_data works", {
+test_that("AppenderElasticSearch/LayoutElastic transform_data works", {
   con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
   index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
   on.exit({
@@ -125,7 +125,7 @@ test_that("AppenderElastic/LayoutElastic transform_data works", {
     lg$config(NULL)
   })
 
-  app <- AppenderElastic$new(
+  app <- AppenderElasticSearch$new(
     con,
     index,
     layout = LayoutElastic$new(transform_data = function(.){
@@ -135,7 +135,7 @@ test_that("AppenderElastic/LayoutElastic transform_data works", {
     }))
 
   lg <-
-    get_logger("test/AppenderElastic")$
+    get_logger("test/AppenderElasticSearch")$
     add_appender(app)$
     set_propagate(FALSE)
 
