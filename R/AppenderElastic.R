@@ -150,12 +150,13 @@ AppenderElastic <- R6::R6Class(
           }
           data.table::setDF(dd)
 
-        res <- elastic::docs_bulk_index(
+
+        res <- suppressWarnings(elastic::docs_bulk_index(
           conn = self[["conn"]],
           x = dd,
           index = self[["index"]],
           quiet = TRUE
-        )
+        ))
 
         errors <- vapply(res, function(x) isTRUE(x[["errors"]]), logical(1))
 
