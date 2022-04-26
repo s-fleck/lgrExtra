@@ -9,3 +9,13 @@
 ## usethis namespace: start
 ## usethis namespace: end
 NULL
+
+
+
+.onLoad <- function(...){
+  assign(
+    "lg",
+    lgr::get_logger("lgrExtra"),
+    envir = parent.env(environment())
+  )
+}
