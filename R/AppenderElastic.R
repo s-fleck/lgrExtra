@@ -113,7 +113,7 @@ AppenderElastic <- R6::R6Class(
       }
 
       dd <- lapply(es_result$hits$hits, function(hit) wrap_recursive_elements(hit[["_source"]]))
-      dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
+      dd <- suppressWarnings(data.table::rbindlist(dd, use.names = TRUE, fill = TRUE))
 
       if (nrow(dd) > 0){
         if ("timestamp" %in% names(dd)){
