@@ -116,7 +116,11 @@ AppenderElastic <- R6::R6Class(
       dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
 
       if (nrow(dd) > 0){
-        dd[["timestamp"]] <- parse_timestamp_smart(dd[["timestamp"]])
+        if ("timestamp" %in% names(dd)){
+          dd[["timestamp"]] <- parse_timestamp_smart(dd[["timestamp"]])
+        } else if ("@timestamp" %in% names(dd)){
+          dd[["@timestamp"]] <- parse_timestamp_smart(dd[["@timestamp"]])
+        }
       }
 
       dd[["level"]] <- as.integer(dd[["level"]])
