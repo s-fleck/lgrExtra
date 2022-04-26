@@ -146,27 +146,27 @@ AppenderElasticSearch <- R6::R6Class(
         # convert to data.frame (docs_bulk_index needs it that way)
           data_transformer <- self[["layout"]]$transform_data
           dd <- lapply(buffer, data_transformer)
-          dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
 
-        # apply layout
-          name_transformer <- self[["layout"]]$transform_names
-          if (!is.null(name_transformer)){
-            data.table::setnames(dd, name_transformer(names(dd)))
-          }
-          data.table::setDF(dd)
+          # manually prepare data for bulk api so that we have more control
+          # (esp. don't write NULL to empty fields but leave them out instead)
+          json <- lapply(dd, function(.) {c(
+              jsonlite::toJSON(list(index = list("_index" = index)), auto_unbox = TRUE),
+              jsonlite::toJSON(., auto_unbox = TRUE)
+          )})
 
+          tf <- tempfile()
+          on.exit(unlink(tf))
+          writeLines(unlist(json), tf)
 
-        res <- suppressWarnings(elastic::docs_bulk_index(
+        res <- suppressWarnings(elastic::docs_bulk(
           conn = self[["conn"]],
-          x = dd,
+          x = tf,
           index = self[["index"]],
           quiet = TRUE
         ))
 
-        errors <- vapply(res, function(x) isTRUE(x[["errors"]]), logical(1))
-
-        if (any(errors)){
-          lapply(res[errors], function(.) warning(jsonlite::toJSON(.)))
+        if (isTRUE(res[["errors"]])){
+          warning(jsonlite::toJSON(res))
         }
 
         assign("insert_pos", 0L, envir = private)

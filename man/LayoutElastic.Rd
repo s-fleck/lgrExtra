@@ -27,13 +27,7 @@ Other database layouts:
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{transform_names}}{a \code{function} to transform the property names before
-inserting to elasticsearch. For example, \code{LayoutElastic$new(transform_names = function(x) toupper(x))}}
-
-\item{\code{transform_data}}{a \code{function} to transform the log event to
-a \code{data.frame} before inserting to ElasticSearch. Must return a
-\code{data.frame} or \code{data.table} that will be passed to
-\code{data.table::rbindlist()}.}
+\item{\code{transform_data}}{a \code{function} to transform the log event to a list.}
 }
 \if{html}{\out{</div>}}
 }
@@ -59,7 +53,7 @@ a \code{data.frame} before inserting to ElasticSearch. Must return a
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutElastic$new(
   transform_names = NULL,
-  transform_data = data.table::as.data.table
+  transform_data = function(event) event[["values"]]
 )}\if{html}{\out{</div>}}
 }
 
