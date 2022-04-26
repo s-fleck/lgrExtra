@@ -18,6 +18,7 @@ Imports:
 Suggests: 
     covr,
     DBI,
+    elastic,
     gmailr,
     jsonlite,
     RMariaDB,
