@@ -112,10 +112,6 @@ AppenderElastic <- R6::R6Class(
         return(NULL)
       }
 
-      x <- es_result$hits$hits[[5]][["_source"]]
-      as.data.frame(x)
-      as.data.frame(lapply(x, function(.) if (!is.atomic(.)) I(.) else .))
-
       dd <- lapply(es_result$hits$hits, function(hit) wrap_recursive_elements(hit[["_source"]]))
       dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
 
@@ -143,7 +139,8 @@ AppenderElastic <- R6::R6Class(
 
       if (length(buffer)){
         # convert to data.frame (docs_bulk_index needs it that way)
-          dd <- lapply(buffer, function(event) as.data.frame(event))
+          data_transformer <- self[["layout"]]$transform_data
+          dd <- lapply(buffer, data_transformer)
           dd <- data.table::rbindlist(dd, use.names = TRUE, fill = TRUE)
 
         # apply layout

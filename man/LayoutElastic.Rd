@@ -29,6 +29,11 @@ Other database layouts:
 \describe{
 \item{\code{transform_names}}{a \code{function} to transform the property names before
 inserting to elasticsearch. For example, \code{LayoutElastic$new(transform_names = function(x) toupper(x))}}
+
+\item{\code{transform_data}}{a \code{function} to transform the log event to
+a \code{data.frame} before inserting to ElasticSearch. Must return a
+\code{data.frame} or \code{data.table} that will be passed to
+\code{data.table::rbindlist()}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -52,7 +57,10 @@ inserting to elasticsearch. For example, \code{LayoutElastic$new(transform_names
 \if{latex}{\out{\hypertarget{method-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{LayoutElastic$new(transform_names = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{LayoutElastic$new(
+  transform_names = NULL,
+  transform_data = data.table::as.data.table
+)}\if{html}{\out{</div>}}
 }
 
 }

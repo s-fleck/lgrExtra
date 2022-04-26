@@ -4,7 +4,10 @@ try(source(rprojroot::find_testthat_root_file("integration_tests/elastic_test_us
 test_that("AppenderElastic basic logging works", {
   con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
   index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
-  on.exit(elastic::index_delete(con, index))
+  on.exit({
+    elastic::index_delete(con, index)
+    lg$config(NULL)
+  })
 
   app <- AppenderElastic$new(con, index)
 
@@ -12,6 +15,7 @@ test_that("AppenderElastic basic logging works", {
     get_logger("test/AppenderElastic")$
     add_appender(app)$
     set_propagate(FALSE)
+
 
   lg$info("test 1", baz = "hash")
   lg$error("test 2", error = "404")
@@ -50,7 +54,10 @@ test_that("AppenderElastic basic logging works", {
 test_that("AppenderElastic/LayoutElastic transform_names works", {
   con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
   index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
-  on.exit(elastic::index_delete(con, index))
+  on.exit({
+    elastic::index_delete(con, index)
+    lg$config(NULL)
+  })
 
   app <- AppenderElastic$new(
     con,
@@ -72,4 +79,73 @@ test_that("AppenderElastic/LayoutElastic transform_names works", {
     names(raw_log_data[[1]][["_source"]]),
     toupper(c("level", "timestamp", "logger", "caller", "msg", "baz"))
   )
+})
+
+
+
+
+test_that("AppenderElastic/LayoutElastic transform_names works", {
+  con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
+  index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
+  on.exit({
+    elastic::index_delete(con, index)
+    lg$config(NULL)
+  })
+
+  app <- AppenderElastic$new(
+    con,
+    index,
+    layout = LayoutElastic$new(transform_names = toupper))
+
+  lg <-
+    get_logger("test/AppenderElastic")$
+    add_appender(app)$
+    set_propagate(FALSE)
+
+  lg$info("test 1", baz = "hash")
+  app$flush()
+  Sys.sleep(1)
+
+  # check if name transformation from layout was applied
+  raw_log_data <- elastic::Search(con, index, body = '{"query": {"match_all": {}} }')$hits$hits
+  expect_identical(
+    names(raw_log_data[[1]][["_source"]]),
+    toupper(c("level", "timestamp", "logger", "caller", "msg", "baz"))
+  )
+})
+
+
+
+
+test_that("AppenderElastic/LayoutElastic transform_data works", {
+  con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
+  index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
+  on.exit({
+    elastic::index_delete(con, index)
+    lg$config(NULL)
+  })
+
+  app <- AppenderElastic$new(
+    con,
+    index,
+    layout = LayoutElastic$new(transform_data = function(.){
+      res <- data.table::as.data.table(.)
+      res[, test := "it works"]
+      res
+    }))
+
+  lg <-
+    get_logger("test/AppenderElastic")$
+    add_appender(app)$
+    set_propagate(FALSE)
+
+  lg$info("test 1", baz = "hash")
+  lg$info("test 1", foo = "bar")
+  app$flush()
+  Sys.sleep(1)
+
+  # check if name transformation from layout was applied
+  app$get_data()
+
+  expect_identical(app$get_data()[["test"]], rep("it works", 2))
 })
