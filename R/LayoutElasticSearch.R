@@ -7,8 +7,8 @@
 #' @template layout
 #' @family database layouts
 #' @export
-LayoutElastic <- R6::R6Class(
-  "LayoutElastic",
+LayoutElasticSearch <- R6::R6Class(
+  "LayoutElasticSearch",
   inherit = lgr::Layout,
   public = list(
     initialize = function(

@@ -89,7 +89,7 @@ ElasticSearch index}
   conn,
   index,
   threshold = NA_integer_,
-  layout = LayoutElastic$new(),
+  layout = LayoutElasticSearch$new(),
   close_on_exit = TRUE,
   buffer_size = 0,
   flush_threshold = "error",

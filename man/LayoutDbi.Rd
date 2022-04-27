@@ -54,10 +54,10 @@ defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$forma
 \code{\link[=select_dbi_layout]{select_dbi_layout()}}, \link[DBI:DBI-package]{DBI::DBI},
 
 Other Layout: 
-\code{\link{LayoutElastic}}
+\code{\link{LayoutElasticSearch}}
 
 Other database layouts: 
-\code{\link{LayoutElastic}}
+\code{\link{LayoutElasticSearch}}
 }
 \concept{Layout}
 \concept{database layouts}
