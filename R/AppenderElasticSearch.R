@@ -2,12 +2,12 @@
 # AppenderDbi -------------------------------------------------------------
 
 
-#' Log to elasticsearch
+#' Log to ElasticSearch
+#'
+#' Log to ElasticSearch via http.
 #'
 #' **NOTE**: **Experimental**; not yet fully documented and and details are
 #' subject to change
-#'
-#' @description
 #'
 #' @template appender
 #'

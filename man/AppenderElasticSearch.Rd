@@ -2,15 +2,12 @@
 % Please edit documentation in R/AppenderElasticSearch.R
 \name{AppenderElasticSearch}
 \alias{AppenderElasticSearch}
-\title{Log to elasticsearch}
+\title{Log to ElasticSearch}
 \value{
 The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
 }
 \description{
-
-}
-\details{
 \strong{NOTE}: \strong{Experimental}; not yet fully documented and and details are
 subject to change
 }
