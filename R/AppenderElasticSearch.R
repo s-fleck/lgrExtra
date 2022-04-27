@@ -92,7 +92,7 @@ AppenderElasticSearch <- R6::R6Class(
 
 
     #' @field data `data.frame`. content of index
-    get_data = function(n = 20){
+    get_data = function(n = 20L){
       index <- get("index", envir = self)
 
       if (elastic::index_exists(private[[".conn"]], index)){
@@ -104,7 +104,7 @@ AppenderElasticSearch <- R6::R6Class(
               "match_all": {}
             }
           }',
-          size = 20
+          size = n
         )
       } else {
         return(NULL)
