@@ -8,6 +8,9 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
 }
 \description{
+Log to ElasticSearch via http.
+}
+\details{
 \strong{NOTE}: \strong{Experimental}; not yet fully documented and and details are
 subject to change
 }
@@ -24,18 +27,9 @@ Other Appenders:
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{AppenderElasticSearch}
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{data}}{\code{data.frame}. content of index}
-}
-\if{html}{\out{</div>}}
-}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{data}}{\code{data.frame}. content of index}
-
 \item{\code{conn}}{a \link[elastic:connect]{ElasticSearch connection}}
 
 \item{\code{close_on_exit}}{\code{TRUE} or \code{FALSE}. Close the ElasticSearch connection
@@ -102,7 +96,8 @@ ElasticSearch index}
 \describe{
 \item{\code{conn, index}}{see section \emph{Fields}}
 
-\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}
+A data \code{data.frame}. content of index}
 }
 \if{html}{\out{</div>}}
 }
@@ -130,9 +125,20 @@ ElasticSearch index}
 \if{latex}{\out{\hypertarget{method-get_data}{}}}
 \subsection{Method \code{get_data()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AppenderElasticSearch$get_data(n = 20L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AppenderElasticSearch$get_data(n = 20L, threshold = NA)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{n}}{\code{integer} scalar. Retrieve only the last \code{n} log entries that match
+\code{threshold}}
+
+\item{\code{threshold}}{\code{character} or \code{integer} scalar. The minimum log level
+that should be displayed}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-show"></a>}}

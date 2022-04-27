@@ -135,3 +135,81 @@ test_that("AppenderElasticSearch/LayoutElasticSearch transform_event works", {
 
   expect_identical(app$get_data()[["test"]], rep("it works", 2))
 })
+
+
+
+
+test_that("AppenderElasticSearch$get_data() works with numeric levels", {
+  con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
+  index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
+  on.exit({
+    elastic::index_delete(con, index)
+    lg$config(NULL)
+  })
+
+  app <- AppenderElasticSearch$new(
+    con,
+    index
+  )
+
+  lg <-
+    get_logger("test/AppenderElasticSearch")$
+    add_appender(app)$
+    set_propagate(FALSE)$
+    set_threshold(NA)
+
+  lg$trace("test 1")
+  lg$debug("test 2")
+  lg$info("test 3")
+  lg$error("test 3")
+  app$flush()
+  Sys.sleep(1)
+
+  # check if name transformation from layout was applied
+  expect_setequal(app$get_data()$level, c(200, 400, 500, 600))
+  expect_setequal(app$get_data(threshold = 400)$level, c(400, 200))
+  expect_setequal(app$get_data(threshold = "info")$level, c(400, 200))
+
+  expect_output(app$show(threshold = 400), ".*INFO.*ERROR")
+
+})
+
+
+
+test_that("AppenderElasticSearch$get_data() works", {
+  con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
+  index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
+  on.exit({
+    elastic::index_delete(con, index)
+    lg$  config(NULL)
+  })
+
+  app <- AppenderElasticSearch$new(
+    con,
+    index,
+    layout = LayoutElasticSearch$new(transform_event = function(event){
+      res <- event$values
+      res[["level"]] <- lgr::label_levels(res[["level"]])
+      res
+    }))
+
+  lg <-
+    get_logger("test/AppenderElasticSearch")$
+    add_appender(app)$
+    set_propagate(FALSE)$
+    set_threshold(NA)
+
+  lg$trace("trace 1")
+  lg$debug("debug 2")
+  lg$info("info 3")
+  lg$error("error 3")
+  app$flush()
+  Sys.sleep(1)
+
+  # check if name transformation from layout was applied
+  expect_setequal(app$get_data()$level, c("trace", "debug", "info", "error"))
+  expect_setequal(app$get_data(threshold = 400)$level, c("info", "error"))
+  expect_setequal(app$get_data(threshold = "info")$level, c("info", "error"))
+
+  expect_output(app$show(threshold = 400), ".*INFO.*ERROR")
+})

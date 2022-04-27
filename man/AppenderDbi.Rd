@@ -98,9 +98,8 @@ when the Logger is removed?}
 \item{\code{col_types}}{a named \code{character} vector providing information about the
 column types in the database. How the column types are reported
 depends on the database driver. For example, SQLite returns human
-readable data types (character, double, ...) while DB2 returns
-numeric codes representing the data type
-(see \url{https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_73/db2/rbafzcatsqltypeinfo.htm})}
+readable data types (character, double, ...) while IBM DB2 returns
+numeric codes representing the data type.}
 
 \item{\code{table}}{a \code{character} scalar or a \link[DBI:Id]{DBI::Id} specifying the target
 database table}

@@ -91,19 +91,84 @@ AppenderElasticSearch <- R6::R6Class(
     },
 
 
-    #' @field data `data.frame`. content of index
-    get_data = function(n = 20L){
+    #' A data `data.frame`. content of index
+    #'
+    #' @param n `integer` scalar. Retrieve only the last `n` log entries that match
+    #'   `threshold`
+    #' @param threshold `character` or `integer` scalar. The minimum log level
+    #'   that should be displayed
+    #'
+    #' @return a `data.frame`
+    get_data = function(n = 20L, threshold = NA){
       index <- get("index", envir = self)
 
       if (elastic::index_exists(private[[".conn"]], index)){
+
+        if (is.na(threshold) || !length(threshold)){
+          q <-
+            '{
+              "query": {
+                "match_all": {}
+              }
+            }'
+
+        } else {
+          threshold <-  standardize_threshold(threshold)
+          es_numeric_types <-
+            c("long", "integer", "short", "byte", "double", "float", "half_float", "scaled_float", "unsigned_long")
+
+          level_type <- unlist(
+            elastic::field_mapping_get(
+              private[[".conn"]],
+              index = index,
+              field = "level"
+            )
+          )[[2]]
+
+          if (level_type %in% es_numeric_types){
+            q <- sprintf(
+              '{
+                "query": {
+                    "range" : {
+                        "level" : {
+                            "lte" : %s
+                        }
+                    }
+                }
+              }',
+              threshold
+            )
+          } else {
+            levels <- getOption("lgr.log_levels")
+            levels <- levels[standardize_log_levels(levels) <= threshold]
+            level_names_caps <- names(levels)
+            substr(level_names_caps, 1, 1) <- toupper(substr(level_names_caps, 1, 1))
+            match_terms <- unique(c(
+              names(levels),
+              toupper(names(levels)),
+              tolower(names(levels)),
+              level_names_caps,
+              as.integer(levels)
+            ))
+            q <- sprintf(
+              '
+            {
+              "query": {
+                "terms": {
+                  "level": [%s]
+                }
+              }
+            }
+            ',
+              paste('"', match_terms, '"', collapse = ", ", sep = "")
+            )
+          }
+        }
+
         es_result <- elastic::Search(
           private[[".conn"]],
           index = index,
-          body = '{
-            "query": {
-              "match_all": {}
-            }
-          }',
+          body = q,
           size = n
         )
       } else {
@@ -125,15 +190,33 @@ AppenderElasticSearch <- R6::R6Class(
         dd[["level"]] <- as.integer(dd[["level"]])
       }
 
-      dd
+      as.data.frame(dd)
     },
 
 
     show = function(
-    threshold = NA_integer_,
-    n = 20
+      threshold = NA_integer_,
+      n = 20
     ){
-      stop("not implemented")
+      assert(is_n0(n))
+
+      dd <- self$get_data(n, threshold)
+
+      if (identical(nrow(dd),  0L)){
+        cat("[empty log]")
+      } else {
+        walk(
+          as_event_list(dd, na.rm = TRUE),
+          function(event) {
+            class(event) <- union("LogEvent", class(event))
+            if (is.character(event[["level"]])){
+              event[["level"]] <- lgr::unlabel_levels(event[["level"]])
+            }
+            cat(format(event), "\n")
+          })
+      }
+
+      invisible(dd)
     },
 
 
