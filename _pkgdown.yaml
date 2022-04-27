@@ -3,6 +3,7 @@ reference:
     contents:
       - AppenderDbi
       - AppenderDt
+      - AppenderElasticSearch
       - AppenderGmail
       - AppenderSendmail
       - AppenderPushbullet
@@ -10,6 +11,7 @@ reference:
   - title: Other functions and classes
     contents:
       - LayoutDbi
+      - LayoutElasticSearch
       - Serializer
       - select_dbi_layout
       - unpack_json_cols
