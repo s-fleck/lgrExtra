@@ -138,39 +138,46 @@ AppenderElasticSearch <- R6::R6Class(
 
 
     flush = function(){
-      lo <- get(".layout", envir = private)
-      index  <- get("index", envir = self)
+
       buffer <- get("buffer_events", envir = self)
 
       if (length(buffer)){
         # convert to data.frame (docs_bulk_index needs it that way)
-          data_transformer <- self[["layout"]]$transform_data
-          dd <- lapply(buffer, data_transformer)
+          index  <- get("index", envir = self)
 
           # manually prepare data for bulk api so that we have more control
           # (esp. don't write NULL to empty fields but leave them out instead)
-          json <- lapply(dd, function(.) {c(
-              jsonlite::toJSON(list(index = list("_index" = index)), auto_unbox = TRUE),
-              jsonlite::toJSON(., auto_unbox = TRUE)
-          )})
+          # bulk API wants one line of metadata followed by the actual data
+          json <- lapply(buffer, function(event) {
+            json_header <- jsonlite::toJSON(list(index = list("_index" = index)), auto_unbox = TRUE)
+            json_event  <- self[["layout"]][["format_event"]](event)
+
+            c(
+              json_header,
+              json_event
+            )
+          })
 
           tf <- tempfile()
           on.exit(unlink(tf))
           writeLines(unlist(json), tf)
 
-        res <- suppressWarnings(elastic::docs_bulk(
-          conn = self[["conn"]],
-          x = tf,
-          index = self[["index"]],
-          quiet = TRUE
-        ))
+        # insert into ES
+          res <- suppressWarnings(elastic::docs_bulk(
+            conn = self[["conn"]],
+            x = tf,
+            index = self[["index"]],
+            quiet = TRUE
+          ))
 
-        if (isTRUE(res[["errors"]])){
-          warning(jsonlite::toJSON(res))
-        }
+          if (isTRUE(res[["errors"]])){
+            warning(jsonlite::toJSON(res))
+          }
 
-        assign("insert_pos", 0L, envir = private)
-        private$.buffer_events <- list()
+        # reset buffer
+          assign("insert_pos", 0L, envir = private)
+          private$.buffer_events <- list()
+
         invisible(self)
       }
     }

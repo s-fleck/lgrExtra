@@ -8,26 +8,24 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Layout]{lgr::Layout} and can used as a Layout by an \link[lgr:Appender]{lgr::Appender}.
 }
 \description{
-Format log events for output to ElasticSearch
-
-Format log events for output to ElasticSearch
+Similar to \link[lgr:LayoutJson]{lgr::LayoutJson}, but with some modifications to prepare data
+for elasticsearch.
 }
 \seealso{
 Other Layout: 
 \code{\link{LayoutDbi}}
-
-Other database layouts: 
-\code{\link{LayoutDbi}}
 }
 \concept{Layout}
-\concept{database layouts}
 \section{Super class}{
 \code{\link[lgr:Layout]{lgr::Layout}} -> \code{LayoutElasticSearch}
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{transform_data}}{a \code{function} to transform the log event to a list.}
+\item{\code{toJSON_args}}{a list of values passed on to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
+
+\item{\code{transform_event}}{a \code{function} with a single argument \code{event} that
+takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -35,13 +33,15 @@ Other database layouts:
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-new}{\code{LayoutElasticSearch$new()}}
+\item \href{#method-format_event}{\code{LayoutElasticSearch$format_event()}}
+\item \href{#method-set_toJSON_args}{\code{LayoutElasticSearch$set_toJSON_args()}}
+\item \href{#method-set_transform_event}{\code{LayoutElasticSearch$set_transform_event()}}
 \item \href{#method-clone}{\code{LayoutElasticSearch$clone()}}
 }
 }
 \if{html}{
 \out{<details open ><summary>Inherited methods</summary>}
 \itemize{
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="format_event">}\href{../../lgr/html/Layout.html#method-format_event}{\code{lgr::Layout$format_event()}}\out{</span>}
 \item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="toString">}\href{../../lgr/html/Layout.html#method-toString}{\code{lgr::Layout$toString()}}\out{</span>}
 }
 \out{</details>}
@@ -52,9 +52,36 @@ Other database layouts:
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$new(
-  transform_names = NULL,
-  transform_data = function(event) event[["values"]]
+  toJSON_args = list(auto_unbox = TRUE),
+  transform_event = function(event) get("values", event)
 )}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-format_event"></a>}}
+\if{latex}{\out{\hypertarget{method-format_event}{}}}
+\subsection{Method \code{format_event()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$format_event(event)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_toJSON_args"></a>}}
+\if{latex}{\out{\hypertarget{method-set_toJSON_args}{}}}
+\subsection{Method \code{set_toJSON_args()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$set_toJSON_args(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-set_transform_event"></a>}}
+\if{latex}{\out{\hypertarget{method-set_transform_event}{}}}
+\subsection{Method \code{set_transform_event()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$set_transform_event(x)}\if{html}{\out{</div>}}
 }
 
 }

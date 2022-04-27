@@ -103,7 +103,7 @@ test_that("AppenderElasticSearch basic logging works with buffer", {
 
 
 
-test_that("AppenderElasticSearch/LayoutElasticSearch transform_data works", {
+test_that("AppenderElasticSearch/LayoutElasticSearch transform_event works", {
   con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
   index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
   on.exit({
@@ -114,7 +114,7 @@ test_that("AppenderElasticSearch/LayoutElasticSearch transform_data works", {
   app <- AppenderElasticSearch$new(
     con,
     index,
-    layout = LayoutElasticSearch$new(transform_data = function(event){
+    layout = LayoutElasticSearch$new(transform_event = function(event){
       res <- event$values
       res[["test"]] <- "it works"
       res

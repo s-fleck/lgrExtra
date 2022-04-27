@@ -55,9 +55,6 @@ defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$forma
 
 Other Layout: 
 \code{\link{LayoutElasticSearch}}
-
-Other database layouts: 
-\code{\link{LayoutElasticSearch}}
 }
 \concept{Layout}
 \concept{database layouts}
