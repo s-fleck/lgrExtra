@@ -160,7 +160,7 @@ AppenderElasticSearch <- R6::R6Class(
 
           tf <- tempfile()
           on.exit(unlink(tf))
-          writeLines(unlist(json), tf)
+          writeLines(unlist(json), tf, useBytes = TRUE)  #useBytes = TRUE necessary for windows utf-8
 
         # insert into ES
           res <- suppressWarnings(elastic::docs_bulk(
