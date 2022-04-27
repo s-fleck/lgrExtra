@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.com/s-fleck/lgrExtra.svg?branch=master)](https://travis-ci.com/s-fleck/lgrExtra)
 [![Codecov test
 coverage](https://codecov.io/gh/s-fleck/lgrExtra/branch/master/graph/badge.svg)](https://codecov.io/gh/s-fleck/lgrExtra?branch=master)
 [![Lifecycle:
@@ -30,14 +28,15 @@ time to work on lgrExtra, but you are welcome to submit feature
 requests. If I see that the interest in lgrExtra increases I may
 prioritize it over other projects.
 
-| Appender           | Description                                  | Backend                                                       | Status                                                                                                                                                      |
-|--------------------|----------------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| AppenderDbi        | Databases                                    | [DBI](https://cran.r-project.org/package=DBI)                 | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
-| AppenderDt         | In-memory data.table                         | [data.table](https://github.com/Rdatatable/data.table)        | [![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)         |
-| AppenderGmail      | E-mail via Gmail REST API                    | [gmailr](https://cran.r-project.org/package=gmailr)           | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
-| AppenderSendmail   | E-mail via SMTP                              | [sendmailR](https://cran.r-project.org/package=sendmailR)     | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)              |
-| AppenderPushbullet | Pushbullet (mobile phone push notifications) | [RPushbullet](https://cran.r-project.org/package=RPushbullet) | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)              |
-| AppenderSyslog     | Linux Syslog                                 | [rsyslog](https://cran.r-project.org/package=rsyslog)         | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)              |
+| Appender              | Description                                  | Backend                                                       | Status                                                                                                                                                      |
+|-----------------------|----------------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| AppenderElasticSearch | ElasticSearch                                | [elastic](https://cran.r-project.org/package=elastic)         | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
+| AppenderDbi           | Databases                                    | [DBI](https://cran.r-project.org/package=DBI)                 | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
+| AppenderDt            | In-memory data.table                         | [data.table](https://github.com/Rdatatable/data.table)        | [![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)         |
+| AppenderGmail         | E-mail via Gmail REST API                    | [gmailr](https://cran.r-project.org/package=gmailr)           | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
+| AppenderPushbullet    | Pushbullet (mobile phone push notifications) | [RPushbullet](https://cran.r-project.org/package=RPushbullet) | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)              |
+| AppenderSendmail      | E-mail via SMTP                              | [sendmailR](https://cran.r-project.org/package=sendmailR)     | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)              |
+| AppenderSyslog        | Linux Syslog                                 | [rsyslog](https://cran.r-project.org/package=rsyslog)         | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)              |
 
 ## Installation
 

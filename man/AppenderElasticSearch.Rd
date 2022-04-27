@@ -133,7 +133,7 @@ ElasticSearch index}
 \if{latex}{\out{\hypertarget{method-get_data}{}}}
 \subsection{Method \code{get_data()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AppenderElasticSearch$get_data(n = 20)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AppenderElasticSearch$get_data(n = 20L)}\if{html}{\out{</div>}}
 }
 
 }
