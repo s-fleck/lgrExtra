@@ -213,3 +213,39 @@ test_that("AppenderElasticSearch$get_data() works", {
 
   expect_output(app$show(threshold = 400), ".*INFO.*ERROR")
 })
+
+
+
+test_that("AppenderElasticSearch$get_data() return_type works", {
+  con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
+  index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
+  on.exit({
+    elastic::index_delete(con, index)
+    lg$config(NULL)
+  })
+
+  app <- AppenderElasticSearch$new(
+    con,
+    index
+  )
+
+  lg <-
+    get_logger("test/AppenderElasticSearch")$
+    add_appender(app)$
+    set_propagate(FALSE)$
+    set_threshold(NA)
+
+  lg$trace("test 1")
+  lg$debug("test 2")
+  lg$info("test 3")
+  lg$error("test 3")
+  app$flush()
+  Sys.sleep(1)
+
+  # check if name transformation from layout was applied
+  expect_s3_class(app$get_data(result_type = "data.frame"), "data.frame")
+  expect_s3_class(app$get_data(result_type = "data.table"), "data.table")
+  expect_type(app$get_data(result_type = "list"), "list")
+  expect_true("hits" %in% names(app$get_data(result_type = "list")))
+  expect_type(app$get_data(result_type = "json"), "character")
+})

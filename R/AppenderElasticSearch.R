@@ -97,100 +97,67 @@ AppenderElasticSearch <- R6::R6Class(
     #'   `threshold`
     #' @param threshold `character` or `integer` scalar. The minimum log level
     #'   that should be displayed
+    #' @param result_type `character` scalar. Any of:
+    #'   * `data.frame`
+    #'   * `data.table` (shortcut: `dt`)
+    #'   * `list` (unprocessed list with ElasticSearch metadata)
+    #'   * `json` (raw ElasticSearch json)
     #'
-    #' @return a `data.frame`
-    get_data = function(n = 20L, threshold = NA){
+    #' @return see `result_type`
+    get_data = function(
+      n = 20L,
+      threshold = NA,
+      result_type = "data.frame"
+    ){
+      assert(is_n(n))
+      result_type <- standardize_result_type(result_type, c("data.frame", "data.table", "list", "json"))
       index <- get("index", envir = self)
+      conn <-  get("conn", envir = self)
 
-      if (elastic::index_exists(private[[".conn"]], index)){
 
-        if (is.na(threshold) || !length(threshold)){
-          q <-
-            '{
-              "query": {
-                "match_all": {}
-              }
-            }'
-
-        } else {
-          threshold <-  standardize_threshold(threshold)
-          es_numeric_types <-
-            c("long", "integer", "short", "byte", "double", "float", "half_float", "scaled_float", "unsigned_long")
-
-          level_type <- unlist(
-            elastic::field_mapping_get(
-              private[[".conn"]],
-              index = index,
-              field = "level"
-            )
-          )[[2]]
-
-          if (level_type %in% es_numeric_types){
-            q <- sprintf(
-              '{
-                "query": {
-                    "range" : {
-                        "level" : {
-                            "lte" : %s
-                        }
-                    }
-                }
-              }',
-              threshold
-            )
-          } else {
-            levels <- getOption("lgr.log_levels")
-            levels <- levels[standardize_log_levels(levels) <= threshold]
-            level_names_caps <- names(levels)
-            substr(level_names_caps, 1, 1) <- toupper(substr(level_names_caps, 1, 1))
-            match_terms <- unique(c(
-              names(levels),
-              toupper(names(levels)),
-              tolower(names(levels)),
-              level_names_caps,
-              as.integer(levels)
-            ))
-            q <- sprintf(
-              '
-            {
-              "query": {
-                "terms": {
-                  "level": [%s]
-                }
-              }
-            }
-            ',
-              paste('"', match_terms, '"', collapse = ", ", sep = "")
-            )
-          }
-        }
-
-        es_result <- elastic::Search(
-          private[[".conn"]],
-          index = index,
-          body = q,
-          size = n
-        )
-      } else {
+      if (!elastic::index_exists(conn, index)){  # early exit
         return(NULL)
       }
 
-      dd <- lapply(es_result$hits$hits, function(hit) wrap_recursive_elements(hit[["_source"]]))
-      dd <- suppressWarnings(data.table::rbindlist(dd, use.names = TRUE, fill = TRUE))
+      # query
+      q <- make_get_log_elastic_query(threshold, conn, index)
 
-      if (nrow(dd) > 0){
-        if ("timestamp" %in% names(dd)){
-          dd[["timestamp"]] <- parse_timestamp_smart(dd[["timestamp"]])
-        } else if ("@timestamp" %in% names(dd)){
-          dd[["@timestamp"]] <- parse_timestamp_smart(dd[["@timestamp"]])
+      es_result <- elastic::Search(
+        conn,
+        index = index,
+        body = q,
+        size = n,
+        raw = identical(result_type, "json")
+      )
+
+      if (
+        identical(result_type, "json") ||
+        identical(result_type, "list")
+      ){
+        return(es_result)
+      }
+
+      # parse results
+      res <- lapply(es_result$hits$hits, function(hit) wrap_recursive_elements(hit[["_source"]]))
+      res <- suppressWarnings(data.table::rbindlist(res, use.names = TRUE, fill = TRUE))
+
+      if (nrow(res) > 0){
+        if ("timestamp" %in% names(res)){
+          res[["timestamp"]] <- parse_timestamp_smart(res[["timestamp"]])
+        } else if ("@timestamp" %in% names(res)){
+          res[["@timestamp"]] <- parse_timestamp_smart(res[["@timestamp"]])
         }
       }
 
-      if (is_integerish(dd[["level"]])){
-        dd[["level"]] <- as.integer(dd[["level"]])
+      if (is_integerish(res[["level"]])){
+        res[["level"]] <- as.integer(res[["level"]])
       }
 
-      as.data.frame(dd)
+      if (identical(result_type, "data.frame")){
+        data.table::setDF(res)
+      }
+
+      res
     },
 
 
@@ -200,7 +167,7 @@ AppenderElasticSearch <- R6::R6Class(
     ){
       assert(is_n0(n))
 
-      dd <- self$get_data(n, threshold)
+      dd <- self$get_data(n, threshold, "data.table")
 
       if (identical(nrow(dd),  0L)){
         cat("[empty log]")
@@ -329,4 +296,99 @@ wrap_recursive_elements <- function(x){
       }
     }
   )
+}
+
+
+
+
+make_get_log_elastic_query <- function(
+  threshold,
+  conn,
+  index
+) {
+  threshold <-  standardize_threshold(threshold)
+  es_numeric_types <-
+    c("long", "integer", "short", "byte", "double", "float", "half_float", "scaled_float", "unsigned_long")
+
+
+  if (is.na(threshold) || !length(threshold)){
+    q <-
+      '
+      {
+        "query": {
+          "match_all": {}
+        }
+      }
+      '
+
+  } else {
+
+    level_type <- unlist(
+      elastic::field_mapping_get(
+        conn,
+        index = index,
+        field = "level"
+      )
+    )[[2]]
+
+    if (level_type %in% es_numeric_types){
+      q <- sprintf(
+        '
+        {
+          "query": {
+            "range" : {
+              "level" : {
+                "lte" : %s
+              }
+            }
+          }
+        }
+        ',
+        threshold
+      )
+    } else {
+      levels <- getOption("lgr.log_levels")
+      levels <- levels[standardize_log_levels(levels) <= threshold]
+      level_names_caps <- names(levels)
+      substr(level_names_caps, 1, 1) <- toupper(substr(level_names_caps, 1, 1))
+      match_terms <- unique(c(
+        names(levels),
+        toupper(names(levels)),
+        tolower(names(levels)),
+        level_names_caps,
+        as.integer(levels)
+      ))
+      q <- sprintf(
+        '
+        {
+          "query": {
+            "terms": {
+              "level": [%s]
+            }
+          }
+        }
+        ',
+        paste('"', match_terms, '"', collapse = ", ", sep = "")
+      )
+    }
+  }
+
+  q
+}
+
+
+
+
+standardize_result_type <- function(
+  x,
+  valid_types = c("data.frame", "data.table")
+){
+  assert(is_scalar_character(x))
+
+  if (identical(x, "dt")){
+    x <- "data.table"
+  }
+
+  assert(x %in% valid_types)
+  return(x)
 }

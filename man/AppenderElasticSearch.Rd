@@ -125,7 +125,11 @@ A data \code{data.frame}. content of index}
 \if{latex}{\out{\hypertarget{method-get_data}{}}}
 \subsection{Method \code{get_data()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AppenderElasticSearch$get_data(n = 20L, threshold = NA)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AppenderElasticSearch$get_data(
+  n = 20L,
+  threshold = NA,
+  result_type = "data.frame"
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -136,8 +140,19 @@ A data \code{data.frame}. content of index}
 
 \item{\code{threshold}}{\code{character} or \code{integer} scalar. The minimum log level
 that should be displayed}
+
+\item{\code{result_type}}{\code{character} scalar. Any of:
+\itemize{
+\item \code{data.frame}
+\item \code{data.table} (shortcut: \code{dt})
+\item \code{list} (unprocessed list with ElasticSearch metadata)
+\item \code{json} (raw ElasticSearch json)
+}}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+see \code{result_type}
 }
 }
 \if{html}{\out{<hr>}}
