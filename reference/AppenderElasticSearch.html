@@ -172,7 +172,11 @@ A data <code>data.frame</code>. content of index</p></dd>
 
 <div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderElasticSearch</span><span class="op">$</span><span class="fu">get_data</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20L</span>, threshold <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderElasticSearch</span><span class="op">$</span><span class="fu">get_data</span><span class="op">(</span>
+  n <span class="op">=</span> <span class="fl">20L</span>,
+  threshold <span class="op">=</span> <span class="cn">NA</span>,
+  result_type <span class="op">=</span> <span class="st">"data.frame"</span>
+<span class="op">)</span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -187,7 +191,19 @@ A data <code>data.frame</code>. content of index</p></dd>
 that should be displayed</p></dd>
 
 
+<dt><code>result_type</code></dt>
+<dd><p><code>character</code> scalar. Any of:</p><ul><li><p><code>data.frame</code></p></li>
+<li><p><code>data.table</code> (shortcut: <code>dt</code>)</p></li>
+<li><p><code>list</code> (unprocessed list with ElasticSearch metadata)</p></li>
+<li><p><code>json</code> (raw ElasticSearch json)</p></li>
+</ul></dd>
+
+
 </dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
+<p>see <code>result_type</code></p>
 </div>
 
 </div><p></p><hr><a id="method-show"></a><div class="section">
@@ -224,7 +240,7 @@ that should be displayed</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>
