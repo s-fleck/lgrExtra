@@ -81,43 +81,4 @@ for (plan_test in c("multisession", "multicore")){
     expect_length(readLines(sleepAppender$file), 1)
     expect_match(readLines(sleepAppender$file), "sleepy test")
   })
-
-
-  test_that(sprintf("AppenderAsync works with ElasticSearch [%s]", plan_test), {
-
-    if (!future::supportsMulticore() && identical(plan_test, "multicore")) {
-      skip("'multicore' is not supported on system")
-    }
-
-    con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
-    index <- paste(sample(letters, 48, replace = TRUE), collapse = "")
-    on.exit({
-      elastic::index_delete(con, index)
-      lg$config(NULL)
-    })
-
-
-    appenderElastic <- AppenderElasticSearch$new(con, index)
-    app <- AppenderAsync$new(appenderElastic)
-
-    lg <-
-      get_logger("test/AppenderElasticSearch")$
-      add_appender(app)$
-      set_propagate(FALSE)$
-      set_threshold(NA)
-
-    lg$trace("test 1")
-    lg$debug("test 2")
-    lg$info("test 3")
-    lg$error("test 3")
-    app$appender$flush()
-    Sys.sleep(1)
-
-    # check if name transformation from layout was applied
-    expect_s3_class(appenderElastic$get_data(result_type = "data.frame"), "data.frame")
-    expect_s3_class(appenderElastic$get_data(result_type = "data.table"), "data.table")
-    expect_type(appenderElastic$get_data(result_type = "list"), "list")
-    expect_true("hits" %in% names(appenderElastic$get_data(result_type = "list")))
-    expect_type(appenderElastic$get_data(result_type = "json"), "character")
-  })
 }
