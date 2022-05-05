@@ -9,7 +9,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 }
 \description{
 Similar to \link[lgr:LayoutJson]{lgr::LayoutJson}, but with some modifications to prepare data
-for elasticsearch.
+for ElasticSearch.
 }
 \seealso{
 Other Layout: 

@@ -5,7 +5,7 @@
 #' Format log events for output to ElasticSearch
 #'
 #' Similar to [lgr::LayoutJson], but with some modifications to prepare data
-#' for elasticsearch.
+#' for ElasticSearch.
 #'
 #' @template layout
 #' @export

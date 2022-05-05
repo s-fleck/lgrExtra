@@ -4,7 +4,7 @@
 
 #' Log to ElasticSearch
 #'
-#' Log to ElasticSearch via http.
+#' Log to ElasticSearch via HTTP
 #'
 #' **NOTE**: **Experimental**; not yet fully documented and and details are
 #' subject to change
@@ -80,7 +80,7 @@ AppenderElasticSearch <- R6::R6Class(
         conn$ping(),
         error = function(e) {
           stop(
-            lg$fatal("Cannot connect to elasticsearch %s:%s: %s", conn$host, conn$port, e$message),
+            lg$fatal("Cannot connect to ElasticSearch %s:%s: %s", conn$host, conn$port, e$message),
             e
           )
         }
@@ -101,7 +101,7 @@ AppenderElasticSearch <- R6::R6Class(
     #'   * `data.frame`
     #'   * `data.table` (shortcut: `dt`)
     #'   * `list` (unprocessed list with ElasticSearch metadata)
-    #'   * `json` (raw ElasticSearch json)
+    #'   * `json` (raw ElasticSearch JSON)
     #'
     #' @return see `result_type`
     get_data = function(

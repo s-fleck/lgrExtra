@@ -8,7 +8,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
 }
 \description{
-Log to ElasticSearch via http.
+Log to ElasticSearch via HTTP
 }
 \details{
 \strong{NOTE}: \strong{Experimental}; not yet fully documented and and details are
@@ -146,7 +146,7 @@ that should be displayed}
 \item \code{data.frame}
 \item \code{data.table} (shortcut: \code{dt})
 \item \code{list} (unprocessed list with ElasticSearch metadata)
-\item \code{json} (raw ElasticSearch json)
+\item \code{json} (raw ElasticSearch JSON)
 }}
 }
 \if{html}{\out{</div>}}
