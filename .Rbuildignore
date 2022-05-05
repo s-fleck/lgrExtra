@@ -14,3 +14,4 @@
 ^CRAN-RELEASE$
 ^_pkgdown.yaml$
 ^revdep$
+^CRAN-SUBMISSION$
