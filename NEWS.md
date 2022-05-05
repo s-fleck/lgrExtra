@@ -1,6 +1,6 @@
-lgrExtra 0.0.6
+# lgrExtra 0.0.6
 
-* add AppenderElasticSearch (#5)
+* add AppenderElasticSearch for logging to ElasticSearch (#5)
 
 
 # lgrExtra 0.0.5 (2021-02-23)
