@@ -4,7 +4,7 @@ AppenderAsync <- R6::R6Class(
   public = list(
 
     initialize = function(
-      appender
+    appender
     ){
       self$set_appender(appender)
     },
@@ -24,7 +24,19 @@ AppenderAsync <- R6::R6Class(
     append = function(event){
       private[[".future"]] <- future::future(private[[".appender"]][["append"]](event))
       private[[".future"]]
+    },
+
+    format = function(
+    ...
+    ){
+      async_appender_header <- paste0("<", class(self)[[1]], " : ")
+      res <- self$appender$format()
+      res <- substring(res, 2)
+
+      res[[1]] <- paste0(async_appender_header, res[[1]])
+      res
     }
+
   ),
 
   # +- active ---------------------------------------------------------------
@@ -38,6 +50,8 @@ AppenderAsync <- R6::R6Class(
     layout = function() private[[".appender"]][["layout"]],
 
     future = function() private[[".future"]],
+
+    appender = function() private[[".appender"]],
 
     resolved = function() {
       future::resolved(private[[".future"]])
