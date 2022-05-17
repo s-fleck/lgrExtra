@@ -79,10 +79,8 @@ AppenderElasticSearch <- R6::R6Class(
       tryCatch(
         conn$ping(),
         error = function(e) {
-          stop(
-            lg$fatal("Cannot connect to ElasticSearch %s:%s: %s", conn$host, conn$port, e$message),
-            e
-          )
+          lg$fatal("Cannot connect to ElasticSearch %s:%s: %s", conn$host, conn$port, e$message)
+          stop(e)
         }
       )
 
