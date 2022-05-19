@@ -16,6 +16,7 @@ subject to change
 }
 \seealso{
 Other Appenders: 
+\code{\link{AppenderAsync}},
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
 \code{\link{AppenderGmail}},

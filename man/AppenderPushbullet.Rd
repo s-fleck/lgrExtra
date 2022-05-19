@@ -33,6 +33,7 @@ if (requireNamespace("RPushbullet") && !is.null(getOption("rpushbullet.key")) ){
 \link{LayoutFormat}, \link{LayoutGlue}
 
 Other Appenders: 
+\code{\link{AppenderAsync}},
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
 \code{\link{AppenderElasticSearch}},

@@ -76,6 +76,7 @@ if (requireNamespace("RSQLite")){
 }
 \seealso{
 Other Appenders: 
+\code{\link{AppenderAsync}},
 \code{\link{AppenderDt}},
 \code{\link{AppenderElasticSearch}},
 \code{\link{AppenderGmail}},

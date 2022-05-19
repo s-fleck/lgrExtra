@@ -46,6 +46,7 @@ if (requireNamespace("sendmailR")){
 \link{LayoutFormat}, \link{LayoutGlue}
 
 Other Appenders: 
+\code{\link{AppenderAsync}},
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
 \code{\link{AppenderElasticSearch}},

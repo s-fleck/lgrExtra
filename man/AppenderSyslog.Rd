@@ -25,6 +25,7 @@ if (requireNamespace("rsyslog", quietly = TRUE) && Sys.info()[["sysname"]] == "L
 \link{LayoutFormat}, \link{LayoutJson}
 
 Other Appenders: 
+\code{\link{AppenderAsync}},
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
 \code{\link{AppenderElasticSearch}},

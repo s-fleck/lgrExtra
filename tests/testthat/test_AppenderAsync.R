@@ -50,8 +50,6 @@ for (plan_test in c("multisession", "multicore")){
       skip("'multicore' is not supported on system")
     }
 
-    plan_test <- "multisession"
-
     old_plan <- future::plan()
     future::plan(plan_test)
     sleepAppender <- AppenderSleepyFile$new(file = tempfile())
@@ -67,7 +65,9 @@ for (plan_test in c("multisession", "multicore")){
       lg$config(NULL)
     })
 
-    lg$info("sleepy test")
+    lg$info("sleepy test 1")
+    lg$info("sleepy test 2")
+    lg$info("sleepy test 3")
 
     # appender is sleeping in background
     readLines(sleepAppender$file)
@@ -78,7 +78,7 @@ for (plan_test in c("multisession", "multicore")){
 
     # appender should have resolved now
     expect_true(asyncAppender$resolved)
-    expect_length(readLines(sleepAppender$file), 1)
+    expect_length(readLines(sleepAppender$file), 3)
     expect_match(readLines(sleepAppender$file), "sleepy test")
   })
 }
