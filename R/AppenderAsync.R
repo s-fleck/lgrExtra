@@ -1,10 +1,10 @@
-#' Log to Async via futures
+#' Log to Async via last_future
 #'
 #' @description
 #' This Appender can be used as wrapper around another Appender to make it
 #' async (i.e. not block until the log message is written to the destination
-#' but rather return imediatly). This makes most sense for "slow" destinations
-#' like Databases or ElasticSearch.
+#' but rather return imediatly). As async logging has a noticable overheader,
+#' this makes most sense for "slow" destinations like Databases or ElasticSearch.
 #'
 #' **NOTE**: **Experimental**; not yet fully documented and and details are
 #' subject to change
@@ -35,7 +35,7 @@ AppenderAsync <- R6::R6Class(
       appender
     ){
       self$set_appender(appender)
-      private[[".futures"]] <- list()
+      private[[".last_future"]] <- list()
       self
     },
 
@@ -53,23 +53,8 @@ AppenderAsync <- R6::R6Class(
     },
 
     append = function(event){
-      self$prune_futures()
-      len <- length(private[[".futures"]])
-      private[[".futures"]][[len + 1L]] <- future::future(private[[".appender"]][["append"]](event))
-      private[[".futures"]]
-    },
-
-    prune_futures = function(){
-      for (i in rev(seq_along(private[[".futures"]]))){
-        if (identical(future::resolved(private[[".futures"]][[i]]), TRUE)){
-          private[[".futures"]][[i]] <- NULL
-        }
-      }
-    },
-
-    await = function(){
-      future::resolve(private[[".futures"]])
-      self
+      private[[".last_future"]][[1L]] <- promises::future_promise(private[[".appender"]][["append"]](event))
+      private[[".last_future"]]
     },
 
     format = function(
@@ -98,16 +83,16 @@ AppenderAsync <- R6::R6Class(
     #' @field layout the layout of the wrapped Appender
     layout = function() private[[".appender"]][["layout"]],
 
-    #' @field futures a list of futures, one for each ongoing `$append` operation
-    futures = function() private[[".futures"]],
+    #' @field last_future a list of last_future, one for each ongoing `$append` operation
+    last_future = function() private[[".last_future"]],
 
     #' @field appender the wrapped Appender
     appender = function() private[[".appender"]],
 
-    #' @field layout `logical` scalar. Whether or not all futures have resolved
+    #' @field layout `logical` scalar. Whether or not all last_future have resolved
     #'  (i.e. no log message is outstanding)
     resolved = function() {
-      for (el in private[[".futures"]]){
+      for (el in private[[".last_future"]]){
         if (identical(future::resolved(el), FALSE)){
           return (FALSE)
         }
@@ -118,7 +103,7 @@ AppenderAsync <- R6::R6Class(
 
   private = list(
     .appender = NULL,
-    .futures = NULL
+    .last_future = NULL
   )
 )
 
