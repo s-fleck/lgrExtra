@@ -35,6 +35,8 @@ AppenderAsync <- R6::R6Class(
       appender
     ){
       self$set_appender(appender)
+      private[[".futures"]] <- list()
+      self
     },
 
 
@@ -51,18 +53,23 @@ AppenderAsync <- R6::R6Class(
     },
 
     append = function(event){
-      len <- length(private[[".futures"]])
       self$prune_futures()
+      len <- length(private[[".futures"]])
       private[[".futures"]][[len + 1L]] <- future::future(private[[".appender"]][["append"]](event))
       private[[".futures"]]
     },
 
-    prune_futures = function(event){
+    prune_futures = function(){
       for (i in rev(seq_along(private[[".futures"]]))){
-        if (identical(future::resolved(private[[".futures"]][[i]]), FALSE)){
+        if (identical(future::resolved(private[[".futures"]][[i]]), TRUE)){
           private[[".futures"]][[i]] <- NULL
         }
       }
+    },
+
+    await = function(){
+      future::resolve(private[[".futures"]])
+      self
     },
 
     format = function(
@@ -114,3 +121,4 @@ AppenderAsync <- R6::R6Class(
     .futures = NULL
   )
 )
+
