@@ -39,7 +39,6 @@ AppenderAsync <- R6::R6Class(
       self
     },
 
-
     set_appender = function(appender){
       private[[".appender"]] <- appender
     },
@@ -53,8 +52,7 @@ AppenderAsync <- R6::R6Class(
     },
 
     append = function(event){
-      private[[".last_future"]][[1L]] <- promises::future_promise(private[[".appender"]][["append"]](event))
-      private[[".last_future"]]
+      future::future(private[[".appender"]][["append"]](event))
     },
 
     format = function(
@@ -106,4 +104,3 @@ AppenderAsync <- R6::R6Class(
     .last_future = NULL
   )
 )
-
