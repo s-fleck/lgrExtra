@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.7</span>
       </span>
     </div>
 
@@ -47,41 +47,46 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="va">cols</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.table</span>
-<span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="va">cols</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="va">cols</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="va">cols</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.table</span></span>
+<span><span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="va">cols</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="va">cols</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>a <code>data.frame</code></p></dd>
+
+
 <dt>cols</dt>
 <dd><p><code>character</code> vector. The names of the text columns containing
 JSON strings that should be expanded.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a <code>data.frame</code> with additional columns expanded from the columns
+    
+
+<p>a <code>data.frame</code> with additional columns expanded from the columns
 containing JSON</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span class="r-in">  name <span class="op">=</span> <span class="st">"example data"</span>,</span>
-<span class="r-in">  fields <span class="op">=</span> <span class="st">'{"letters":["a","b","c"], "LETTERS":["A","B","C"]}'</span>,</span>
-<span class="r-in">  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="st">"fields"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">res</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"example data"</span>,</span></span>
+<span class="r-in"><span>  fields <span class="op">=</span> <span class="st">'{"letters":["a","b","c"], "LETTERS":["A","B","C"]}'</span>,</span></span>
+<span class="r-in"><span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">unpack_json_cols</span><span class="op">(</span><span class="va">x</span>, <span class="st">"fields"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">res</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           name letters LETTERS</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 example data a, b, c A, B, C</span>
-<span class="r-in"><span class="va">res</span><span class="op">$</span><span class="va">letters</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span class="r-in"><span><span class="va">res</span><span class="op">$</span><span class="va">letters</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a" "b" "c"</span>
 </code></pre></div>
     </div>
@@ -97,7 +102,7 @@ containing JSON</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

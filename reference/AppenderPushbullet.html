@@ -22,7 +22,7 @@ events in case a fatal event is encountered."><!-- mathjax --><script src="https
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.7</span>
       </span>
     </div>
 
@@ -59,7 +59,9 @@ events in case a <code>fatal</code> event is encountered.</p>
 
     <div id="value">
     <h2>Value</h2>
-    <p>The <code>$new()</code> method returns an <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6</a> that inherits from
+    
+
+<p>The <code>$new()</code> method returns an <a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6</a> that inherits from
 <a href="https://s-fleck.github.io/lgr/reference/Appender.html" class="external-link">lgr::Appender</a> and can be uses as an appender by a <a href="https://s-fleck.github.io/lgr/reference/Logger.html" class="external-link">lgr::Logger</a>.</p>
     </div>
     <div id="see-also">
@@ -111,47 +113,47 @@ events in case a <code>fatal</code> event is encountered.</p>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>AppenderPushbullet$new()</code></a></p></li>
-<li><p><a href="#method-flush"><code>AppenderPushbullet$flush()</code></a></p></li>
-<li><p><a href="#method-set_apikey"><code>AppenderPushbullet$set_apikey()</code></a></p></li>
-<li><p><a href="#method-set_recipients"><code>AppenderPushbullet$set_recipients()</code></a></p></li>
-<li><p><a href="#method-set_email"><code>AppenderPushbullet$set_email()</code></a></p></li>
-<li><p><a href="#method-set_channel"><code>AppenderPushbullet$set_channel()</code></a></p></li>
-<li><p><a href="#method-set_devices"><code>AppenderPushbullet$set_devices()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter"><a href="../../lgr/html/Filterable.html#method-add_filter"><code>lgr::Filterable$add_filter()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter"><a href="../../lgr/html/Filterable.html#method-filter"><code>lgr::Filterable$filter()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter"><a href="../../lgr/html/Filterable.html#method-remove_filter"><code>lgr::Filterable$remove_filter()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters"><a href="../../lgr/html/Filterable.html#method-set_filters"><code>lgr::Filterable$set_filters()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout"><a href="../../lgr/html/Appender.html#method-set_layout"><code>lgr::Appender$set_layout()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold"><a href="../../lgr/html/Appender.html#method-set_threshold"><code>lgr::Appender$set_threshold()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append"><a href="../../lgr/html/AppenderMemory.html#method-append"><code>lgr::AppenderMemory$append()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear"><a href="../../lgr/html/AppenderMemory.html#method-clear"><code>lgr::AppenderMemory$clear()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format"><a href="../../lgr/html/AppenderMemory.html#method-format"><code>lgr::AppenderMemory$format()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size"><a href="../../lgr/html/AppenderMemory.html#method-set_buffer_size"><code>lgr::AppenderMemory$set_buffer_size()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit"><a href="../../lgr/html/AppenderMemory.html#method-set_flush_on_exit"><code>lgr::AppenderMemory$set_flush_on_exit()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate"><a href="../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate"><code>lgr::AppenderMemory$set_flush_on_rotate()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold"><a href="../../lgr/html/AppenderMemory.html#method-set_flush_threshold"><code>lgr::AppenderMemory$set_flush_threshold()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush"><a href="../../lgr/html/AppenderMemory.html#method-set_should_flush"><code>lgr::AppenderMemory$set_should_flush()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show"><a href="../../lgr/html/AppenderMemory.html#method-show"><code>lgr::AppenderMemory$show()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout"><a href="../../lgrExtra/html/AppenderDigest.html#method-set_subject_layout"><code>lgrExtra::AppenderDigest$set_subject_layout()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-AppenderPushbullet-new"><code>AppenderPushbullet$new()</code></a></p></li>
+<li><p><a href="#method-AppenderPushbullet-flush"><code>AppenderPushbullet$flush()</code></a></p></li>
+<li><p><a href="#method-AppenderPushbullet-set_apikey"><code>AppenderPushbullet$set_apikey()</code></a></p></li>
+<li><p><a href="#method-AppenderPushbullet-set_recipients"><code>AppenderPushbullet$set_recipients()</code></a></p></li>
+<li><p><a href="#method-AppenderPushbullet-set_email"><code>AppenderPushbullet$set_email()</code></a></p></li>
+<li><p><a href="#method-AppenderPushbullet-set_channel"><code>AppenderPushbullet$set_channel()</code></a></p></li>
+<li><p><a href="#method-AppenderPushbullet-set_devices"><code>AppenderPushbullet$set_devices()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter"><a href="../../lgr/html/Filterable.html#method-Filterable-add_filter"><code>lgr::Filterable$add_filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter"><a href="../../lgr/html/Filterable.html#method-Filterable-filter"><code>lgr::Filterable$filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter"><a href="../../lgr/html/Filterable.html#method-Filterable-remove_filter"><code>lgr::Filterable$remove_filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters"><a href="../../lgr/html/Filterable.html#method-Filterable-set_filters"><code>lgr::Filterable$set_filters()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout"><a href="../../lgr/html/Appender.html#method-Appender-set_layout"><code>lgr::Appender$set_layout()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold"><a href="../../lgr/html/Appender.html#method-Appender-set_threshold"><code>lgr::Appender$set_threshold()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-append"><code>lgr::AppenderMemory$append()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-clear"><code>lgr::AppenderMemory$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="format"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-format"><code>lgr::AppenderMemory$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_buffer_size"><code>lgr::AppenderMemory$set_buffer_size()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_flush_on_exit"><code>lgr::AppenderMemory$set_flush_on_exit()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_flush_on_rotate"><code>lgr::AppenderMemory$set_flush_on_rotate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_flush_threshold"><code>lgr::AppenderMemory$set_flush_threshold()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_should_flush"><code>lgr::AppenderMemory$set_should_flush()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show"><a href="../../lgr/html/AppenderMemory.html#method-AppenderMemory-show"><code>lgr::AppenderMemory$show()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout"><a href="../../lgrExtra/html/AppenderDigest.html#method-AppenderDigest-set_subject_layout"><code>lgrExtra::AppenderDigest$set_subject_layout()</code></a></span></li>
+</ul></details></p><hr><a id="method-AppenderPushbullet-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 
 <div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va"><a href="../reference/AppenderPushbullet.html">AppenderPushbullet</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
-  threshold <span class="op">=</span> <span class="cn">NA_integer_</span>,
-  flush_threshold <span class="op">=</span> <span class="st">"fatal"</span>,
-  layout <span class="op">=</span> <span class="va">LayoutFormat</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>fmt <span class="op">=</span> <span class="st">"%K  %t&gt; %m %f"</span>, timestamp_fmt <span class="op">=</span> <span class="st">"%H:%M:%S"</span><span class="op">)</span>,
-  subject_layout <span class="op">=</span> <span class="va">LayoutFormat</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>fmt <span class="op">=</span> <span class="st">"[LGR] %L: %m"</span><span class="op">)</span>,
-  buffer_size <span class="op">=</span> <span class="fl">6</span>,
-  recipients <span class="op">=</span> <span class="cn">NULL</span>,
-  email <span class="op">=</span> <span class="cn">NULL</span>,
-  channel <span class="op">=</span> <span class="cn">NULL</span>,
-  devices <span class="op">=</span> <span class="cn">NULL</span>,
-  apikey <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"rpushbullet.key"</span><span class="op">)</span>,
-  filters <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/AppenderPushbullet.html">AppenderPushbullet</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  threshold <span class="op">=</span> <span class="cn">NA_integer_</span>,</span>
+<span>  flush_threshold <span class="op">=</span> <span class="st">"fatal"</span>,</span>
+<span>  layout <span class="op">=</span> <span class="va">LayoutFormat</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>fmt <span class="op">=</span> <span class="st">"%K  %t&gt; %m %f"</span>, timestamp_fmt <span class="op">=</span> <span class="st">"%H:%M:%S"</span><span class="op">)</span>,</span>
+<span>  subject_layout <span class="op">=</span> <span class="va">LayoutFormat</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>fmt <span class="op">=</span> <span class="st">"[LGR] %L: %m"</span><span class="op">)</span>,</span>
+<span>  buffer_size <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>  recipients <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  email <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  channel <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  devices <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  apikey <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"rpushbullet.key"</span><span class="op">)</span>,</span>
+<span>  filters <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -171,57 +173,57 @@ events in case a <code>fatal</code> event is encountered.</p>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-flush"></a><div class="section">
+</div><p></p><hr><a id="method-AppenderPushbullet-flush"></a><div class="section">
 <h3 id="method-flush-">Method <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">flush()</a></code><a class="anchor" aria-label="anchor" href="#method-flush-"></a></h3>
 
 <div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">flush</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">flush</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-set_apikey"></a><div class="section">
+</div><p></p><hr><a id="method-AppenderPushbullet-set_apikey"></a><div class="section">
 <h3 id="method-set-apikey-">Method <code>set_apikey()</code><a class="anchor" aria-label="anchor" href="#method-set-apikey-"></a></h3>
 
 <div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_apikey</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_apikey</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-set_recipients"></a><div class="section">
+</div><p></p><hr><a id="method-AppenderPushbullet-set_recipients"></a><div class="section">
 <h3 id="method-set-recipients-">Method <code>set_recipients()</code><a class="anchor" aria-label="anchor" href="#method-set-recipients-"></a></h3>
 
 <div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_recipients</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_recipients</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-set_email"></a><div class="section">
+</div><p></p><hr><a id="method-AppenderPushbullet-set_email"></a><div class="section">
 <h3 id="method-set-email-">Method <code>set_email()</code><a class="anchor" aria-label="anchor" href="#method-set-email-"></a></h3>
 
 <div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_email</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_email</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-set_channel"></a><div class="section">
+</div><p></p><hr><a id="method-AppenderPushbullet-set_channel"></a><div class="section">
 <h3 id="method-set-channel-">Method <code>set_channel()</code><a class="anchor" aria-label="anchor" href="#method-set-channel-"></a></h3>
 
 <div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_channel</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_channel</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-set_devices"></a><div class="section">
+</div><p></p><hr><a id="method-AppenderPushbullet-set_devices"></a><div class="section">
 <h3 id="method-set-devices-">Method <code>set_devices()</code><a class="anchor" aria-label="anchor" href="#method-set-devices-"></a></h3>
 
 <div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_devices</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">set_devices</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
@@ -231,19 +233,18 @@ events in case a <code>fatal</code> event is encountered.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"RPushbullet"</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"rpushbullet.key"</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span><span class="op">{</span></span>
-<span class="r-in">  <span class="va">app</span> <span class="op">&lt;-</span> <span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu">lgr</span><span class="fu">::</span><span class="fu"><a href="https://s-fleck.github.io/lgr/reference/get_logger.html" class="external-link">get_logger</a></span><span class="op">(</span><span class="st">"test/dbi"</span><span class="op">)</span><span class="op">$</span></span>
-<span class="r-in">    <span class="fu">add_appender</span><span class="op">(</span><span class="va">app</span>, <span class="st">"pb"</span><span class="op">)</span><span class="op">$</span></span>
-<span class="r-in">    <span class="fu">set_propagate</span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="va">lg</span><span class="op">$</span><span class="fu">fatal</span><span class="op">(</span><span class="st">"info"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">lg</span><span class="op">$</span><span class="fu">fatal</span><span class="op">(</span><span class="st">"test"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="va">lg</span><span class="op">$</span><span class="fu">config</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: RPushbullet</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"RPushbullet"</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"rpushbullet.key"</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">app</span> <span class="op">&lt;-</span> <span class="va">AppenderPushbullet</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu">lgr</span><span class="fu">::</span><span class="fu"><a href="https://s-fleck.github.io/lgr/reference/get_logger.html" class="external-link">get_logger</a></span><span class="op">(</span><span class="st">"test/dbi"</span><span class="op">)</span><span class="op">$</span></span></span>
+<span class="r-in"><span>    <span class="fu">add_appender</span><span class="op">(</span><span class="va">app</span>, <span class="st">"pb"</span><span class="op">)</span><span class="op">$</span></span></span>
+<span class="r-in"><span>    <span class="fu">set_propagate</span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="va">lg</span><span class="op">$</span><span class="fu">fatal</span><span class="op">(</span><span class="st">"info"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">lg</span><span class="op">$</span><span class="fu">fatal</span><span class="op">(</span><span class="st">"test"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="va">lg</span><span class="op">$</span><span class="fu">config</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -258,7 +259,7 @@ events in case a <code>fatal</code> event is encountered.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
