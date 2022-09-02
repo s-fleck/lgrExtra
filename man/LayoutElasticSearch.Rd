@@ -32,23 +32,23 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LayoutElasticSearch$new()}}
-\item \href{#method-format_event}{\code{LayoutElasticSearch$format_event()}}
-\item \href{#method-set_toJSON_args}{\code{LayoutElasticSearch$set_toJSON_args()}}
-\item \href{#method-set_transform_event}{\code{LayoutElasticSearch$set_transform_event()}}
-\item \href{#method-clone}{\code{LayoutElasticSearch$clone()}}
+\item \href{#method-LayoutElasticSearch-new}{\code{LayoutElasticSearch$new()}}
+\item \href{#method-LayoutElasticSearch-format_event}{\code{LayoutElasticSearch$format_event()}}
+\item \href{#method-LayoutElasticSearch-set_toJSON_args}{\code{LayoutElasticSearch$set_toJSON_args()}}
+\item \href{#method-LayoutElasticSearch-set_transform_event}{\code{LayoutElasticSearch$set_transform_event()}}
+\item \href{#method-LayoutElasticSearch-clone}{\code{LayoutElasticSearch$clone()}}
 }
 }
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="toString">}\href{../../lgr/html/Layout.html#method-toString}{\code{lgr::Layout$toString()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="toString"><a href='../../lgr/html/Layout.html#method-Layout-toString'><code>lgr::Layout$toString()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LayoutElasticSearch-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutElasticSearch-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$new(
@@ -59,8 +59,8 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-format_event"></a>}}
-\if{latex}{\out{\hypertarget{method-format_event}{}}}
+\if{html}{\out{<a id="method-LayoutElasticSearch-format_event"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutElasticSearch-format_event}{}}}
 \subsection{Method \code{format_event()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$format_event(event)}\if{html}{\out{</div>}}
@@ -68,8 +68,8 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_toJSON_args"></a>}}
-\if{latex}{\out{\hypertarget{method-set_toJSON_args}{}}}
+\if{html}{\out{<a id="method-LayoutElasticSearch-set_toJSON_args"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutElasticSearch-set_toJSON_args}{}}}
 \subsection{Method \code{set_toJSON_args()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$set_toJSON_args(x)}\if{html}{\out{</div>}}
@@ -77,8 +77,8 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_transform_event"></a>}}
-\if{latex}{\out{\hypertarget{method-set_transform_event}{}}}
+\if{html}{\out{<a id="method-LayoutElasticSearch-set_transform_event"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutElasticSearch-set_transform_event}{}}}
 \subsection{Method \code{set_transform_event()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutElasticSearch$set_transform_event(x)}\if{html}{\out{</div>}}
@@ -86,8 +86,8 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LayoutElasticSearch-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutElasticSearch-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

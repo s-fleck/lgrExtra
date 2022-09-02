@@ -2,5 +2,4 @@
 
 0 errors | 0 warnings | 0 notes
 
-* Added AppenderElasticSearch
-* Fix some outdated documentation
+* Rebuild docs for R 4.2.0

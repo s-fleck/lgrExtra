@@ -20,12 +20,12 @@ SerializerJson$new()
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-clone}{\code{Serializer$clone()}}
+\item \href{#method-Serializer-clone}{\code{Serializer$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-Serializer-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-Serializer-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
@@ -47,20 +47,14 @@ The objects of this class are cloneable with this method.
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{SerializerJson$new()}}
-\item \href{#method-serialize}{\code{SerializerJson$serialize()}}
-\item \href{#method-clone}{\code{SerializerJson$clone()}}
+\item \href{#method-SerializerJson-new}{\code{SerializerJson$new()}}
+\item \href{#method-SerializerJson-serialize}{\code{SerializerJson$serialize()}}
+\item \href{#method-SerializerJson-clone}{\code{SerializerJson$clone()}}
 }
-}
-\if{html}{
-\out{<details open ><summary>Inherited methods</summary>}
-\itemize{
-}
-\out{</details>}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-SerializerJson-new"></a>}}
+\if{latex}{\out{\hypertarget{method-SerializerJson-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SerializerJson$new(
@@ -74,8 +68,8 @@ The objects of this class are cloneable with this method.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-serialize"></a>}}
-\if{latex}{\out{\hypertarget{method-serialize}{}}}
+\if{html}{\out{<a id="method-SerializerJson-serialize"></a>}}
+\if{latex}{\out{\hypertarget{method-SerializerJson-serialize}{}}}
 \subsection{Method \code{serialize()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SerializerJson$serialize(event)}\if{html}{\out{</div>}}
@@ -83,8 +77,8 @@ The objects of this class are cloneable with this method.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-SerializerJson-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-SerializerJson-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

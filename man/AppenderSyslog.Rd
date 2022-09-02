@@ -60,28 +60,28 @@ mapping lgr \link{log_levels} to rsyslog log levels. See
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{AppenderSyslog$new()}}
-\item \href{#method-append}{\code{AppenderSyslog$append()}}
-\item \href{#method-set_syslog_levels}{\code{AppenderSyslog$set_syslog_levels()}}
-\item \href{#method-set_identifier}{\code{AppenderSyslog$set_identifier()}}
+\item \href{#method-AppenderSyslog-new}{\code{AppenderSyslog$new()}}
+\item \href{#method-AppenderSyslog-append}{\code{AppenderSyslog$append()}}
+\item \href{#method-AppenderSyslog-set_syslog_levels}{\code{AppenderSyslog$set_syslog_levels()}}
+\item \href{#method-AppenderSyslog-set_identifier}{\code{AppenderSyslog$set_identifier()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter">}\href{../../lgr/html/Filterable.html#method-add_filter}{\code{lgr::Filterable$add_filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter">}\href{../../lgr/html/Filterable.html#method-filter}{\code{lgr::Filterable$filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter">}\href{../../lgr/html/Filterable.html#method-remove_filter}{\code{lgr::Filterable$remove_filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters">}\href{../../lgr/html/Filterable.html#method-set_filters}{\code{lgr::Filterable$set_filters()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="format">}\href{../../lgr/html/Appender.html#method-format}{\code{lgr::Appender$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout">}\href{../../lgr/html/Appender.html#method-set_layout}{\code{lgr::Appender$set_layout()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter"><a href='../../lgr/html/Filterable.html#method-Filterable-add_filter'><code>lgr::Filterable$add_filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter"><a href='../../lgr/html/Filterable.html#method-Filterable-filter'><code>lgr::Filterable$filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter"><a href='../../lgr/html/Filterable.html#method-Filterable-remove_filter'><code>lgr::Filterable$remove_filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters"><a href='../../lgr/html/Filterable.html#method-Filterable-set_filters'><code>lgr::Filterable$set_filters()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="format"><a href='../../lgr/html/Appender.html#method-Appender-format'><code>lgr::Appender$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout"><a href='../../lgr/html/Appender.html#method-Appender-set_layout'><code>lgr::Appender$set_layout()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold"><a href='../../lgr/html/Appender.html#method-Appender-set_threshold'><code>lgr::Appender$set_threshold()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-AppenderSyslog-new"></a>}}
+\if{latex}{\out{\hypertarget{method-AppenderSyslog-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderSyslog$new(
@@ -96,8 +96,8 @@ mapping lgr \link{log_levels} to rsyslog log levels. See
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-append"></a>}}
-\if{latex}{\out{\hypertarget{method-append}{}}}
+\if{html}{\out{<a id="method-AppenderSyslog-append"></a>}}
+\if{latex}{\out{\hypertarget{method-AppenderSyslog-append}{}}}
 \subsection{Method \code{append()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderSyslog$append(event)}\if{html}{\out{</div>}}
@@ -105,8 +105,8 @@ mapping lgr \link{log_levels} to rsyslog log levels. See
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_syslog_levels"></a>}}
-\if{latex}{\out{\hypertarget{method-set_syslog_levels}{}}}
+\if{html}{\out{<a id="method-AppenderSyslog-set_syslog_levels"></a>}}
+\if{latex}{\out{\hypertarget{method-AppenderSyslog-set_syslog_levels}{}}}
 \subsection{Method \code{set_syslog_levels()}}{
 Define conversion between lgr and syslog log levels
 \subsection{Usage}{
@@ -127,8 +127,8 @@ returns a \code{character} vector of log levels for \code{\link[rsyslog:syslog]{
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_identifier"></a>}}
-\if{latex}{\out{\hypertarget{method-set_identifier}{}}}
+\if{html}{\out{<a id="method-AppenderSyslog-set_identifier"></a>}}
+\if{latex}{\out{\hypertarget{method-AppenderSyslog-set_identifier}{}}}
 \subsection{Method \code{set_identifier()}}{
 Set a string to identify the process.
 \subsection{Usage}{

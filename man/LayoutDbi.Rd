@@ -104,29 +104,29 @@ to JSON strings}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{LayoutDbi$new()}}
-\item \href{#method-set_col_types}{\code{LayoutDbi$set_col_types()}}
-\item \href{#method-set_serialized_cols}{\code{LayoutDbi$set_serialized_cols()}}
-\item \href{#method-sql_create_table}{\code{LayoutDbi$sql_create_table()}}
-\item \href{#method-toString}{\code{LayoutDbi$toString()}}
-\item \href{#method-clone}{\code{LayoutDbi$clone()}}
+\item \href{#method-LayoutDbi-new}{\code{LayoutDbi$new()}}
+\item \href{#method-LayoutDbi-set_col_types}{\code{LayoutDbi$set_col_types()}}
+\item \href{#method-LayoutDbi-set_serialized_cols}{\code{LayoutDbi$set_serialized_cols()}}
+\item \href{#method-LayoutDbi-sql_create_table}{\code{LayoutDbi$sql_create_table()}}
+\item \href{#method-LayoutDbi-toString}{\code{LayoutDbi$toString()}}
+\item \href{#method-LayoutDbi-clone}{\code{LayoutDbi$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="format_event">}\href{../../lgr/html/LayoutFormat.html#method-format_event}{\code{lgr::LayoutFormat$format_event()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="read">}\href{../../lgr/html/LayoutFormat.html#method-read}{\code{lgr::LayoutFormat$read()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_colors">}\href{../../lgr/html/LayoutFormat.html#method-set_colors}{\code{lgr::LayoutFormat$set_colors()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_fmt">}\href{../../lgr/html/LayoutFormat.html#method-set_fmt}{\code{lgr::LayoutFormat$set_fmt()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_pad_levels">}\href{../../lgr/html/LayoutFormat.html#method-set_pad_levels}{\code{lgr::LayoutFormat$set_pad_levels()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_timestamp_fmt">}\href{../../lgr/html/LayoutFormat.html#method-set_timestamp_fmt}{\code{lgr::LayoutFormat$set_timestamp_fmt()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="format_event"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-format_event'><code>lgr::LayoutFormat$format_event()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="read"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-read'><code>lgr::LayoutFormat$read()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_colors"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-set_colors'><code>lgr::LayoutFormat$set_colors()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_fmt"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-set_fmt'><code>lgr::LayoutFormat$set_fmt()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_pad_levels"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-set_pad_levels'><code>lgr::LayoutFormat$set_pad_levels()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_timestamp_fmt"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-set_timestamp_fmt'><code>lgr::LayoutFormat$set_timestamp_fmt()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-LayoutDbi-new"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutDbi-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$new(
@@ -145,8 +145,8 @@ to JSON strings}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_col_types"></a>}}
-\if{latex}{\out{\hypertarget{method-set_col_types}{}}}
+\if{html}{\out{<a id="method-LayoutDbi-set_col_types"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutDbi-set_col_types}{}}}
 \subsection{Method \code{set_col_types()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$set_col_types(x)}\if{html}{\out{</div>}}
@@ -154,8 +154,8 @@ to JSON strings}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-set_serialized_cols"></a>}}
-\if{latex}{\out{\hypertarget{method-set_serialized_cols}{}}}
+\if{html}{\out{<a id="method-LayoutDbi-set_serialized_cols"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutDbi-set_serialized_cols}{}}}
 \subsection{Method \code{set_serialized_cols()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$set_serialized_cols(x)}\if{html}{\out{</div>}}
@@ -163,8 +163,8 @@ to JSON strings}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-sql_create_table"></a>}}
-\if{latex}{\out{\hypertarget{method-sql_create_table}{}}}
+\if{html}{\out{<a id="method-LayoutDbi-sql_create_table"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutDbi-sql_create_table}{}}}
 \subsection{Method \code{sql_create_table()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$sql_create_table(table)}\if{html}{\out{</div>}}
@@ -172,8 +172,8 @@ to JSON strings}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-toString"></a>}}
-\if{latex}{\out{\hypertarget{method-toString}{}}}
+\if{html}{\out{<a id="method-LayoutDbi-toString"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutDbi-toString}{}}}
 \subsection{Method \code{toString()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$toString()}\if{html}{\out{</div>}}
@@ -181,8 +181,8 @@ to JSON strings}
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-LayoutDbi-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutDbi-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

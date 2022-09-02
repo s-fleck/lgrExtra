@@ -1,7 +1,7 @@
 Type: Package
 Package: lgrExtra
 Title: Extra Appenders for 'lgr'
-Version: 0.0.6
+Version: 0.0.7
 Authors@R: 
     person("Stefan", "Fleck", , "stefan.b.fleck@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3344-9851"))
@@ -29,4 +29,4 @@ Suggests:
     testthat
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1.9000

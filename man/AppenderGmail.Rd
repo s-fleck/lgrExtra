@@ -36,40 +36,40 @@ Other Appenders:
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{AppenderGmail$new()}}
-\item \href{#method-flush}{\code{AppenderGmail$flush()}}
+\item \href{#method-AppenderGmail-new}{\code{AppenderGmail$new()}}
+\item \href{#method-AppenderGmail-flush}{\code{AppenderGmail$flush()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter">}\href{../../lgr/html/Filterable.html#method-add_filter}{\code{lgr::Filterable$add_filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter">}\href{../../lgr/html/Filterable.html#method-filter}{\code{lgr::Filterable$filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter">}\href{../../lgr/html/Filterable.html#method-remove_filter}{\code{lgr::Filterable$remove_filter()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters">}\href{../../lgr/html/Filterable.html#method-set_filters}{\code{lgr::Filterable$set_filters()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout">}\href{../../lgr/html/Appender.html#method-set_layout}{\code{lgr::Appender$set_layout()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold">}\href{../../lgr/html/Appender.html#method-set_threshold}{\code{lgr::Appender$set_threshold()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append">}\href{../../lgr/html/AppenderMemory.html#method-append}{\code{lgr::AppenderMemory$append()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear">}\href{../../lgr/html/AppenderMemory.html#method-clear}{\code{lgr::AppenderMemory$clear()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size">}\href{../../lgr/html/AppenderMemory.html#method-set_buffer_size}{\code{lgr::AppenderMemory$set_buffer_size()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_exit}{\code{lgr::AppenderMemory$set_flush_on_exit()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_on_rotate}{\code{lgr::AppenderMemory$set_flush_on_rotate()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold">}\href{../../lgr/html/AppenderMemory.html#method-set_flush_threshold}{\code{lgr::AppenderMemory$set_flush_threshold()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush">}\href{../../lgr/html/AppenderMemory.html#method-set_should_flush}{\code{lgr::AppenderMemory$set_should_flush()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show">}\href{../../lgr/html/AppenderMemory.html#method-show}{\code{lgr::AppenderMemory$show()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout">}\href{../../lgrExtra/html/AppenderDigest.html#method-set_subject_layout}{\code{lgrExtra::AppenderDigest$set_subject_layout()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="format">}\href{../../lgrExtra/html/AppenderMail.html#method-format}{\code{lgrExtra::AppenderMail$format()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_bcc">}\href{../../lgrExtra/html/AppenderMail.html#method-set_bcc}{\code{lgrExtra::AppenderMail$set_bcc()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_cc">}\href{../../lgrExtra/html/AppenderMail.html#method-set_cc}{\code{lgrExtra::AppenderMail$set_cc()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_from">}\href{../../lgrExtra/html/AppenderMail.html#method-set_from}{\code{lgrExtra::AppenderMail$set_from()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_html">}\href{../../lgrExtra/html/AppenderMail.html#method-set_html}{\code{lgrExtra::AppenderMail$set_html()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_to">}\href{../../lgrExtra/html/AppenderMail.html#method-set_to}{\code{lgrExtra::AppenderMail$set_to()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="add_filter"><a href='../../lgr/html/Filterable.html#method-Filterable-add_filter'><code>lgr::Filterable$add_filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="filter"><a href='../../lgr/html/Filterable.html#method-Filterable-filter'><code>lgr::Filterable$filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="remove_filter"><a href='../../lgr/html/Filterable.html#method-Filterable-remove_filter'><code>lgr::Filterable$remove_filter()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Filterable" data-id="set_filters"><a href='../../lgr/html/Filterable.html#method-Filterable-set_filters'><code>lgr::Filterable$set_filters()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_layout"><a href='../../lgr/html/Appender.html#method-Appender-set_layout'><code>lgr::Appender$set_layout()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Appender" data-id="set_threshold"><a href='../../lgr/html/Appender.html#method-Appender-set_threshold'><code>lgr::Appender$set_threshold()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="append"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-append'><code>lgr::AppenderMemory$append()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="clear"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-clear'><code>lgr::AppenderMemory$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_buffer_size"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_buffer_size'><code>lgr::AppenderMemory$set_buffer_size()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_exit"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_flush_on_exit'><code>lgr::AppenderMemory$set_flush_on_exit()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_on_rotate"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_flush_on_rotate'><code>lgr::AppenderMemory$set_flush_on_rotate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_flush_threshold"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_flush_threshold'><code>lgr::AppenderMemory$set_flush_threshold()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="set_should_flush"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-set_should_flush'><code>lgr::AppenderMemory$set_should_flush()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="AppenderMemory" data-id="show"><a href='../../lgr/html/AppenderMemory.html#method-AppenderMemory-show'><code>lgr::AppenderMemory$show()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderDigest" data-id="set_subject_layout"><a href='../../lgrExtra/html/AppenderDigest.html#method-AppenderDigest-set_subject_layout'><code>lgrExtra::AppenderDigest$set_subject_layout()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="format"><a href='../../lgrExtra/html/AppenderMail.html#method-AppenderMail-format'><code>lgrExtra::AppenderMail$format()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_bcc"><a href='../../lgrExtra/html/AppenderMail.html#method-AppenderMail-set_bcc'><code>lgrExtra::AppenderMail$set_bcc()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_cc"><a href='../../lgrExtra/html/AppenderMail.html#method-AppenderMail-set_cc'><code>lgrExtra::AppenderMail$set_cc()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_from"><a href='../../lgrExtra/html/AppenderMail.html#method-AppenderMail-set_from'><code>lgrExtra::AppenderMail$set_from()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_html"><a href='../../lgrExtra/html/AppenderMail.html#method-AppenderMail-set_html'><code>lgrExtra::AppenderMail$set_html()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="lgrExtra" data-topic="AppenderMail" data-id="set_to"><a href='../../lgrExtra/html/AppenderMail.html#method-AppenderMail-set_to'><code>lgrExtra::AppenderMail$set_to()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-AppenderGmail-new"></a>}}
+\if{latex}{\out{\hypertarget{method-AppenderGmail-new}{}}}
 \subsection{Method \code{new()}}{
 see \link{AppenderMail} for details
 \subsection{Usage}{
@@ -90,8 +90,8 @@ see \link{AppenderMail} for details
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-flush"></a>}}
-\if{latex}{\out{\hypertarget{method-flush}{}}}
+\if{html}{\out{<a id="method-AppenderGmail-flush"></a>}}
+\if{latex}{\out{\hypertarget{method-AppenderGmail-flush}{}}}
 \subsection{Method \code{flush()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderGmail$flush()}\if{html}{\out{</div>}}
