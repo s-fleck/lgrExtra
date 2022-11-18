@@ -249,3 +249,50 @@ test_that("AppenderElasticSearch$get_data() return_type works", {
   expect_true("hits" %in% names(app$get_data(result_type = "list")))
   expect_type(app$get_data(result_type = "json"), "character")
 })
+
+
+
+
+test_that("AppenderElasticSearch basic logging works", {
+
+  # arrange
+  con <- elastic::connect("127.0.0.1", user = Sys.getenv("ELASTIC_USER"), pwd = Sys.getenv("ELASTIC_PASSWORD"))
+
+  indices <- c("index-1", "index-2")
+  sel_index <- 1
+  index <- function() indices[[sel_index]]
+
+  on.exit({
+    try(elastic::index_delete(con, index1name))
+    try(elastic::index_delete(con, index2name))
+    lg$config(NULL)
+  })
+
+  app <- AppenderElasticSearch$new(con, index)
+
+  lg <-
+    get_logger("test/AppenderElasticSearch")$
+    add_appender(app)$
+    set_propagate(FALSE)$
+    set_threshold(NA)
+
+  # act
+  expect_identical(app$index, indices[[1]])
+  msg1 <- "this should end up in index-1"
+  lg$fatal(msg1, error = "404")
+  app$flush()
+
+  sel_index <- 2
+  expect_identical(app$index, indices[[2]])
+  msg2 <- "this should end up in index-2"
+  lg$fatal(msg2, foo = "asf")
+  app$flush()
+
+  Sys.sleep(1)
+
+  # assert
+  log1 <- elastic::Search(con, indices[[1]], body = '{"query": {"match_all": {}} }')$hits$hits
+  log2 <- elastic::Search(con, indices[[2]], body = '{"query": {"match_all": {}} }')$hits$hits
+  expect_identical(log1[[1]][["_source"]][["msg"]], msg1)
+  expect_identical(log2[[1]][["_source"]][["msg"]], msg2)
+})

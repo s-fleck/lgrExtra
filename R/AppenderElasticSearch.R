@@ -56,10 +56,8 @@ AppenderElasticSearch <- R6::R6Class(
       self$set_close_on_exit(close_on_exit)
 
       # index columns
-      if (elastic::index_exists(self$conn, self$index)){
-        # do nothing
-      } else if (is.null(self$layout$col_types)) {
-        elastic::index_create(conn, index = index)
+      if (!elastic::index_exists(self$conn, self$index)){
+        elastic::index_create(conn, index = self$index)
       }
 
       self
@@ -193,7 +191,12 @@ AppenderElasticSearch <- R6::R6Class(
 
       if (length(buffer)){
         # convert to data.frame (docs_bulk_index needs it that way)
-          index  <- get("index", envir = self)
+          index <- get("index", envir = self)
+          conn  <- get("conn", envir = self)
+
+          if (!elastic::index_exists(conn, index)){
+            elastic::index_create(conn, index = index)
+          }
 
           # manually prepare data for bulk api so that we have more control
           # (esp. don't write NULL to empty fields but leave them out instead)
@@ -214,9 +217,9 @@ AppenderElasticSearch <- R6::R6Class(
 
         # insert into ES
           res <- suppressWarnings(elastic::docs_bulk(
-            conn = self[["conn"]],
+            conn = conn,
             x = tf,
-            index = self[["index"]],
+            index = index,
             quiet = TRUE
           ))
 
@@ -253,10 +256,20 @@ AppenderElasticSearch <- R6::R6Class(
       private$.close_on_exit
     },
 
-    #' @field index a `character` scalar or a [DBI::Id] specifying the target
-    #'   ElasticSearch index
+    #' @field index target ElasticSearch index. May either be:
+    #'   * a `character` scalar, or
+    #'   * a `function` returning a `character` scalar
     index = function(){
-      get(".index", envir = private)
+      res <- get(".index", envir = private)
+      if (is.function(res)){
+        res <- format(res())
+        assert(
+          is_scalar_character(res) && !anyNA(res),
+          "If `index` is a function it must return a `character` scalar or",
+          "something that can be interpreted as one"
+        )
+      }
+      res
     }
   ),
 
@@ -272,7 +285,7 @@ AppenderElasticSearch <- R6::R6Class(
     },
 
     set_index = function(index){
-      assert(is_scalar_character(index))
+      assert(is_scalar_character(index) || is.function(index))
       private[[".index"]] <- index
       self
     },
