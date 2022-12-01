@@ -120,9 +120,9 @@ AppenderDbi <- R6::R6Class(
         # do nothing
       } else if (is.null(self$layout$col_types)) {
         stop(AppenderConfigDoesNotMatchDbTableError(
-          "table `%s` does not exist and no col_types were specified in `layout`"),
+          "table `%s` does not exist and no col_types were specified in `layout`",
           self$table_name
-        )
+        ))
 
       } else {
         ct <- layout$col_types
