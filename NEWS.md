@@ -1,5 +1,10 @@
 # lgrExtra 0.0.7
 
+* Support functions for index names and index mappings in AppenderElasticSearch
+
+
+# lgrExtra 0.0.7
+
 * Rebuild docs for R 4.2.0
 
 
