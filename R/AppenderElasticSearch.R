@@ -26,7 +26,7 @@ AppenderElasticSearch <- R6::R6Class(
     index,
     threshold = NA_integer_,
     layout = LayoutElasticSearch$new(),
-    close_on_exit = TRUE,
+    index_create_body = NULL,
     buffer_size = 0,
     flush_threshold = "error",
     flush_on_exit = TRUE,
@@ -53,23 +53,15 @@ AppenderElasticSearch <- R6::R6Class(
       # database
       self$set_conn(conn)
       private$set_index(index)
-      self$set_close_on_exit(close_on_exit)
+      private$set_index_create_body(index_create_body)
 
       # index columns
       if (!elastic::index_exists(self$conn, self$index)){
-        elastic::index_create(conn, index = self$index)
+        elastic::index_create(conn, index = self$index, body = self$index_create_body)
       }
 
       self
     },
-
-
-    set_close_on_exit = function(x){
-      assert(is_scalar_bool(x))
-      private$.close_on_exit <- x
-      invisible(self)
-    },
-
 
     set_conn = function(conn){
       assert(inherits(conn, "Elasticsearch"))
@@ -195,7 +187,7 @@ AppenderElasticSearch <- R6::R6Class(
           conn  <- get("conn", envir = self)
 
           if (!elastic::index_exists(conn, index)){
-            elastic::index_create(conn, index = index)
+            elastic::index_create(conn, index = index, body = self$index_create_body)
           }
 
           # manually prepare data for bulk api so that we have more control
@@ -250,12 +242,6 @@ AppenderElasticSearch <- R6::R6Class(
     },
 
 
-    #' @field close_on_exit `TRUE` or `FALSE`. Close the ElasticSearch connection
-    #'   when the Logger is removed?
-    close_on_exit = function(){
-      private$.close_on_exit
-    },
-
     #' @field index target ElasticSearch index. May either be:
     #'   * a `character` scalar, or
     #'   * a `function` returning a `character` scalar
@@ -263,12 +249,40 @@ AppenderElasticSearch <- R6::R6Class(
       res <- get(".index", envir = private)
       if (is.function(res)){
         res <- format(res())
-        assert(
-          is_scalar_character(res) && !anyNA(res),
-          "If `index` is a function it must return a `character` scalar or",
-          "something that can be interpreted as one"
-        )
       }
+
+      assert(
+        is_scalar_character(res) && !anyNA(res),
+        "If `index` is a function it must return a `character` scalar or",
+        "something that can be interpreted as one"
+      )
+
+      res
+    },
+
+    #' @field index_create_body
+    #' * `character` scalar json string (or `NULL`).
+    #' * a `function` returning a `character` scalar json string (or `NULL`)
+    #' Optional settings,
+    #' mappings, aliases, etc... in case the target index has to be created
+    #' by the logger. See \url{https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html}
+    index_create_body = function(){
+      res <- get(".index_create_body", envir = private)
+
+      if (is.function(res)){
+        res <- res()
+      }
+
+      if (is.null(res)){
+        return(NULL)
+      }
+
+      assert(
+        is_scalar_character(res) && !anyNA(res),
+        "If `index` is a function it must return a `character` scalar or",
+        "something that can be interpreted as one"
+      )
+
       res
     }
   ),
@@ -278,10 +292,6 @@ AppenderElasticSearch <- R6::R6Class(
     finalize = function() {
       if (self$flush_on_exit)
         self$flush()
-
-      if (self$close_on_exit){
-        suppressWarnings(try(DBI::dbDisconnect(private$.conn), silent = TRUE))
-      }
     },
 
     set_index = function(index){
@@ -290,9 +300,15 @@ AppenderElasticSearch <- R6::R6Class(
       self
     },
 
+    set_index_create_body = function(body){
+      assert(is.null(body) || is_scalar_character(body) || is.function(body))
+      private[[".index_create_body"]] <- body
+      self
+    },
+
     .conn = NULL,
     .index = NULL,
-    .close_on_exit = NULL
+    .index_create_body = NULL
   )
 )
 
