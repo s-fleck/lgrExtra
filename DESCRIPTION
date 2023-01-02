@@ -11,7 +11,8 @@ Description: Additional appenders for the logging package 'lgr' that
 License: MIT + file LICENSE
 Imports:
     data.table,
-    lgr
+    lgr,
+    R6
 Suggests: 
     covr,
     DBI,
