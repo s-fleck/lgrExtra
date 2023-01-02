@@ -19,3 +19,11 @@ NULL
     envir = parent.env(environment())
   )
 }
+
+
+
+# for R CMD Check
+r6_import_workaround <- function(){
+  R6::is.R6(NULL)
+  NULL
+}
