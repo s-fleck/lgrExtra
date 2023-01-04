@@ -182,14 +182,14 @@ AppenderElasticSearch <- R6::R6Class(
       buffer <- get("buffer_events", envir = self)
 
       if (length(buffer)){
-        # convert to data.frame (docs_bulk_index needs it that way)
-          index <- get("index", envir = self)
-          conn  <- get("conn", envir = self)
+        index <- get("index", envir = self)
+        conn  <- get("conn", envir = self)
 
-          if (!elastic::index_exists(conn, index)){
-            elastic::index_create(conn, index = index, body = self$index_create_body)
-          }
+        if (!elastic::index_exists(conn, index)){
+          elastic::index_create(conn, index = index, body = self$index_create_body)
+        }
 
+        # prep for bulk api
           # manually prepare data for bulk api so that we have more control
           # (esp. don't write NULL to empty fields but leave them out instead)
           # bulk API wants one line of metadata followed by the actual data
