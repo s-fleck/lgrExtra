@@ -1,4 +1,8 @@
-# lgrExtra 0.0.7
+# lgrExtra 0.0.9
+
+* add AppenderAWSCloudWatchLog for logging to [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) (#9)
+
+# lgrExtra 0.0.8
 
 * Support functions for index names and index mappings in AppenderElasticSearch
 
