@@ -244,8 +244,8 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
       })
     },
 
-    unique_string = function(){
-      paste(sample(c(1:9, letters), size = 8, replace = T), collapse = "")
+    unique_string = function(size = 8){
+      paste(sample(c(0:9, letters), size = size, replace = T), collapse = "")
     },
 
     .client = NULL,
