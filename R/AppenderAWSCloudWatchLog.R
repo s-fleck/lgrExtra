@@ -1,7 +1,7 @@
 # AppenderAWSCloudWatchLog -------------------------------------------------------------
 
 
-#' Log to databases via DBI
+#' Log to AWS CloudWatch Logs
 #'
 #' @description
 #'
@@ -48,13 +48,15 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
   cloneable = FALSE,
   public = list(
 
-    #' @param conn,table see section *Fields*
+    #' @param log_group_name The name of the AWS CloudWatch log group.
+    #' @param log_stream_name The name of the log stream within the `log_group_name`.
+    #' @param log_group_retention_days The number of days to retain the log events in the specified log group.
+    #' @param paws_config list of paws config. Please see section \url{https://www.paws-r-sdk.com/docs/set_service_parameter/}
     #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
     initialize = function(
       log_group_name,
       log_stream_name = paste(log_group_name, Sys.Date(), sep = "/"),
       log_group_retention_days = NULL,
-      create_log_group = TRUE,
       paws_config = list(),
       threshold = NA_integer_,
       layout = LayoutFormat$new(fmt = "%L: %m", colors = list()),
@@ -89,9 +91,7 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
       self$set_log_stream_name(log_stream_name)
       self$set_log_group_retention_days(log_group_retention_days)
 
-      if (isTRUE(create_log_group)) {
-        private$.call_log("create_log_group", list(logGroupName=self$log_group_name))
-      }
+      private$.call_log("create_log_group", list(logGroupName=self$log_group_name))
 
       if (!is.null(log_group_retention_days)) {
         private$.call_log(
@@ -140,24 +140,24 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
       if (length(buffer)){
         logEvents = lapply(buffer, function(event) {
          list(
-           timestamp = as.numeric(event$timestamp)*1000,
-           message = lo$format_event(event)
+           timestamp = as.numeric(event[["timestamp"]])*1000,
+           message = lo[["format_event"]](event)
          )
         })
         kwargs <- list(
-          logGroupName=self$log_group_name,
-          logStreamName=self$log_stream_name,
+          logGroupName=get("log_group_name", envir = self),
+          logStreamName=get("log_stream_name", envir = self),
           logEvents=logEvents
         )
-        kwargs[["sequenceToken"]] <- private$.log_stream_token
+        kwargs[["sequenceToken"]] <- get(".log_stream_token", envir = private)
 
         resp <- tryCatch({
           private$.call_log("put_log_events", kwargs)
         }, paws_error = function(error) {
           if (paws_error_code(error) %in% c("ResourceNotFoundException")) {
             private$.call_log("create_log_stream", list(
-                logGroupName = self$log_group_name,
-                logStreamName=self$log_stream_name
+                logGroupName = get("log_group_name", envir = self),
+                logStreamName=get("log_stream_name", envir = self)
               )
             )
             private$.call_log("put_log_events", kwargs)
@@ -165,7 +165,7 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
             stop(error)
           }
         })
-        private$.log_stream_token <- resp$nextSequenceToken
+        assign(".log_stream_token", resp[["nextSequenceToken"]], envir = private)
       }
 
       assign("insert_pos", 0L, envir = private)
@@ -182,20 +182,27 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
       private$.client
     },
 
+    #' @field log_group_name The name of the AWS CloudWatch log group.
     log_group_name = function(){
-      private$.log_group_name
+      get(".log_group_name", envir = private)
     },
 
+    #' @field log_stream_name The name of the log stream within the `log_group_name`.
     log_stream_name = function(){
-      private$.log_stream_name
+      get(".log_stream_name", envir = private)
+    },
+
+    #' @param log_group_retention_days The number of days to retain the log events in the specified log group.
+    log_group_retention_days = function(){
+      get(".log_stream_name", envir = private)
     },
 
     data = function(){
       event_count <- 1
 
       kwargs <- list(
-        logGroupName = self$log_group_name,
-        logStreamName = self$log_stream_name,
+        logGroupName = get("log_group_name", envir = self),
+        logStreamName = get("log_stream_name", envir = self),
         startTime = 0,
         startFromHead = TRUE
       )
@@ -204,17 +211,17 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
 
         response <- private$.call_log("get_log_events", kwargs)
 
-        event_count <- length(response$events)
+        event_count <- length(response[["events"]])
         position <- length(events) + 1
         if (event_count) {
-          kwargs$nextToken <- response$nextForwardToken
-          events[[position]] <- response$events
+          kwargs[["nextToken"]] <- response[["nextForwardToken"]]
+          events[[position]] <- response[["events"]]
         }
         if (event_count == 0) break
       }
       resp <- unlist(events, recursive = FALSE)
       return(
-        lapply(resp, function(l) trimws(l$message, which = "right"))
+        lapply(resp, function(l) trimws(l[["message"]], which = "right"))
       )
     }
   ),

@@ -2,7 +2,7 @@
 % Please edit documentation in R/AppenderAWSCloudWatchLog.R
 \name{AppenderAWSCloudWatchLog}
 \alias{AppenderAWSCloudWatchLog}
-\title{Log to databases via DBI}
+\title{Log to AWS CloudWatch Logs}
 \value{
 The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
@@ -62,6 +62,10 @@ Other Appenders:
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{client}}{a \link[paws.management:cloudwatchlogs]{paws.management cloudwatchlogs client}}
+
+\item{\code{log_group_name}}{The name of the AWS CloudWatch log group.}
+
+\item{\code{log_stream_name}}{The name of the log stream within the \code{log_group_name}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -106,7 +110,6 @@ Other Appenders:
   log_group_name,
   log_stream_name = paste(log_group_name, Sys.Date(), sep = "/"),
   log_group_retention_days = NULL,
-  create_log_group = TRUE,
   paws_config = list(),
   threshold = NA_integer_,
   layout = LayoutFormat$new(fmt = "\%L: \%m", colors = list()),
@@ -122,9 +125,15 @@ Other Appenders:
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
+\item{\code{log_group_name}}{The name of the AWS CloudWatch log group.}
 
-\item{\code{conn, table}}{see section \emph{Fields}}
+\item{\code{log_stream_name}}{The name of the log stream within the \code{log_group_name}.}
+
+\item{\code{log_group_retention_days}}{The number of days to retain the log events in the specified log group.}
+
+\item{\code{paws_config}}{list of paws config. Please see section \url{https://www.paws-r-sdk.com/docs/set_service_parameter/}}
+
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
 }
 \if{html}{\out{</div>}}
 }
