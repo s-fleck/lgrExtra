@@ -129,7 +129,8 @@ Other Appenders:
 
 \item{\code{log_stream_name}}{The name of the log stream within the \code{log_group_name}.}
 
-\item{\code{log_group_retention_days}}{The number of days to retain the log events in the specified log group.}
+\item{\code{log_group_retention_days}}{The number of days to retain the log events in the specified log group.
+\href{https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html}{AWS API Documentation}}
 
 \item{\code{paws_config}}{list of paws config. Please see section \url{https://www.paws-r-sdk.com/docs/set_service_parameter/}}
 
@@ -142,37 +143,71 @@ Other Appenders:
 \if{html}{\out{<a id="method-AppenderAWSCloudWatchLog-set_client"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderAWSCloudWatchLog-set_client}{}}}
 \subsection{Method \code{set_client()}}{
+set \code{paws.management} \code{cloudwatchlogs} client
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderAWSCloudWatchLog$set_client(client)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{client}}{(\code{paws.management::cloudwatchlogs}) client.
+\href{https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html}{AWS CloudWatch}}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AppenderAWSCloudWatchLog-set_log_group_name"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderAWSCloudWatchLog-set_log_group_name}{}}}
 \subsection{Method \code{set_log_group_name()}}{
+set log group name for AWS CloudWatch
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderAWSCloudWatchLog$set_log_group_name(log_group_name)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{log_group_name}}{(character) name of AWS CloudWatch}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AppenderAWSCloudWatchLog-set_log_stream_name"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderAWSCloudWatchLog-set_log_stream_name}{}}}
 \subsection{Method \code{set_log_stream_name()}}{
+set log stream name within AWS CloudWatch log group
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderAWSCloudWatchLog$set_log_stream_name(log_stream_name)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{log_stream_name}}{(character) log stream name with AWS CloudWatch log group}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AppenderAWSCloudWatchLog-set_log_group_retention_days"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderAWSCloudWatchLog-set_log_group_retention_days}{}}}
 \subsection{Method \code{set_log_group_retention_days()}}{
+set log group retention days for AWS CloudWatch Log Group.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderAWSCloudWatchLog$set_log_group_retention_days(log_group_retention_days)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{log_group_retention_days}}{The number of days to retain the log events in the specified log group.
+\href{https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html}{AWS API Documentation}}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AppenderAWSCloudWatchLog-flush"></a>}}

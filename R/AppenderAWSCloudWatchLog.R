@@ -51,6 +51,7 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
     #' @param log_group_name The name of the AWS CloudWatch log group.
     #' @param log_stream_name The name of the log stream within the `log_group_name`.
     #' @param log_group_retention_days The number of days to retain the log events in the specified log group.
+    #' \href{https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html}{AWS API Documentation}
     #' @param paws_config list of paws config. Please see section \url{https://www.paws-r-sdk.com/docs/set_service_parameter/}
     #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
     initialize = function(
@@ -95,24 +96,31 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
 
       if (!is.null(log_group_retention_days)) {
         private$.call_log(
-          "put_retention_policy", list(logGroupName=self$log_group_name, retentionInDays=self$log_group_retention_days)
+          "put_retention_policy", list(logGroupName=self$log_group_name, retentionInDays=private$.log_group_retention_days)
         )
       }
 
       return(self)
     },
 
+    #' @description set `paws.management` `cloudwatchlogs` client
+    #' @param client (`paws.management::cloudwatchlogs`) client.
+    #' \href{https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html}{AWS CloudWatch}
     set_client = function(client){
       private$.client <- client
       invisible(self)
     },
 
+    #' @description set log group name for AWS CloudWatch
+    #' @param log_group_name (character) name of AWS CloudWatch
     set_log_group_name = function(log_group_name) {
       assert(is_scalar_character(log_group_name))
       private$.log_group_name <- log_group_name
       invisible(self)
     },
 
+    #' @description set log stream name within AWS CloudWatch log group
+    #' @param log_stream_name (character) log stream name with AWS CloudWatch log group
     set_log_stream_name = function(log_stream_name) {
       assert(is_scalar_character(log_stream_name))
 
@@ -126,6 +134,9 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
       invisible(self)
     },
 
+    #' @description set log group retention days for AWS CloudWatch Log Group.
+    #' @param log_group_retention_days The number of days to retain the log events in the specified log group.
+    #' \href{https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html}{AWS API Documentation}
     set_log_group_retention_days = function(log_group_retention_days) {
       assert(
         is_scalar_numeric(log_group_retention_days) || is.null(log_group_retention_days)
