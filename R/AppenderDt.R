@@ -272,7 +272,7 @@ AppenderDt <- R6::R6Class(
     #' Get the log recorded by this `Appender` as a `data.table` with a maximum
     #' of `buffer_size` rows
     dt = function(){
-      tmp <- private$.data[!is.na(private$.data$.id), ]
+      tmp <- private$.data[!is.na(private$.data$.id)]
       tmp[order(tmp$.id), ]
     },
 

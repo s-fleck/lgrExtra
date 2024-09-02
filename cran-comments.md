@@ -2,4 +2,4 @@
 
 0 errors | 0 warnings | 0 notes
 
-Support functions for index names and index mappings in AppenderElasticSearch
+Workaround for test failures do to recen data.table changes
