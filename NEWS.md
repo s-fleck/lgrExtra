@@ -1,4 +1,9 @@
-# lgrExtra 0.0.7
+# lgrExtra 0.0.9
+
+* Fixes for tests related to recent changes in data.table 1.16.0
+
+
+# lgrExtra 0.0.8
 
 * Support functions for index names and index mappings in AppenderElasticSearch
 
