@@ -1,6 +1,5 @@
 context("AppenderDt")
 
-options("datatable.showProgress" = FALSE)
 
 x <- LogEvent$new(
   logger = Logger$new("dummy"),

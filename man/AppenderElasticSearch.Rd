@@ -32,11 +32,19 @@ Other Appenders:
 \describe{
 \item{\code{conn}}{a \link[elastic:connect]{ElasticSearch connection}}
 
-\item{\code{close_on_exit}}{\code{TRUE} or \code{FALSE}. Close the ElasticSearch connection
-when the Logger is removed?}
+\item{\code{index}}{target ElasticSearch index. May either be:
+\itemize{
+\item a \code{character} scalar, or
+\item a \code{function} returning a \code{character} scalar
+}}
 
-\item{\code{index}}{a \code{character} scalar or a \link[DBI:Id]{DBI::Id} specifying the target
-ElasticSearch index}
+\item{\code{index_create_body}}{\itemize{
+\item \code{character} scalar json string (or \code{NULL}).
+\item a \code{function} returning a \code{character} scalar json string (or \code{NULL})
+Optional settings,
+mappings, aliases, etc... in case the target index has to be created
+by the logger. See \url{https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html}
+}}
 }
 \if{html}{\out{</div>}}
 }
@@ -44,7 +52,6 @@ ElasticSearch index}
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-AppenderElasticSearch-new}{\code{AppenderElasticSearch$new()}}
-\item \href{#method-AppenderElasticSearch-set_close_on_exit}{\code{AppenderElasticSearch$set_close_on_exit()}}
 \item \href{#method-AppenderElasticSearch-set_conn}{\code{AppenderElasticSearch$set_conn()}}
 \item \href{#method-AppenderElasticSearch-get_data}{\code{AppenderElasticSearch$get_data()}}
 \item \href{#method-AppenderElasticSearch-show}{\code{AppenderElasticSearch$show()}}
@@ -81,7 +88,7 @@ ElasticSearch index}
   index,
   threshold = NA_integer_,
   layout = LayoutElasticSearch$new(),
-  close_on_exit = TRUE,
+  index_create_body = NULL,
   buffer_size = 0,
   flush_threshold = "error",
   flush_on_exit = TRUE,
@@ -96,20 +103,11 @@ ElasticSearch index}
 \describe{
 \item{\code{conn, index}}{see section \emph{Fields}}
 
-\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}
 A data \code{data.frame}. content of index}
 }
 \if{html}{\out{</div>}}
 }
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-AppenderElasticSearch-set_close_on_exit"></a>}}
-\if{latex}{\out{\hypertarget{method-AppenderElasticSearch-set_close_on_exit}{}}}
-\subsection{Method \code{set_close_on_exit()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AppenderElasticSearch$set_close_on_exit(x)}\if{html}{\out{</div>}}
-}
-
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AppenderElasticSearch-set_conn"></a>}}

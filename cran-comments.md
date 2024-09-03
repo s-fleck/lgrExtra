@@ -2,4 +2,5 @@
 
 0 errors | 0 warnings | 0 notes
 
-Workaround for test failures do to recen data.table changes
+* Fix tests failures due to recent data.table changes
+* Resubmission: Fixed links in docs

@@ -11,7 +11,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 Log to a database table with any \strong{DBI} compatible backend. Please be
 aware that AppenderDbi does \emph{not} support case sensitive / quoted column
 names, and you advised to only use all-lowercase names for
-custom fields (see \code{...} argument of \link{LogEvent}).
+custom fields (see \code{...} argument of \link[lgr:LogEvent]{lgr::LogEvent}).
 When appending to a database table all LogEvent values for which a column
 exists in the target table will be appended, all others are ignored.
 
@@ -166,7 +166,7 @@ database table}
 \describe{
 \item{\code{conn, table}}{see section \emph{Fields}}
 
-\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}}
 }
 \if{html}{\out{</div>}}
 }

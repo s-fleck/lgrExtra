@@ -9,7 +9,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 }
 \description{
 Send mails via \code{\link[gmailr:gm_send_message]{gmailr::gm_send_message()}}. This
-Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
+Appender keeps an in-memory buffer like \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message. The default behavior
 is to push the last 30 log events in case a \code{fatal} event is encountered.
@@ -19,7 +19,7 @@ please refer to the \href{https://github.com/r-lib/gmailr}{documentation of gmai
 for details.
 }
 \seealso{
-\link{LayoutFormat}, \link{LayoutGlue}
+\link[lgr:LayoutFormat]{lgr::LayoutFormat}, \link[lgr:LayoutGlue]{lgr::LayoutGlue}
 
 Other Appenders: 
 \code{\link{AppenderDbi}},

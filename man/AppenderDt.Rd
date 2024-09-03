@@ -9,7 +9,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 }
 \description{
 An Appender that outputs to an in-memory \code{data.table}. It fulfill a similar
-purpose as the more flexible \link{AppenderBuffer} and is mainly included for
+purpose as the more flexible \link[lgr:AppenderBuffer]{lgr::AppenderBuffer} and is mainly included for
 historical reasons/backwards compatibility with older version of \strong{lgr}.
 
 \strong{NOTE}: AppenderDt has been superseded by \link[lgr:AppenderBuffer]{lgr::AppenderBuffer} and is
@@ -18,7 +18,7 @@ kept mainly for archival purposes.
 \section{Custom Fields}{
 
 
-\code{AppenderDt} supports \link[=LogEvent]{custom fields}, but they have to be
+\code{AppenderDt} supports \link[lgr:LogEvent]{lgr::custom fields}, but they have to be
 pre-allocated in the \code{prototype} argument. Custom fields that are not
 part of the prototype are inserted in the list-column \code{.fields} if it
 exists.
@@ -39,7 +39,7 @@ its \verb{$show()} method.
 \section{Comparison AppenderBuffer and AppenderDt}{
 
 
-Both \link{AppenderBuffer} and \link{AppenderDt} do in memory buffering of events.
+Both \link[lgr:AppenderBuffer]{lgr::AppenderBuffer} and \link{AppenderDt} do in memory buffering of events.
 AppenderBuffer retains a copies of the events it processes and has the
 ability to pass the buffered events on to other Appenders. AppenderDt
 converts the events to rows in a \code{data.table} and is a bit harder to

@@ -26,7 +26,7 @@ the methods \verb{$format_data()}, \verb{$format_colnames} and \verb{$format_tab
 
 It does not format
 LogEvents directly, but their \code{data.table} representations (see
-\link{as.data.table.LogEvent}), as well as column- and table names.
+\link[lgr:as.data.frame.LogEvent]{lgr::as.data.table.LogEvent}), as well as column- and table names.
 }
 \section{Database Specific Layouts}{
 

@@ -22,7 +22,7 @@ if (requireNamespace("rsyslog", quietly = TRUE) && Sys.info()[["sysname"]] == "L
 }
 }
 \seealso{
-\link{LayoutFormat}, \link{LayoutJson}
+\link[lgr:LayoutFormat]{lgr::LayoutFormat}, \link[lgr:LayoutGlue]{lgr::LayoutGlue}
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
@@ -40,7 +40,7 @@ Other Appenders:
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
 \item{\code{syslog_levels.}}{Either a named \code{character} vector or a \code{function}
-mapping lgr \link{log_levels} to rsyslog log levels. See
+mapping lgr \link[lgr:get_log_levels]{lgr::log_levels} to rsyslog log levels. See
 \verb{$set_syslog_levels()}.}
 }
 \if{html}{\out{</div>}}
@@ -52,7 +52,7 @@ mapping lgr \link{log_levels} to rsyslog log levels. See
 if \code{NULL} defaults to the logger name}
 
 \item{\code{syslog_levels.}}{Either a named \code{character} vector or a \code{function}
-mapping lgr \link{log_levels} to rsyslog log levels. See
+mapping lgr \link[lgr:get_log_levels]{lgr::log_levels} to rsyslog log levels. See
 \verb{$set_syslog_levels()}.}
 }
 \if{html}{\out{</div>}}
@@ -118,7 +118,7 @@ Define conversion between lgr and syslog log levels
 \describe{
 \item{\code{x}}{\itemize{
 \item a named \code{character} vector mapping whose names are log
-levels as understood by \code{\link[rsyslog:syslog]{rsyslog::syslog()}} and whose values are \link[=log_levels]{lgr log levels} (either \code{character} or \code{numeric})
+levels as understood by \code{\link[rsyslog:syslog]{rsyslog::syslog()}} and whose values are \link[lgr:get_log_levels]{lgr log levels} (either \code{character} or \code{numeric})
 \item a \code{function} that takes a vector of lgr log levels as input and
 returns a \code{character} vector of log levels for \code{\link[rsyslog:syslog]{rsyslog::syslog()}}.
 }}

@@ -15,7 +15,7 @@
 #'
 #' It does not format
 #' LogEvents directly, but their `data.table` representations (see
-#' [as.data.table.LogEvent]), as well as column- and table names.
+#' [lgr::as.data.table.LogEvent]), as well as column- and table names.
 #'
 #' @section Database Specific Layouts:
 #'

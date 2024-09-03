@@ -1,9 +1,10 @@
 # Test multiple RDBMS
 
-dt_sp <- options("datatable.showProgress")
+dt_sp <- getOption("datatable.showProgress")
 
 setup(options("datatable.showProgress" = FALSE))
 teardown({
+  stopifnot(is.null(dt_sp) || is_scalar_bool(dt_sp))
   options("datatable.showProgress" = dt_sp)
 })
 

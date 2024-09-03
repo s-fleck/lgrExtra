@@ -11,7 +11,6 @@
 #'
 #' @template appender
 #'
-#' @examples
 #' @export
 AppenderElasticSearch <- R6::R6Class(
   "AppenderElasticSearch",
@@ -20,7 +19,7 @@ AppenderElasticSearch <- R6::R6Class(
   public = list(
 
     #' @param conn,index see section *Fields*
-    #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
+    #' @param threshold,flush_threshold,layout,buffer_size see [lgr::AppenderBuffer]
     initialize = function(
     conn,
     index,

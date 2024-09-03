@@ -9,7 +9,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 }
 \description{
 Send push notifications via \href{https://www.pushbullet.com/}{Pushbullet}. This
-Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
+Appender keeps an in-memory buffer like \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message that is sent to
 \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}}. The default behavior is to push the last 7 log
@@ -30,7 +30,7 @@ if (requireNamespace("RPushbullet") && !is.null(getOption("rpushbullet.key")) ){
 }
 }
 \seealso{
-\link{LayoutFormat}, \link{LayoutGlue}
+\link[lgr:LayoutFormat]{lgr::LayoutFormat}, \link[lgr:LayoutGlue]{lgr::LayoutGlue}
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
@@ -122,7 +122,7 @@ Other Digest Appenders:
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}}
 
 \item{\code{subject_layout}}{A \link[lgr:LayoutFormat]{lgr::LayoutFormat} object.}
 

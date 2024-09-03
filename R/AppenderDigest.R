@@ -10,7 +10,7 @@
 #' @template abstract_class
 #'
 #' @export
-#' @seealso [LayoutFormat], [LayoutGlue]
+#' @seealso [lgr::LayoutFormat], [lgr::LayoutGlue]
 #' @family Digest Appenders
 AppenderDigest <-  R6::R6Class(
   "AppenderDigest",
@@ -31,7 +31,7 @@ AppenderDigest <-  R6::R6Class(
   ),
 
   active = list(
-    #' @field subject_layout A [Layout] used to format the last [LogEvent]
+    #' @field subject_layout A [lgr::Layout] used to format the last [lgr::LogEvent]
     #'   in this Appenders buffer when it is flushed. The result will be used as
     #'   the subject of the digest (for example, the E-mail subject).
     subject_layout = function() get(".subject_layout", private)
@@ -52,7 +52,7 @@ AppenderDigest <-  R6::R6Class(
 #'
 #' @description
 #' Send push notifications via [Pushbullet](https://www.pushbullet.com/). This
-#' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
+#' Appender keeps an in-memory buffer like [lgr::AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
 #' buffered events are concatenated to a single message that is sent to
 #' [RPushbullet::pbPost()]. The default behavior is to push the last 7 log
@@ -60,7 +60,7 @@ AppenderDigest <-  R6::R6Class(
 #'
 #' @template appender
 #' @family Digest Appenders
-#' @seealso [LayoutFormat], [LayoutGlue]
+#' @seealso [lgr::LayoutFormat], [lgr::LayoutGlue]
 #' @export
 #' @examples
 #' if (requireNamespace("RPushbullet") && !is.null(getOption("rpushbullet.key")) ){
@@ -83,7 +83,7 @@ AppenderPushbullet <- R6::R6Class(
   # +- public --------------------------------------------------------------
   public = list(
   #' @param recipients,email,channel,devices,apikey see [RPushbullet::pbPost]
-  #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
+  #' @param threshold,flush_threshold,layout,buffer_size see [lgr::AppenderBuffer]
   #' @param subject_layout A [lgr::LayoutFormat] object.
     initialize = function(
       threshold = NA_integer_,
@@ -330,7 +330,7 @@ AppenderMail <- R6::R6Class(
 #' @description
 #' Send mails via [sendmailR::sendmail()], which requires that you have access
 #' to an SMTP server that does not require authentication. This
-#' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
+#' Appender keeps an in-memory buffer like [lgr::AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
 #' buffered events are concatenated to a single message. The default behavior
 #' is to push the last 30 log events in case a `fatal` event is encountered.
@@ -348,7 +348,7 @@ AppenderMail <- R6::R6Class(
 #' }
 #'
 #' @template appender
-#' @seealso [LayoutFormat], [LayoutGlue]
+#' @seealso [lgr::LayoutFormat], [lgr::LayoutGlue]
 #' @family Digest Appenders
 #' @export
 #' @examples
@@ -496,7 +496,7 @@ AppenderSendmail <- R6::R6Class(
 #'
 #' @description
 #' Send mails via [gmailr::gm_send_message()]. This
-#' Appender keeps an in-memory buffer like [AppenderBuffer]. If the buffer is
+#' Appender keeps an in-memory buffer like [lgr::AppenderBuffer]. If the buffer is
 #' flushed, usually because an event of specified magnitude is encountered, all
 #' buffered events are concatenated to a single message. The default behavior
 #' is to push the last 30 log events in case a `fatal` event is encountered.
@@ -506,7 +506,7 @@ AppenderSendmail <- R6::R6Class(
 #' for details.
 #'
 #' @template appender
-#' @seealso [LayoutFormat], [LayoutGlue]
+#' @seealso [lgr::LayoutFormat], [lgr::LayoutGlue]
 #' @export
 AppenderGmail <- R6::R6Class(
   "AppenderGmail",
