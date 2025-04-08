@@ -16,6 +16,7 @@ Imports:
 Suggests: 
     covr,
     DBI,
+    pool,
     elastic,
     gmailr,
     jsonlite,
