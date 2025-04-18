@@ -1,11 +1,11 @@
 Type: Package
 Package: lgrExtra
 Title: Extra Appenders for 'lgr'
-Version: 0.0.9
-Authors@R: 
-    person("Stefan", "Fleck", , "stefan.b.fleck@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-3344-9851"))
-Maintainer: Stefan Fleck <stefan.b.fleck@gmail.com>
+Version: 0.1.0
+Authors@R: c(
+    person("Stefan", "Fleck", , "stefan.b.fleck@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3344-9851")),
+    person("Jimmy", "Briggs", , "jimmy.briggs@jimbrig.com", role = c("ctb", "rev"), comment = c(ORCID = "0000-0002-7489-8787"))
+  )
 Description: Additional appenders for the logging package 'lgr' that
     support logging to databases, email and push notifications.
 License: MIT + file LICENSE
@@ -16,6 +16,7 @@ Imports:
 Suggests: 
     covr,
     DBI,
+    pool,
     elastic,
     gmailr,
     jsonlite,
