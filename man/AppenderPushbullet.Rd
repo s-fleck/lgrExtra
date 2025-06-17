@@ -35,8 +35,10 @@ if (requireNamespace("RPushbullet") && !is.null(getOption("rpushbullet.key")) ){
 Other Appenders: 
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
+\code{\link{AppenderDynatrace}},
 \code{\link{AppenderElasticSearch}},
 \code{\link{AppenderGmail}},
+\code{\link{AppenderPool}},
 \code{\link{AppenderSendmail}},
 \code{\link{AppenderSyslog}}
 

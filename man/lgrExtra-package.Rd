@@ -11,5 +11,10 @@ Additional appenders for the logging package 'lgr' that support logging to datab
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})
 
+Other contributors:
+\itemize{
+  \item Jimmy Briggs \email{jimmy.briggs@jimbrig.com} (\href{https://orcid.org/0000-0002-7489-8787}{ORCID}) [contributor, reviewer]
+}
+
 }
 \keyword{internal}

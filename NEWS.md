@@ -1,3 +1,9 @@
+# lgrExtra 0.1.0
+
+* Add AppenderDynatrace
+* Add AppenderPool (thx @jimbrig)
+
+
 # lgrExtra 0.0.9
 
 * Fixes for tests related to recent changes in data.table 1.16.0

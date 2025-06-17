@@ -73,6 +73,7 @@ if (requireNamespace("RSQLite") && requireNamespace("pool")){
 Other Appenders: 
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
+\code{\link{AppenderDynatrace}},
 \code{\link{AppenderElasticSearch}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPushbullet}},

@@ -4,10 +4,8 @@
 
 #' Log to ElasticSearch
 #'
-#' Log to ElasticSearch via HTTP
-#'
-#' **NOTE**: **Experimental**; not yet fully documented and and details are
-#' subject to change
+#' **NOTE**: **Maturing**; not yet fully documented but well tested in
+#'   a production scenario
 #'
 #' @template appender
 #'
