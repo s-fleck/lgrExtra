@@ -28,6 +28,7 @@ prioritize it over other projects.
 
 | Appender | Description | Backend | Status |
 |----|----|----|----|
+| AppenderAWSCloudWatchLog | Amazon AWS CloudWatch Log | [paws.management](https://cran.r-project.org/package=paws.management) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 | AppenderElasticSearch | ElasticSearch | [elastic](https://cran.r-project.org/package=elastic) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 | AppenderDbi | Databases | [DBI](https://cran.r-project.org/package=DBI) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 | AppenderDt | In-memory data.table | [data.table](https://github.com/Rdatatable/data.table) | [![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded) |
@@ -37,8 +38,6 @@ prioritize it over other projects.
 | AppenderSendmail | E-mail via SMTP | [sendmailR](https://cran.r-project.org/package=sendmailR) | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |
 | AppenderSyslog | Linux Syslog | [rsyslog](https://cran.r-project.org/package=rsyslog) | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |
 | AppenderDynatrace | Dynatrace | [httr2](https://cran.r-project.org/package=httr2) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
-| AppenderPool | Linux Syslog | [rsyslog](https://cran.r-project.org/package=rsyslog) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
-| AppenderAWSCloudWatchLog | Amazon AWS CloudWatch Log | [paws.management](https://cran.r-project.org/package=paws.management) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 
 ## Installation
 
