@@ -78,6 +78,7 @@ lg$config(NULL)
 \link[data.table:data.table]{data.table::data.table}
 
 Other Appenders: 
+\code{\link{AppenderAWSCloudWatchLog}},
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDynatrace}},
 \code{\link{AppenderElasticSearch}},

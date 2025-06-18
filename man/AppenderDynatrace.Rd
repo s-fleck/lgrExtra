@@ -2,22 +2,20 @@
 % Please edit documentation in R/AppenderDynatrace.R
 \name{AppenderDynatrace}
 \alias{AppenderDynatrace}
-\title{Log to Dynatrace}
+\title{Log to Dynatrace via HTTP}
 \value{
 The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
 }
 \description{
-Log to Dynatrace via HTTP
-}
-\details{
 \strong{NOTE}: \strong{Experimental}; not yet fully documented and and details are
-subject to change
+subject to change.
 }
 \seealso{
 \url{https://docs.dynatrace.com/docs/analyze-explore-automate/logs/lma-log-ingestion/lma-log-ingestion-via-api}
 
 Other Appenders: 
+\code{\link{AppenderAWSCloudWatchLog}},
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
 \code{\link{AppenderElasticSearch}},
@@ -87,7 +85,7 @@ Other Appenders:
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDynatrace$new(
   url,
-  api_key = "",
+  api_key,
   threshold = NA_integer_,
   layout = LayoutDynatrace$new(),
   buffer_size = 0,

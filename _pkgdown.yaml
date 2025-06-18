@@ -1,20 +1,25 @@
 reference:
   - title: "Appenders"
     contents:
+      - AppenderAWSCloudWatchLog
       - AppenderDbi
+      - AppenderDynatrace
       - AppenderDt
       - AppenderElasticSearch
       - AppenderGmail
       - AppenderSendmail
+      - AppenderPool
       - AppenderPushbullet
       - AppenderSyslog
   - title: Other functions and classes
     contents:
       - LayoutDbi
       - LayoutElasticSearch
+      - LayoutDynatrace
       - Serializer
       - select_dbi_layout
       - unpack_json_cols
+      - transform_event_dynatrace
   - title: "Abstract classes"
     desc: For developers only
     contents:

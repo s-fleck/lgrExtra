@@ -82,16 +82,7 @@ transform_event_dynatrace <- function(event) {
   names(values) <- property_names
 
   values[["logger"]] <- gsub("/", ".", values[["logger"]], fixed = TRUE)
-  values[["level"]] <- lgr::label_levels(
-    values[["level"]],
-    c(
-      Fatal = 100L,
-      Error = 200L,
-      Warn = 300L,
-      Info = 400L,
-      Debug = 500L,
-      Trace = 600L
-    ))
+  values[["level"]] <- lgr::label_levels(values[["level"]])
 
   values
 }

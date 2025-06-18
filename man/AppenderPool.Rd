@@ -71,6 +71,7 @@ if (requireNamespace("RSQLite") && requireNamespace("pool")){
 }
 \seealso{
 Other Appenders: 
+\code{\link{AppenderAWSCloudWatchLog}},
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
 \code{\link{AppenderDynatrace}},
