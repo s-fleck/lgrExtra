@@ -1,12 +1,10 @@
 # AppenderDbi -------------------------------------------------------------
 
 
-#' Log to Dynatrace
-#'
 #' Log to Dynatrace via HTTP
 #'
 #' **NOTE**: **Experimental**; not yet fully documented and and details are
-#' subject to change
+#' subject to change.
 #'
 #' @template appender
 #'
@@ -23,7 +21,7 @@ AppenderDynatrace <- R6::R6Class(
     #' @param threshold,flush_threshold,layout,buffer_size see [lgr::AppenderBuffer]
     initialize = function(
     url,
-    api_key = "",
+    api_key,
     threshold = NA_integer_,
     layout = LayoutDynatrace$new(),
     buffer_size = 0,
@@ -56,11 +54,13 @@ AppenderDynatrace <- R6::R6Class(
       self
     },
 
+
     set_url = function(url){
       assert(is_scalar_character(url))
       private$.url <- url
       invisible(self)
     },
+
 
     set_api_key = function(api_key){
       assert(is_scalar_character(api_key))
@@ -117,14 +117,8 @@ AppenderDynatrace <- R6::R6Class(
             httr2::request(url) |>
             httr2::req_method("POST") |>
             httr2::req_headers("Content-Type" = "application/json") |>
+            httr2::req_headers(Authorization = sprintf("Api-Token %s", self[["api_key"]])) |>
             httr2::req_body_raw(json_body)
-
-          api_key <- get("api_key", envir = self)
-
-          if (!is.null(api_key)) {
-            request <- request |>
-              httr2::req_headers(Authorization = sprintf("Api-Token %s", api_key))
-          }
 
           response <- httr2::req_perform(request)
 
