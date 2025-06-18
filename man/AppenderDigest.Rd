@@ -16,7 +16,7 @@ before an error was encountered or a push notification.
 \strong{Abstract classes}, only exported for package developers.
 }
 \seealso{
-\link{LayoutFormat}, \link{LayoutGlue}
+\link[lgr:LayoutFormat]{lgr::LayoutFormat}, \link[lgr:LayoutGlue]{lgr::LayoutGlue}
 
 Other abstract classes: 
 \code{\link{AppenderMail}}
@@ -34,7 +34,7 @@ Other Digest Appenders:
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{subject_layout}}{A \link{Layout} used to format the last \link{LogEvent}
+\item{\code{subject_layout}}{A \link[lgr:Layout]{lgr::Layout} used to format the last \link[lgr:LogEvent]{lgr::LogEvent}
 in this Appenders buffer when it is flushed. The result will be used as
 the subject of the digest (for example, the E-mail subject).}
 }

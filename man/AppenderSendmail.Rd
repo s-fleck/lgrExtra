@@ -10,7 +10,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \description{
 Send mails via \code{\link[sendmailR:sendmail]{sendmailR::sendmail()}}, which requires that you have access
 to an SMTP server that does not require authentication. This
-Appender keeps an in-memory buffer like \link{AppenderBuffer}. If the buffer is
+Appender keeps an in-memory buffer like \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}. If the buffer is
 flushed, usually because an event of specified magnitude is encountered, all
 buffered events are concatenated to a single message. The default behavior
 is to push the last 30 log events in case a \code{fatal} event is encountered.
@@ -43,13 +43,15 @@ if (requireNamespace("sendmailR")){
 }
 }
 \seealso{
-\link{LayoutFormat}, \link{LayoutGlue}
+\link[lgr:LayoutFormat]{lgr::LayoutFormat}, \link[lgr:LayoutGlue]{lgr::LayoutGlue}
 
 Other Appenders: 
 \code{\link{AppenderDbi}},
 \code{\link{AppenderDt}},
+\code{\link{AppenderDynatrace}},
 \code{\link{AppenderElasticSearch}},
 \code{\link{AppenderGmail}},
+\code{\link{AppenderPool}},
 \code{\link{AppenderPushbullet}},
 \code{\link{AppenderSyslog}}
 

@@ -1,5 +1,6 @@
 context("AppenderDt")
 
+
 x <- LogEvent$new(
   logger = Logger$new("dummy"),
   level = 200L,
@@ -7,6 +8,7 @@ x <- LogEvent$new(
   caller = NA_character_,
   msg = "foo bar"
 )
+
 
 
 

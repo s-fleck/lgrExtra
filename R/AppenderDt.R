@@ -5,7 +5,7 @@
 #' @description
 #'
 #' An Appender that outputs to an in-memory `data.table`. It fulfill a similar
-#' purpose as the more flexible [AppenderBuffer] and is mainly included for
+#' purpose as the more flexible [lgr::AppenderBuffer] and is mainly included for
 #' historical reasons/backwards compatibility with older version of **lgr**.
 #'
 #' **NOTE**: AppenderDt has been superseded by [lgr::AppenderBuffer] and is
@@ -13,7 +13,7 @@
 #'
 #' @section Custom Fields:
 #'
-#' `AppenderDt` supports [custom fields][LogEvent], but they have to be
+#' `AppenderDt` supports [lgr::custom fields][lgr::LogEvent], but they have to be
 #' pre-allocated in the `prototype` argument. Custom fields that are not
 #' part of the prototype are inserted in the list-column `.fields` if it
 #' exists.
@@ -32,7 +32,7 @@
 #'
 #' @section Comparison AppenderBuffer and AppenderDt:
 #'
-#' Both [AppenderBuffer] and [AppenderDt] do in memory buffering of events.
+#' Both [lgr::AppenderBuffer] and [AppenderDt] do in memory buffering of events.
 #' AppenderBuffer retains a copies of the events it processes and has the
 #' ability to pass the buffered events on to other Appenders. AppenderDt
 #' converts the events to rows in a `data.table` and is a bit harder to
@@ -272,7 +272,7 @@ AppenderDt <- R6::R6Class(
     #' Get the log recorded by this `Appender` as a `data.table` with a maximum
     #' of `buffer_size` rows
     dt = function(){
-      tmp <- private$.data[!is.na(private$.data$.id), ]
+      tmp <- private$.data[!is.na(private$.data$.id)]
       tmp[order(tmp$.id), ]
     },
 

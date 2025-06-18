@@ -4,14 +4,11 @@
 
 #' Log to ElasticSearch
 #'
-#' Log to ElasticSearch via HTTP
-#'
-#' **NOTE**: **Experimental**; not yet fully documented and and details are
-#' subject to change
+#' **NOTE**: **Maturing**; not yet fully documented but well tested in
+#'   a production scenario
 #'
 #' @template appender
 #'
-#' @examples
 #' @export
 AppenderElasticSearch <- R6::R6Class(
   "AppenderElasticSearch",
@@ -20,7 +17,7 @@ AppenderElasticSearch <- R6::R6Class(
   public = list(
 
     #' @param conn,index see section *Fields*
-    #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
+    #' @param threshold,flush_threshold,layout,buffer_size see [lgr::AppenderBuffer]
     initialize = function(
     conn,
     index,

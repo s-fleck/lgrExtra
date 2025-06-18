@@ -6,7 +6,7 @@
 #' An Appender that writes to the syslog on supported POSIX platforms. Requires
 #' the \pkg{rsyslog} package.
 #'
-#' @seealso [LayoutFormat], [LayoutJson]
+#' @seealso [lgr::LayoutFormat], [lgr::LayoutGlue]
 #' @template appender
 #' @export
 #' @examples
@@ -67,7 +67,7 @@ AppenderSyslog <- R6::R6Class(
     #' @param x
     #'  * a named `character` vector mapping whose names are log
     #'    levels as understood by [rsyslog::syslog()] and whose values are [lgr
-    #'    log levels][log_levels] (either `character` or `numeric`)
+    #'    log levels][lgr::log_levels] (either `character` or `numeric`)
     #'  * a `function` that takes a vector of lgr log levels as input and
     #'    returns a `character` vector of log levels for [rsyslog::syslog()].
     set_syslog_levels = function(x){
@@ -102,7 +102,7 @@ AppenderSyslog <- R6::R6Class(
     identifier    = function() get(".identifier", private),
 
     #' @field syslog_levels. Either a named `character` vector or a `function`
-    #'   mapping lgr [log_levels] to rsyslog log levels. See
+    #'   mapping lgr [lgr::log_levels] to rsyslog log levels. See
     #'   `$set_syslog_levels()`.
     syslog_levels = function() get(".syslog_levels", private)
   ),

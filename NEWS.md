@@ -1,6 +1,14 @@
+# lgrExtra 0.1.0
+
+* Add AppenderDynatrace
+* Add AppenderPool (thx @jimbrig)
+* add AppenderAWSCloudWatchLog for logging to [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) (#9) (thx @DyfanJones)
+
+
 # lgrExtra 0.0.9
 
-* add AppenderAWSCloudWatchLog for logging to [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) (#9)
+* Fixes for tests related to recent changes in data.table 1.16.0
+
 
 # lgrExtra 0.0.8
 

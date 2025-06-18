@@ -26,7 +26,7 @@ the methods \verb{$format_data()}, \verb{$format_colnames} and \verb{$format_tab
 
 It does not format
 LogEvents directly, but their \code{data.table} representations (see
-\link{as.data.table.LogEvent}), as well as column- and table names.
+\link[lgr:as.data.frame.LogEvent]{lgr::as.data.table.LogEvent}), as well as column- and table names.
 }
 \section{Database Specific Layouts}{
 
@@ -54,6 +54,7 @@ defaults for \verb{$format_table_name}, \verb{$format_colnames} and \verb{$forma
 \code{\link[=select_dbi_layout]{select_dbi_layout()}}, \link[DBI:DBI-package]{DBI::DBI},
 
 Other Layout: 
+\code{\link{LayoutDynatrace}},
 \code{\link{LayoutElasticSearch}}
 }
 \concept{Layout}
