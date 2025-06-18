@@ -1,69 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderDbi.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderDigest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderDt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderElasticSearch.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderGmail.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderMail.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderPushbullet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderSendmail.html</loc>
-  </url>
-  <url>
-    <loc>/reference/AppenderSyslog.html</loc>
-  </url>
-  <url>
-    <loc>/reference/LayoutDbi.html</loc>
-  </url>
-  <url>
-    <loc>/reference/LayoutElasticSearch.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Serializer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/lgrExtra-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/select_dbi_layout.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unpack_json_cols.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/AppenderAWSCloudWatchLog.html</loc></url>
+<url><loc>/reference/AppenderDbi.html</loc></url>
+<url><loc>/reference/AppenderDigest.html</loc></url>
+<url><loc>/reference/AppenderDt.html</loc></url>
+<url><loc>/reference/AppenderDynatrace.html</loc></url>
+<url><loc>/reference/AppenderElasticSearch.html</loc></url>
+<url><loc>/reference/AppenderGmail.html</loc></url>
+<url><loc>/reference/AppenderMail.html</loc></url>
+<url><loc>/reference/AppenderPool.html</loc></url>
+<url><loc>/reference/AppenderPushbullet.html</loc></url>
+<url><loc>/reference/AppenderSendmail.html</loc></url>
+<url><loc>/reference/AppenderSyslog.html</loc></url>
+<url><loc>/reference/LayoutDbi.html</loc></url>
+<url><loc>/reference/LayoutDynatrace.html</loc></url>
+<url><loc>/reference/LayoutElasticSearch.html</loc></url>
+<url><loc>/reference/Serializer.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/lgrExtra-package.html</loc></url>
+<url><loc>/reference/select_dbi_layout.html</loc></url>
+<url><loc>/reference/transform_event_dynatrace.html</loc></url>
+<url><loc>/reference/unpack_json_cols.html</loc></url>
 </urlset>
+
