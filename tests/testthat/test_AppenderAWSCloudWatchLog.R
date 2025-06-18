@@ -1,4 +1,6 @@
 test_that("set minimal setting in initialisation", {
+  skip_if_not_installed("paws.management")
+
   mock_create_log_group <- mock()
   mock_put_retention_policy <- mock()
   mock_put_log_events <- mock()
@@ -41,7 +43,12 @@ test_that("set minimal setting in initialisation", {
   expect_equal(private$.log_group_retention_days, NULL)
 })
 
+
+
+
 test_that("set minimal setting in initialisation", {
+  skip_if_not_installed("paws.management")
+
   mock_create_log_group <- mock()
   mock_put_retention_policy <- mock()
   mock_put_log_events <- mock()
@@ -96,7 +103,12 @@ test_that("set minimal setting in initialisation", {
   expect_equal(private$.log_group_retention_days, 30)
 })
 
+
+
+
 test_that("check logs are correctly formatted to send to cloudwatch", {
+  skip_if_not_installed("paws.management")
+
   mock_create_log_group <- mock(cycle = T)
   mock_put_retention_policy <- mock(cycle = T)
   mock_put_log_events <- mock(list(nextSequenceToken = "123"), cycle = T)
@@ -154,7 +166,12 @@ test_that("check logs are correctly formatted to send to cloudwatch", {
   ))
 })
 
+
+
+
 test_that("check batch logs are correctly formatted to send to cloudwatch", {
+  skip_if_not_installed("paws.management")
+
   mock_create_log_group <- mock(cycle = T)
   mock_put_retention_policy <- mock(cycle = T)
   mock_put_log_events <- mock(list(nextSequenceToken = "123"), cycle = T)
@@ -222,7 +239,12 @@ test_that("check batch logs are correctly formatted to send to cloudwatch", {
   ))
 })
 
+
+
+
 test_that("check batch logs are correctly formatted to send to cloudwatch", {
+  skip_if_not_installed("paws.management")
+
   mock_create_log_group <- mock(cycle = T)
   mock_put_retention_policy <- mock(cycle = T)
   mock_put_log_events <- mock(list(nextSequenceToken = "123"), cycle = T)
@@ -289,8 +311,11 @@ test_that("check batch logs are correctly formatted to send to cloudwatch", {
     )
   ))
 })
+
 
 test_that("check get logs from cloudwatch", {
+  skip_if_not_installed("paws.management")
+
   mock_create_log_group <- mock(cycle = T)
   mock_put_retention_policy <- mock(cycle = T)
   mock_put_log_events <- mock(list(nextSequenceToken = "123"), cycle = T)
