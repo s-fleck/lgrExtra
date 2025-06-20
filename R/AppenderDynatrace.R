@@ -112,13 +112,14 @@ AppenderDynatrace <- R6::R6Class(
 
         json_body <- paste0("[", paste(json_body, collapse = ","), "]")
 
-        # insert into ES
-          request <-
-            httr2::request(url) |>
-            httr2::req_method("POST") |>
-            httr2::req_headers("Content-Type" = "application/json") |>
-            httr2::req_headers(Authorization = sprintf("Api-Token %s", self[["api_key"]])) |>
-            httr2::req_body_raw(json_body)
+        # Send log request
+          # we cannot use piping here because we want to support old R version
+          # and also avoid magrittr
+          request <- httr2::request(url)
+          request <- httr2::req_method(request, "POST")
+          request <- httr2::req_headers(request, "Content-Type" = "application/json")
+          request <- httr2::req_headers(request, Authorization = sprintf("Api-Token %s", self[["api_key"]]))
+          request <- httr2::req_body_raw(request, json_body)
 
           response <- httr2::req_perform(request)
 

@@ -43,3 +43,13 @@ pre
 ElasticSearch
 AppenderElasticSearch
 LayoutJson
+AppenderAWSCloudWatchLog
+AppenderDynatrace
+AppenderPool
+httr
+json
+lifecycle
+sdk
+thx
+api
+Api

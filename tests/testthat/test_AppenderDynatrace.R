@@ -2,7 +2,7 @@ test_that("AppenderDynatrace: appending works", {
   event <- lgr::LogEvent$new(
     logger = lgr::Logger$new("dummy"),
     level = 300,
-    timestamp = structure(1541175573.9308, class = c("POSIXct", "POSIXt")),
+    timestamp = structure(1541175573.9308, class = c("POSIXct", "POSIXt"), tzone = "UTC"),
     caller = NA_character_,
     msg = "foo bar"
   )
@@ -28,7 +28,7 @@ test_that("AppenderDynatrace: appending works", {
 
   expect_identical(
     sent_body,
-    "[{\"level\":\"Warn\",\"timestamp\":\"2018-11-02 17:19:33\",\"logger\":\"dummy\",\"caller\":null,\"content\":\"foo bar\"}]")
+    "[{\"level\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"logger\":\"dummy\",\"caller\":null,\"content\":\"foo bar\"}]")
 
   expect_identical(sent_request$headers[["Content-Type"]], "application/json")
   expect_identical(sent_request$headers[["Authorization"]], "Api-Token hashbaz")

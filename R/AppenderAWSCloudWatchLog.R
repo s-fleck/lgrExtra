@@ -32,7 +32,7 @@
 #' @template appender
 #'
 #' @examples
-#' if (requireNamespace("RSQLite")){
+#' \dontrun{
 #'   library(lgrExtra)
 #'   app <- AppenderAWSCloudWatchLog$new(log_group_name = "lgrExtra")
 #'   lg <- lgr::get_logger("lgrExtra")$add_appender(app)$set_propagate(FALSE)

@@ -43,7 +43,7 @@ Other Appenders:
 \item a \code{function} returning a \code{character} scalar json string (or \code{NULL})
 Optional settings,
 mappings, aliases, etc... in case the target index has to be created
-by the logger. See \url{https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html}
+by the logger. See \url{https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-create}
 }}
 }
 \if{html}{\out{</div>}}
