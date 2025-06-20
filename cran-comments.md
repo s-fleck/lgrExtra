@@ -1,6 +1,3 @@
-## R CMD check results
-
-0 errors | 0 warnings | 0 notes
-
-* Fix tests failures due to recent data.table changes
-* Resubmission: Fixed links in docs
+* Add AppenderDynatrace
+* Add AppenderPool (thx @jimbrig)
+* add AppenderAWSCloudWatchLog for logging to [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) (#9) (thx @DyfanJones)
