@@ -265,7 +265,7 @@ that table.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"RSQLite"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">lgrExtra</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">app</span> <span class="op">&lt;-</span> <span class="va">AppenderAWSCloudWatchLog</span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>log_group_name <span class="op">=</span> <span class="st">"lgrExtra"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">lg</span> <span class="op">&lt;-</span> <span class="fu">lgr</span><span class="fu">::</span><span class="fu"><a href="https://s-fleck.github.io/lgr/reference/get_logger.html" class="external-link">get_logger</a></span><span class="op">(</span><span class="st">"lgrExtra"</span><span class="op">)</span><span class="op">$</span><span class="fu">add_appender</span><span class="op">(</span><span class="va">app</span><span class="op">)</span><span class="op">$</span><span class="fu">set_propagate</span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -273,9 +273,7 @@ that table.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">lg</span><span class="op">$</span><span class="va">appenders</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span><span class="va">lg</span><span class="op">$</span><span class="fu">config</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span>  <span class="co"># cleanup</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: RSQLite</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> No compatible credentials provided. Use `options("paws.log_level" = 3L)` for more information.</span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
