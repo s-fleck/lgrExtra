@@ -136,7 +136,7 @@ Other Appenders:
 
 \item{\code{paws_config}}{list of paws config. Please see section \url{https://www.paws-r-sdk.com/docs/set_service_parameter/}}
 
-\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link{AppenderBuffer}}
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}}
 }
 \if{html}{\out{</div>}}
 }

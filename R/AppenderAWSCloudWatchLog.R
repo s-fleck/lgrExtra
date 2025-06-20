@@ -53,7 +53,7 @@ AppenderAWSCloudWatchLog <- R6::R6Class(
     #' @param log_group_retention_days The number of days to retain the log events in the specified log group.
     #' \href{https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html}{AWS API Documentation}
     #' @param paws_config list of paws config. Please see section \url{https://www.paws-r-sdk.com/docs/set_service_parameter/}
-    #' @param threshold,flush_threshold,layout,buffer_size see [AppenderBuffer]
+    #' @param threshold,flush_threshold,layout,buffer_size see [lgr::AppenderBuffer]
     initialize = function(
       log_group_name,
       log_stream_name = paste(log_group_name, Sys.Date(), sep = "/"),
