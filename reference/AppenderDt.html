@@ -216,28 +216,28 @@ this list column.</p></dd>
 <span class="r-in"><span><span class="co"># Displaying the log</span></span></span>
 <span class="r-in"><span><span class="va">lg</span><span class="op">$</span><span class="va">appenders</span><span class="op">$</span><span class="va">memory</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .id level           timestamp logger caller  msg .fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1   500 2025-06-20 19:30:49   test   eval test    NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2   200 2025-06-20 19:30:49   test   eval test    NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1   500 2025-07-07 18:14:56   test   eval test    NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2   200 2025-07-07 18:14:56   test   eval test    NULL</span>
 <span class="r-in"><span><span class="va">lg</span><span class="op">$</span><span class="va">appenders</span><span class="op">$</span><span class="va">memory</span><span class="op">$</span><span class="fu">show</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> DEBUG [19:30:49.060] test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ERROR [19:30:49.086] test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> DEBUG [18:14:56.782] test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ERROR [18:14:56.808] test</span>
 <span class="r-in"><span><span class="fu">lgr</span><span class="fu">::</span><span class="fu"><a href="https://s-fleck.github.io/lgr/reference/simple_logging.html" class="external-link">show_log</a></span><span class="op">(</span>target <span class="op">=</span> <span class="va">lg</span><span class="op">$</span><span class="va">appenders</span><span class="op">$</span><span class="va">memory</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> DEBUG [19:30:49.060] test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ERROR [19:30:49.086] test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> DEBUG [18:14:56.782] test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ERROR [18:14:56.808] test</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># If you pass a Logger to show_log(), it looks for the first AppenderDt</span></span></span>
 <span class="r-in"><span><span class="co"># that it can find.</span></span></span>
 <span class="r-in"><span><span class="fu">lgr</span><span class="fu">::</span><span class="fu"><a href="https://s-fleck.github.io/lgr/reference/simple_logging.html" class="external-link">show_log</a></span><span class="op">(</span>target <span class="op">=</span> <span class="va">lg</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> DEBUG [19:30:49.060] test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ERROR [19:30:49.086] test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> DEBUG [18:14:56.782] test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ERROR [18:14:56.808] test</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Custom fields are stored in the list column .fields by default</span></span></span>
 <span class="r-in"><span><span class="va">lg</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="st">"the iris data frame"</span>, caps <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">lg</span><span class="op">$</span><span class="va">appenders</span><span class="op">$</span><span class="va">memory</span><span class="op">$</span><span class="va">data</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .id level           timestamp logger caller                 msg       .fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1   500 2025-06-20 19:30:49   test   eval                test          NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2   200 2025-06-20 19:30:49   test   eval                test          NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   3   400 2025-06-20 19:30:49   test   eval the iris data frame A, B, C, D, E</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   1   500 2025-07-07 18:14:56   test   eval                test          NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   2   200 2025-07-07 18:14:56   test   eval                test          NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   3   400 2025-07-07 18:14:56   test   eval the iris data frame A, B, C, D, E</span>
 <span class="r-in"><span><span class="va">lg</span><span class="op">$</span><span class="va">appenders</span><span class="op">$</span><span class="va">memory</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">.fields</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">caps</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A" "B" "C" "D" "E"</span>
 <span class="r-in"><span><span class="va">lg</span><span class="op">$</span><span class="fu">config</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span></span>
