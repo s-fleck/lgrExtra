@@ -30,6 +30,12 @@ test_that("AppenderDynatrace: appending works", {
     sent_body,
     "[{\"level\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"logger\":\"dummy\",\"caller\":null,\"content\":\"foo bar\"}]")
 
-  expect_identical(sent_request$headers[["Content-Type"]], "application/json")
-  expect_identical(sent_request$headers[["Authorization"]], "Api-Token hashbaz")
+  if (utils::packageVersion("httr2") >= "1.1.2.9000") {
+    headers <- httr2::req_get_headers(sent_request, "reveal")
+  } else {
+    headers <- sent_request$headers
+  }
+  
+  expect_identical(headers[["Content-Type"]], "application/json")
+  expect_identical(headers[["Authorization"]], "Api-Token hashbaz")
 })
