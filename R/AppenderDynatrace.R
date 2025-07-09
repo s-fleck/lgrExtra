@@ -69,19 +69,7 @@ AppenderDynatrace <- R6::R6Class(
     },
 
 
-    #' A data `data.frame`. content of log
-    #'
-    #' @param n `integer` scalar. Retrieve only the last `n` log entries that match
-    #'   `threshold`
-    #' @param threshold `character` or `integer` scalar. The minimum log level
-    #'   that should be displayed
-    #' @param result_type `character` scalar. Any of:
-    #'   * `data.frame`
-    #'   * `data.table` (shortcut: `dt`)
-    #'   * `list` (unprocessed list with Dynatrace metadata)
-    #'   * `json` (raw Dynatrace JSON)
-    #'
-    #' @return see `result_type`
+    #' @description Get log as data.frame: Not supported for dynatrace
     get_data = function(
       n = 20L,
       threshold = NA,
@@ -91,6 +79,7 @@ AppenderDynatrace <- R6::R6Class(
     },
 
 
+    #' @description Show log in console: Not supported for dynatrace
     show = function(
       threshold = NA_integer_,
       n = 20
@@ -140,12 +129,12 @@ AppenderDynatrace <- R6::R6Class(
     },
 
 
-    #' @field conn a `string` url
+    #' @field url a `string` url
     url = function(){
       private$.url
     },
 
-    #' @field conn a `string` api_key. Also referred to as "Api Token"
+    #' @field api_key a `string` api_key. Also referred to as "Api Token"
     api_key = function(){
       private[[".api_key"]]
     }

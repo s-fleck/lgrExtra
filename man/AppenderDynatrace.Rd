@@ -8,6 +8,11 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
 }
 \description{
+Log to Dynatrace via HTTP
+
+Log to Dynatrace via HTTP
+}
+\details{
 \strong{NOTE}: \strong{Experimental}; not yet fully documented and and details are
 subject to change.
 }
@@ -29,21 +34,12 @@ Other Appenders:
 \section{Super classes}{
 \code{\link[lgr:Filterable]{lgr::Filterable}} -> \code{\link[lgr:Appender]{lgr::Appender}} -> \code{\link[lgr:AppenderMemory]{lgr::AppenderMemory}} -> \code{AppenderDynatrace}
 }
-\section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{conn}}{a \code{string} url}
-
-\item{\code{conn}}{a \code{string} api_key. Also referred to as "Api Token"}
-}
-\if{html}{\out{</div>}}
-}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{conn}}{a \code{string} url}
+\item{\code{url}}{a \code{string} url}
 
-\item{\code{conn}}{a \code{string} api_key. Also referred to as "Api Token"}
+\item{\code{api_key}}{a \code{string} api_key. Also referred to as "Api Token"}
 }
 \if{html}{\out{</div>}}
 }
@@ -102,8 +98,7 @@ Other Appenders:
 \describe{
 \item{\code{url}}{see section \emph{Fields}}
 
-\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}
-A data \code{data.frame}. content of log}
+\item{\code{threshold, flush_threshold, layout, buffer_size}}{see \link[lgr:AppenderBuffer]{lgr::AppenderBuffer}}
 }
 \if{html}{\out{</div>}}
 }
@@ -130,37 +125,17 @@ A data \code{data.frame}. content of log}
 \if{html}{\out{<a id="method-AppenderDynatrace-get_data"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderDynatrace-get_data}{}}}
 \subsection{Method \code{get_data()}}{
+Get log as data.frame: Not supported for dynatrace
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDynatrace$get_data(n = 20L, threshold = NA, result_type = "data.frame")}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{n}}{\code{integer} scalar. Retrieve only the last \code{n} log entries that match
-\code{threshold}}
-
-\item{\code{threshold}}{\code{character} or \code{integer} scalar. The minimum log level
-that should be displayed}
-
-\item{\code{result_type}}{\code{character} scalar. Any of:
-\itemize{
-\item \code{data.frame}
-\item \code{data.table} (shortcut: \code{dt})
-\item \code{list} (unprocessed list with Dynatrace metadata)
-\item \code{json} (raw Dynatrace JSON)
-}}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-see \code{result_type}
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-AppenderDynatrace-show"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderDynatrace-show}{}}}
 \subsection{Method \code{show()}}{
+Show log in console: Not supported for dynatrace
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDynatrace$show(threshold = NA_integer_, n = 20)}\if{html}{\out{</div>}}
 }
