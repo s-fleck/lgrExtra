@@ -1,7 +1,7 @@
 Type: Package
 Package: lgrExtra
 Title: Extra Appenders for 'lgr'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Stefan", "Fleck", , "stefan.b.fleck@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3344-9851")),
@@ -32,7 +32,8 @@ Suggests:
     RSQLite,
     rsyslog,
     sendmailR,
-    testthat
+    testthat,
+    utils
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

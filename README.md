@@ -19,17 +19,15 @@ details and examples
 
 # Development status
 
-The appenders provided by lgrExtra are of varying stability. Especially
-Database-appenders are still considered experimental and should probably
-not be used in a production environment. I currently do not have much
-time to work on lgrExtra, but you are welcome to submit feature
-requests. If I see that the interest in lgrExtra increases I may
-prioritize it over other projects.
+The appenders provided by lgrExtra are of varying stability.
+Elasticsearch and Dynatrace are ready for production use, but
+Database-based appenders are still considered experimental and more of a
+prove-of-concept.
 
 | Appender | Description | Backend | Status |
 |----|----|----|----|
 | AppenderAWSCloudWatchLog | Amazon AWS CloudWatch Log | [paws.management](https://cran.r-project.org/package=paws.management) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
-| AppenderElasticSearch | ElasticSearch | [elastic](https://cran.r-project.org/package=elastic) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
+| AppenderElasticSearch | ElasticSearch | [elastic](https://cran.r-project.org/package=elastic) | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |
 | AppenderDbi | Databases | [DBI](https://cran.r-project.org/package=DBI) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 | AppenderDt | In-memory data.table | [data.table](https://github.com/Rdatatable/data.table) | [![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded) |
 | AppenderGmail | E-mail via Gmail REST API | [gmailr](https://cran.r-project.org/package=gmailr) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
