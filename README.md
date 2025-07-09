@@ -20,9 +20,9 @@ details and examples
 # Development status
 
 The appenders provided by lgrExtra are of varying stability.
-Elasticsearch and Dynatrace are ready for production use, but
-Database-based appenders are still considered experimental and more of a
-prove-of-concept.
+Elasticsearch and Dynatrace are ready for production use (I use them in
+production), but Database-based appenders are still considered
+experimental and more of a prove-of-concept.
 
 | Appender | Description | Backend | Status |
 |----|----|----|----|
