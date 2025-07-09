@@ -3,8 +3,8 @@
 
 #' Log to Dynatrace via HTTP
 #'
-#' **NOTE**: **Experimental**; not yet fully documented and and details are
-#' subject to change.
+#' @description
+#' Log to Dynatrace via the Dynatrace log ingestion API.
 #'
 #' @template appender
 #'

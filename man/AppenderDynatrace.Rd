@@ -8,13 +8,7 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \link[lgr:Appender]{lgr::Appender} and can be uses as an appender by a \link[lgr:Logger]{lgr::Logger}.
 }
 \description{
-Log to Dynatrace via HTTP
-
-Log to Dynatrace via HTTP
-}
-\details{
-\strong{NOTE}: \strong{Experimental}; not yet fully documented and and details are
-subject to change.
+Log to Dynatrace via the Dynatrace log ingestion API.
 }
 \seealso{
 \url{https://docs.dynatrace.com/docs/analyze-explore-automate/logs/lma-log-ingestion/lma-log-ingestion-via-api}
