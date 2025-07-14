@@ -19,7 +19,7 @@ table up manually with an SQL CREATE TABLE statement instead."><!-- mathjax --><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9000</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@ to JSON strings</p></dd>
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/LayoutDbi.html">LayoutDbi</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  col_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>level <span class="op">=</span> <span class="st">"integer"</span>, timestamp <span class="op">=</span> <span class="st">"timestamp"</span>, logger <span class="op">=</span> <span class="st">"varchar(256)"</span>,</span>
-<span>    caller <span class="op">=</span> <span class="st">"varchar(256)"</span>, msg <span class="op">=</span> <span class="st">"varchar(2048)"</span><span class="op">)</span>,</span>
+<span>    caller <span class="op">=</span> <span class="st">"varchar(256)"</span>, msg <span class="op">=</span> <span class="st">"varchar(2048)"</span>, rawMsg <span class="op">=</span> <span class="st">"varchar(2048)"</span><span class="op">)</span>,</span>
 <span>  serialized_cols <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fmt <span class="op">=</span> <span class="st">"%L [%t] %m  %f"</span>,</span>
 <span>  timestamp_fmt <span class="op">=</span> <span class="st">"%Y-%m-%d %H:%M:%S"</span>,</span>

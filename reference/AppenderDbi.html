@@ -8,7 +8,9 @@ exists in the target table will be appended, all others are ignored.
 NOTE: AppenderDbi works reliable for most databases, but is still
 considered experimental, especially because the configuration is
 excessively complicated. Expect breaking changes to AppenderDbi in the
-future."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+future.
+NOTE: AppenderDbi is not actively updated and does not support the
+rawMsg property from lgr &amp;gt;= 0.5.0"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
@@ -26,7 +28,7 @@ future."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">lgrExtra</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9000</span>
       </span>
     </div>
 
@@ -62,6 +64,8 @@ exists in the target table will be appended, all others are ignored.</p>
 considered <strong>experimental</strong>, especially because the configuration is
 excessively complicated. Expect <strong>breaking changes</strong> to AppenderDbi in the
 future.</p>
+<p><strong>NOTE</strong>: AppenderDbi is not actively updated and does not support the
+rawMsg property from lgr &gt;= 0.5.0</p>
     </div>
 
 
@@ -114,7 +118,6 @@ new table will be created with the <code>col_types</code> from <code>layout</cod
     <h2>See also</h2>
     <div class="dont-index"><p>Other Appenders:
 <code><a href="AppenderAWSCloudWatchLog.html">AppenderAWSCloudWatchLog</a></code>,
-<code><a href="AppenderDt.html">AppenderDt</a></code>,
 <code><a href="AppenderDynatrace.html">AppenderDynatrace</a></code>,
 <code><a href="AppenderElasticSearch.html">AppenderElasticSearch</a></code>,
 <code><a href="AppenderGmail.html">AppenderGmail</a></code>,
@@ -279,7 +282,7 @@ database table</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: RSQLite</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> creating 'log' with columns: level integer, timestamp TEXT, logger TEXT, caller TEXT, msg TEXT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   level           timestamp   logger caller  msg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   400 2025-07-09 09:33:15 test/dbi   eval test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   400 2025-07-14 09:38:44 test/dbi   eval test</span>
 </code></pre></div>
     </div>
   </div>
