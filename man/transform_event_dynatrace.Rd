@@ -15,3 +15,6 @@ a \code{list} of values that will be serialized to JSON for Dynatrace.
 \description{
 Transform a log event for Dynatrace
 }
+\seealso{
+\url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
+}

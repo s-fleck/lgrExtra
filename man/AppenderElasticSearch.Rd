@@ -15,7 +15,6 @@ a production scenario
 Other Appenders: 
 \code{\link{AppenderAWSCloudWatchLog}},
 \code{\link{AppenderDbi}},
-\code{\link{AppenderDt}},
 \code{\link{AppenderDynatrace}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPool}},

@@ -12,6 +12,8 @@ Similar to \link[lgr:LayoutJson]{lgr::LayoutJson}, but with some modifications t
 for Dynatrace.
 }
 \seealso{
+\code{\link[=transform_event_dynatrace]{transform_event_dynatrace()}}, \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
+
 Other Layout: 
 \code{\link{LayoutDbi}},
 \code{\link{LayoutElasticSearch}}

@@ -24,18 +24,20 @@ test_that("AppenderDynatrace: appending works", {
   # assert
   sent_body <- sent_request$body$data
 
-  sent_body
+  if (utils::packageVersion("lgr") >= "0.4.5.9000") {
+    expected_body <-  "[{\"loglevel\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"log.logger\":\"dummy\",\"code.function\":null,\"content\":\"foo bar\",\"content_raw\":\"foo bar\",\"log.raw_level\":\"warn\"}]"
+  } else {
+    expected_body <-  "[{\"loglevel\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"log.logger\":\"dummy\",\"code.function\":null,\"content\":\"foo bar\",\"log.raw_level\":\"warn\"}]"
+  }
 
-  expect_identical(
-    sent_body,
-    "[{\"level\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"logger\":\"dummy\",\"caller\":null,\"content\":\"foo bar\"}]")
+  expect_identical(sent_body, expected_body)
 
   if (utils::packageVersion("httr2") >= "1.1.2.9000") {
     headers <- httr2::req_get_headers(sent_request, "reveal")
   } else {
     headers <- sent_request$headers
   }
-  
+
   expect_identical(headers[["Content-Type"]], "application/json")
   expect_identical(headers[["Authorization"]], "Api-Token hashbaz")
 })

@@ -16,7 +16,6 @@ Log to Dynatrace via the Dynatrace log ingestion API.
 Other Appenders: 
 \code{\link{AppenderAWSCloudWatchLog}},
 \code{\link{AppenderDbi}},
-\code{\link{AppenderDt}},
 \code{\link{AppenderElasticSearch}},
 \code{\link{AppenderGmail}},
 \code{\link{AppenderPool}},

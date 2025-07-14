@@ -47,7 +47,6 @@ that table.
 \seealso{
 Other Appenders: 
 \code{\link{AppenderDbi}},
-\code{\link{AppenderDt}},
 \code{\link{AppenderDynatrace}},
 \code{\link{AppenderElasticSearch}},
 \code{\link{AppenderGmail}},

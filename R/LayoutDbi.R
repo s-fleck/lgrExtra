@@ -54,7 +54,8 @@ LayoutDbi <- R6::R6Class(
         timestamp = "timestamp",
         logger = "varchar(256)",
         caller = "varchar(256)",
-        msg = "varchar(2048)"
+        msg = "varchar(2048)",
+        rawMsg = "varchar(2048)"
       ),
       serialized_cols = NULL,
 

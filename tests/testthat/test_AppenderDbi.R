@@ -29,6 +29,7 @@ dbs <- list(
         timestamp = "timestamp",
         logger= "varchar(512)",
         msg = "varchar(1024)",
+        rawMsg = "varchar(1024)",
         caller = "varchar(1024)",
         foo = "varchar(256)"
       )
@@ -86,6 +87,7 @@ init_test_appender = function(
     timestamp = "timestamp",
     logger= "varchar(512)",
     msg = "varchar(1024)",
+    rawMsg = "varchar(1024)",
     caller = "varchar(1024)",
     foo = "varchar(256)"
   ))){
@@ -136,6 +138,7 @@ for (nm in names(dbs)){
       timestamp = "timestamp",
       logger= "varchar(512)",
       msg = "varchar(1024)",
+      rawMsg = "varchar(1024)",
       caller = "varchar(1024)",
       foo = "varchar(256)",
       fields = "varchar(2048)"
@@ -280,7 +283,8 @@ for (nm in names(dbs)){
 
     lg$log(
       200L,
-      "test",
+      "test %s",
+      "foo",
       timestamp = as.POSIXct("2019-12-31"),
       caller = "foo()",
       foo = "bar"
@@ -292,7 +296,8 @@ for (nm in names(dbs)){
       level = 200L,
       timestamp = as.POSIXct("2019-12-31"),
       logger = "db_test",
-      msg = "test",
+      msg = "test foo",
+      rawmsg = "test %s",
       caller = "foo()",
       foo = "bar",
       stringsAsFactors = FALSE

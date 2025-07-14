@@ -132,7 +132,7 @@ to JSON strings}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDbi$new(
   col_types = c(level = "integer", timestamp = "timestamp", logger = "varchar(256)",
-    caller = "varchar(256)", msg = "varchar(2048)"),
+    caller = "varchar(256)", msg = "varchar(2048)", rawMsg = "varchar(2048)"),
   serialized_cols = NULL,
   fmt = "\%L [\%t] \%m  \%f",
   timestamp_fmt = "\%Y-\%m-\%d \%H:\%M:\%S",

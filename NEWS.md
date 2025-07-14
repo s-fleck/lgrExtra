@@ -1,3 +1,12 @@
+# lgrExtra 0.2.0
+
+* require lgr 0.5.0
+* Breaking: Support rawMsg property introdcued in lgr 0.5.0
+* Breaking: Remove long deprecated AppenderDt
+* Update LayoutDynatrace to convert more logEvent properties to standardized 
+  dynatrace property names
+
+
 # lgrExtra 0.1.1
 
 * Adapt tests for compat with httr2 >= "1.1.2.9000"
@@ -7,7 +16,8 @@
 
 * Add AppenderDynatrace
 * Add AppenderPool (thx @jimbrig)
-* add AppenderAWSCloudWatchLog for logging to [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) (#9) (thx @DyfanJones)
+* Add AppenderAWSCloudWatchLog for logging to [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) (#9) (thx @DyfanJones)
+
 
 
 # lgrExtra 0.0.9

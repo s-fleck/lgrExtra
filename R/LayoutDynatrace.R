@@ -8,6 +8,8 @@
 #' for Dynatrace.
 #'
 #' @template layout
+#'
+#' @seealso [transform_event_dynatrace()], \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
 #' @export
 LayoutDynatrace <- R6::R6Class(
   "LayoutDynatrace",
@@ -73,16 +75,37 @@ LayoutDynatrace <- R6::R6Class(
 #' @param event a [lgr::LogEvent] object.
 #'
 #' @returns a `list` of values that will be serialized to JSON for Dynatrace.
+#' @seealso \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
 #' @export
 transform_event_dynatrace <- function(event) {
   values <- get("values", event)
 
-  property_names <- names(values)
-  property_names[property_names == "msg"] <- "content"
-  names(values) <- property_names
-
   values[["logger"]] <- gsub("/", ".", values[["logger"]], fixed = TRUE)
-  values[["level"]] <- lgr::label_levels(values[["level"]])
+  values[["level"]] <- unname(lgr::label_levels(values[["level"]]))
+  values[["log.raw_level"]] <- values[["level"]]
+
+  value_names <- names(values)
+
+  # hard coded loop for maximum performance at the cost of readability
+  for (i in seq_along(value_names)) {
+    if (value_names[i] == "msg") {
+      value_names[i] <- "content"
+
+    } else if (value_names[i] == "level") {
+      value_names[i] <- "loglevel"
+
+    } else if (value_names[i] == "logger") {
+      value_names[i] <- "log.logger"
+
+    } else if (value_names[i] == "caller") {
+      value_names[i] <- "code.function"
+
+    } else if (value_names[i] == "rawMsg") {  # TODO
+      value_names[i] <- "content_raw"
+    }
+  }
+
+  names(values) <- value_names
 
   values
 }
