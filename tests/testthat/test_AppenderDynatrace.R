@@ -25,7 +25,7 @@ test_that("AppenderDynatrace: appending works", {
   sent_body <- sent_request$body$data
 
   if (utils::packageVersion("lgr") >= "0.4.5.9000") {
-    expected_body <-  "[{\"loglevel\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"log.logger\":\"dummy\",\"code.function\":null,\"content\":\"foo bar\",\"content_raw\":\"foo bar\",\"log.raw_level\":\"warn\"}]"
+    expected_body <-  "[{\"loglevel\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"log.logger\":\"dummy\",\"code.function\":null,\"content\":\"foo bar\",\"log.record.template\":\"foo bar\",\"log.raw_level\":\"warn\"}]"
   } else {
     expected_body <-  "[{\"loglevel\":\"warn\",\"timestamp\":\"2018-11-02 16:19:33\",\"log.logger\":\"dummy\",\"code.function\":null,\"content\":\"foo bar\",\"log.raw_level\":\"warn\"}]"
   }

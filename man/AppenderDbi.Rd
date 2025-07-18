@@ -19,9 +19,6 @@ exists in the target table will be appended, all others are ignored.
 considered \strong{experimental}, especially because the configuration is
 excessively complicated. Expect \strong{breaking changes} to AppenderDbi in the
 future.
-
-\strong{NOTE}: AppenderDbi is not actively updated and does not support the
-rawMsg property from lgr >= 0.5.0
 }
 \section{Buffered Logging}{
 

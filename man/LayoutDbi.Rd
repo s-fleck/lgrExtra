@@ -116,6 +116,7 @@ to JSON strings}
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="set_excluded_fields"><a href='../../lgr/html/Layout.html#method-Layout-set_excluded_fields'><code>lgr::Layout$set_excluded_fields()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="format_event"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-format_event'><code>lgr::LayoutFormat$format_event()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="read"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-read'><code>lgr::LayoutFormat$read()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="lgr" data-topic="LayoutFormat" data-id="set_colors"><a href='../../lgr/html/LayoutFormat.html#method-LayoutFormat-set_colors'><code>lgr::LayoutFormat$set_colors()</code></a></span></li>

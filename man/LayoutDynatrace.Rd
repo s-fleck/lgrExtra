@@ -12,7 +12,7 @@ Similar to \link[lgr:LayoutJson]{lgr::LayoutJson}, but with some modifications t
 for Dynatrace.
 }
 \seealso{
-\code{\link[=transform_event_dynatrace]{transform_event_dynatrace()}}, \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
+\url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
 
 Other Layout: 
 \code{\link{LayoutDbi}},
@@ -27,8 +27,13 @@ Other Layout:
 \describe{
 \item{\code{toJSON_args}}{a list of values passed on to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 
-\item{\code{transform_event}}{a \code{function} with a single argument \code{event} that
-takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
+\item{\code{transform_event}}{a \code{function} with the arguments \code{event},
+\code{field_name_map} and \code{excluded_fields}. See \code{\link[=transform_event_dynatrace]{transform_event_dynatrace()}}
+for an example.}
+
+\item{\code{transform_event_names}}{a named \code{character} vector mapping original
+field names to Dynatrace-compatible ones,
+or a \code{function} that accepts a \code{character} vector of field names}
 }
 \if{html}{\out{</div>}}
 }
@@ -39,12 +44,14 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 \item \href{#method-LayoutDynatrace-format_event}{\code{LayoutDynatrace$format_event()}}
 \item \href{#method-LayoutDynatrace-set_toJSON_args}{\code{LayoutDynatrace$set_toJSON_args()}}
 \item \href{#method-LayoutDynatrace-set_transform_event}{\code{LayoutDynatrace$set_transform_event()}}
+\item \href{#method-LayoutDynatrace-set_transform_event_names}{\code{LayoutDynatrace$set_transform_event_names()}}
 \item \href{#method-LayoutDynatrace-clone}{\code{LayoutDynatrace$clone()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="set_excluded_fields"><a href='../../lgr/html/Layout.html#method-Layout-set_excluded_fields'><code>lgr::Layout$set_excluded_fields()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="toString"><a href='../../lgr/html/Layout.html#method-Layout-toString'><code>lgr::Layout$toString()</code></a></span></li>
 </ul>
 </details>
@@ -53,13 +60,36 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 \if{html}{\out{<a id="method-LayoutDynatrace-new"></a>}}
 \if{latex}{\out{\hypertarget{method-LayoutDynatrace-new}{}}}
 \subsection{Method \code{new()}}{
+Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDynatrace$new(
   toJSON_args = list(auto_unbox = TRUE),
-  transform_event = transform_event_dynatrace
+  transform_event = transform_event_dynatrace,
+  transform_event_names = c(msg = "content", level = "loglevel", logger = "log.logger",
+    caller = "code.function", rawMsg = "log.record.template"),
+  excluded_fields = "rawMsg"
 )}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{toJSON_args}}{a list of arguments passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}},}
+
+\item{\code{transform_event}}{a \code{function} with the arguments \code{event},
+\code{field_name_map} and \code{excluded_fields}. See
+\code{\link[=transform_event_dynatrace]{transform_event_dynatrace()}} for an example.}
+
+\item{\code{transform_event_names}}{A named \code{character} vector mapping original
+field names to Dynatrace-compatible ones, or a function with a single
+mandatory argument that accepts a character vector of field names.
+passed to \code{\link[=transform_event]{transform_event()}}.}
+
+\item{\code{excluded_fields}}{A \code{character} vector of field names to exclude
+from the final output. passed to \code{\link[=transform_event]{transform_event()}}.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-LayoutDynatrace-format_event"></a>}}
@@ -85,6 +115,15 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 \subsection{Method \code{set_transform_event()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDynatrace$set_transform_event(x)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-LayoutDynatrace-set_transform_event_names"></a>}}
+\if{latex}{\out{\hypertarget{method-LayoutDynatrace-set_transform_event_names}{}}}
+\subsection{Method \code{set_transform_event_names()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{LayoutDynatrace$set_transform_event_names(x)}\if{html}{\out{</div>}}
 }
 
 }

@@ -43,6 +43,7 @@ takes a \link[lgr:LogEvent]{lgr::LogEvent} and returns a \code{list}.}
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
+<li><span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="set_excluded_fields"><a href='../../lgr/html/Layout.html#method-Layout-set_excluded_fields'><code>lgr::Layout$set_excluded_fields()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="lgr" data-topic="Layout" data-id="toString"><a href='../../lgr/html/Layout.html#method-Layout-toString'><code>lgr::Layout$toString()</code></a></span></li>
 </ul>
 </details>
