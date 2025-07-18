@@ -76,7 +76,7 @@ Other Appenders:
   url,
   api_key,
   threshold = NA_integer_,
-  layout = LayoutDynatrace$new(),
+  layout = DynatraceLayout,
   buffer_size = 0,
   flush_threshold = "error",
   flush_on_exit = TRUE,

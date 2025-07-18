@@ -16,21 +16,20 @@ AppenderDynatrace <- R6::R6Class(
   inherit = lgr::AppenderMemory,
   cloneable = FALSE,
   public = list(
-
     #' @param url see section *Fields*
     #' @param threshold,flush_threshold,layout,buffer_size see [lgr::AppenderBuffer]
     initialize = function(
     url,
     api_key,
     threshold = NA_integer_,
-    layout = LayoutDynatrace$new(),
+    layout = DynatraceLayout,
     buffer_size = 0,
     flush_threshold = "error",
     flush_on_exit = TRUE,
     flush_on_rotate = TRUE,
     should_flush = NULL,
     filters = NULL
-){
+  ){
       assert_namespace("httr2")
 
       # appender

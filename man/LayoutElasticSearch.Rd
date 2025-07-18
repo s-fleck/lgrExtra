@@ -13,8 +13,7 @@ for ElasticSearch.
 }
 \seealso{
 Other Layout: 
-\code{\link{LayoutDbi}},
-\code{\link{LayoutDynatrace}}
+\code{\link{LayoutDbi}}
 }
 \concept{Layout}
 \section{Super class}{
