@@ -10,6 +10,18 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \description{
 Similar to \link[lgr:LayoutJson]{lgr::LayoutJson}, but with some modifications to prepare data
 for Dynatrace.
+
+This Layout provides 3 ways to transform the event before insertion:
+\enumerate{
+\item \code{transform_event} a generic function to transform the event
+\item \code{transform_event_names} a named \code{character} vector or a second
+function to rename fields
+\item \code{excluded_fields} a \code{character} vector to include fields.
+}
+
+In theory supplying a custom \code{transform_event} function is enough to
+transform the event, but the other two parameters are provided for
+convenience. Please note that they are applied in order.
 }
 \seealso{
 \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
@@ -27,9 +39,8 @@ Other Layout:
 \describe{
 \item{\code{toJSON_args}}{a list of values passed on to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}}}
 
-\item{\code{transform_event}}{a \code{function} with the arguments \code{event},
-\code{field_name_map} and \code{excluded_fields}. See \code{\link[=transform_event_dynatrace]{transform_event_dynatrace()}}
-for an example.}
+\item{\code{transform_event}}{a \code{function} with a signle argument \code{event}.
+See \code{\link[=transform_event_dynatrace]{transform_event_dynatrace()}} for an example.}
 
 \item{\code{transform_event_names}}{a named \code{character} vector mapping original
 field names to Dynatrace-compatible ones,
@@ -63,21 +74,19 @@ or a \code{function} that accepts a \code{character} vector of field names}
 Creates a new instance of this \link[R6:R6Class]{R6} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{LayoutDynatrace$new(
-  toJSON_args = list(auto_unbox = TRUE),
   transform_event = transform_event_dynatrace,
   transform_event_names = c(msg = "content", level = "loglevel", logger = "log.logger",
     caller = "code.function", rawMsg = "log.record.template"),
-  excluded_fields = "rawMsg"
+  excluded_fields = NULL,
+  toJSON_args = list(auto_unbox = TRUE)
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{toJSON_args}}{a list of arguments passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}},}
-
 \item{\code{transform_event}}{a \code{function} with the arguments \code{event},
-\code{field_name_map} and \code{excluded_fields}. See
+\code{transform_event_names} and \code{excluded_fields}. See
 \code{\link[=transform_event_dynatrace]{transform_event_dynatrace()}} for an example.}
 
 \item{\code{transform_event_names}}{A named \code{character} vector mapping original
@@ -87,6 +96,8 @@ passed to \code{\link[=transform_event]{transform_event()}}.}
 
 \item{\code{excluded_fields}}{A \code{character} vector of field names to exclude
 from the final output. passed to \code{\link[=transform_event]{transform_event()}}.}
+
+\item{\code{toJSON_args}}{a list of arguments passed to \code{\link[jsonlite:fromJSON]{jsonlite::toJSON()}},}
 }
 \if{html}{\out{</div>}}
 }

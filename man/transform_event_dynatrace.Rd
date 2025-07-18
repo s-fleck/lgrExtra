@@ -4,17 +4,17 @@
 \alias{transform_event_dynatrace}
 \title{Transform a log event for Dynatrace}
 \usage{
-transform_event_dynatrace(event, transform_event_names, excluded_fields)
+transform_event_dynatrace(event)
 }
 \arguments{
 \item{event}{A \link[lgr:LogEvent]{lgr::LogEvent} object.}
 
+\item{excluded_fields}{A \code{character} vector of field names to exclude from
+the final output.}
+
 \item{transform_event_names}{A named \code{character} vector mapping original
 field names to Dynatrace-compatible ones, or a function with a single
 mandatory argument that accepts a character vector of field names}
-
-\item{excluded_fields}{A \code{character} vector of field names to exclude from
-the final output.}
 }
 \value{
 A \code{list} of key-value pairs ready to be serialized to JSON for Dynatrace.
