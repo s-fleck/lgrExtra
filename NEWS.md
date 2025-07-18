@@ -1,10 +1,11 @@
 # lgrExtra 0.2.0
 
 * require lgr 0.5.0
-* Breaking: Support rawMsg property introdcued in lgr 0.5.0
-* Breaking: Remove long deprecated AppenderDt
-* Update LayoutDynatrace to convert more logEvent properties to standardized 
-  dynatrace property names
+* Breaking: Support `rawMsg` property introdcued in lgr 0.5.0
+* Breaking: Remove long deprecated `AppenderDt`
+* Deprecate `LayoutElasticSearch` and replace it by `LayoutJson`, as 
+  that has become much more flexible in lgr 0.5.0
+* Update`AppenderDynatrace` to use `LayoutJson` in a similar fashion
 
 
 # lgrExtra 0.1.1

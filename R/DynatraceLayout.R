@@ -35,7 +35,7 @@ transform_event_dynatrace <- function(
 #' A json layout for Dynatrace ingestion
 #'
 #' @export
-DynatraceLayout <- LayoutJson$new(
+DynatraceLayout <- lgr::LayoutJson$new(
   transform_event = transform_event_dynatrace,
   transform_event_names = c(
     "msg" = "content",

@@ -17,6 +17,7 @@ LayoutElasticSearch <- R6::R6Class(
       toJSON_args = list(auto_unbox = TRUE),
       transform_event = function(event) get("values", event)
     ){
+      .Deprecated("LayoutElasticSearch is deprecated, use LayoutJson instead")
       self$set_transform_event(transform_event)
       self$set_toJSON_args(toJSON_args)
       self

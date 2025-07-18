@@ -7,7 +7,6 @@ errorCondition <- function(message, ..., class, call = NULL) {
 }
 
 
-
 parse_timestamp_smart <- function(x){
   if (is.character(x) && !grepl("-", x[[1]])){
     x <- as.numeric(x)
@@ -24,4 +23,10 @@ parse_timestamp_smart <- function(x){
 
     as.POSIXct(x, origin = c("1970-01-01 00:00:00"))
   }
+}
+
+
+uppercase_first_letter <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
 }
