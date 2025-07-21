@@ -38,11 +38,11 @@ transform_event_dynatrace <- function(
 DynatraceLayout <- lgr::LayoutJson$new(
   transform_event = transform_event_dynatrace,
   transform_event_names = c(
-    "msg" = "content",
-    "level" = "loglevel",
-    "logger" = "log.logger",
-    "caller" = "code.function",
-    "rawMsg" = "log.record.template"  # inspired by https://github.com/open-telemetry/semantic-conventions/issues/2064
+    "content" = "msg",
+    "loglevel" = "level",
+    "log.logger" = "logger",
+    "code.function" = "caller",
+    "log.record.template" = "rawMsg"   # inspired by https://github.com/open-telemetry/semantic-conventions/issues/2064
   ),
   excluded_fields = NULL
 )

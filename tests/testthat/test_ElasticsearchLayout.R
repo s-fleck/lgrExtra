@@ -1,4 +1,4 @@
-test_that("ElasticsearchLayout.format_event() - with default settings - format event correctly", {
+test_that("ElasticSearchLayout.format_event() - with default settings - format event correctly", {
 
   # Arrange
   event <- LogEvent$new(
@@ -16,12 +16,12 @@ test_that("ElasticsearchLayout.format_event() - with default settings - format e
   # Assert
   expect_setequal(
     names(res),
-    c("level", "@timestamp", "logger", "callSite", "message", "rawMessage"))
+    c("log.level", "@timestamp", "log.logger", "log.origin.function", "message", "log.record.template"))
 
-  expect_identical(res$level, "Error")
+  expect_identical(res$log.leve, "error")
   expect_identical(res[["@timestamp"]], 1541175573930.8)
-  expect_identical(res$logger, "dum.my")
-  expect_identical(res$callSite, "foonction")
+  expect_identical(res$log.logger, "dum.my")
+  expect_identical(res$log.origin.function, "foonction")
   expect_identical(res$message, "foo bar")
-  expect_identical(res$rawMessage, "foobar-raw")
+  expect_identical(res$log.record.template, "foobar-raw")
 })
