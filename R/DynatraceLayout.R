@@ -42,8 +42,7 @@ DynatraceLayout <- lgr::LayoutJson$new(
     "level" = "loglevel",
     "logger" = "log.logger",
     "caller" = "code.function",
-    "rawMsg" = "log.record.template"
+    "rawMsg" = "log.record.template"  # inspired by https://github.com/open-telemetry/semantic-conventions/issues/2064
   ),
   excluded_fields = NULL
 )
-
