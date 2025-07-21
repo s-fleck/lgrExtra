@@ -1,18 +1,7 @@
-
-#' Transform a log event for Dynatrace
-#'
-#' Converts a [lgr::LogEvent] object into a list suitable for Dynatrace ingestion,
-#' including optional field renaming and exclusion.
-#'
 #' @param event A [lgr::LogEvent] object.
-#' @param excluded_fields A `character` vector of field names to exclude from
-#'   the final output.
-#' @param transform_event_names A named `character` vector mapping original
-#'   field names to Dynatrace-compatible ones, or a function with a single
-#'   mandatory argument that accepts a character vector of field names
 #'
 #' @returns A `list` of key-value pairs ready to be serialized to JSON for Dynatrace.
-#' @seealso \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
+#' @rdname DynatraceLayout
 #' @export
 transform_event_dynatrace <- function(
     event
@@ -34,6 +23,9 @@ transform_event_dynatrace <- function(
 
 #' A json layout for Dynatrace ingestion
 #'
+#' Transforms a [lgr::LogEvent] object into a list suitable for Dynatracer ingestion.
+#'
+#' @seealso \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
 #' @export
 DynatraceLayout <- lgr::LayoutJson$new(
   transform_event = transform_event_dynatrace,

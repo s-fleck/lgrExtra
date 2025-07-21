@@ -1,3 +1,8 @@
+#' @param event A [lgr::LogEvent] object.
+#'
+#' @returns A `list` of key-value pairs ready to be serialized to JSON for ElasticSearch
+#' @rdname ElasticSearchLayout
+#' @export
 transform_event_elasticsearch = function(event) {
   dd <- event$values
 
@@ -10,6 +15,8 @@ transform_event_elasticsearch = function(event) {
 
 
 #' A json layout for Elasticsearch ingestion
+#'
+#' Transforms a [lgr::LogEvent] object into a list suitable for ElasticSearch ingestion.
 #'
 #' @seealso https://www.elastic.co/docs/reference/ecs
 #' @export
