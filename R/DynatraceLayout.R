@@ -23,7 +23,7 @@ transform_event_dynatrace <- function(
 
 #' A json layout for Dynatrace ingestion
 #'
-#' Transforms a [lgr::LogEvent] object into a list suitable for Dynatracer ingestion.
+#' Transforms a [lgr::LogEvent] object into a list suitable for Dynatrace ingestion.
 #'
 #' @seealso \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}
 #' @export

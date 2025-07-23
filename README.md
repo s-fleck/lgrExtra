@@ -22,14 +22,15 @@ details and examples
 The appenders provided by lgrExtra are of varying stability.
 Elasticsearch and Dynatrace are ready for production use (I use them in
 production), but Database-based appenders are still considered
-experimental and more of a prove-of-concept.
+experimental and more of a prove-of-concept. AppenderDynatrace is still
+labeled `experimental` because the it is rather new and the default
+layout might still change in minor ways.
 
 | Appender | Description | Backend | Status |
 |----|----|----|----|
 | AppenderAWSCloudWatchLog | Amazon AWS CloudWatch Log | [paws.management](https://cran.r-project.org/package=paws.management) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 | AppenderElasticSearch | ElasticSearch | [elastic](https://cran.r-project.org/package=elastic) | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |
 | AppenderDbi | Databases | [DBI](https://cran.r-project.org/package=DBI) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
-| AppenderDt | In-memory data.table | [data.table](https://github.com/Rdatatable/data.table) | [![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded) |
 | AppenderGmail | E-mail via Gmail REST API | [gmailr](https://cran.r-project.org/package=gmailr) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 | AppenderPool | Databases (via connection pool) | [pool](https://cran.r-project.org/package=pool) | [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) |
 | AppenderPushbullet | Pushbullet (mobile phone push notifications) | [RPushbullet](https://cran.r-project.org/package=RPushbullet) | [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) |

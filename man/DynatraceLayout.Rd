@@ -20,7 +20,7 @@ DynatraceLayout
 A \code{list} of key-value pairs ready to be serialized to JSON for Dynatrace.
 }
 \description{
-Transforms a \link[lgr:LogEvent]{lgr::LogEvent} object into a list suitable for Dynatracer ingestion.
+Transforms a \link[lgr:LogEvent]{lgr::LogEvent} object into a list suitable for Dynatrace ingestion.
 }
 \seealso{
 \url{https://docs.dynatrace.com/docs/discover-dynatrace/references/semantic-dictionary/fields#service}

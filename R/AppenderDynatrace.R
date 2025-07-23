@@ -68,22 +68,22 @@ AppenderDynatrace <- R6::R6Class(
     },
 
 
-    #' @description Get log as data.frame: Not supported for dynatrace
+    #' @description Get log as data.frame: Not supported for Dynatrace
     get_data = function(
       n = 20L,
       threshold = NA,
       result_type = "data.frame"
     ){
-      stop("Not supported for dynatrace")
+      stop("Not supported for Dynatrace")
     },
 
 
-    #' @description Show log in console: Not supported for dynatrace
+    #' @description Show log in console: Not supported for Dynatrace
     show = function(
       threshold = NA_integer_,
       n = 20
     ){
-      stop("Not supported for dynatrace")
+      stop("Not supported for Dynatrace")
     },
 
 

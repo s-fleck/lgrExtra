@@ -23,6 +23,6 @@ A \code{list} of key-value pairs ready to be serialized to JSON for ElasticSearc
 Transforms a \link[lgr:LogEvent]{lgr::LogEvent} object into a list suitable for ElasticSearch ingestion.
 }
 \seealso{
-https://www.elastic.co/docs/reference/ecs
+\url{https://www.elastic.co/docs/reference/ecs}
 }
 \keyword{datasets}

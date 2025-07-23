@@ -8,6 +8,13 @@
 \description{
 Additional appenders for the logging package 'lgr' that support logging to Elasticsearch, Dynatrace, AWSCloudWatchLog, databases, syslog, email- and push notifications, and more.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://s-fleck.github.io/lgrExtra/}
+}
+
+}
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})
 

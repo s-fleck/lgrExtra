@@ -14,7 +14,7 @@
 
 # lgrExtra 0.1.1
 
-- Adapt tests for compat with httr2 >= "1.1.2.9000"
+- Adapt tests for compatibility with httr2 >= "1.1.2.9000"
 
 
 # lgrExtra 0.1.0

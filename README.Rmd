@@ -31,7 +31,8 @@ for details and examples
 The appenders provided by lgrExtra are of varying stability. Elasticsearch
 and Dynatrace are ready for production use (I use them in production), but 
 Database-based appenders are still considered experimental and more of a 
-prove-of-concept.
+prove-of-concept. AppenderDynatrace is still labeled `experimental` because
+the it is rather new and the default layout might still change in minor ways.
 
 | Appender                 | Description                                  | Backend                                                               | Status                                                                                                                                                       |
 |--------------------------|----------------------------------------------|-----------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -118,7 +118,7 @@ Other Appenders:
 \if{html}{\out{<a id="method-AppenderDynatrace-get_data"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderDynatrace-get_data}{}}}
 \subsection{Method \code{get_data()}}{
-Get log as data.frame: Not supported for dynatrace
+Get log as data.frame: Not supported for Dynatrace
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDynatrace$get_data(n = 20L, threshold = NA, result_type = "data.frame")}\if{html}{\out{</div>}}
 }
@@ -128,7 +128,7 @@ Get log as data.frame: Not supported for dynatrace
 \if{html}{\out{<a id="method-AppenderDynatrace-show"></a>}}
 \if{latex}{\out{\hypertarget{method-AppenderDynatrace-show}{}}}
 \subsection{Method \code{show()}}{
-Show log in console: Not supported for dynatrace
+Show log in console: Not supported for Dynatrace
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDynatrace$show(threshold = NA_integer_, n = 20)}\if{html}{\out{</div>}}
 }

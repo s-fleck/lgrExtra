@@ -18,7 +18,7 @@ transform_event_elasticsearch = function(event) {
 #'
 #' Transforms a [lgr::LogEvent] object into a list suitable for ElasticSearch ingestion.
 #'
-#' @seealso https://www.elastic.co/docs/reference/ecs
+#' @seealso \url{https://www.elastic.co/docs/reference/ecs}
 #' @export
 ElasticSearchLayout <- lgr::LayoutJson$new(
   transform_event = transform_event_elasticsearch,
