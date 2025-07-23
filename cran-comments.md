@@ -1,3 +1,3 @@
 changelog:
 
-* Minor update to tests for compat with httr2 >= "1.1.2.9000"
+* Update for lgr 0.5.0 and improvements to `AppenderDynatrace`
