@@ -6,7 +6,7 @@
 \alias{lgrExtra-package}
 \title{lgrExtra: Extra Appenders for 'lgr'}
 \description{
-Additional appenders for the logging package 'lgr' that support logging to databases, email and push notifications.
+Additional appenders for the logging package 'lgr' that support logging to Elasticsearch, Dynatrace, AWSCloudWatchLog, databases, syslog, email- and push notifications, and more.
 }
 \author{
 \strong{Maintainer}: Stefan Fleck \email{stefan.b.fleck@gmail.com} (\href{https://orcid.org/0000-0003-3344-9851}{ORCID})

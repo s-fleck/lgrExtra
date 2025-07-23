@@ -1,7 +1,7 @@
 Type: Package
 Package: lgrExtra
 Title: Extra Appenders for 'lgr'
-Version: 0.1.1.9000
+Version: 0.2.0
 Authors@R: c(
     person("Stefan", "Fleck", , "stefan.b.fleck@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3344-9851")),
@@ -9,11 +9,12 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-7489-8787"))
   )
 Description: Additional appenders for the logging package 'lgr' that
-    support logging to databases, email and push notifications.
+    support logging to Elasticsearch, Dynatrace, AWSCloudWatchLog, databases,
+    syslog, email- and push notifications, and more.
 License: MIT + file LICENSE
 Imports:
     data.table,
-    lgr,
+    lgr (>= 0.5.0),
     R6
 Suggests: 
     covr,
