@@ -55,7 +55,7 @@
 <div class="section level1">
 <h1 id="development-status">Development status<a class="anchor" aria-label="anchor" href="#development-status"></a>
 </h1>
-<p>The appenders provided by lgrExtra are of varying stability. Elasticsearch and Dynatrace are ready for production use (I use them in production), but Database-based appenders are still considered experimental and more of a prove-of-concept.</p>
+<p>The appenders provided by lgrExtra are of varying stability. Elasticsearch and Dynatrace are ready for production use (I use them in production), but Database-based appenders are still considered experimental and more of a prove-of-concept. AppenderDynatrace is still labeled <code>experimental</code> because the it is rather new and the default layout might still change in minor ways.</p>
 <table class="table">
 <colgroup>
 <col width="25%">
@@ -89,42 +89,36 @@
 <td><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></td>
 </tr>
 <tr class="even">
-<td>AppenderDt</td>
-<td>In-memory data.table</td>
-<td><a href="https://github.com/Rdatatable/data.table" class="external-link">data.table</a></td>
-<td><a href="https://lifecycle.r-lib.org/articles/stages.html#superseded" class="external-link"><img src="https://img.shields.io/badge/lifecycle-superseded-blue.svg" alt="Lifecycle: superseded"></a></td>
-</tr>
-<tr class="odd">
 <td>AppenderGmail</td>
 <td>E-mail via Gmail REST API</td>
 <td><a href="https://cran.r-project.org/package=gmailr" class="external-link">gmailr</a></td>
 <td><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>AppenderPool</td>
 <td>Databases (via connection pool)</td>
 <td><a href="https://cran.r-project.org/package=pool" class="external-link">pool</a></td>
 <td><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>AppenderPushbullet</td>
 <td>Pushbullet (mobile phone push notifications)</td>
 <td><a href="https://cran.r-project.org/package=RPushbullet" class="external-link">RPushbullet</a></td>
 <td><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>AppenderSendmail</td>
 <td>E-mail via SMTP</td>
 <td><a href="https://cran.r-project.org/package=sendmailR" class="external-link">sendmailR</a></td>
 <td><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>AppenderSyslog</td>
 <td>Linux Syslog</td>
 <td><a href="https://cran.r-project.org/package=rsyslog" class="external-link">rsyslog</a></td>
 <td><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>AppenderDynatrace</td>
 <td>Dynatrace</td>
 <td><a href="https://cran.r-project.org/package=httr2" class="external-link">httr2</a></td>
