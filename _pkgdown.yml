@@ -1,3 +1,7 @@
+url: https://s-fleck.github.io/lgrExtra/
+template:
+  bootstrap: 5
+
 reference:
   - title: "Appenders"
     contents:
@@ -14,11 +18,13 @@ reference:
     contents:
       - LayoutDbi
       - LayoutElasticSearch
-      - LayoutDynatrace
+      - ElasticSearchLayout
+      - DynatraceLayout
       - Serializer
       - select_dbi_layout
       - unpack_json_cols
       - transform_event_dynatrace
+      - transform_event_elasticsearch
   - title: "Abstract classes"
     desc: For developers only
     contents:
