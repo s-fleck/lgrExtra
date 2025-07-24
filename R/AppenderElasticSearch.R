@@ -22,7 +22,7 @@ AppenderElasticSearch <- R6::R6Class(
     conn,
     index,
     threshold = NA_integer_,
-    layout = LayoutElasticSearch$new(),
+    layout = ElasticSearchLayout,
     index_create_body = NULL,
     buffer_size = 0,
     flush_threshold = "error",

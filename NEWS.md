@@ -1,4 +1,9 @@
-# lgrExtra 0.2.0
+# 0.2.0.9000
+
+- Fix AppenderElasticSearch to not use deprecated LayoutElasticSearch by default
+ 
+
+# 0.2.0
 
 - require lgr 0.5.0
 
@@ -12,7 +17,7 @@
 - Breaking: Remove long deprecated `AppenderDt`
 
 
-# lgrExtra 0.1.1
+# 0.1.1
 
 - Adapt tests for compatibility with httr2 >= "1.1.2.9000"
 
@@ -26,27 +31,27 @@
 - Add `AppenderAWSCloudWatchLog` for logging to [AWS CloudWatch](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html) (#9) (thx @DyfanJones)
 
 
-# lgrExtra 0.0.9
+# 0.0.9
 
 - Fixes for tests related to recent changes in `data.table` 1.16.0
 
 
-# lgrExtra 0.0.8
+# 0.0.8
 
 - Support functions for index names and index mappings in `AppenderElasticSearch`
 
 
-# lgrExtra 0.0.7
+# 0.0.7
 
 - Rebuild docs for `R 4.2.0`
 
 
-# lgrExtra 0.0.6
+# 0.0.6
 
 - add `AppenderElasticSearch` for logging to ElasticSearch (#5)
 
 
-# lgrExtra 0.0.5
+# 0.0.5
 
 - Migration of experimental Appenders from [lgr](https://s-fleck.github.io/lgr/)
 
