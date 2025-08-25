@@ -1,3 +1,1 @@
-changelog:
-
-* Update for lgr 0.5.0 and improvements to `AppenderDynatrace`
+Fix flaky test that was sensitive to time zones (on some machines)

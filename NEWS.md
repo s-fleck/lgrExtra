@@ -1,7 +1,7 @@
-# 0.2.0.9000
+# 0.2.1
 
-- Fix AppenderElasticSearch to not use deprecated LayoutElasticSearch by default
-- Fix flakey test that was sensitive to time zones
+- Fix `AppenderElasticSearch` to not use deprecated `LayoutElasticSearch` by default
+- Fix flaky test that was sensitive to time zones
  
 
 # 0.2.0

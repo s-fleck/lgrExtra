@@ -86,7 +86,7 @@ by the logger. See \url{https://www.elastic.co/docs/api/doc/elasticsearch/operat
   conn,
   index,
   threshold = NA_integer_,
-  layout = LayoutElasticSearch$new(),
+  layout = ElasticSearchLayout,
   index_create_body = NULL,
   buffer_size = 0,
   flush_threshold = "error",
