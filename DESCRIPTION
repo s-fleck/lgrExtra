@@ -9,9 +9,10 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-7489-8787"))
   )
 Description: Additional appenders for the logging package 'lgr' that
-    support logging to 'Elasticsearch', 'Dynatrace', 'AWSCloudWatchLog', databases,
-    'syslog', email- and push notifications, and more.
+    support logging to 'Elasticsearch', 'Dynatrace', 'AWSCloudWatchLog',
+    databases, 'syslog', email- and push notifications, and more.
 License: MIT + file LICENSE
+URL: https://s-fleck.github.io/lgrExtra/
 Imports:
     data.table,
     lgr (>= 0.5.0),
@@ -38,4 +39,3 @@ Suggests:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://s-fleck.github.io/lgrExtra/
