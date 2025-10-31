@@ -1,3 +1,8 @@
+# 0.2.2
+
+- Fix `AppenderDynatrace` default timestamp logging format
+
+
 # 0.2.1
 
 - Fix `AppenderElasticSearch` to not use deprecated `LayoutElasticSearch` by default

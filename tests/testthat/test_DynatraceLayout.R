@@ -20,7 +20,7 @@ test_that("DynatraceLayout.format_event() - with default settings - format event
 
   expect_identical(res$loglevel, "error")
   expect_identical(res$log.raw_level, "error")
-  expect_identical(res$timestamp, "2018-11-02 16:19:33")
+  expect_equivalent(res$timestamp, 1541175573930)
   expect_identical(res$log.logger, "dum.my")
   expect_identical(res$code.function, "foonction")
   expect_identical(res$content, "foo bar")

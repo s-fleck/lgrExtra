@@ -21,6 +21,16 @@ transform_event_dynatrace <- function(
 }
 
 
+#' Convert POSIXct to Unix Epoch milliseconds
+#'
+#' @param x a `POSIXct` vector
+#'
+#' @export
+as_unix_epoch_ms <- function(x){
+  round(as.numeric(x) * 1e3)
+}
+
+
 #' A json layout for Dynatrace ingestion
 #'
 #' Transforms a [lgr::LogEvent] object into a list suitable for Dynatrace ingestion.
@@ -29,6 +39,7 @@ transform_event_dynatrace <- function(
 #' @export
 DynatraceLayout <- lgr::LayoutJson$new(
   transform_event = transform_event_dynatrace,
+  timestamp_fmt = as_unix_epoch_ms,
   transform_event_names = c(
     "content" = "msg",
     "loglevel" = "level",

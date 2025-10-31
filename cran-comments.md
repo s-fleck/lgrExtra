@@ -1,1 +1,1 @@
-Fix flaky test that was sensitive to time zones (on some machines)
+Minor fix for default timestamp format when logging to dynatrace
