@@ -23,11 +23,15 @@ transform_event_dynatrace <- function(
 
 #' Convert POSIXct to Unix Epoch milliseconds
 #'
+#' Useful for log targets that expect timestamps as unix epoch milliseconds,
+#' such as Dynatrace and Elasticsearch.
+#'
 #' @param x a `POSIXct` vector
+#' @param digits an `integer` scalar. Number of decimal places to round to.
 #'
 #' @export
-as_unix_epoch_ms <- function(x){
-  round(as.numeric(x) * 1e3)
+as_unix_epoch_ms <- function(x, digits = 0){
+  round(as.numeric(x) * 1e3, digits = digits)
 }
 
 

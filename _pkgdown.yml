@@ -25,6 +25,7 @@ reference:
       - unpack_json_cols
       - transform_event_dynatrace
       - transform_event_elasticsearch
+      - as_unix_epoch_ms
   - title: "Abstract classes"
     desc: For developers only
     contents:

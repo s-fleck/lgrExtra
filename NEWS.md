@@ -1,3 +1,8 @@
+# 0.2.2.9000 (dev)
+
+- Add digits argument to `as_unix_epoch_ms()`
+
+
 # 0.2.2
 
 - Fix `AppenderDynatrace` default timestamp logging format
