@@ -10,6 +10,17 @@ The \verb{$new()} method returns an \link[R6:R6Class]{R6::R6} that inherits from
 \description{
 Log to Dynatrace via the Dynatrace log ingestion API.
 }
+\examples{
+
+## ------------------------------------------------
+## Method `AppenderDynatrace$set_httr2_req_callback`
+## ------------------------------------------------
+
+callback <- function(req){
+  httr2::req_options(req, ssl_verifypeer = 0L, ssl_verifyhost = 0L)
+}
+dynatrace_appender$set_httr2_req_callback(callback)
+}
 \seealso{
 \url{https://docs.dynatrace.com/docs/analyze-explore-automate/logs/lma-log-ingestion/lma-log-ingestion-via-api}
 
@@ -42,6 +53,7 @@ Other Appenders:
 \item \href{#method-AppenderDynatrace-new}{\code{AppenderDynatrace$new()}}
 \item \href{#method-AppenderDynatrace-set_url}{\code{AppenderDynatrace$set_url()}}
 \item \href{#method-AppenderDynatrace-set_api_key}{\code{AppenderDynatrace$set_api_key()}}
+\item \href{#method-AppenderDynatrace-set_httr2_req_callback}{\code{AppenderDynatrace$set_httr2_req_callback()}}
 \item \href{#method-AppenderDynatrace-get_data}{\code{AppenderDynatrace$get_data()}}
 \item \href{#method-AppenderDynatrace-show}{\code{AppenderDynatrace$show()}}
 \item \href{#method-AppenderDynatrace-flush}{\code{AppenderDynatrace$flush()}}
@@ -82,7 +94,8 @@ Other Appenders:
   flush_on_exit = TRUE,
   flush_on_rotate = TRUE,
   should_flush = NULL,
-  filters = NULL
+  filters = NULL,
+  httr2_req_callback = NULL
 )}\if{html}{\out{</div>}}
 }
 
@@ -111,6 +124,27 @@ Other Appenders:
 \subsection{Method \code{set_api_key()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AppenderDynatrace$set_api_key(api_key)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AppenderDynatrace-set_httr2_req_callback"></a>}}
+\if{latex}{\out{\hypertarget{method-AppenderDynatrace-set_httr2_req_callback}{}}}
+\subsection{Method \code{set_httr2_req_callback()}}{
+a callback \code{function} to be applied to the httr2 request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AppenderDynatrace$set_httr2_req_callback(httr2_req_callback)}\if{html}{\out{</div>}}
+}
+
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{callback <- function(req){
+  httr2::req_options(req, ssl_verifypeer = 0L, ssl_verifyhost = 0L)
+}
+dynatrace_appender$set_httr2_req_callback(callback)
+}
+\if{html}{\out{</div>}}
+
 }
 
 }

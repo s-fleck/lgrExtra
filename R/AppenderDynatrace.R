@@ -28,7 +28,8 @@ AppenderDynatrace <- R6::R6Class(
     flush_on_exit = TRUE,
     flush_on_rotate = TRUE,
     should_flush = NULL,
-    filters = NULL
+    filters = NULL,
+    httr2_req_callback = NULL
   ){
       assert_namespace("httr2")
 
@@ -49,6 +50,7 @@ AppenderDynatrace <- R6::R6Class(
       # connection
       self$set_url(url)
       self$set_api_key(api_key)
+      self$set_httr2_req_callback(httr2_req_callback)
 
       self
     },
@@ -64,6 +66,22 @@ AppenderDynatrace <- R6::R6Class(
     set_api_key = function(api_key){
       assert(is_scalar_character(api_key))
       private[[".api_key"]] <- api_key
+      invisible(self)
+    },
+
+
+    #' @description a callback `function` to be applied to the httr2 request
+    #' @examples
+    #' # Use callback to add retry options ignore server cerificates
+    #' callback <- function(req){
+    #'   req <- httr2::req_retry(req, max_tries = 2)
+    #'   req <- httr2::req_options(req, ssl_verifypeer = 0L, ssl_verifyhost = 0L)
+    #'   req
+    #' }
+    #' dynatrace_appender$set_httr2_req_callback(callback)
+    set_httr2_req_callback = function(httr2_req_callback){
+      assert(is.null(httr2_req_callback) || is.function(httr2_req_callback))
+      private[[".httr2_req_callback"]] <- httr2_req_callback
       invisible(self)
     },
 
@@ -109,6 +127,10 @@ AppenderDynatrace <- R6::R6Class(
           request <- httr2::req_headers(request, Authorization = sprintf("Api-Token %s", self[["api_key"]]))
           request <- httr2::req_body_raw(request, json_body)
 
+          if (!is.null(private[[".httr2_req_callback"]])){
+            request <- private[[".httr2_req_callback"]](request)
+          }
+
           response <- httr2::req_perform(request)
 
         # reset buffer
@@ -147,6 +169,7 @@ AppenderDynatrace <- R6::R6Class(
     },
 
     .url = NULL,
-    .api_key = NULL
+    .api_key = NULL,
+    .httr2_req_callback = NULL
   )
 )
